@@ -1,6 +1,14 @@
 import React from 'react';
 
-const newsItems = [
+interface NewsItem {
+  id: number;
+  date: string;
+  title: string;
+  description: string;
+  link: string;
+}
+
+const newsItems: NewsItem[] = [
     {
         id: 1,
         date: "Mar 2026",

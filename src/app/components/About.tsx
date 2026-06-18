@@ -2,10 +2,14 @@
 
 import { useState, useEffect, useRef } from 'react';
 
-// Sub-component for the counting animation remains unchanged
-const AnimatedNumber = ({ target, suffix = "" }) => {
+interface AnimatedNumberProps {
+  target: number;
+  suffix?: string;
+}
+
+const AnimatedNumber = ({ target, suffix = "" }: AnimatedNumberProps) => {
   const [count, setCount] = useState(0);
-  const nodeRef = useRef(null);
+  const nodeRef = useRef<HTMLSpanElement>(null);
   const [inView, setInView] = useState(false);
 
   useEffect(() => {

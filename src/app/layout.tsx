@@ -1,13 +1,14 @@
+import type { Metadata } from 'next';
 import './globals.css';
 import Navbar from './components/Navbar';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'INFAB Semiconductor | Advanced MEMS & Microfluidic Solutions',
   description: 'Pioneering Indian deep-tech company specializing in advanced MEMS sensors, actuators, and medical microfluidic devices. Incubated at CeNSE, IISc Bengaluru.',
   keywords: 'INFAB, Semiconductor, MEMS, Microfluidics, Aerospace sensors, Pressure transducers, IISc Bangalore, CeNSE, Deep-tech India',
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth">
       {/* Inject Phosphor Icons */}

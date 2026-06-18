@@ -1,9 +1,22 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type ReactNode } from 'react';
 
-// Define our slide data array
-const slides = [
+interface Slide {
+  id: number;
+  tag: string;
+  tagIcon: ReactNode;
+  title: string;
+  highlight: string;
+  description: string;
+  bgImage: string;
+  primaryAction: string;
+  primaryLink: string;
+  secondaryAction: string;
+  secondaryLink: string;
+}
+
+const slides: Slide[] = [
   {
     id: 1,
     tag: "Medical Microfluidics",

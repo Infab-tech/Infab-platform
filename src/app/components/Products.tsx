@@ -1,7 +1,17 @@
 import React from 'react';
 
-// Data array based on your exact HTML files
-const markets = [
+interface Market {
+  id: string;
+  tag: string;
+  title: string;
+  description: string;
+  icon: string;
+  image: string;
+  links: string[];
+  linkHref: string;
+}
+
+const markets: Market[] = [
     {
         id: "aerospace",
         tag: "Aerospace & Defence",
