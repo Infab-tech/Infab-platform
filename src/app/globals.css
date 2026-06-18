@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+
+@theme {
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 50s linear infinite;
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+
+    100% {
+      transform: translateX(-33.33%);
+    }
+
+    /* Adjusts based on tripling the array */
+  }
+
+  @keyframes marquee-reverse {
+    0% {
+      transform: translateX(-50%);
+    }
+
+    /* Adjusts based on doubling the array */
+    100% {
+      transform: translateX(0%);
+    }
+  }
+}
+
+
+@layer base {
+  :root {
+    --bg-primary: #05080f;
+    --bg-secondary: #0c101b;
+    --accent-primary: #00d4ff;
+    --accent-warm: #ff6b35;
+    --text-primary: #f0f4ff;
+    --text-secondary: #8a99ad;
+    --border-primary: rgba(255, 255, 255, 0.05);
+    --bg-tertiary: #101626;
+
+    /* Logo adjustment token for dark theme */
+    --logo-filter: invert(1) brightness(100%) contrast(100%);
+    --logo-blend: screen;
+  }
+
+  .light {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --accent-primary: #0088cc;
+    --accent-warm: #e65100;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --border-primary: rgba(0, 0, 0, 0.1);
+    --bg-tertiary: #f1f5f9;
+
+    /* Logo adjustment token for light theme (restores original colors) */
+    --logo-filter: none;
+    --logo-blend: multiply;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Programmatic brand contrast utility */
+  .brand-logo-adaptive {
+    filter: var(--logo-filter);
+    mix-blend-mode: var(--logo-blend);
+    transition: filter 0.3s ease;
+  }
+}
