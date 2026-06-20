@@ -18,24 +18,197 @@ interface ProductData {
 }
 
 const fallbackProducts: ProductData[] = [
-  // Aerospace
-  { id: 'aero-1', name: 'SP Series — Pressure Sensors', category: 'AEROSPACE', description: 'Silicon piezoresistive pressure sensors designed for aviation altimetry and atmospheric sensing. Exceptional thermal stability and long-term reliability.', specs: ['0–1000 mbar', 'Piezoresistive', 'Silicon', 'MIL-Spec'] },
-  { id: 'aero-2', name: 'TP Series — Pressure Transducers', category: 'AEROSPACE', description: 'High-accuracy MEMS-based pressure transducers with integrated signal conditioning for aircraft environmental control and pneumatic systems.', specs: ['0–700 bar', 'Capacitive', 'SOI', 'AEC-Q100'] },
-  { id: 'aero-3', name: 'Differential Pressure Switches', category: 'AEROSPACE', description: 'Precision differential pressure switches for fuel, hydraulic, and pneumatic systems. Redundant design with fail-safe operation for safety-critical applications.', specs: ['Differential', 'Snap-action', '-55°C to +125°C'] },
-  { id: 'aero-4', name: 'Flow Transmitters', category: 'AEROSPACE', description: 'MEMS thermal flow transmitters for airflow measurement in ventilation, environmental control, and propulsion test systems with exceptional dynamic range.', specs: ['Thermal MEMS', '4–20 mA output', 'IP67'] },
-  { id: 'aero-5', name: 'Hall Effect Sensors', category: 'AEROSPACE', description: 'Contactless Hall effect sensors for position, speed, and current sensing in landing gear, flight control actuators, and engine management systems.', specs: ['Contactless', 'Linear & rotary', '3.3–5V supply'] },
-  { id: 'aero-6', name: 'Custom Aerospace Modules', category: 'AEROSPACE', description: 'Bespoke integrated sensor modules for OEM and Tier-1 aircraft manufacturers requiring multi-parameter sensing with onboard signal processing.', specs: ['Custom OEM', 'Multi-parameter', 'DO-160G'] },
-  // Healthcare
-  { id: 'hc-1', name: 'ISPLPS001 — Microfluidic Chip', category: 'HEALTHCARE', description: 'Single-layer PDMS microfluidic chip for cell culture and organ-on-chip applications. Optical transparency for live imaging compatibility.', specs: ['PDMS/Glass', 'Channel: 100µm', 'Biocompatible'] },
-  { id: 'hc-2', name: 'ISPLPS002 — Pressure Controller', category: 'HEALTHCARE', description: 'Ultra-low-pressure controller for precise flow regulation in microfluidic networks. Sub-millibar resolution for droplet generation and particle sorting.', specs: ['0–1000 mbar', '±0.01 mbar res.', 'USB control'] },
-  { id: 'hc-3', name: 'ISPLHTPT001 — Flow Sensor', category: 'HEALTHCARE', description: 'Thermal MEMS flow sensor for precise liquid flow measurement in microfluidic systems, infusion pumps, and lab-on-chip platforms.', specs: ['0–5 mL/min', 'Thermal MEMS', 'I²C / SPI'] },
-  { id: 'hc-4', name: 'ISPLDPS001 — Droplet Generator', category: 'HEALTHCARE', description: 'Silicon-glass droplet generation chip with T-junction and flow-focusing geometries. Compatible with aqueous and organic solvents for emulsification.', specs: ['Silicon/Glass', 'T-junction', '1–1000 Hz'] },
-  { id: 'hc-5', name: 'Organ-on-Chip Platform', category: 'HEALTHCARE', description: 'Multi-layer microfluidic organ-on-chip platforms with integrated membrane for co-culture of epithelial and endothelial cells under physiological shear stress.', specs: ['Multi-layer', 'PDMS membrane', 'Live imaging'] },
-  { id: 'hc-6', name: 'ISPLPT001 — Nanoparticle Synthesis Chip', category: 'HEALTHCARE', description: 'Microfluidic reactor chip for continuous-flow synthesis of lipid nanoparticles and polymeric nanoparticles for drug delivery and mRNA encapsulation.', specs: ['Continuous flow', 'LNP synthesis', 'mRNA compatible'] },
-  // MEMS
-  { id: 'mems-1', name: 'MEMS Pressure Sensor Die', category: 'MEMS', description: 'Bare piezoresistive MEMS die for OEM integration. Wafer-level testing, dicing, and optional packaging available. Bulk silicon and SOI process options.', specs: ['Bulk Si / SOI', 'Wafer-level test', 'Custom packaging'] },
-  { id: 'mems-2', name: 'Hall Effect Sensor IC', category: 'MEMS', description: 'Monolithic Hall sensor IC with integrated amplifier, offset compensation, and digital output. Suitable for brushless DC motor control and position encoding.', specs: ['±100 mT range', 'SPI output', '2×2 mm QFN'] },
-  { id: 'mems-3', name: 'Thermal Flow Sensor', category: 'MEMS', description: 'Calorimetric MEMS flow sensor for low-flow gas and liquid measurement. Integrated heater and thermopile for differential temperature-based sensing.', specs: ['0–500 sccm', 'Calorimetric', 'Analog output'] },
+  // Aerospace — real INFAB model numbers with datasheet specs
+  {
+    id: 'aero-1',
+    name: 'ISPLPS001 — Pressure Switch',
+    category: 'AEROSPACE',
+    description: 'MIL-grade silicon piezoresistive pressure switch for aircraft hydraulic, fuel, and pneumatic systems. Designed to meet the most demanding airborne qualification requirements.',
+    specs: [
+      'Rated WP: 100–300 ±14 bar',
+      'Proof Pressure: 420 bar',
+      'Burst Pressure: 700 bar',
+      'Supply: 16–32 V DC',
+      'Op. Temp: -54°C to +135°C',
+      'Termination: Circular Connector',
+    ],
+  },
+  {
+    id: 'aero-2',
+    name: 'ISPLPT001 — Pressure Transducer',
+    category: 'AEROSPACE',
+    description: 'High-accuracy MIL-grade MEMS pressure transducer with integrated signal conditioning for aircraft environmental control, cabin pressure, and pneumatic systems.',
+    specs: [
+      'Rated WP: 100–300 ±14 bar',
+      'Proof Pressure: 420 bar',
+      'Burst Pressure: 700 bar',
+      'Supply: 16–32 V DC',
+      'Op. Temp: -54°C to +135°C',
+      'Termination: Circular Connector',
+    ],
+  },
+  {
+    id: 'aero-3',
+    name: 'ISPLDPS001 — Differential Pressure Switch',
+    category: 'AEROSPACE',
+    description: 'Precision differential pressure switch for fuel filter monitoring, hydraulic line balance, and airflow measurement in commercial and military aircraft.',
+    specs: [
+      'Rated WP: 0–350 kPa',
+      'Proof Pressure: 700 kPa',
+      'Burst Pressure: 1050 kPa',
+      'Supply: 16–32 V DC',
+      'Op. Temp: -55°C to +95°C',
+      'Termination: Circular Connector',
+    ],
+  },
+  {
+    id: 'aero-4',
+    name: 'MEMS Flow Transmitters',
+    category: 'AEROSPACE',
+    description: 'Thermal MEMS flow transmitters for precision airflow measurement in ventilation, environmental control, and propulsion test systems with industry-leading dynamic range.',
+    specs: [
+      'Technology: Thermal MEMS',
+      'Output: 4–20 mA',
+      'Protection: IP67',
+      'Interface: RS-485 / Modbus',
+    ],
+  },
+  {
+    id: 'aero-5',
+    name: 'Hall Effect Sensors',
+    category: 'AEROSPACE',
+    description: 'Contactless Hall effect sensors for position, speed, and current sensing in landing gear, flight control actuators, and engine management systems.',
+    specs: [
+      'Range: ±100 mT',
+      'Type: Linear & rotary',
+      'Supply: 3.3–5 V',
+      'Output: Analog / PWM',
+    ],
+  },
+  {
+    id: 'aero-6',
+    name: 'Custom Aerospace Sensor Modules',
+    category: 'AEROSPACE',
+    description: 'Bespoke integrated sensor modules for OEM and Tier-1 aircraft manufacturers requiring multi-parameter sensing with onboard signal processing and MIL-qualified packaging.',
+    specs: [
+      'Standard: DO-160G / MIL-STD-810',
+      'Type: Multi-parameter',
+      'Interface: Custom OEM',
+      'Qualification: AS9100 Rev D',
+    ],
+  },
+  // Healthcare & Microfluidics — real INFAB model numbers
+  {
+    id: 'hc-1',
+    name: 'ISPLHTPT001 — Pressure Transducer',
+    category: 'HEALTHCARE',
+    description: 'Low-pressure MEMS transducer purpose-built for medical and microfluidic applications. Wide operating temperature range makes it suitable for sterilisable and implantable contexts.',
+    specs: [
+      'Rated WP: 0–29 psi (Gauge)',
+      'Proof Pressure: 43.5 PSI',
+      'Burst Pressure: 72.5 PSI',
+      'Supply: 16–32 V DC',
+      'Output: 0.5–5 V DC',
+      'Op. Temp: -40°C to +180°C',
+    ],
+  },
+  {
+    id: 'hc-2',
+    name: 'ISPLPS002 — Microfluidic Pressure Controller',
+    category: 'HEALTHCARE',
+    description: 'Ultra-low-pressure controller for precise flow regulation in microfluidic networks. Sub-millibar resolution enables reliable droplet generation, particle sorting, and organ-on-chip perfusion.',
+    specs: [
+      'Pressure Range: 0–1000 mbar',
+      'Resolution: ±0.01 mbar',
+      'Interface: USB / RS-232',
+      'Channels: Up to 8',
+    ],
+  },
+  {
+    id: 'hc-3',
+    name: 'Microfluidic Chips (PDMS / Glass)',
+    category: 'HEALTHCARE',
+    description: 'Single- and multi-layer microfluidic chips for cell culture, organ-on-chip, and lab-on-chip applications. Optically transparent for live fluorescence and brightfield imaging.',
+    specs: [
+      'Material: PDMS / Glass / Si',
+      'Channel Width: 20–500 µm',
+      'Compatibility: Biocompatible',
+      'Bonding: Plasma / Anodic',
+    ],
+  },
+  {
+    id: 'hc-4',
+    name: 'Droplet Generation Chips',
+    category: 'HEALTHCARE',
+    description: 'Silicon-glass chips with T-junction and flow-focusing geometries for monodisperse droplet production. Ideal for digital PCR, drug encapsulation, and single-cell assays.',
+    specs: [
+      'Material: Silicon / Glass',
+      'Geometry: T-junction & FF',
+      'Droplet Rate: 1–1000 Hz',
+      'Compatibility: Aqueous & organic',
+    ],
+  },
+  {
+    id: 'hc-5',
+    name: 'Organ-on-Chip Platform',
+    category: 'HEALTHCARE',
+    description: 'Multi-layer microfluidic organ-on-chip platforms with integrated membrane for physiological co-culture of epithelial and endothelial cells under controlled shear stress.',
+    specs: [
+      'Layers: Multi-layer PDMS',
+      'Membrane: 10 µm porous PDMS',
+      'Imaging: Live fluorescence',
+      'Shear: Tunable 0.01–1 Pa',
+    ],
+  },
+  {
+    id: 'hc-6',
+    name: 'Nanoparticle Synthesis Chips',
+    category: 'HEALTHCARE',
+    description: 'Continuous-flow microfluidic reactors for size-controlled synthesis of lipid nanoparticles (LNP) and polymeric nanoparticles for mRNA delivery and drug encapsulation.',
+    specs: [
+      'Flow Regime: Continuous flow',
+      'Applications: LNP / mRNA / Drug',
+      'NP Size Control: 20–500 nm',
+      'Throughput: µL to mL/min',
+    ],
+  },
+  // MEMS Semiconductor
+  {
+    id: 'mems-1',
+    name: 'Piezoresistive MEMS Sensor Die',
+    category: 'MEMS',
+    description: 'Bare piezoresistive MEMS die for OEM integration. Available in bulk silicon and SOI variants with wafer-level testing, dicing, and optional hermetic packaging.',
+    specs: [
+      'Process: Bulk Si / SOI',
+      'Testing: Wafer-level probe',
+      'Packaging: Custom hermetic',
+      'Wafer Size: 4" / 6"',
+    ],
+  },
+  {
+    id: 'mems-2',
+    name: 'Hall Effect Sensor IC',
+    category: 'MEMS',
+    description: 'Monolithic Hall sensor IC with integrated amplifier, offset compensation, and digital SPI output. Designed for brushless DC motor commutation and high-precision position encoding.',
+    specs: [
+      'Range: ±100 mT',
+      'Output: SPI digital',
+      'Package: 2×2 mm QFN',
+      'Supply: 3.3 V / 5 V',
+    ],
+  },
+  {
+    id: 'mems-3',
+    name: 'Calorimetric Thermal Flow Sensor',
+    category: 'MEMS',
+    description: 'Calorimetric MEMS flow sensor with integrated heater and thermopile for differential-temperature-based sensing of gas and liquid flows at sub-sccm resolution.',
+    specs: [
+      'Range: 0–500 sccm',
+      'Principle: Calorimetric',
+      'Output: Analog 0–5 V',
+      'Media: Gas & liquid',
+    ],
+  },
 ];
 
 const categories = [
@@ -44,37 +217,71 @@ const categories = [
   { id: 'mems', key: 'MEMS', label: 'MEMS & Semiconductor', icon: 'ph-cpu', description: 'INFAB specialises in the fabrication of Micro-Electro-Mechanical Systems (MEMS) and offers a comprehensive range of process services. Our state-of-the-art facilities and experienced team ensure the highest quality and precision.' },
 ];
 
+function SpecTable({ specs }: { specs: string[] }) {
+  if (specs.length === 0) return null;
+  return (
+    <div className="mb-4 rounded-lg border border-[var(--border-primary)] overflow-hidden">
+      <table className="w-full text-xs">
+        <tbody>
+          {specs.map((spec) => {
+            const colonIdx = spec.indexOf(':');
+            if (colonIdx === -1) {
+              return (
+                <tr key={spec} className="border-b border-[var(--border-primary)] last:border-0">
+                  <td colSpan={2} className="px-3 py-1.5 font-mono text-[var(--accent-primary)]">{spec}</td>
+                </tr>
+              );
+            }
+            const label = spec.slice(0, colonIdx).trim();
+            const value = spec.slice(colonIdx + 1).trim();
+            return (
+              <tr key={spec} className="border-b border-[var(--border-primary)] last:border-0 even:bg-[var(--text-primary)]/[0.02]">
+                <td className="px-3 py-1.5 text-[var(--text-secondary)] font-mono whitespace-nowrap w-[40%] border-r border-[var(--border-primary)]">{label}</td>
+                <td className="px-3 py-1.5 text-[var(--text-primary)] font-semibold">{value}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 function ProductCard({ product }: { product: ProductData }) {
   const cover = product.imageUrl ?? product.imageUrls?.[0] ?? null;
   return (
     <div className="group flex flex-col rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
-      {/* Product image */}
+      {/* Product image or placeholder */}
       {cover ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={cover} alt={product.name} className="w-full aspect-video object-cover border-b border-[var(--border-primary)]" />
       ) : (
-        <div className="w-full aspect-video bg-[var(--bg-primary)] border-b border-[var(--border-primary)] flex items-center justify-center">
-          <i className="ph ph-microchip text-4xl text-[var(--text-secondary)]/20"></i>
+        <div className="w-full aspect-[3/1] bg-[var(--bg-primary)] border-b border-[var(--border-primary)] flex items-center justify-center relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent-primary)]/5 to-transparent"></div>
+          <i className="ph ph-microchip text-5xl text-[var(--text-secondary)]/10"></i>
         </div>
       )}
+
       <div className="p-6 flex flex-col flex-grow">
-      <h3 className="text-lg font-bold text-[var(--text-primary)] mb-3 leading-snug">{product.name}</h3>
-      {product.specs.length > 0 && (
-        <div className="flex flex-wrap gap-2 mb-4">
-          {product.specs.map((spec) => (
-            <span key={spec} className="inline-flex px-2 py-0.5 rounded bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] text-xs font-mono">
-              {spec}
-            </span>
-          ))}
-        </div>
-      )}
-      <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-6 flex-grow">{product.description}</p>
-      <Link
-        href={`/contact?product=${encodeURIComponent(product.name)}`}
-        className="inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors mt-auto"
-      >
-        Request Quote <i className="ph ph-arrow-right transition-transform group-hover:translate-x-1"></i>
-      </Link>
+        {/* Model number / name */}
+        <h3 className="text-base font-bold text-[var(--text-primary)] mb-1 leading-snug group-hover:text-[var(--accent-primary)] transition-colors">
+          {product.name}
+        </h3>
+
+        {/* Description */}
+        <p className="text-xs text-[var(--text-secondary)] leading-relaxed mb-4 flex-grow">
+          {product.description}
+        </p>
+
+        {/* Spec table */}
+        <SpecTable specs={product.specs} />
+
+        <Link
+          href={`/contact?product=${encodeURIComponent(product.name)}`}
+          className="inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors mt-2"
+        >
+          Request Quote <i className="ph ph-arrow-right transition-transform group-hover:translate-x-1"></i>
+        </Link>
       </div>
     </div>
   );

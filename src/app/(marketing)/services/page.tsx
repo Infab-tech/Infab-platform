@@ -6,6 +6,39 @@ export const metadata: Metadata = {
   description: 'End-to-end MEMS and microfluidics services — from concept to qualified device — using world-class cleanroom facilities at IISc CeNSE.',
 };
 
+const customDesignCapabilities = [
+  {
+    icon: 'ph-pencil-ruler',
+    title: 'Application-Specific Architecture',
+    description: 'We translate your sensor or actuator concept into an optimised MEMS architecture — selecting the right transduction principle, material stack, and device geometry for your target application.',
+  },
+  {
+    icon: 'ph-monitor-play',
+    title: 'Multi-Physics Simulation',
+    description: 'FEM and CFD simulation using COMSOL Multiphysics and Ansys to model electrostatic, piezoresistive, thermal, and fluidic behaviour before a single wafer is processed.',
+  },
+  {
+    icon: 'ph-graph',
+    title: 'Process Design Kit (PDK)',
+    description: 'Layout design using our in-house PDK covering lithography, DRIE, thin-film, and packaging design rules. Compatible with standard EDA toolchains for seamless tape-out.',
+  },
+  {
+    icon: 'ph-flask',
+    title: 'Rapid Prototyping',
+    description: 'Fast-turn prototyping within our IISc CeNSE cleanroom — from mask generation to diced devices in weeks, not months, enabling tight design-test-iterate cycles.',
+  },
+  {
+    icon: 'ph-factory',
+    title: 'Design for Manufacturability',
+    description: 'Every design is reviewed for yield, reliability, and scalability. We identify process sensitivities early so your prototype transitions smoothly to small-volume production.',
+  },
+  {
+    icon: 'ph-shield-check',
+    title: 'IP-Protected Development',
+    description: 'Full NDA-backed engagement. Your MEMS architecture, process integration flows, and measurement data remain your intellectual property throughout the project.',
+  },
+];
+
 const microfluidicsSteps = [
   { num: '01', title: 'Design & Simulation', description: 'CAD layout and CFD simulation of microfluidic networks, channel geometries, and flow dynamics using COMSOL and custom tools.' },
   { num: '02', title: 'Mask & Lithography', description: 'Photomask generation and photolithographic patterning on silicon, glass, and polymer substrates to micron-level precision.' },
@@ -47,12 +80,56 @@ export default function ServicesPage() {
         </div>
       </div>
 
+      {/* Custom MEMS Design & Foundry */}
+      <div id="custom-design" className="border-b border-[var(--border-primary)] py-32 bg-[var(--bg-secondary)]">
+        <div className="mx-auto max-w-7xl px-6">
+          {/* Section header */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-end mb-16">
+            <div>
+              <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">Service 01</span>
+              <h2 className="text-4xl font-bold tracking-tight text-[var(--text-primary)] mb-6">Custom MEMS Design &amp; Foundry</h2>
+              <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
+              <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
+                From concept to qualified device — INFAB offers end-to-end MEMS design services backed by world-class cleanroom fabrication at IISc CeNSE. Whether you need a novel sensor architecture or a production-ready die, our engineers work alongside your team across every phase.
+              </p>
+            </div>
+            <div className="flex flex-col gap-4">
+              <div className="rounded-2xl border border-[var(--accent-primary)]/20 bg-[var(--bg-primary)] p-6">
+                <p className="font-mono text-xs font-semibold uppercase tracking-widest text-[var(--accent-primary)] mb-2">Engagement Model</p>
+                <ul className="text-sm text-[var(--text-secondary)] space-y-1">
+                  <li className="flex items-center gap-2"><i className="ph ph-check-circle text-[var(--accent-primary)]"></i> Concept feasibility &amp; architecture review</li>
+                  <li className="flex items-center gap-2"><i className="ph ph-check-circle text-[var(--accent-primary)]"></i> Simulation → tape-out → prototype delivery</li>
+                  <li className="flex items-center gap-2"><i className="ph ph-check-circle text-[var(--accent-primary)]"></i> Iterative design-test cycles (weeks, not months)</li>
+                  <li className="flex items-center gap-2"><i className="ph ph-check-circle text-[var(--accent-primary)]"></i> Full NDA — your IP stays yours</li>
+                </ul>
+              </div>
+              <Link href="/contact" className="inline-flex items-center gap-2 font-mono text-sm font-semibold uppercase tracking-wider text-[var(--accent-primary)] hover:text-[var(--text-primary)] transition-colors">
+                Start a Design Engagement <i className="ph ph-arrow-right"></i>
+              </Link>
+            </div>
+          </div>
+
+          {/* Capabilities grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {customDesignCapabilities.map((cap) => (
+              <div key={cap.title} className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-primary)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
+                <div className="w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex items-center justify-center mb-5">
+                  <i className={`ph ${cap.icon} text-xl text-[var(--accent-primary)]`}></i>
+                </div>
+                <h3 className="text-sm font-bold text-[var(--text-primary)] mb-2">{cap.title}</h3>
+                <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{cap.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Microfluidics Solution */}
       <div id="microfluidics" className="border-b border-[var(--border-primary)] py-32">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             <div>
-              <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">Service 01</span>
+              <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">Service 02</span>
               <h2 className="text-4xl font-bold tracking-tight text-[var(--text-primary)] mb-6">Microfluidics Solution</h2>
               <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
               <p className="text-[var(--text-secondary)] text-lg leading-relaxed mb-8">
@@ -83,7 +160,7 @@ export default function ServicesPage() {
       <div id="mems" className="border-b border-[var(--border-primary)] py-32 bg-[var(--bg-secondary)]">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mb-16 max-w-3xl">
-            <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">Service 02</span>
+            <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">Service 03</span>
             <h2 className="text-4xl font-bold tracking-tight text-[var(--text-primary)] mb-6">MEMS Fabrication Services</h2>
             <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
             <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
