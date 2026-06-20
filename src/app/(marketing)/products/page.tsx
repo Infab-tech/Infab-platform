@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { prisma } from '@/lib/supabase/prisma';
 
@@ -23,6 +24,7 @@ const fallbackProducts: ProductData[] = [
     id: 'aero-1',
     name: 'ISPLPS001 — Pressure Switch',
     category: 'AEROSPACE',
+    imageUrl: '/assests/products/pressure-switch.png',
     description: 'MIL-grade silicon piezoresistive pressure switch for aircraft hydraulic, fuel, and pneumatic systems. Designed to meet the most demanding airborne qualification requirements.',
     specs: [
       'Rated WP: 100–300 ±14 bar',
@@ -37,6 +39,7 @@ const fallbackProducts: ProductData[] = [
     id: 'aero-2',
     name: 'ISPLPT001 — Pressure Transducer',
     category: 'AEROSPACE',
+    imageUrl: '/assests/products/pressure-transducer.png',
     description: 'High-accuracy MIL-grade MEMS pressure transducer with integrated signal conditioning for aircraft environmental control, cabin pressure, and pneumatic systems.',
     specs: [
       'Rated WP: 100–300 ±14 bar',
@@ -51,6 +54,7 @@ const fallbackProducts: ProductData[] = [
     id: 'aero-3',
     name: 'ISPLDPS001 — Differential Pressure Switch',
     category: 'AEROSPACE',
+    imageUrl: '/assests/products/dps.png',
     description: 'Precision differential pressure switch for fuel filter monitoring, hydraulic line balance, and airflow measurement in commercial and military aircraft.',
     specs: [
       'Rated WP: 0–350 kPa',
@@ -102,6 +106,7 @@ const fallbackProducts: ProductData[] = [
     id: 'hc-1',
     name: 'ISPLHTPT001 — Pressure Transducer',
     category: 'HEALTHCARE',
+    imageUrl: '/assests/products/htpt.png',
     description: 'Low-pressure MEMS transducer purpose-built for medical and microfluidic applications. Wide operating temperature range makes it suitable for sterilisable and implantable contexts.',
     specs: [
       'Rated WP: 0–29 psi (Gauge)',
@@ -128,6 +133,7 @@ const fallbackProducts: ProductData[] = [
     id: 'hc-3',
     name: 'Microfluidic Chips (PDMS / Glass)',
     category: 'HEALTHCARE',
+    imageUrl: '/assests/products/mf-chip.jpg',
     description: 'Single- and multi-layer microfluidic chips for cell culture, organ-on-chip, and lab-on-chip applications. Optically transparent for live fluorescence and brightfield imaging.',
     specs: [
       'Material: PDMS / Glass / Si',
@@ -140,6 +146,7 @@ const fallbackProducts: ProductData[] = [
     id: 'hc-4',
     name: 'Droplet Generation Chips',
     category: 'HEALTHCARE',
+    imageUrl: '/assests/products/hexagon-well.jpg',
     description: 'Silicon-glass chips with T-junction and flow-focusing geometries for monodisperse droplet production. Ideal for digital PCR, drug encapsulation, and single-cell assays.',
     specs: [
       'Material: Silicon / Glass',
@@ -152,6 +159,7 @@ const fallbackProducts: ProductData[] = [
     id: 'hc-5',
     name: 'Organ-on-Chip Platform',
     category: 'HEALTHCARE',
+    imageUrl: '/assests/services/cancer-on-chip.png',
     description: 'Multi-layer microfluidic organ-on-chip platforms with integrated membrane for physiological co-culture of epithelial and endothelial cells under controlled shear stress.',
     specs: [
       'Layers: Multi-layer PDMS',
@@ -177,6 +185,7 @@ const fallbackProducts: ProductData[] = [
     id: 'mems-1',
     name: 'Piezoresistive MEMS Sensor Die',
     category: 'MEMS',
+    imageUrl: '/assests/products/microchip.jpg',
     description: 'Bare piezoresistive MEMS die for OEM integration. Available in bulk silicon and SOI variants with wafer-level testing, dicing, and optional hermetic packaging.',
     specs: [
       'Process: Bulk Si / SOI',
@@ -253,10 +262,11 @@ function ProductCard({ product }: { product: ProductData }) {
     <div className="group flex flex-col rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
       {/* Product image or placeholder */}
       {cover ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={cover} alt={product.name} className="w-full aspect-video object-cover border-b border-[var(--border-primary)]" />
+        <div className="w-full h-48 bg-[#080d18] border-b border-[var(--border-primary)] flex items-center justify-center overflow-hidden">
+          <Image src={cover} alt={product.name} width={320} height={192} className="max-h-44 w-auto object-contain" />
+        </div>
       ) : (
-        <div className="w-full aspect-[3/1] bg-[var(--bg-primary)] border-b border-[var(--border-primary)] flex items-center justify-center relative overflow-hidden">
+        <div className="w-full h-32 bg-[var(--bg-primary)] border-b border-[var(--border-primary)] flex items-center justify-center relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent-primary)]/5 to-transparent"></div>
           <i className="ph ph-microchip text-5xl text-[var(--text-secondary)]/10"></i>
         </div>

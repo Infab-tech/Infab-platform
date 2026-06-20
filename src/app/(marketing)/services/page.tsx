@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -56,12 +57,12 @@ const memsProcesses = [
 ];
 
 const facilities = [
-  { icon: 'ph-circles-three', title: 'Class 100 Cleanroom', description: 'ISO Class 5 (Class 100) environment. Full suite of photolithography, deposition, and etch equipment for 4" and 6" wafers.' },
-  { icon: 'ph-magnifying-glass', title: 'Characterisation Lab', description: 'Full suite of surface, electrical, and optical characterisation equipment including SEM, AFM, profilometer, C-V and I-V measurement stations.' },
-  { icon: 'ph-cpu', title: 'MEMS Test & Packaging', description: 'Wafer-level probe station, dicing saw, wire bonder, and die-attach equipment for MEMS device packaging and qualification testing.' },
-  { icon: 'ph-drop', title: 'Microfluidics Lab', description: 'Dedicated PDMS fabrication, spin coating, and soft lithography equipment. UV curing station, plasma bonding, and fluidic testing benches.' },
-  { icon: 'ph-thermometer', title: 'Environmental Test Chamber', description: 'Thermal cycling, humidity, vibration, and shock test chambers for qualification of aerospace and industrial sensor products to MIL-STD and DO-160.' },
-  { icon: 'ph-monitor', title: 'Design & Simulation Centre', description: 'Workstation cluster running COMSOL Multiphysics, Cadence, Ansys, and custom MEMS design tools for sensor design, simulation, and layout.' },
+  { icon: 'ph-circles-three', title: 'Class 100 Cleanroom', description: 'ISO Class 5 (Class 100) environment. Full suite of photolithography, deposition, and etch equipment for 4" and 6" wafers.', photo: '/assests/services/cwb-semi-clean.jpg' },
+  { icon: 'ph-magnifying-glass', title: 'Characterisation Lab', description: 'Full suite of surface, electrical, and optical characterisation equipment including SEM, AFM, profilometer, C-V and I-V measurement stations.', photo: '/assests/services/dektakxt.jpg' },
+  { icon: 'ph-waves', title: 'Deep Reactive Ion Etch (DRIE)', description: 'Bosch-process DRIE chamber for high-aspect-ratio silicon structures. Etch depth up to 300 µm with vertical sidewalls and tight CD control.', photo: '/assests/services/drie.jpg' },
+  { icon: 'ph-sun', title: 'Lithography Tools', description: 'MJB4 & EVG620 mask aligners for UV and deep-UV lithography with feature sizes down to 2 µm on silicon, glass, and polymer substrates.', photo: '/assests/services/mjb4.png' },
+  { icon: 'ph-drop', title: 'Microfluidics Lab', description: 'Dedicated PDMS fabrication, spin coating, and soft lithography equipment. UV curing station, plasma bonding, and fluidic testing benches.', photo: '/assests/services/spincoater.jpg' },
+  { icon: 'ph-monitor', title: 'Design & Simulation Centre', description: 'Workstation cluster running COMSOL Multiphysics, Cadence, Ansys, and custom MEMS design tools for sensor design, simulation, and layout.', photo: '/assests/services/infab-section-1.png' },
 ];
 
 export default function ServicesPage() {
@@ -135,6 +136,10 @@ export default function ServicesPage() {
               <p className="text-[var(--text-secondary)] text-lg leading-relaxed mb-8">
                 We bring your microfluidic concepts to life through advanced cleanroom fabrication, combining silicon, glass, and polymer processing under one roof. From initial design to final packaged chip, INFAB handles the complete development cycle.
               </p>
+              {/* Real lab photo */}
+              <div className="rounded-2xl overflow-hidden border border-[var(--border-primary)] mb-8">
+                <Image src="/assests/services/microfluidics-showcase.png" alt="INFAB Microfluidics Cleanroom" width={640} height={360} className="w-full object-cover" />
+              </div>
               <Link href="/contact" className="inline-flex items-center gap-2 font-mono text-sm font-semibold uppercase tracking-wider text-[var(--accent-primary)] hover:text-[var(--text-primary)] transition-colors">
                 Request a Quote <i className="ph ph-arrow-right"></i>
               </Link>
@@ -159,13 +164,18 @@ export default function ServicesPage() {
       {/* MEMS Fabrication */}
       <div id="mems" className="border-b border-[var(--border-primary)] py-32 bg-[var(--bg-secondary)]">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="mb-16 max-w-3xl">
-            <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">Service 03</span>
-            <h2 className="text-4xl font-bold tracking-tight text-[var(--text-primary)] mb-6">MEMS Fabrication Services</h2>
-            <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
-            <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
-              INFAB offers comprehensive MEMS process services for prototyping and small-volume production. Our experienced team supports clients from research institutions to industrial OEMs.
-            </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start mb-16">
+            <div>
+              <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">Service 03</span>
+              <h2 className="text-4xl font-bold tracking-tight text-[var(--text-primary)] mb-6">MEMS Fabrication Services</h2>
+              <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
+              <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
+                INFAB offers comprehensive MEMS process services for prototyping and small-volume production. Our experienced team supports clients from research institutions to industrial OEMs.
+              </p>
+            </div>
+            <div className="rounded-2xl overflow-hidden border border-[var(--border-primary)]">
+              <Image src="/assests/services/mems-fabrication.png" alt="INFAB MEMS Fabrication Facility" width={640} height={427} className="w-full object-cover" />
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {memsProcesses.map((p) => (
@@ -196,12 +206,19 @@ export default function ServicesPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {facilities.map((f) => (
-              <div key={f.title} className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
-                <div className="w-12 h-12 rounded-xl bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex items-center justify-center mb-6">
-                  <i className={`ph ${f.icon} text-2xl text-[var(--accent-primary)]`}></i>
+              <div key={f.title} className="group rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
+                {f.photo && (
+                  <div className="h-44 overflow-hidden border-b border-[var(--border-primary)]">
+                    <Image src={f.photo} alt={f.title} width={480} height={176} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  </div>
+                )}
+                <div className="p-8">
+                  <div className="w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex items-center justify-center mb-5">
+                    <i className={`ph ${f.icon} text-xl text-[var(--accent-primary)]`}></i>
+                  </div>
+                  <h3 className="text-lg font-bold text-[var(--text-primary)] mb-3">{f.title}</h3>
+                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{f.description}</p>
                 </div>
-                <h3 className="text-lg font-bold text-[var(--text-primary)] mb-3">{f.title}</h3>
-                <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{f.description}</p>
               </div>
             ))}
           </div>

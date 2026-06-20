@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -12,38 +13,39 @@ const founder = {
   name: 'Muthuraman Swaminathan',
   title: 'Founder & CEO',
   bio: 'Driving INFAB\'s mission to create a bridge between fundamental research and industrial deployment through cutting-edge MEMS and microfluidic innovation. Incubated at CeNSE, IISc Bangalore.',
+  photo: '/assests/team/muthuraman.jpg',
 };
 
 const research = [
-  { name: 'Dr. Mohammed Yosuff Caffiyar', title: 'Principal Scientist', bio: 'Leads core MEMS device science, sensor physics, and process development at INFAB\'s cleanroom facilities.' },
-  { name: 'Dr. Saara K', title: 'Research Director', bio: 'Directs research programmes across MEMS sensor architectures and microfluidic platform development.' },
+  { name: 'Dr. Mohammed Yosuff Caffiyar', title: 'Principal Scientist', bio: 'Leads core MEMS device science, sensor physics, and process development at INFAB\'s cleanroom facilities.', photo: '/assests/team/yosuff.jpg' },
+  { name: 'Dr. Saara K', title: 'Research Director', bio: 'Directs research programmes across MEMS sensor architectures and microfluidic platform development.', photo: '/assests/team/saara.jpg' },
 ];
 
 const engineering = [
-  { name: 'Prem A', title: 'Sr. Design Engineer', bio: 'Senior MEMS and sensor design engineer with hands-on experience in layout, simulation, and device qualification.' },
-  { name: 'Amos Heeber', title: 'Design Engineer', bio: 'Design engineer focused on MEMS device architecture, mask layout, and hardware integration.' },
-  { name: 'Ragin Raj K', title: 'Hardware Designer', bio: 'Hardware and electronics designer responsible for sensor readout circuits and system integration.' },
+  { name: 'Prem A', title: 'Sr. Design Engineer', bio: 'Senior MEMS and sensor design engineer with hands-on experience in layout, simulation, and device qualification.', photo: '/assests/team/prem.jpg' },
+  { name: 'Amos Heeber', title: 'Design Engineer', bio: 'Design engineer focused on MEMS device architecture, mask layout, and hardware integration.', photo: '/assests/team/amos.jpg' },
+  { name: 'Ragin Raj K', title: 'Hardware Designer', bio: 'Hardware and electronics designer responsible for sensor readout circuits and system integration.', photo: '/assests/team/ragin.jpg' },
   { name: 'Stephen N S', title: 'Project Coordinator', bio: 'Coordinates cross-functional engineering projects, timelines, and customer deliverables.' },
 ];
 
 const consultants = [
   { name: 'Dr. Kashyap Dhruv', title: 'Software Consultant', bio: 'Advises on embedded firmware, data acquisition systems, and software toolchain for MEMS product lines.' },
-  { name: 'Jobin Vijay', title: 'Hardware Design Consultant', bio: 'External hardware design consultant supporting schematic, PCB, and system-level design reviews.' },
-  { name: 'Rahul Sharma', title: 'Finance Consultant', bio: 'Financial strategy and startup finance advisor, supporting fundraising, grants, and investor relations.' },
+  { name: 'Jobin Vijay', title: 'Hardware Design Consultant', bio: 'External hardware design consultant supporting schematic, PCB, and system-level design reviews.', photo: '/assests/team/jobin.jpg' },
+  { name: 'Rahul Sharma', title: 'Finance Consultant', bio: 'Financial strategy and startup finance advisor, supporting fundraising, grants, and investor relations.', photo: '/assests/team/rahul.jpg' },
 ];
 
 const business = [
-  { name: 'Dilip Kamat', title: 'Business Development', bio: 'Leads B2B sales, strategic partnerships, and market development for aerospace and healthcare verticals.' },
-  { name: 'Rajita M', title: 'Administration', bio: 'Handles administrative operations, procurement, and office coordination across INFAB\'s facilities.' },
-  { name: 'Priyanka K C', title: 'Administration', bio: 'Supports day-to-day administrative functions and organisational workflows.' },
+  { name: 'Dilip Kamat', title: 'Business Development', bio: 'Leads B2B sales, strategic partnerships, and market development for aerospace and healthcare verticals.', photo: '/assests/team/dilip.jpg' },
+  { name: 'Rajita M', title: 'Administration', bio: 'Handles administrative operations, procurement, and office coordination across INFAB\'s facilities.', photo: '/assests/team/rajita.jpg' },
+  { name: 'Priyanka K C', title: 'Administration', bio: 'Supports day-to-day administrative functions and organisational workflows.', photo: '/assests/team/priyanka.jpg' },
 ];
 
 const interns = [
-  { name: 'Palash Srivastava', title: 'Intern' },
-  { name: 'Sreelakshmi Anil', title: 'Intern' },
-  { name: 'Swaminath B', title: 'Intern' },
-  { name: 'Priyam Badyal', title: 'Intern' },
-  { name: 'Vaisakh Melaveetil', title: 'Intern' },
+  { name: 'Palash Srivastava', title: 'Intern', photo: '/assests/team/palash.jpg' },
+  { name: 'Sreelakshmi Anil', title: 'Intern', photo: '/assests/team/sreelakshmi.jpg' },
+  { name: 'Swaminath B', title: 'Intern', photo: '/assests/team/swaminath.jpg' },
+  { name: 'Priyam Badyal', title: 'Intern', photo: '/assests/team/priyam.jpg' },
+  { name: 'Vaisakh Melaveetil', title: 'Intern', photo: '/assests/team/vaisakh.jpg' },
 ];
 
 /* ── Helpers ──────────────────────────────────────────────────────────────── */
@@ -57,15 +59,31 @@ function getInitials(name: string): string {
     .join('');
 }
 
-interface Member { name: string; title: string; bio?: string; }
+interface Member { name: string; title: string; bio?: string; photo?: string; }
+
+function Avatar({ name, photo, size }: { name: string; photo?: string; size: 'lg' | 'md' | 'sm' }) {
+  const dims = size === 'lg' ? 'w-20 h-20' : size === 'md' ? 'w-12 h-12' : 'w-8 h-8';
+  const radius = size === 'lg' ? 'rounded-2xl' : size === 'md' ? 'rounded-xl' : 'rounded-lg';
+  const textSize = size === 'lg' ? 'text-2xl' : size === 'md' ? 'text-base' : 'text-xs';
+  if (photo) {
+    return (
+      <div className={`${dims} ${radius} overflow-hidden flex-shrink-0 border border-[var(--accent-primary)]/20`}>
+        <Image src={photo} alt={name} width={size === 'lg' ? 80 : size === 'md' ? 48 : 32} height={size === 'lg' ? 80 : size === 'md' ? 48 : 32} className="w-full h-full object-cover object-top" />
+      </div>
+    );
+  }
+  return (
+    <div className={`${dims} ${radius} bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex-shrink-0 flex items-center justify-center font-bold ${textSize} text-[var(--accent-primary)]`}>
+      {getInitials(name)}
+    </div>
+  );
+}
 
 function LeadershipCard({ m }: { m: Member }) {
   return (
     <div className="rounded-2xl border border-[var(--accent-primary)]/30 bg-[var(--bg-secondary)] p-10 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/60 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/10">
       <div className="flex items-start gap-6 mb-6">
-        <div className="w-20 h-20 rounded-2xl bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/30 flex-shrink-0 flex items-center justify-center font-bold text-2xl text-[var(--accent-primary)]">
-          {getInitials(m.name)}
-        </div>
+        <Avatar name={m.name} photo={m.photo} size="lg" />
         <div className="pt-1">
           <h3 className="text-xl font-bold text-[var(--text-primary)] mb-1">{m.name}</h3>
           <p className="font-mono text-xs uppercase tracking-widest text-[var(--accent-primary)]">{m.title}</p>
@@ -80,9 +98,7 @@ function MemberCard({ m }: { m: Member }) {
   return (
     <div className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-xl hover:shadow-[var(--accent-primary)]/5">
       <div className="flex items-center gap-3 mb-4">
-        <div className="w-12 h-12 rounded-xl bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex-shrink-0 flex items-center justify-center font-bold text-base text-[var(--accent-primary)]">
-          {getInitials(m.name)}
-        </div>
+        <Avatar name={m.name} photo={m.photo} size="md" />
         <div>
           <h3 className="text-sm font-bold text-[var(--text-primary)] leading-tight">{m.name}</h3>
           <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--accent-primary)] mt-0.5">{m.title}</p>
@@ -93,12 +109,10 @@ function MemberCard({ m }: { m: Member }) {
   );
 }
 
-function InternChip({ m }: { m: { name: string; title: string } }) {
+function InternChip({ m }: { m: { name: string; title: string; photo?: string } }) {
   return (
     <div className="flex items-center gap-3 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] px-4 py-3">
-      <div className="w-8 h-8 rounded-lg bg-[var(--text-primary)]/5 border border-[var(--border-primary)] flex-shrink-0 flex items-center justify-center text-xs font-bold text-[var(--text-secondary)]">
-        {getInitials(m.name)}
-      </div>
+      <Avatar name={m.name} photo={m.photo} size="sm" />
       <div>
         <p className="text-sm font-semibold text-[var(--text-primary)]">{m.name}</p>
         <p className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-secondary)]">{m.title}</p>
