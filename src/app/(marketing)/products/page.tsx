@@ -13,6 +13,8 @@ interface ProductData {
   category: string;
   description: string;
   specs: string[];
+  imageUrl?: string | null;
+  imageUrls?: string[];
 }
 
 const fallbackProducts: ProductData[] = [
@@ -43,8 +45,19 @@ const categories = [
 ];
 
 function ProductCard({ product }: { product: ProductData }) {
+  const cover = product.imageUrl ?? product.imageUrls?.[0] ?? null;
   return (
-    <div className="group flex flex-col rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
+    <div className="group flex flex-col rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
+      {/* Product image */}
+      {cover ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={cover} alt={product.name} className="w-full aspect-video object-cover border-b border-[var(--border-primary)]" />
+      ) : (
+        <div className="w-full aspect-video bg-[var(--bg-primary)] border-b border-[var(--border-primary)] flex items-center justify-center">
+          <i className="ph ph-microchip text-4xl text-[var(--text-secondary)]/20"></i>
+        </div>
+      )}
+      <div className="p-6 flex flex-col flex-grow">
       <h3 className="text-lg font-bold text-[var(--text-primary)] mb-3 leading-snug">{product.name}</h3>
       {product.specs.length > 0 && (
         <div className="flex flex-wrap gap-2 mb-4">
@@ -62,6 +75,7 @@ function ProductCard({ product }: { product: ProductData }) {
       >
         Request Quote <i className="ph ph-arrow-right transition-transform group-hover:translate-x-1"></i>
       </Link>
+      </div>
     </div>
   );
 }
@@ -72,7 +86,7 @@ export default async function ProductsPage() {
     const rows = await prisma.product.findMany({
       where: { isActive: true },
       orderBy: { category: 'asc' },
-      select: { id: true, name: true, category: true, description: true, specs: true },
+      select: { id: true, name: true, category: true, description: true, specs: true, imageUrl: true, imageUrls: true },
     });
     dbProducts = rows.map((r) => ({
       id: r.id,
@@ -80,6 +94,8 @@ export default async function ProductsPage() {
       category: r.category.toUpperCase(),
       description: r.description,
       specs: Array.isArray(r.specs) ? (r.specs as string[]) : [],
+      imageUrl: r.imageUrl,
+      imageUrls: r.imageUrls ?? [],
     }));
   } catch {
     // DB not available — use fallback

@@ -105,21 +105,22 @@ export async function deleteProduct(id: string) {
     revalidatePath('/products');
 }
 
-// Add this to the bottom of src/app/actions/admin.ts
-
 export async function addNewProduct(formData: FormData) {
-    await verifyAdmin(); // Ensure the user is still a valid admin
+    await verifyAdmin();
 
     const name = formData.get('name') as string;
     const category = formData.get('category') as string;
     const description = formData.get('description') as string;
+    const specsRaw = formData.get('specs') as string;
+    const imageUrlsRaw = formData.get('imageUrls') as string;
 
     if (!name || !category || !description) {
-        return { success: false, message: "Missing required fields." };
+        return { success: false, message: 'Missing required fields.' };
     }
 
-    // Create a URL-friendly slug (e.g., "New Sensor!" -> "new-sensor-167890")
     const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + Date.now().toString().slice(-6);
+    const specs = specsRaw ? specsRaw.split(',').map((s) => s.trim()).filter(Boolean) : [];
+    const imageUrls: string[] = imageUrlsRaw ? JSON.parse(imageUrlsRaw) : [];
 
     try {
         await prisma.product.create({
@@ -128,19 +129,152 @@ export async function addNewProduct(formData: FormData) {
                 slug,
                 category,
                 description,
-                isActive: true, // New products are active by default
-            }
+                specs,
+                imageUrl: imageUrls[0] ?? null,
+                imageUrls,
+                isActive: true,
+            },
         });
-
-        // Refresh the caches so the new product appears instantly
         revalidatePath('/admin/products');
         revalidatePath('/products');
-
     } catch (error) {
-        console.error("Failed to add product:", error);
-        return { success: false, message: "Database error. Could not save product." };
+        console.error('Failed to add product:', error);
+        return { success: false, message: 'Database error. Could not save product.' };
     }
 
-    // Redirect back to the products table after successful creation
     redirect('/admin/products');
+}
+
+export async function updateProduct(id: string, formData: FormData) {
+    await verifyAdmin();
+
+    const name = formData.get('name') as string;
+    const category = formData.get('category') as string;
+    const description = formData.get('description') as string;
+    const specsRaw = formData.get('specs') as string;
+    const imageUrlsRaw = formData.get('imageUrls') as string;
+
+    if (!name || !category || !description) {
+        return { success: false, message: 'Missing required fields.' };
+    }
+
+    const specs = specsRaw ? specsRaw.split(',').map((s) => s.trim()).filter(Boolean) : [];
+    const imageUrls: string[] = imageUrlsRaw ? JSON.parse(imageUrlsRaw) : [];
+
+    try {
+        await prisma.product.update({
+            where: { id },
+            data: {
+                name,
+                category,
+                description,
+                specs,
+                imageUrl: imageUrls[0] ?? null,
+                imageUrls,
+            },
+        });
+        revalidatePath('/admin/products');
+        revalidatePath('/products');
+    } catch (error) {
+        console.error('Failed to update product:', error);
+        return { success: false, message: 'Database error. Could not update product.' };
+    }
+
+    redirect('/admin/products');
+}
+
+// ── News Article Actions ──────────────────────────────────────────────────────
+
+export async function addNewsArticle(formData: FormData) {
+    await verifyAdmin();
+
+    const title = formData.get('title') as string;
+    const description = formData.get('description') as string;
+    const category = formData.get('category') as string;
+    const link = formData.get('link') as string;
+    const publishedAt = formData.get('publishedAt') as string;
+    const isPublished = formData.get('isPublished') === 'on';
+
+    if (!title || !description) {
+        return { success: false, message: 'Title and description are required.' };
+    }
+
+    try {
+        await prisma.newsArticle.create({
+            data: {
+                title,
+                description,
+                category: category || 'General',
+                link: link || null,
+                publishedAt: publishedAt ? new Date(publishedAt) : new Date(),
+                isPublished,
+            },
+        });
+        revalidatePath('/admin/news');
+        revalidatePath('/news');
+    } catch (error) {
+        console.error('Failed to add news article:', error);
+        return { success: false, message: 'Database error. Could not save article.' };
+    }
+
+    redirect('/admin/news');
+}
+
+export async function updateNewsArticle(id: string, formData: FormData) {
+    await verifyAdmin();
+
+    const title = formData.get('title') as string;
+    const description = formData.get('description') as string;
+    const category = formData.get('category') as string;
+    const link = formData.get('link') as string;
+    const publishedAt = formData.get('publishedAt') as string;
+    const isPublished = formData.get('isPublished') === 'on';
+
+    if (!title || !description) {
+        return { success: false, message: 'Title and description are required.' };
+    }
+
+    try {
+        await prisma.newsArticle.update({
+            where: { id },
+            data: {
+                title,
+                description,
+                category: category || 'General',
+                link: link || null,
+                publishedAt: publishedAt ? new Date(publishedAt) : undefined,
+                isPublished,
+            },
+        });
+        revalidatePath('/admin/news');
+        revalidatePath('/news');
+    } catch (error) {
+        console.error('Failed to update news article:', error);
+        return { success: false, message: 'Database error. Could not update article.' };
+    }
+
+    redirect('/admin/news');
+}
+
+export async function deleteNewsArticle(id: string) {
+    try {
+        await verifyAdmin();
+        await prisma.newsArticle.delete({ where: { id } });
+        revalidatePath('/admin/news');
+        revalidatePath('/news');
+        return { success: true };
+    } catch (e: unknown) {
+        console.error('Failed to delete news article:', e);
+        return { success: false, message: 'Failed to delete article.' };
+    }
+}
+
+export async function toggleNewsPublished(id: string, currentStatus: boolean) {
+    await verifyAdmin();
+    await prisma.newsArticle.update({
+        where: { id },
+        data: { isPublished: !currentStatus },
+    });
+    revalidatePath('/admin/news');
+    revalidatePath('/news');
 }

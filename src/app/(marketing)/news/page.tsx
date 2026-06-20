@@ -1,57 +1,27 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { prisma } from '@/lib/supabase/prisma';
 
 export const metadata: Metadata = {
   title: 'News & Events | INFAB Semiconductor',
   description: 'Latest announcements, product launches, research milestones, and events from INFAB Semiconductor.',
 };
 
-const articles = [
-  {
-    id: 1,
-    date: 'March 25, 2026',
-    dateShort: 'Mar 2026',
-    category: 'Product Launches',
-    title: 'INFAB Semiconductor Expands Aerospace Product Portfolio with New Differential Pressure Transducers',
-    description:
-      'INFAB Semiconductor announces the launch of its next-generation TP Series differential pressure transducers, offering enhanced accuracy and extended operating temperature range for commercial aviation and UAV applications.',
-  },
-  {
-    id: 2,
-    date: 'January 30, 2026',
-    dateShort: 'Jan 2026',
-    category: 'Awards & Recognition',
-    title: 'New Organ-on-Chip Platform for Pharmaceutical Research Receives CE Mark Approval',
-    description:
-      "INFAB Semiconductor's latest microfluidic organ-on-chip platform has received European CE Mark certification, opening doors for clinical research partnerships across the EU and validating INFAB's quality management processes.",
-  },
-  {
-    id: 3,
-    date: 'December 10, 2025',
-    dateShort: 'Dec 2025',
-    category: 'Awards & Recognition',
-    title: 'INFAB Recognised with "Best Deep-Tech Startup" Award at India Semiconductor Summit 2025',
-    description:
-      'INFAB Semiconductor received the Best Deep-Tech Startup of the Year award at the India Semiconductor Summit held in Bengaluru, acknowledging the company\'s contributions to the domestic semiconductor ecosystem.',
-  },
-  {
-    id: 4,
-    date: 'October 5, 2025',
-    dateShort: 'Oct 2025',
-    category: 'Partnerships & MoUs',
-    title: 'INFAB Semiconductor Signs MoU with HAL for Co-Development of Avionics Pressure Sensors',
-    description:
-      'INFAB Semiconductor signed a Memorandum of Understanding with Hindustan Aeronautics Limited (HAL) to co-develop indigenous MEMS pressure sensors for the Light Combat Aircraft (LCA) Tejas programme.',
-  },
-  {
-    id: 5,
-    date: 'July 18, 2025',
-    dateShort: 'Jul 2025',
-    category: 'Funding & Investors',
-    title: 'INFAB Receives Series A Funding to Scale MEMS Manufacturing Capacity',
-    description:
-      'INFAB Semiconductor has successfully closed a Series A funding round led by a consortium of deep-tech investors and supported by the CDIIC initiative, enabling a 3x expansion of cleanroom capacity and workforce growth.',
-  },
+interface ArticleShape {
+  id: string;
+  date: Date;
+  category: string;
+  title: string;
+  description: string;
+  link: string | null;
+}
+
+const FALLBACK_ARTICLES: ArticleShape[] = [
+  { id: '1', date: new Date('2026-03-25'), category: 'Product Launches', title: 'INFAB Semiconductor Expands Aerospace Product Portfolio with New Differential Pressure Transducers', description: 'INFAB Semiconductor announces the launch of its next-generation TP Series differential pressure transducers, offering enhanced accuracy and extended operating temperature range for commercial aviation and UAV applications.', link: null },
+  { id: '2', date: new Date('2026-01-30'), category: 'Awards & Recognition', title: 'New Organ-on-Chip Platform for Pharmaceutical Research Receives CE Mark Approval', description: "INFAB Semiconductor's latest microfluidic organ-on-chip platform has received European CE Mark certification, opening doors for clinical research partnerships across the EU and validating INFAB's quality management processes.", link: null },
+  { id: '3', date: new Date('2025-12-10'), category: 'Awards & Recognition', title: 'INFAB Recognised with "Best Deep-Tech Startup" Award at India Semiconductor Summit 2025', description: "INFAB Semiconductor received the Best Deep-Tech Startup of the Year award at the India Semiconductor Summit held in Bengaluru, acknowledging the company's contributions to the domestic semiconductor ecosystem.", link: null },
+  { id: '4', date: new Date('2025-10-05'), category: 'Partnerships & MoUs', title: 'INFAB Semiconductor Signs MoU with HAL for Co-Development of Avionics Pressure Sensors', description: 'INFAB Semiconductor signed a Memorandum of Understanding with Hindustan Aeronautics Limited (HAL) to co-develop indigenous MEMS pressure sensors for the Light Combat Aircraft (LCA) Tejas programme.', link: null },
+  { id: '5', date: new Date('2025-07-18'), category: 'Funding & Investors', title: 'INFAB Receives Series A Funding to Scale MEMS Manufacturing Capacity', description: 'INFAB Semiconductor has successfully closed a Series A funding round led by a consortium of deep-tech investors and supported by the CDIIC initiative, enabling a 3x expansion of cleanroom capacity and workforce growth.', link: null },
 ];
 
 const categories = [
@@ -63,7 +33,34 @@ const categories = [
   { label: 'Events & Conferences', count: 9 },
 ];
 
-export default function NewsPage() {
+function fmt(date: Date) {
+  return date.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+function fmtShort(date: Date) {
+  return date.toLocaleDateString('en-IN', { month: 'short', year: 'numeric' });
+}
+
+export default async function NewsPage() {
+  let dbArticles: typeof FALLBACK_ARTICLES = [];
+  try {
+    const rows = await prisma.newsArticle.findMany({
+      where: { isPublished: true },
+      orderBy: { publishedAt: 'desc' },
+    });
+    dbArticles = rows.map((r) => ({
+      id: r.id,
+      date: r.publishedAt,
+      category: r.category,
+      title: r.title,
+      description: r.description,
+      link: r.link,
+    }));
+  } catch {
+    // DB not connected — use fallback
+  }
+
+  const articles = dbArticles.length > 0 ? dbArticles : FALLBACK_ARTICLES;
+
   return (
     <div className="bg-[var(--bg-primary)]">
 
@@ -95,13 +92,12 @@ export default function NewsPage() {
                   key={article.id}
                   className="group rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:border-[var(--accent-primary)]/30"
                 >
-                  {/* Top bar */}
                   <div className="h-2 bg-gradient-to-r from-[var(--accent-primary)]/60 to-[var(--accent-primary)]/10"></div>
 
                   <div className="p-8">
                     <div className="flex flex-wrap items-center gap-3 mb-4">
                       <span className="inline-flex items-center px-3 py-1 bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 text-[var(--accent-primary)] text-xs font-mono font-bold uppercase tracking-wider rounded">
-                        {article.dateShort}
+                        {fmtShort(article.date)}
                       </span>
                       <span className="text-xs text-[var(--text-secondary)] font-mono uppercase tracking-wider">
                         {article.category}
@@ -114,13 +110,24 @@ export default function NewsPage() {
                       {article.description}
                     </p>
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-[var(--text-secondary)]">{article.date}</span>
-                      <Link
-                        href="/contact"
-                        className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-primary)] transition-colors"
-                      >
-                        Read More <i className="ph ph-arrow-right transition-transform group-hover:translate-x-1"></i>
-                      </Link>
+                      <span className="text-xs text-[var(--text-secondary)]">{fmt(article.date)}</span>
+                      {article.link ? (
+                        <a
+                          href={article.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-primary)] transition-colors"
+                        >
+                          Read Article <i className="ph ph-arrow-square-out"></i>
+                        </a>
+                      ) : (
+                        <Link
+                          href="/contact"
+                          className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-primary)] transition-colors"
+                        >
+                          Contact Us <i className="ph ph-arrow-right transition-transform group-hover:translate-x-1"></i>
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </article>
@@ -159,7 +166,7 @@ export default function NewsPage() {
                     <li key={a.id} className="flex gap-3 items-start">
                       <span className="flex-shrink-0 mt-1 w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)]"></span>
                       <div>
-                        <p className="text-xs font-mono text-[var(--accent-primary)] mb-1">{a.dateShort}</p>
+                        <p className="text-xs font-mono text-[var(--accent-primary)] mb-1">{fmtShort(a.date)}</p>
                         <p className="text-sm text-[var(--text-primary)] leading-snug line-clamp-2">{a.title}</p>
                       </div>
                     </li>

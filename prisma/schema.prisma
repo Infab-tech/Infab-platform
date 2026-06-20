@@ -30,12 +30,12 @@ model Product {
   description String   @db.Text
   specs       Json?
   imageUrl    String?
+  imageUrls   String[]
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now()) @updatedAt
-  
-  // New Relation: A product can be in many quotes
-  quoteItems  QuoteItem[] 
+
+  quoteItems  QuoteItem[]
 }
 
 // 3. QUOTE REQUESTS (The "Cart/Order")
@@ -77,7 +77,20 @@ model QuoteMessage {
   quoteRequest   QuoteRequest @relation(fields: [quoteRequestId], references: [id], onDelete: Cascade)
 }
 
-// 5. USER ROLES (RBAC)
+// 6. NEWS ARTICLES
+model NewsArticle {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  category    String   @default("General")
+  link        String?
+  publishedAt DateTime @default(now())
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+}
+
+// 7. USER ROLES (RBAC)
 model userRole {
   email     String   @id
   role      String   @default("CUSTOMER") // CUSTOMER, ADMIN

@@ -28,6 +28,7 @@ export default async function AdminProductsPage() {
                     <table className="w-full text-left border-collapse">
                         <thead>
                             <tr className="bg-[var(--text-primary)]/[0.02] border-b border-[var(--text-primary)]/10 font-mono text-xs uppercase tracking-wider text-[var(--text-secondary)]">
+                                <th className="p-5 font-semibold w-16">Image</th>
                                 <th className="p-5 font-semibold">Category</th>
                                 <th className="p-5 font-semibold">Product Name</th>
                                 <th className="p-5 font-semibold">Status</th>
@@ -42,6 +43,16 @@ export default async function AdminProductsPage() {
                             )}
                             {products.map((product) => (
                                 <tr key={product.id} className="border-b border-[var(--text-primary)]/5 hover:bg-[var(--text-primary)]/[0.02] transition-colors text-[var(--text-primary)]">
+                                    <td className="p-5">
+                                        {product.imageUrl ? (
+                                            // eslint-disable-next-line @next/next/no-img-element
+                                            <img src={product.imageUrl} alt="" className="w-12 h-12 rounded-lg object-cover border border-[var(--text-primary)]/10" />
+                                        ) : (
+                                            <div className="w-12 h-12 rounded-lg bg-[var(--text-primary)]/5 border border-[var(--text-primary)]/10 flex items-center justify-center">
+                                                <i className="ph ph-image text-lg text-[var(--text-secondary)]/40"></i>
+                                            </div>
+                                        )}
+                                    </td>
                                     <td className="p-5">
                                         <span className="inline-flex px-2 py-1 bg-[var(--text-primary)]/5 rounded text-xs font-mono uppercase text-[var(--text-secondary)]">
                                             {product.category}
@@ -66,6 +77,11 @@ export default async function AdminProductsPage() {
                                     </td>
                                     <td className="p-5">
                                         <div className="flex justify-end gap-3">
+
+                                            {/* Edit */}
+                                            <Link href={`/admin/products/${product.id}/edit`} className="text-xs font-bold uppercase tracking-wider px-3 py-2 rounded border border-[var(--accent-primary)]/30 text-[var(--accent-primary)] hover:bg-[var(--accent-primary)]/10 transition-colors">
+                                                Edit
+                                            </Link>
 
                                             {/* Toggle Status Action */}
                                             <form action={async () => {
