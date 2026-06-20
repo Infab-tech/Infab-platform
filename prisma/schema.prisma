@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// 1. INQUIRIES
+model Inquiry {
+  id           String   @id @default(cuid())
+  firstName    String
+  lastName     String
+  email        String
+  organization String?
+  interest     String
+  message      String   @db.Text
+  status       String   @default("PENDING")
+  createdAt    DateTime @default(now())
+}
+
+// 2. PRODUCTS
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  category    String
+  description String   @db.Text
+  specs       Json?
+  imageUrl    String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+  
+  // New Relation: A product can be in many quotes
+  quoteItems  QuoteItem[] 
+}
+
+// 3. QUOTE REQUESTS (The "Cart/Order")
+model QuoteRequest {
+  id             String      @id @default(cuid())
+  userId         String      // Links to the Supabase Auth User ID
+  userEmail      String      // Stored for easy reference
+  status         String      @default("PENDING") // PENDING, REVIEWING, QUOTED, ACCEPTED
+  notes          String?     @db.Text
+  deletedByAdmin Boolean     @default(false)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @default(now()) @updatedAt
+  
+  items          QuoteItem[]
+  messages       QuoteMessage[]
+}
+
+// 4. QUOTE ITEMS (The individual products inside the request)
+model QuoteItem {
+  id             String   @id @default(cuid())
+  quoteRequestId String
+  productId      String
+  quantity       Int      @default(1)
+  
+  quoteRequest   QuoteRequest @relation(fields: [quoteRequestId], references: [id], onDelete: Cascade)
+  product        Product      @relation(fields: [productId], references: [id])
+}
+
+// 5. QUOTE MESSAGES (Two-way chat system)
+model QuoteMessage {
+  id             String       @id @default(cuid())
+  quoteRequestId String
+  senderRole     String       // "ADMIN" or "CUSTOMER"
+  senderEmail    String       // Email of who sent it
+  text           String       @db.Text
+  isRead         Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+  
+  quoteRequest   QuoteRequest @relation(fields: [quoteRequestId], references: [id], onDelete: Cascade)
+}
+
+// 5. USER ROLES (RBAC)
+model userRole {
+  email     String   @id
+  role      String   @default("CUSTOMER") // CUSTOMER, ADMIN
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@map("UserRole")
+}

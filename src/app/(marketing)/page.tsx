@@ -1,8 +1,8 @@
-import Hero from './components/Hero';
-import About from './components/About';
-import Products from './components/Products';
-import News from './components/News';
-import Partners from './components/Partners';
+import Hero from '@/components/sections/Hero';
+import About from '@/components/sections/About';
+import Products from '@/components/sections/Products';
+import News from '@/components/sections/News';
+import Partners from '@/components/sections/Partners';
 
 export default function Home() {
   return (

@@ -1,0 +1,105 @@
+'use client';
+
+import { useState } from 'react';
+import { addNewProduct } from '@/app/actions/admin';
+import Link from 'next/link';
+
+export default function NewProductPage() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    const formData = new FormData(e.currentTarget);
+    const result = await addNewProduct(formData);
+
+    // We only hit this code if the Server Action returned an error 
+    // (If successful, the Server Action triggers a redirect!)
+    if (result && !result.success) {
+      setErrorMessage(result.message);
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="max-w-3xl mx-auto">
+      <div className="mb-10 flex items-center gap-4">
+        <Link href="/admin/products" className="w-10 h-10 rounded-full bg-[var(--text-primary)]/5 flex items-center justify-center hover:bg-[var(--text-primary)]/10 transition-colors text-[var(--text-primary)]">
+          <i className="ph ph-arrow-left"></i>
+        </Link>
+        <div>
+          <h1 className="text-3xl font-bold mb-1 text-[var(--text-primary)]">Add New Product</h1>
+          <p className="text-[var(--text-secondary)]">Publish a new MEMS sensor or microfluidic device to the catalog.</p>
+        </div>
+      </div>
+
+      <div className="bg-[var(--bg-secondary)] border border-[var(--text-primary)]/10 rounded-2xl p-8 shadow-xl">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+          
+          <div className="flex flex-col gap-2">
+            <label htmlFor="name" className="font-mono text-xs font-semibold uppercase text-[var(--text-secondary)]">Product Name *</label>
+            <input 
+              type="text" 
+              id="name" 
+              name="name" 
+              required 
+              placeholder="e.g., MP-100 High Temp Pressure Sensor"
+              className="bg-[var(--text-primary)]/[0.03] border border-[var(--text-primary)]/10 rounded-lg px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] focus:bg-[var(--text-primary)]/[0.05] transition-colors" 
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="category" className="font-mono text-xs font-semibold uppercase text-[var(--text-secondary)]">Market Vertical *</label>
+            <select 
+              id="category" 
+              name="category" 
+              required 
+              defaultValue=""
+              className="bg-[var(--text-primary)]/[0.03] border border-[var(--text-primary)]/10 rounded-lg px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] focus:bg-[var(--text-primary)]/[0.05] transition-colors appearance-none"
+            >
+              <option value="" disabled className="text-black">Select a core category</option>
+              <option value="Aerospace" className="text-black">Aerospace & Defence</option>
+              <option value="Healthcare" className="text-black">Healthcare & Life Sciences</option>
+              <option value="MEMS" className="text-black">MEMS & Semiconductor</option>
+            </select>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="description" className="font-mono text-xs font-semibold uppercase text-[var(--text-secondary)]">Technical Description *</label>
+            <textarea 
+              id="description" 
+              name="description" 
+              rows={5} 
+              required 
+              placeholder="Detailed description of the product's capabilities and use-cases..."
+              className="bg-[var(--text-primary)]/[0.03] border border-[var(--text-primary)]/10 rounded-lg px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] focus:bg-[var(--text-primary)]/[0.05] transition-colors resize-none"
+            ></textarea>
+          </div>
+
+          {errorMessage && (
+            <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-500 rounded-lg text-sm font-medium">
+              {errorMessage}
+            </div>
+          )}
+
+          <div className="pt-6 border-t border-[var(--text-primary)]/10 flex justify-end gap-4">
+            <Link href="/admin/products" className="px-6 py-3 rounded-lg border border-[var(--text-primary)]/20 text-[var(--text-primary)] font-semibold text-sm hover:bg-[var(--text-primary)]/10 transition-colors">
+              Cancel
+            </Link>
+            <button 
+              type="submit" 
+              disabled={isSubmitting}
+              className="px-8 py-3 rounded-lg bg-[var(--accent-primary)] text-[var(--bg-primary)] font-bold uppercase tracking-wider text-sm hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center gap-2"
+            >
+              {isSubmitting ? 'Publishing...' : 'Publish Product'}
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  );
+}
