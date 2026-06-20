@@ -6,13 +6,20 @@ export const metadata = {
     title: 'Products Management | Admin Console',
 };
 
-export default async function AdminProductsPage() {
+export default async function AdminProductsPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
+    const params = await searchParams;
     const products = await prisma.product.findMany({
         orderBy: { category: 'asc' }
     });
 
     return (
         <div className="max-w-6xl mx-auto pt-8 sm:pt-4">
+            {params?.error === 'has_quotes' && (
+                <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 text-red-500 rounded-lg font-bold flex items-center gap-3">
+                    <i className="ph ph-warning-circle text-xl"></i>
+                    Cannot delete this product because it is part of existing customer quote requests. Please use "Hide" instead to preserve history.
+                </div>
+            )}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-10">
                 <div className="mt-8 sm:mt-0">
                     <h1 className="text-3xl font-bold mb-2 text-[var(--text-primary)]">Product Catalog</h1>

@@ -98,11 +98,24 @@ export async function toggleProductStatus(id: string, currentStatus: boolean) {
 
 export async function deleteProduct(id: string) {
     await verifyAdmin();
-    await prisma.product.delete({
-        where: { id }
-    });
+    let hasError = false;
+    try {
+        await prisma.product.delete({
+            where: { id }
+        });
+    } catch (e: any) {
+        if (e.code === 'P2003') {
+            hasError = true;
+        } else {
+            throw e;
+        }
+    }
     revalidatePath('/admin/products');
     revalidatePath('/products');
+    
+    if (hasError) {
+        redirect('/admin/products?error=has_quotes');
+    }
 }
 
 export async function addNewProduct(formData: FormData) {
