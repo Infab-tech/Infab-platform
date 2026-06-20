@@ -17,11 +17,46 @@ interface ArticleShape {
 }
 
 const FALLBACK_ARTICLES: ArticleShape[] = [
-  { id: '1', date: new Date('2026-03-25'), category: 'Product Launches', title: 'INFAB Semiconductor Expands Aerospace Product Portfolio with New Differential Pressure Transducers', description: 'INFAB Semiconductor announces the launch of its next-generation TP Series differential pressure transducers, offering enhanced accuracy and extended operating temperature range for commercial aviation and UAV applications.', link: null },
-  { id: '2', date: new Date('2026-01-30'), category: 'Awards & Recognition', title: 'New Organ-on-Chip Platform for Pharmaceutical Research Receives CE Mark Approval', description: "INFAB Semiconductor's latest microfluidic organ-on-chip platform has received European CE Mark certification, opening doors for clinical research partnerships across the EU and validating INFAB's quality management processes.", link: null },
-  { id: '3', date: new Date('2025-12-10'), category: 'Awards & Recognition', title: 'INFAB Recognised with "Best Deep-Tech Startup" Award at India Semiconductor Summit 2025', description: "INFAB Semiconductor received the Best Deep-Tech Startup of the Year award at the India Semiconductor Summit held in Bengaluru, acknowledging the company's contributions to the domestic semiconductor ecosystem.", link: null },
-  { id: '4', date: new Date('2025-10-05'), category: 'Partnerships & MoUs', title: 'INFAB Semiconductor Signs MoU with HAL for Co-Development of Avionics Pressure Sensors', description: 'INFAB Semiconductor signed a Memorandum of Understanding with Hindustan Aeronautics Limited (HAL) to co-develop indigenous MEMS pressure sensors for the Light Combat Aircraft (LCA) Tejas programme.', link: null },
-  { id: '5', date: new Date('2025-07-18'), category: 'Funding & Investors', title: 'INFAB Receives Series A Funding to Scale MEMS Manufacturing Capacity', description: 'INFAB Semiconductor has successfully closed a Series A funding round led by a consortium of deep-tech investors and supported by the CDIIC initiative, enabling a 3x expansion of cleanroom capacity and workforce growth.', link: null },
+  {
+    id: '1',
+    date: new Date('2025-09-05'),
+    category: 'Events & Conferences',
+    title: 'Meet Us @ electronica India 2025',
+    description: 'INFAB Semiconductor will be exhibiting at electronica India 2025, one of South Asia\'s premier trade fairs for electronics and sensor technologies. Visit our booth to see our latest MEMS pressure sensors and microfluidic platforms in action.',
+    link: 'https://electronica-india.com/en/trade-fair/',
+  },
+  {
+    id: '2',
+    date: new Date('2025-09-05'),
+    category: 'Awards & Recognition',
+    title: 'GRAND CHALLENGE Winner',
+    description: 'INFAB Semiconductor won the Grand Challenge award, recognising our breakthrough work in indigenous MEMS sensor development. The award was presented through the IIoT Sensors platform, acknowledging our contributions to India\'s deep-tech ecosystem.',
+    link: 'https://www.iiotsensors.org/grant-challenge-results',
+  },
+  {
+    id: '3',
+    date: new Date('2025-09-05'),
+    category: 'Research & Papers',
+    title: 'Indian MEMS Startup INFAB Shares Perspective on Surging Domestic Market',
+    description: 'INFAB Semiconductor featured in Digitimes, sharing insights on the rapidly growing Indian MEMS market. The article covers our view on domestic semiconductor manufacturing opportunities, the role of IISc incubation, and India\'s path to MEMS self-reliance.',
+    link: 'https://www.digitimes.com/news/a20230328VL205/ic-manufacturing-india-mems-startup.html',
+  },
+  {
+    id: '4',
+    date: new Date('2025-09-05'),
+    category: 'Partnerships & MoUs',
+    title: 'INFAB Semiconductor — IISc Spinoff Advancing India\'s Semiconductor Manufacturing',
+    description: 'A feature on INFAB Semiconductor as a spinoff from the Indian Institute of Science, highlighting our journey from cleanroom research at CeNSE to commercial MEMS sensor manufacturing for aerospace, healthcare, and semiconductor applications.',
+    link: null,
+  },
+  {
+    id: '5',
+    date: new Date('2025-08-01'),
+    category: 'Research & Papers',
+    title: 'INFAB: Powering India\'s Deep-Tech Future from the Inside Out',
+    description: 'YourStory profiles INFAB Semiconductor\'s mission to build world-class MEMS technology in India. The piece covers our founding story at IISc CeNSE, our product portfolio spanning aerospace and microfluidics, and the vision behind making India a global MEMS hub.',
+    link: 'https://yourstory.com/2025/08/infab-semiconductor-mems-innovation',
+  },
 ];
 
 const categories = [

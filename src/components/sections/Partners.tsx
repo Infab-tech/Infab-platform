@@ -1,7 +1,7 @@
 import React from 'react';
 
-const supporters = ["AIC", "BIRAC", "INCENSE", "CDIIC", "Elevate", "fSID", "MeitY"];
-const customers = ["Hindustan Aeronautics Ltd", "Aeronautical Development Agency", "BITS Pilani", "CEERI · CSIO", "IIT Hyderabad", "NIIST", "NIPER", "Metallic Bellows India"];
+const supporters = ["AIC", "BIRAC", "InCeNSE · IISc", "CDIIC", "Elevate", "fSID", "MeitY"];
+const customers = ["Hindustan Aeronautics Ltd", "Aeronautical Development Agency", "BITS Pilani", "CEERI", "CSIO Chandigarh", "IIT Hyderabad", "AmarBio", "NIIST", "NIPER", "UR Therapeutics", "Metallic Bellows India"];
 
 export default function Partners() {
     return (
