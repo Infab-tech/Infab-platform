@@ -256,8 +256,8 @@ export default function ServicesPage() {
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
-                      <div className="h-40 overflow-hidden border-b border-[var(--border-primary)]">
-                        <Image src="/assests/services/mjb4.png" alt="Karl Süss MJB4 Mask Aligner" width={480} height={160} className="w-full h-full object-cover" />
+                      <div className="h-52 relative border-b border-[var(--border-primary)] bg-[var(--bg-primary)]">
+                        <Image src="/assests/services/mjb4.png" alt="Karl Süss MJB4 Mask Aligner" fill className="object-contain p-4" />
                       </div>
                       <div className="p-5">
                         <h5 className="font-bold text-[var(--text-primary)] mb-1">Karl Süss MJB4 Mask Aligner</h5>
@@ -271,8 +271,8 @@ export default function ServicesPage() {
                       </div>
                     </div>
                     <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
-                      <div className="h-40 overflow-hidden border-b border-[var(--border-primary)]">
-                        <Image src="/assests/services/evg620.jpg" alt="EVG620 Mask Aligner" width={480} height={160} className="w-full h-full object-cover" />
+                      <div className="h-52 relative border-b border-[var(--border-primary)] bg-[var(--bg-primary)]">
+                        <Image src="/assests/services/evg620.jpg" alt="EVG620 Mask Aligner" fill className="object-contain p-4" />
                       </div>
                       <div className="p-5">
                         <h5 className="font-bold text-[var(--text-primary)] mb-1">EVG620 Mask Aligner</h5>
@@ -314,8 +314,8 @@ export default function ServicesPage() {
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
-                      <div className="h-40 overflow-hidden border-b border-[var(--border-primary)]">
-                        <Image src="/assests/services/drie.jpg" alt="DRIE System" width={480} height={160} className="w-full h-full object-cover" />
+                      <div className="h-52 relative border-b border-[var(--border-primary)] bg-[var(--bg-primary)]">
+                        <Image src="/assests/services/drie.jpg" alt="DRIE System" fill className="object-contain p-4" />
                       </div>
                       <div className="p-5">
                         <h5 className="font-bold text-[var(--text-primary)] mb-1">Deep Reactive Ion Etch (DRIE)</h5>
@@ -329,8 +329,8 @@ export default function ServicesPage() {
                       </div>
                     </div>
                     <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
-                      <div className="h-40 overflow-hidden border-b border-[var(--border-primary)]">
-                        <Image src="/assests/services/asher.png" alt="Plasma Asher" width={480} height={160} className="w-full h-full object-cover object-top" />
+                      <div className="h-52 relative border-b border-[var(--border-primary)] bg-[var(--bg-primary)]">
+                        <Image src="/assests/services/asher.png" alt="Plasma Asher" fill className="object-contain p-4" />
                       </div>
                       <div className="p-5">
                         <h5 className="font-bold text-[var(--text-primary)] mb-1">O₂ Plasma Asher</h5>
@@ -368,8 +368,8 @@ export default function ServicesPage() {
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
-                      <div className="h-40 overflow-hidden border-b border-[var(--border-primary)]">
-                        <Image src="/assests/services/spincoater.jpg" alt="Spin Coater" width={480} height={160} className="w-full h-full object-cover" />
+                      <div className="h-52 relative border-b border-[var(--border-primary)] bg-[var(--bg-primary)]">
+                        <Image src="/assests/services/spincoater.jpg" alt="Spin Coater" fill className="object-contain p-4" />
                       </div>
                       <div className="p-5">
                         <h5 className="font-bold text-[var(--text-primary)] mb-1">Laurell Spin Coater</h5>
@@ -382,8 +382,8 @@ export default function ServicesPage() {
                       </div>
                     </div>
                     <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
-                      <div className="h-40 overflow-hidden border-b border-[var(--border-primary)]">
-                        <Image src="/assests/services/evg-bonder.jpg" alt="EVG Wafer Bonder" width={480} height={160} className="w-full h-full object-cover" />
+                      <div className="h-52 relative border-b border-[var(--border-primary)] bg-[var(--bg-primary)]">
+                        <Image src="/assests/services/evg-bonder.jpg" alt="EVG Wafer Bonder" fill className="object-contain p-4" />
                       </div>
                       <div className="p-5">
                         <h5 className="font-bold text-[var(--text-primary)] mb-1">EVG Wafer Bonder</h5>
@@ -425,8 +425,8 @@ export default function ServicesPage() {
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
-                      <div className="h-40 overflow-hidden border-b border-[var(--border-primary)]">
-                        <Image src="/assests/services/dektakxt.jpg" alt="Bruker DektakXT Profilometer" width={480} height={160} className="w-full h-full object-cover" />
+                      <div className="h-52 relative border-b border-[var(--border-primary)] bg-[var(--bg-primary)]">
+                        <Image src="/assests/services/dektakxt.jpg" alt="Bruker DektakXT Profilometer" fill className="object-contain p-4" />
                       </div>
                       <div className="p-5">
                         <h5 className="font-bold text-[var(--text-primary)] mb-1">Bruker DektakXT Profilometer</h5>
