@@ -12,7 +12,7 @@ export default async function CatalogPage() {
     const rows = await prisma.product.findMany({
       where: { isActive: true },
       orderBy: { category: 'asc' },
-      select: { id: true, name: true, category: true, description: true, specs: true, imageUrl: true },
+      select: { id: true, name: true, category: true, description: true, specs: true, imageUrl: true, imageUrls: true },
     });
 
     if (rows.length > 0) {
@@ -23,6 +23,7 @@ export default async function CatalogPage() {
         description: r.description,
         specs: Array.isArray(r.specs) ? (r.specs as string[]) : [],
         imageUrl: r.imageUrl,
+        imageUrls: r.imageUrls ?? [],
       }));
     }
   } catch {
@@ -37,6 +38,7 @@ export default async function CatalogPage() {
       description: p.description,
       specs: p.specs,
       imageUrl: p.imageUrl ?? null,
+      imageUrls: p.imageUrl ? [p.imageUrl] : [],
     }));
   }
 

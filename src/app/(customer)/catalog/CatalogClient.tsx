@@ -1,9 +1,9 @@
 'use client';
 
 import { useCart } from '@/lib/cart-context';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import ProductImageCarousel from '@/components/ui/ProductImageCarousel';
 
 export interface CatalogProduct {
   id: string;
@@ -12,6 +12,7 @@ export interface CatalogProduct {
   description: string;
   specs: string[];
   imageUrl: string | null;
+  imageUrls: string[];
 }
 
 const CATEGORY_CONFIG: Record<string, { label: string; icon: string; colour: string }> = {
@@ -125,20 +126,14 @@ export default function CatalogClient({ products }: { products: CatalogProduct[]
               key={product.id}
               className="group flex flex-col rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/30 hover:shadow-xl hover:shadow-[var(--accent-primary)]/5"
             >
-              {/* Image */}
-              <div className="h-40 bg-[#080d18] border-b border-[var(--border-primary)] flex items-center justify-center overflow-hidden relative">
-                {product.imageUrl ? (
-                  <Image
-                    src={product.imageUrl}
-                    alt={product.name}
-                    width={280}
-                    height={160}
-                    className="max-h-36 w-auto object-contain"
-                  />
-                ) : (
-                  <i className="ph ph-microchip text-5xl text-[var(--text-secondary)]/10"></i>
-                )}
-              </div>
+              {/* Image carousel */}
+              {(() => {
+                const allImages = [
+                  ...(product.imageUrl ? [product.imageUrl] : []),
+                  ...product.imageUrls.filter((u) => u !== product.imageUrl),
+                ];
+                return <ProductImageCarousel urls={allImages} name={product.name} height="h-40" />;
+              })()}
 
               {/* Body */}
               <div className="p-5 flex flex-col flex-grow gap-3">

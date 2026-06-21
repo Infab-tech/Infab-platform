@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { prisma } from '@/lib/supabase/prisma';
 import { FALLBACK_PRODUCTS } from '@/lib/content-defaults';
+import ProductImageCarousel from '@/components/ui/ProductImageCarousel';
 
 export const metadata: Metadata = {
   title: 'Products | INFAB Semiconductor',
@@ -16,10 +16,10 @@ interface ProductData {
   description: string;
   specs: string[];
   imageUrl?: string | null;
-  imageUrls?: string[];
+  imageUrls: string[];
 }
 
-const fallbackProducts: ProductData[] = FALLBACK_PRODUCTS.map((p, i) => ({ ...p, id: `default-${i}` }));
+const fallbackProducts: ProductData[] = FALLBACK_PRODUCTS.map((p, i) => ({ ...p, id: `default-${i}`, imageUrls: p.imageUrl ? [p.imageUrl] : [] }));
 
 const categories = [
   { id: 'aerospace', key: 'AEROSPACE', label: 'Aerospace & Defence', icon: 'ph-airplane-tilt', description: 'INFAB pressure sensors and modules exceed the rigorous requirements of the most demanding airborne applications. Our products sustain high environmental stresses and deliver state-of-the-art precision, long-term stability, and reliability.' },
@@ -58,20 +58,13 @@ function SpecTable({ specs }: { specs: string[] }) {
 }
 
 function ProductCard({ product }: { product: ProductData }) {
-  const cover = product.imageUrl ?? product.imageUrls?.[0] ?? null;
+  const allImages = [
+    ...(product.imageUrl ? [product.imageUrl] : []),
+    ...product.imageUrls.filter((u) => u !== product.imageUrl),
+  ];
   return (
     <div className="group flex flex-col rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
-      {/* Product image or placeholder */}
-      {cover ? (
-        <div className="w-full h-48 bg-[#080d18] border-b border-[var(--border-primary)] flex items-center justify-center overflow-hidden">
-          <Image src={cover} alt={product.name} width={320} height={192} className="max-h-44 w-auto object-contain" />
-        </div>
-      ) : (
-        <div className="w-full h-32 bg-[var(--bg-primary)] border-b border-[var(--border-primary)] flex items-center justify-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent-primary)]/5 to-transparent"></div>
-          <i className="ph ph-microchip text-5xl text-[var(--text-secondary)]/10"></i>
-        </div>
-      )}
+      <ProductImageCarousel urls={allImages} name={product.name} />
 
       <div className="p-6 flex flex-col flex-grow">
         {/* Model number / name */}
