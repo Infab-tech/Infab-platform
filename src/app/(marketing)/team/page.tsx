@@ -39,7 +39,7 @@ function LeadershipCard({ m }: { m: Member }) {
     <div className="rounded-2xl border border-[var(--accent-primary)]/30 bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/60 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/10">
       <div className="aspect-[4/5] w-full bg-[var(--bg-primary)] border-b border-[var(--accent-primary)]/20 relative overflow-hidden">
         {m.photo ? (
-          <Image src={m.photo} alt={m.name} fill className="object-cover object-top" />
+          <Image src={m.photo} alt={m.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover object-top" />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-5xl font-bold text-[var(--accent-primary)]/40">
             {getInitials(m.name)}
@@ -62,7 +62,7 @@ function MemberCard({ m }: { m: Member }) {
     <div className="group rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-xl hover:shadow-[var(--accent-primary)]/5">
       <div className="aspect-[4/5] w-full bg-[var(--bg-primary)] border-b border-[var(--border-primary)] relative overflow-hidden">
         {m.photo ? (
-          <Image src={m.photo} alt={m.name} fill className="object-cover object-top transition-transform duration-500 group-hover:scale-105" />
+          <Image src={m.photo} alt={m.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover object-top transition-transform duration-500 group-hover:scale-105" />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-3xl font-bold text-[var(--accent-primary)]/40 bg-[var(--accent-primary)]/5">
             {getInitials(m.name)}

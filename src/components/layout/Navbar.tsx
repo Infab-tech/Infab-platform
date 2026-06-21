@@ -71,9 +71,10 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Navigation links */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-4 lg:gap-6">
           <Link href="/about" className="text-sm font-medium tracking-wide opacity-80 hover:opacity-100 transition-opacity">About Us</Link>
           <Link href="/products" className="text-sm font-medium tracking-wide opacity-80 hover:opacity-100 transition-opacity">Products</Link>
+          <Link href="/services" className="text-sm font-medium tracking-wide opacity-80 hover:opacity-100 transition-opacity">Services</Link>
           <Link href="/services#facilities" className="text-sm font-medium tracking-wide opacity-80 hover:opacity-100 transition-opacity">Facilities</Link>
           <Link href="/team" className="text-sm font-medium tracking-wide opacity-80 hover:opacity-100 transition-opacity">Team</Link>
           <Link href="/news" className="text-sm font-medium tracking-wide opacity-80 hover:opacity-100 transition-opacity">News</Link>
