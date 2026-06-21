@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { createClient } from '@/lib/supabase/client';
 
 interface ImageUploaderProps {
   existingUrls?: string[];
@@ -16,8 +15,6 @@ export default function ImageUploader({ existingUrls = [], onChange }: ImageUplo
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const supabase = createClient();
-
   const handleFiles = async (files: FileList) => {
     setUploading(true);
     setError(null);
@@ -26,20 +23,19 @@ export default function ImageUploader({ existingUrls = [], onChange }: ImageUplo
     for (const file of Array.from(files)) {
       if (!file.type.startsWith('image/')) continue;
 
-      const ext = file.name.split('.').pop() ?? 'jpg';
-      const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+      const fd = new FormData();
+      fd.append('file', file);
+      fd.append('bucket', BUCKET);
 
-      const { error: uploadError } = await supabase.storage
-        .from(BUCKET)
-        .upload(path, file, { upsert: false });
+      const res = await fetch('/api/admin/upload', { method: 'POST', body: fd });
+      const json = await res.json();
 
-      if (uploadError) {
-        setError(`Upload failed: ${uploadError.message}`);
+      if (!res.ok || json.error) {
+        setError(json.error ?? 'Upload failed.');
         continue;
       }
 
-      const { data } = supabase.storage.from(BUCKET).getPublicUrl(path);
-      newUrls.push(data.publicUrl);
+      newUrls.push(json.url);
     }
 
     const updated = [...urls, ...newUrls];
@@ -47,7 +43,6 @@ export default function ImageUploader({ existingUrls = [], onChange }: ImageUplo
     onChange(updated);
     setUploading(false);
 
-    // Clear the file input so the same file can be re-selected if needed
     if (inputRef.current) inputRef.current.value = '';
   };
 
@@ -108,14 +103,12 @@ export default function ImageUploader({ existingUrls = [], onChange }: ImageUplo
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={url} alt={`Product image ${i + 1}`} className="w-full h-full object-cover" />
 
-              {/* Thumbnail badge */}
               {i === 0 && (
                 <span className="absolute top-1 left-1 text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 bg-[var(--accent-primary)] text-white rounded">
                   Cover
                 </span>
               )}
 
-              {/* Controls overlay */}
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                 {i > 0 && (
                   <button

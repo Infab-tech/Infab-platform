@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
-import { createClient } from '@/lib/supabase/client';
 
 interface TeamPhotoUploaderProps {
   existingUrl?: string | null;
@@ -27,7 +26,6 @@ export default function TeamPhotoUploader({ existingUrl, onChange, memberName = 
   const [dragging, setDragging] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const supabase = createClient();
 
   const uploadFile = useCallback(async (file: File) => {
     if (!file.type.startsWith('image/')) {
@@ -38,26 +36,25 @@ export default function TeamPhotoUploader({ existingUrl, onChange, memberName = 
     setUploading(true);
     setError(null);
 
-    const ext = file.name.split('.').pop() ?? 'jpg';
-    const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+    const fd = new FormData();
+    fd.append('file', file);
+    fd.append('bucket', BUCKET);
 
-    const { error: uploadError } = await supabase.storage
-      .from(BUCKET)
-      .upload(path, file, { upsert: false });
+    const res = await fetch('/api/admin/upload', { method: 'POST', body: fd });
+    const json = await res.json();
 
-    if (uploadError) {
-      setError(`Upload failed: ${uploadError.message}`);
+    if (!res.ok || json.error) {
+      setError(json.error ?? 'Upload failed.');
       setUploading(false);
       return;
     }
 
-    const { data } = supabase.storage.from(BUCKET).getPublicUrl(path);
-    setUrl(data.publicUrl);
-    onChange(data.publicUrl);
+    setUrl(json.url);
+    onChange(json.url);
     setUploading(false);
 
     if (inputRef.current) inputRef.current.value = '';
-  }, [supabase, onChange]);
+  }, [onChange]);
 
   const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -140,7 +137,6 @@ export default function TeamPhotoUploader({ existingUrl, onChange, memberName = 
             disabled={uploading}
           />
 
-          {/* Avatar placeholder */}
           <div className="w-20 h-20 rounded-full bg-[var(--accent-primary)]/10 border-2 border-dashed border-[var(--accent-primary)]/30 flex items-center justify-center text-2xl font-bold text-[var(--accent-primary)]/50">
             {memberName ? getInitials(memberName) : <i className="ph ph-user text-3xl"></i>}
           </div>
@@ -152,9 +148,7 @@ export default function TeamPhotoUploader({ existingUrl, onChange, memberName = 
                   <i className="ph ph-spinner-gap animate-spin"></i> Uploading…
                 </span>
               ) : (
-                <>
-                  {dragging ? 'Drop to upload' : 'Drag & drop or click to upload'}
-                </>
+                dragging ? 'Drop to upload' : 'Drag & drop or click to upload'
               )}
             </p>
             <p className="text-xs text-[var(--text-secondary)] mt-1">JPG, PNG, WEBP — portrait photos work best</p>
