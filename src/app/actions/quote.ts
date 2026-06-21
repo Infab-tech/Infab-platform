@@ -50,3 +50,42 @@ export async function submitQuoteRequest(formData: FormData) {
         return { success: false, message: "Failed to submit quote request." };
     }
 }
+
+export interface RFQCartItem {
+    productId: string;
+    quantity: number;
+}
+
+export async function submitMultiItemQuote(items: RFQCartItem[], notes: string) {
+    try {
+        const supabase = await createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) return { success: false, message: 'Unauthorized.' };
+
+        if (!items.length) return { success: false, message: 'Your cart is empty.' };
+
+        await prisma.quoteRequest.create({
+            data: {
+                userId: user.id,
+                userEmail: user.email || 'unknown',
+                notes: notes || null,
+                items: {
+                    create: items.map((i) => ({
+                        productId: i.productId,
+                        quantity: i.quantity,
+                    })),
+                },
+            },
+        });
+
+        revalidatePath('/dashboard');
+        revalidatePath('/orders');
+        revalidatePath('/admin/orders');
+        revalidatePath('/admin');
+
+        return { success: true, message: 'Quote request submitted successfully.' };
+    } catch (error) {
+        console.error('Failed to submit multi-item quote:', error);
+        return { success: false, message: 'Failed to submit quote request.' };
+    }
+}

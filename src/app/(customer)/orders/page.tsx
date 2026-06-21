@@ -35,7 +35,7 @@ export default async function OrdersPage() {
           <h2 className="text-3xl font-bold mb-2">Quotes & Orders</h2>
           <p className="text-[var(--text-secondary)]">Track the status of your engineering requests.</p>
         </div>
-        <Link href="/orders/new" className="px-6 py-3 rounded-lg bg-[var(--accent-primary)] text-[#03060c] font-bold uppercase tracking-wider text-sm hover:bg-white transition-colors">
+        <Link href="/catalog" className="px-6 py-3 rounded-lg bg-[var(--accent-primary)] text-[#03060c] font-bold uppercase tracking-wider text-sm hover:bg-white transition-colors">
           + Request New Quote
         </Link>
       </div>
