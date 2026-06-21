@@ -308,6 +308,35 @@ export interface DefaultPublication {
   link: string | null;
 }
 
+export interface DefaultPartner {
+  name: string;
+  category: 'supporter' | 'customer';
+  order: number;
+}
+
+export const FALLBACK_PARTNERS: DefaultPartner[] = [
+  // Supporters / Incubators
+  { name: 'AIC',              category: 'supporter', order: 1 },
+  { name: 'BIRAC',            category: 'supporter', order: 2 },
+  { name: 'InCeNSE · IISc',  category: 'supporter', order: 3 },
+  { name: 'CDIIC',            category: 'supporter', order: 4 },
+  { name: 'Elevate',          category: 'supporter', order: 5 },
+  { name: 'fSID',             category: 'supporter', order: 6 },
+  { name: 'MeitY',            category: 'supporter', order: 7 },
+  // Customers / Collaborators
+  { name: 'Hindustan Aeronautics Ltd',   category: 'customer', order: 8 },
+  { name: 'Aeronautical Development Agency', category: 'customer', order: 9 },
+  { name: 'BITS Pilani',                 category: 'customer', order: 10 },
+  { name: 'CEERI',                       category: 'customer', order: 11 },
+  { name: 'CSIO Chandigarh',             category: 'customer', order: 12 },
+  { name: 'IIT Hyderabad',               category: 'customer', order: 13 },
+  { name: 'AmarBio',                     category: 'customer', order: 14 },
+  { name: 'NIIST',                       category: 'customer', order: 15 },
+  { name: 'NIPER',                       category: 'customer', order: 16 },
+  { name: 'UR Therapeutics',             category: 'customer', order: 17 },
+  { name: 'Metallic Bellows India',      category: 'customer', order: 18 },
+];
+
 export const FALLBACK_PUBLICATIONS: DefaultPublication[] = [
   {
     title: 'MEMS-Based Piezoresistive Pressure Sensors for Aerospace Applications',

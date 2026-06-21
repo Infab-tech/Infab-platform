@@ -1,33 +1,66 @@
 import { prisma } from '@/lib/supabase/prisma';
 import { updateInquiryStatus } from '@/app/actions/admin';
 import DeleteInquiryButton from './DeleteInquiryButton';
-
 import Pagination from '@/components/ui/Pagination';
 
 export const metadata = {
     title: 'Inquiries | Admin Console',
 };
 
-export default async function AdminInquiriesPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
-    const { page } = await searchParams;
+export default async function AdminInquiriesPage({ searchParams }: { searchParams: Promise<{ page?: string; q?: string }> }) {
+    const { page, q } = await searchParams;
     const currentPage = Math.max(1, parseInt(page || '1', 10));
     const PAGE_SIZE = 10;
+    const search = q?.trim() || '';
 
-    const totalInquiries = await prisma.inquiry.count();
+    const where = search ? {
+        OR: [
+            { firstName: { contains: search, mode: 'insensitive' as const } },
+            { lastName:  { contains: search, mode: 'insensitive' as const } },
+            { email:     { contains: search, mode: 'insensitive' as const } },
+            { organization: { contains: search, mode: 'insensitive' as const } },
+        ],
+    } : {};
+
+    const [totalInquiries, inquiries] = await prisma.$transaction([
+        prisma.inquiry.count({ where }),
+        prisma.inquiry.findMany({
+            where,
+            orderBy: { createdAt: 'desc' },
+            skip: (currentPage - 1) * PAGE_SIZE,
+            take: PAGE_SIZE,
+        }),
+    ]);
     const totalPages = Math.ceil(totalInquiries / PAGE_SIZE);
-
-    const inquiries = await prisma.inquiry.findMany({
-        orderBy: { createdAt: 'desc' },
-        skip: (currentPage - 1) * PAGE_SIZE,
-        take: PAGE_SIZE,
-    });
 
     return (
         <div className="max-w-6xl mx-auto">
-            <div className="mb-10">
+            <div className="mb-8">
                 <h1 className="text-3xl font-bold mb-2">Public Inquiries</h1>
                 <p className="text-[var(--text-secondary)]">Messages submitted from the website contact form.</p>
             </div>
+
+            {/* Search bar */}
+            <form method="GET" className="mb-6 flex gap-3">
+                <div className="relative flex-1 max-w-sm">
+                    <i className="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-secondary)]"></i>
+                    <input
+                        type="text"
+                        name="q"
+                        defaultValue={search}
+                        placeholder="Search by name, email, or organisation…"
+                        className="w-full pl-9 pr-4 py-2.5 rounded-lg bg-[var(--bg-secondary)] border border-[var(--text-primary)]/10 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] focus:outline-none focus:border-[var(--accent-primary)]/50"
+                    />
+                </div>
+                <button type="submit" className="px-4 py-2.5 rounded-lg bg-[var(--accent-primary)] text-[var(--bg-primary)] text-sm font-bold hover:opacity-90 transition-opacity">
+                    Search
+                </button>
+                {search && (
+                    <a href="/admin/inquiries" className="px-4 py-2.5 rounded-lg border border-[var(--text-primary)]/10 text-sm text-[var(--text-secondary)] hover:bg-[var(--text-primary)]/5 transition-colors">
+                        Clear
+                    </a>
+                )}
+            </form>
 
             <div className="bg-[var(--bg-secondary)] border border-[var(--text-primary)]/5 rounded-2xl overflow-hidden shadow-xl">
                 <div className="overflow-x-auto">
@@ -44,7 +77,9 @@ export default async function AdminInquiriesPage({ searchParams }: { searchParam
                         <tbody className="text-sm">
                             {inquiries.length === 0 && (
                                 <tr>
-                                    <td colSpan={5} className="p-10 text-center text-[var(--text-secondary)]">No inquiries found.</td>
+                                    <td colSpan={5} className="p-10 text-center text-[var(--text-secondary)]">
+                                        {search ? `No inquiries matching "${search}".` : 'No inquiries found.'}
+                                    </td>
                                 </tr>
                             )}
                             {inquiries.map((inquiry) => (
@@ -71,7 +106,6 @@ export default async function AdminInquiriesPage({ searchParams }: { searchParam
                                     </td>
                                     <td className="p-5 text-right">
                                         {inquiry.status === 'PENDING' && (
-                                            // We use Next.js Server Action binding to pass arguments
                                             <form action={async () => {
                                                 'use server';
                                                 await updateInquiryStatus(inquiry.id, 'RESOLVED');

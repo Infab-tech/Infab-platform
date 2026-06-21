@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/supabase/prisma';
-import { togglePartnerActive, deletePartner } from '@/app/actions/admin';
+import { togglePartnerActive, deletePartner, seedDefaultPartners } from '@/app/actions/admin';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -26,8 +26,41 @@ export default async function AdminPartnersPage({ searchParams }: { searchParams
     // DB not connected yet
   }
 
+  const isUsingFallback = partners.length === 0 && totalPartners === 0;
+
   return (
     <div className="max-w-6xl mx-auto pt-8 sm:pt-4">
+
+      {/* Seed banner */}
+      {isUsingFallback ? (
+        <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 bg-yellow-500/10 border border-yellow-500/30 rounded-xl">
+          <div className="flex items-start gap-3">
+            <i className="ph ph-warning text-yellow-400 text-xl mt-0.5 flex-shrink-0"></i>
+            <div>
+              <p className="font-bold text-yellow-400 text-sm">Homepage is showing hardcoded fallback partners</p>
+              <p className="text-yellow-400/70 text-xs mt-0.5">The database has no partners yet. Seed the defaults to take control — you can then edit or add logos to each entry.</p>
+            </div>
+          </div>
+          <form action={async () => { 'use server'; await seedDefaultPartners(); }}>
+            <button type="submit" className="whitespace-nowrap px-5 py-2.5 rounded-lg bg-yellow-500 text-black font-bold text-sm hover:bg-yellow-400 transition-colors">
+              Seed 18 Defaults →
+            </button>
+          </form>
+        </div>
+      ) : (
+        <div className="mb-6 flex items-center justify-between p-4 bg-green-500/10 border border-green-500/20 rounded-xl">
+          <div className="flex items-center gap-3">
+            <i className="ph ph-check-circle text-green-400 text-lg"></i>
+            <p className="text-green-400 text-sm font-semibold">
+              Live — homepage is showing {totalPartners} DB partner{totalPartners !== 1 ? 's' : ''}.
+            </p>
+          </div>
+          <Link href="/" target="_blank" className="text-xs font-mono font-bold text-green-400 hover:text-green-300 flex items-center gap-1">
+            View on site <i className="ph ph-arrow-square-out"></i>
+          </Link>
+        </div>
+      )}
+
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-10">
         <div className="mt-2 sm:mt-0">
           <h1 className="text-3xl font-bold mb-2 text-[var(--text-primary)]">Partners & Supporters</h1>

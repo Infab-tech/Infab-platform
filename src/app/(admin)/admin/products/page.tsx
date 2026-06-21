@@ -14,22 +14,33 @@ const CATEGORY_CONFIG: Record<string, { icon: string; colour: string; label: str
     MEMS:       { icon: 'ph-cpu',           colour: 'text-cyan-400 bg-cyan-400/10',   label: 'MEMS' },
 };
 
-export default async function AdminProductsPage({ searchParams }: { searchParams: Promise<{ error?: string, page?: string }> }) {
+export default async function AdminProductsPage({ searchParams }: { searchParams: Promise<{ error?: string, page?: string, q?: string }> }) {
     const params = await searchParams;
-    const page = params?.page;
-    const currentPage = Math.max(1, parseInt(page || '1', 10));
+    const currentPage = Math.max(1, parseInt(params?.page || '1', 10));
     const PAGE_SIZE = 10;
+    const search = params?.q?.trim() || '';
 
-    const totalProducts = await prisma.product.count();
+    const where = search ? {
+        OR: [
+            { name:     { contains: search, mode: 'insensitive' as const } },
+            { category: { contains: search, mode: 'insensitive' as const } },
+        ],
+    } : {};
+
+    const [totalProducts, products] = await prisma.$transaction([
+        prisma.product.count({ where }),
+        prisma.product.findMany({
+            where,
+            orderBy: { category: 'asc' },
+            skip: (currentPage - 1) * PAGE_SIZE,
+            take: PAGE_SIZE,
+        }),
+    ]);
     const totalPages = Math.ceil(totalProducts / PAGE_SIZE);
 
-    const products = await prisma.product.findMany({
-        orderBy: { category: 'asc' },
-        skip: (currentPage - 1) * PAGE_SIZE,
-        take: PAGE_SIZE,
-    });
-
-    const isUsingFallback = products.length === 0;
+    // Only show seed banner when the entire DB is empty (not when search returns no results)
+    const totalAllProducts = search ? await prisma.product.count() : totalProducts;
+    const isUsingFallback = totalAllProducts === 0;
 
     return (
         <div className="max-w-6xl mx-auto pt-8 sm:pt-4">
@@ -78,7 +89,7 @@ export default async function AdminProductsPage({ searchParams }: { searchParams
                 </div>
             )}
 
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-10">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-6">
                 <div className="mt-2 sm:mt-0">
                     <h1 className="text-3xl font-bold mb-2 text-[var(--text-primary)]">Product Catalog</h1>
                     <p className="text-[var(--text-secondary)]">Manage your active products and categories.</p>
@@ -94,6 +105,28 @@ export default async function AdminProductsPage({ searchParams }: { searchParams
                     </Link>
                 </div>
             </div>
+
+            {/* Search bar */}
+            <form method="GET" className="mb-6 flex gap-3">
+                <div className="relative flex-1 max-w-sm">
+                    <i className="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-secondary)]"></i>
+                    <input
+                        type="text"
+                        name="q"
+                        defaultValue={search}
+                        placeholder="Search by name or category…"
+                        className="w-full pl-9 pr-4 py-2.5 rounded-lg bg-[var(--bg-secondary)] border border-[var(--text-primary)]/10 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] focus:outline-none focus:border-[var(--accent-primary)]/50"
+                    />
+                </div>
+                <button type="submit" className="px-4 py-2.5 rounded-lg bg-[var(--accent-primary)] text-[var(--bg-primary)] text-sm font-bold hover:opacity-90 transition-opacity">
+                    Search
+                </button>
+                {search && (
+                    <a href="/admin/products" className="px-4 py-2.5 rounded-lg border border-[var(--text-primary)]/10 text-sm text-[var(--text-secondary)] hover:bg-[var(--text-primary)]/5 transition-colors">
+                        Clear
+                    </a>
+                )}
+            </form>
 
             <div className="bg-[var(--bg-secondary)] border border-[var(--text-primary)]/10 rounded-2xl overflow-hidden shadow-xl">
                 <div className="overflow-x-auto">
@@ -111,7 +144,7 @@ export default async function AdminProductsPage({ searchParams }: { searchParams
                             {products.length === 0 && (
                                 <tr>
                                     <td colSpan={5} className="p-10 text-center text-[var(--text-secondary)]">
-                                        No products in the database. Use &ldquo;Seed 15 Defaults&rdquo; above to get started.
+                                        {search ? `No products matching "${search}".` : 'No products in the database. Use "Seed 15 Defaults" above to get started.'}
                                     </td>
                                 </tr>
                             )}

@@ -6,10 +6,11 @@ export const metadata = {
 };
 
 export default async function AdminDashboardPage() {
-    // Fetch real-time stats from the database
-    const pendingInquiriesCount = await prisma.inquiry.count({ where: { status: 'PENDING' } });
-    const totalProductsCount = await prisma.product.count();
-    const pendingQuotesCount = await prisma.quoteRequest.count({ where: { status: 'PENDING' } });
+    const [pendingInquiriesCount, totalProductsCount, pendingQuotesCount] = await prisma.$transaction([
+        prisma.inquiry.count({ where: { status: 'PENDING' } }),
+        prisma.product.count({ where: { isActive: true } }),
+        prisma.quoteRequest.count({ where: { status: 'PENDING' } }),
+    ]);
 
     return (
         <div className="max-w-6xl mx-auto">

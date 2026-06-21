@@ -4,7 +4,7 @@ import { prisma } from '@/lib/supabase/prisma';
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
-import { FALLBACK_PRODUCTS, FALLBACK_NEWS, FALLBACK_TEAM, FALLBACK_PUBLICATIONS } from '@/lib/content-defaults';
+import { FALLBACK_PRODUCTS, FALLBACK_NEWS, FALLBACK_TEAM, FALLBACK_PUBLICATIONS, FALLBACK_PARTNERS } from '@/lib/content-defaults';
 
 // Helper function to double-check admin authorization on the server
 export async function verifyAdmin() {
@@ -589,4 +589,18 @@ export async function deletePartner(id: string) {
     await prisma.partner.delete({ where: { id } });
     revalidatePath('/admin/partners');
     revalidatePath('/');
+}
+
+export async function seedDefaultPartners() {
+    await verifyAdmin();
+    const count = await prisma.partner.count();
+    if (count > 0) return { skipped: true, message: 'Partners already in database — seed skipped.' };
+    for (const p of FALLBACK_PARTNERS) {
+        await prisma.partner.create({
+            data: { name: p.name, order: p.order, isActive: true }
+        });
+    }
+    revalidatePath('/admin/partners');
+    revalidatePath('/');
+    return { skipped: false, message: `Seeded ${FALLBACK_PARTNERS.length} partners.` };
 }

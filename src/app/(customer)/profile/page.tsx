@@ -32,7 +32,7 @@ export default async function ProfilePage() {
                 <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label className="block font-mono text-xs font-semibold uppercase text-[var(--text-secondary)] mb-2">Registered Email</label>
-                        <div className="bg-white/[0.02] border border-[var(--text-primary)]/10 rounded-lg px-4 py-3 text-[var(--text-primary)]">
+                        <div className="bg-[var(--text-primary)]/[0.03] border border-[var(--text-primary)]/10 rounded-lg px-4 py-3 text-[var(--text-primary)]">
                             {user.email}
                         </div>
                     </div>
