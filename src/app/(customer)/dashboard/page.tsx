@@ -12,16 +12,17 @@ export default async function DashboardPage() {
 
     if (!user || !user.email) return null;
 
-    // Fetch user's quotes
-    const quotes = await prisma.quoteRequest.findMany({
-        where: { userEmail: user.email },
-        orderBy: { createdAt: 'desc' },
-        include: {
-            items: {
-                include: { product: true }
-            }
-        }
-    });
+    // Fetch user's quotes and unread message count in parallel
+    const [quotes, unreadCount] = await Promise.all([
+        prisma.quoteRequest.findMany({
+            where: { userId: user.id },
+            orderBy: { createdAt: 'desc' },
+            include: { items: { include: { product: true } } }
+        }),
+        prisma.quoteMessage.count({
+            where: { quoteRequest: { userId: user.id }, senderRole: 'ADMIN', isRead: false }
+        }),
+    ]);
 
     // Calculate Stats
     const activeQuotesCount = quotes.filter(q => q.status === 'PENDING' || q.status === 'REVIEWING' || q.status === 'QUOTED').length;
@@ -46,7 +47,7 @@ export default async function DashboardPage() {
                 </div>
                 <div className="bg-[var(--bg-secondary)] border border-[var(--text-primary)]/10 p-6 rounded-xl">
                     <div className="text-[var(--text-secondary)] font-mono text-xs uppercase tracking-wider mb-2">Unread Messages</div>
-                    <div className="text-4xl font-bold text-[var(--text-primary)]">0</div>
+                    <div className="text-4xl font-bold text-[var(--text-primary)]">{unreadCount}</div>
                 </div>
             </div>
 

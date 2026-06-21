@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { logoutUser } from '@/app/actions/auth';
 import { prisma } from '@/lib/supabase/prisma';
 import ThemeToggle from '@/components/ui/ThemeToggle';
+import AdminSidebarNav from '@/components/layout/AdminSidebarNav';
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
     const supabase = await createClient();
@@ -38,36 +39,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
                     </span>
                 </div>
 
-                <nav className="flex-1 p-4 flex flex-col gap-2">
-                    <Link href="/admin" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[var(--text-primary)]/5 transition-colors">
-                        <i className="ph ph-squares-four text-xl text-[var(--accent-primary)]"></i> Dashboard
-                    </Link>
-                    <Link href="/admin/inquiries" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[var(--text-primary)]/5 transition-colors">
-                        <i className="ph ph-envelope-simple text-xl text-[var(--accent-primary)]"></i> Inquiries
-                    </Link>
-                    <Link href="/admin/orders" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[var(--text-primary)]/5 transition-colors">
-                        <i className="ph ph-receipt text-xl text-[var(--accent-primary)]"></i> Quote Requests
-                    </Link>
-                    <Link href="/admin/products" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[var(--text-primary)]/5 transition-colors">
-                        <i className="ph ph-package text-xl text-[var(--accent-primary)]"></i> Products
-                    </Link>
-                    <Link href="/admin/news" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[var(--text-primary)]/5 transition-colors">
-                        <i className="ph ph-newspaper text-xl text-[var(--accent-primary)]"></i> News
-                    </Link>
-                    <Link href="/admin/team" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[var(--text-primary)]/5 transition-colors">
-                        <i className="ph ph-users-three text-xl text-[var(--accent-primary)]"></i> Team
-                    </Link>
-                    <Link href="/admin/publications" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[var(--text-primary)]/5 transition-colors">
-                        <i className="ph ph-books text-xl text-[var(--accent-primary)]"></i> Publications
-                    </Link>
-                    <Link href="/admin/staff" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[var(--text-primary)]/5 transition-colors">
-                        <i className="ph ph-shield-check text-xl text-[var(--accent-primary)]"></i> Staff Access
-                    </Link>
-                    
-                    <Link href="/admin/users" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[var(--text-primary)]/5 transition-colors">
-                        <i className="ph ph-users text-xl text-[var(--accent-primary)]"></i> Users
-                    </Link>
-                </nav>
+                <AdminSidebarNav />
 
                 <div className="p-4 border-t border-[var(--text-primary)]/10">
                     <form action={logoutUser}>

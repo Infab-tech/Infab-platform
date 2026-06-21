@@ -45,6 +45,20 @@ export default async function ProfilePage() {
                 </div>
             </div>
 
+            {/* Change Password */}
+            <div className="bg-[var(--bg-secondary)] border border-[var(--text-primary)]/10 rounded-2xl p-6 flex items-center justify-between mb-8">
+                <div>
+                    <h3 className="text-lg font-bold text-[var(--text-primary)] mb-1">Change Password</h3>
+                    <p className="text-sm text-[var(--text-secondary)]">Request a secure password reset link via email.</p>
+                </div>
+                <a
+                    href="/forgot-password"
+                    className="px-6 py-3 rounded-lg bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] font-bold uppercase tracking-wider text-sm hover:bg-[var(--accent-primary)] hover:text-[var(--bg-primary)] transition-colors border border-[var(--accent-primary)]/20"
+                >
+                    Reset Password
+                </a>
+            </div>
+
             {/* Logout Form using Server Actions */}
             <div className="bg-red-500/5 border border-red-500/10 rounded-2xl p-6 flex items-center justify-between">
                 <div>

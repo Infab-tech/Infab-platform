@@ -19,6 +19,8 @@ model Inquiry {
   message      String   @db.Text
   status       String   @default("PENDING")
   createdAt    DateTime @default(now())
+
+  @@index([status])
 }
 
 // 2. PRODUCTS
@@ -36,6 +38,8 @@ model Product {
   updatedAt   DateTime @default(now()) @updatedAt
 
   quoteItems  QuoteItem[]
+
+  @@index([isActive, category])
 }
 
 // 3. QUOTE REQUESTS (The "Cart/Order")
@@ -53,6 +57,7 @@ model QuoteRequest {
   messages       QuoteMessage[]
 
   @@index([userId])
+  @@index([status])
 }
 
 // 4. QUOTE ITEMS (The individual products inside the request)
@@ -77,10 +82,11 @@ model QuoteMessage {
   text           String       @db.Text
   isRead         Boolean      @default(false)
   createdAt      DateTime     @default(now())
-  
+
   quoteRequest   QuoteRequest @relation(fields: [quoteRequestId], references: [id], onDelete: Cascade)
 
   @@index([quoteRequestId])
+  @@index([quoteRequestId, senderRole, isRead])
 }
 
 // 6. NEWS ARTICLES
@@ -127,6 +133,8 @@ model Publication {
   order       Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now()) @updatedAt
+
+  @@index([isPublished, order])
 }
 
 // 9. USER ROLES (RBAC)

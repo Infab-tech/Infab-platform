@@ -37,8 +37,9 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // Same logic for /dashboard
-  if (!user && req.nextUrl.pathname.startsWith('/dashboard')) {
+  // Protect all customer portal routes
+  const customerRoutes = ['/dashboard', '/catalog', '/cart', '/orders', '/profile'];
+  if (!user && customerRoutes.some(r => req.nextUrl.pathname.startsWith(r))) {
     const url = req.nextUrl.clone();
     url.pathname = '/login';
     return NextResponse.redirect(url);

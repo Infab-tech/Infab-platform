@@ -6,10 +6,13 @@ const fallbackSupporters = ["AIC", "BIRAC", "InCeNSE · IISc", "CDIIC", "Elevate
 const fallbackCustomers = ["Hindustan Aeronautics Ltd", "Aeronautical Development Agency", "BITS Pilani", "CEERI", "CSIO Chandigarh", "IIT Hyderabad", "AmarBio", "NIIST", "NIPER", "UR Therapeutics", "Metallic Bellows India"];
 
 export default async function Partners() {
-    const dbPartners = await prisma.partner.findMany({
-        where: { isActive: true },
-        orderBy: { order: 'asc' }
-    });
+    let dbPartners: Awaited<ReturnType<typeof prisma.partner.findMany>> = [];
+    try {
+        dbPartners = await prisma.partner.findMany({
+            where: { isActive: true },
+            orderBy: { order: 'asc' }
+        });
+    } catch { /* fallback */ }
 
     let row1: Array<{ id: string, name: string, logoUrl?: string | null }> = fallbackSupporters.map(name => ({ id: name, name }));
     let row2: Array<{ id: string, name: string, logoUrl?: string | null }> = fallbackCustomers.map(name => ({ id: name, name }));

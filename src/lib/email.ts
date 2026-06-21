@@ -11,7 +11,7 @@ export async function sendEmail({ to, subject, html }: { to: string, subject: st
 
     try {
         const data = await resend.emails.send({
-            from: 'INFAB <no-reply@yourdomain.com>', // User needs to configure this domain in Resend
+            from: process.env.RESEND_FROM_EMAIL || 'INFAB <no-reply@infab-tech.com>',
             to,
             subject,
             html,
