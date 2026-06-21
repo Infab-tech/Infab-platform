@@ -2,26 +2,31 @@
 
 import { useState } from 'react';
 import { updateTeamMember } from '@/app/actions/admin';
+import TeamPhotoUploader from '@/components/ui/TeamPhotoUploader';
 import Link from 'next/link';
 import type { TeamMember } from '@prisma/client';
 
 const SECTIONS = [
-  { value: 'FOUNDER', label: 'Founder' },
-  { value: 'RESEARCH', label: 'Research & Science' },
+  { value: 'FOUNDER',     label: 'Founder' },
+  { value: 'RESEARCH',    label: 'Research & Science' },
   { value: 'ENGINEERING', label: 'Engineering' },
   { value: 'CONSULTANTS', label: 'Consultants' },
-  { value: 'BUSINESS', label: 'Business & Administration' },
+  { value: 'BUSINESS',    label: 'Business & Administration' },
+  { value: 'INTERN',      label: 'Interns' },
 ];
 
 export default function EditTeamMemberForm({ member }: { member: TeamMember }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [photoUrl, setPhotoUrl] = useState<string | null>(member.photoUrl);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
-    const result = await updateTeamMember(member.id, new FormData(e.currentTarget));
+    const fd = new FormData(e.currentTarget);
+    fd.set('photoUrl', photoUrl ?? '');
+    const result = await updateTeamMember(member.id, fd);
     if (result && !result.success) {
       setError(result.message ?? 'Something went wrong.');
       setIsSubmitting(false);
@@ -42,6 +47,18 @@ export default function EditTeamMemberForm({ member }: { member: TeamMember }) {
 
       <div className="bg-[var(--bg-secondary)] border border-[var(--text-primary)]/10 rounded-2xl p-8 shadow-xl">
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+
+          {/* Photo */}
+          <div className="flex flex-col gap-2">
+            <p className="font-mono text-xs font-semibold uppercase text-[var(--text-secondary)]">
+              Photo <span className="normal-case font-normal">(optional)</span>
+            </p>
+            <TeamPhotoUploader
+              existingUrl={member.photoUrl}
+              onChange={setPhotoUrl}
+              memberName={member.name}
+            />
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="flex flex-col gap-2">
@@ -80,22 +97,6 @@ export default function EditTeamMemberForm({ member }: { member: TeamMember }) {
               />
               <p className="text-xs text-[var(--text-secondary)]">Lower numbers appear first within the section.</p>
             </div>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <label htmlFor="photoUrl" className="font-mono text-xs font-semibold uppercase text-[var(--text-secondary)]">Photo URL <span className="normal-case font-normal">(optional)</span></label>
-            <input
-              type="text" id="photoUrl" name="photoUrl" defaultValue={member.photoUrl ?? ''}
-              placeholder="/assests/team/name.jpg"
-              className="bg-[var(--text-primary)]/[0.03] border border-[var(--text-primary)]/10 rounded-lg px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
-            />
-            {member.photoUrl && (
-              <div className="flex items-center gap-3 mt-1">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={member.photoUrl} alt="" className="w-12 h-12 rounded-full object-cover object-top border border-[var(--text-primary)]/10" />
-                <p className="text-xs text-[var(--text-secondary)]">Current photo</p>
-              </div>
-            )}
           </div>
 
           <div className="flex flex-col gap-2">

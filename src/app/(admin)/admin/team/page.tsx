@@ -6,19 +6,21 @@ import Image from 'next/image';
 export const metadata = { title: 'Team Management | Admin Console' };
 
 const SECTION_LABELS: Record<string, string> = {
-  FOUNDER: 'Founder',
-  RESEARCH: 'Research & Science',
+  FOUNDER:     'Founder',
+  RESEARCH:    'Research & Science',
   ENGINEERING: 'Engineering',
   CONSULTANTS: 'Consultants',
-  BUSINESS: 'Business & Admin',
+  BUSINESS:    'Business & Admin',
+  INTERN:      'Interns',
 };
 
 const SECTION_COLOURS: Record<string, string> = {
-  FOUNDER: 'text-cyan-400 bg-cyan-400/10',
-  RESEARCH: 'text-purple-400 bg-purple-400/10',
+  FOUNDER:     'text-cyan-400 bg-cyan-400/10',
+  RESEARCH:    'text-purple-400 bg-purple-400/10',
   ENGINEERING: 'text-blue-400 bg-blue-400/10',
   CONSULTANTS: 'text-yellow-400 bg-yellow-400/10',
-  BUSINESS: 'text-green-400 bg-green-400/10',
+  BUSINESS:    'text-green-400 bg-green-400/10',
+  INTERN:      'text-pink-400 bg-pink-400/10',
 };
 
 function sectionClass(s: string) {

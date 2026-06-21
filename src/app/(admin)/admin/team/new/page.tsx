@@ -2,25 +2,31 @@
 
 import { useState } from 'react';
 import { addTeamMember } from '@/app/actions/admin';
+import TeamPhotoUploader from '@/components/ui/TeamPhotoUploader';
 import Link from 'next/link';
 
 const SECTIONS = [
-  { value: 'FOUNDER', label: 'Founder' },
-  { value: 'RESEARCH', label: 'Research & Science' },
+  { value: 'FOUNDER',     label: 'Founder' },
+  { value: 'RESEARCH',    label: 'Research & Science' },
   { value: 'ENGINEERING', label: 'Engineering' },
   { value: 'CONSULTANTS', label: 'Consultants' },
-  { value: 'BUSINESS', label: 'Business & Administration' },
+  { value: 'BUSINESS',    label: 'Business & Administration' },
+  { value: 'INTERN',      label: 'Interns' },
 ];
 
 export default function NewTeamMemberPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [photoUrl, setPhotoUrl] = useState<string | null>(null);
+  const [name, setName] = useState('');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
-    const result = await addTeamMember(new FormData(e.currentTarget));
+    const fd = new FormData(e.currentTarget);
+    fd.set('photoUrl', photoUrl ?? '');
+    const result = await addTeamMember(fd);
     if (result && !result.success) {
       setError(result.message ?? 'Something went wrong.');
       setIsSubmitting(false);
@@ -42,12 +48,22 @@ export default function NewTeamMemberPage() {
       <div className="bg-[var(--bg-secondary)] border border-[var(--text-primary)]/10 rounded-2xl p-8 shadow-xl">
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
 
+          {/* Photo */}
+          <div className="flex flex-col gap-2">
+            <p className="font-mono text-xs font-semibold uppercase text-[var(--text-secondary)]">
+              Photo <span className="normal-case font-normal">(optional)</span>
+            </p>
+            <TeamPhotoUploader onChange={setPhotoUrl} memberName={name} />
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="flex flex-col gap-2">
               <label htmlFor="name" className="font-mono text-xs font-semibold uppercase text-[var(--text-secondary)]">Full Name *</label>
               <input
                 type="text" id="name" name="name" required
                 placeholder="e.g., Dr. Jane Smith"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="bg-[var(--text-primary)]/[0.03] border border-[var(--text-primary)]/10 rounded-lg px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
               />
             </div>
@@ -82,16 +98,6 @@ export default function NewTeamMemberPage() {
               />
               <p className="text-xs text-[var(--text-secondary)]">Lower numbers appear first within the section.</p>
             </div>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <label htmlFor="photoUrl" className="font-mono text-xs font-semibold uppercase text-[var(--text-secondary)]">Photo URL <span className="normal-case font-normal">(optional)</span></label>
-            <input
-              type="text" id="photoUrl" name="photoUrl"
-              placeholder="e.g., /assests/team/jane-smith.jpg"
-              className="bg-[var(--text-primary)]/[0.03] border border-[var(--text-primary)]/10 rounded-lg px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
-            />
-            <p className="text-xs text-[var(--text-secondary)]">Path relative to <code className="font-mono text-[var(--accent-primary)]">/public</code> (e.g. <code className="font-mono">/assests/team/name.jpg</code>). Leave blank to show initials placeholder.</p>
           </div>
 
           <div className="flex flex-col gap-2">

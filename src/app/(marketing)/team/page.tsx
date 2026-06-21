@@ -14,11 +14,12 @@ export const metadata: Metadata = {
 interface Member { name: string; title: string; bio?: string | null; photo?: string | null; }
 
 const SECTION_CONFIG: Array<{ key: string; eyebrow: string; heading: string; alt: string; bg: boolean }> = [
-  { key: 'FOUNDER',     eyebrow: 'Founder',    heading: 'Leadership',              alt: 'founder',     bg: false },
-  { key: 'RESEARCH',    eyebrow: 'Science',    heading: 'Research & Science',      alt: 'research',    bg: true  },
-  { key: 'ENGINEERING', eyebrow: 'Technical',  heading: 'Engineering',             alt: 'engineering', bg: false },
-  { key: 'CONSULTANTS', eyebrow: 'Advisory',   heading: 'Consultants',             alt: 'consultants', bg: true  },
-  { key: 'BUSINESS',    eyebrow: 'Operations', heading: 'Business & Administration', alt: 'business', bg: false },
+  { key: 'FOUNDER',     eyebrow: 'Founder',    heading: 'Leadership',                alt: 'founder',     bg: false },
+  { key: 'RESEARCH',    eyebrow: 'Science',    heading: 'Research & Science',        alt: 'research',    bg: true  },
+  { key: 'ENGINEERING', eyebrow: 'Technical',  heading: 'Engineering',               alt: 'engineering', bg: false },
+  { key: 'CONSULTANTS', eyebrow: 'Advisory',   heading: 'Consultants',               alt: 'consultants', bg: true  },
+  { key: 'BUSINESS',    eyebrow: 'Operations', heading: 'Business & Administration', alt: 'business',    bg: false },
+  { key: 'INTERN',      eyebrow: 'Next Gen',   heading: 'Interns',                   alt: 'interns',     bg: true  },
 ];
 
 /* ── Helpers ──────────────────────────────────────────────────────────────── */
