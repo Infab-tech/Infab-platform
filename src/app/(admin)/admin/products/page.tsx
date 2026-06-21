@@ -6,6 +6,12 @@ export const metadata = {
     title: 'Products Management | Admin Console',
 };
 
+const CATEGORY_CONFIG: Record<string, { icon: string; colour: string; label: string }> = {
+    AEROSPACE:  { icon: 'ph-airplane-tilt', colour: 'text-blue-400 bg-blue-400/10',  label: 'Aerospace' },
+    HEALTHCARE: { icon: 'ph-dna',           colour: 'text-green-400 bg-green-400/10', label: 'Healthcare' },
+    MEMS:       { icon: 'ph-cpu',           colour: 'text-cyan-400 bg-cyan-400/10',   label: 'MEMS' },
+};
+
 export default async function AdminProductsPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
     const params = await searchParams;
     const products = await prisma.product.findMany({
@@ -111,9 +117,18 @@ export default async function AdminProductsPage({ searchParams }: { searchParams
                                         )}
                                     </td>
                                     <td className="p-5">
-                                        <span className="inline-flex px-2 py-1 bg-[var(--text-primary)]/5 rounded text-xs font-mono uppercase text-[var(--text-secondary)]">
-                                            {product.category}
-                                        </span>
+                                        {(() => {
+                                            const cfg = CATEGORY_CONFIG[product.category.toUpperCase()];
+                                            return cfg ? (
+                                                <span className={`inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-mono font-bold uppercase ${cfg.colour}`}>
+                                                    <i className={`ph ${cfg.icon}`}></i> {cfg.label}
+                                                </span>
+                                            ) : (
+                                                <span className="inline-flex px-2 py-1 bg-[var(--text-primary)]/5 rounded text-xs font-mono uppercase text-[var(--text-secondary)]">
+                                                    {product.category}
+                                                </span>
+                                            );
+                                        })()}
                                     </td>
                                     <td className="p-5">
                                         <div className="font-bold text-[var(--text-primary)] mb-1">{product.name}</div>

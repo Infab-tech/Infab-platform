@@ -4,7 +4,7 @@ import { prisma } from '@/lib/supabase/prisma';
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
-import { FALLBACK_PRODUCTS, FALLBACK_NEWS, FALLBACK_TEAM } from '@/lib/content-defaults';
+import { FALLBACK_PRODUCTS, FALLBACK_NEWS, FALLBACK_TEAM, FALLBACK_PUBLICATIONS } from '@/lib/content-defaults';
 
 // Helper function to double-check admin authorization on the server
 async function verifyAdmin() {
@@ -447,4 +447,85 @@ export async function seedDefaultTeam() {
     revalidatePath('/admin/team');
     revalidatePath('/team');
     return { skipped: false, message: `Seeded ${FALLBACK_TEAM.length} team members into the database.` };
+}
+
+// ── PUBLICATIONS ─────────────────────────────────────────────────────────────
+
+export async function addPublication(formData: FormData) {
+    await verifyAdmin();
+    const title    = formData.get('title') as string;
+    const authors  = formData.get('authors') as string;
+    const journal  = formData.get('journal') as string;
+    const year     = parseInt(formData.get('year') as string, 10);
+    const abstract = formData.get('abstract') as string;
+    const link     = formData.get('link') as string;
+    const order    = parseInt(formData.get('order') as string, 10) || 0;
+
+    if (!title || !authors || isNaN(year)) {
+        return { success: false, message: 'Title, authors, and year are required.' };
+    }
+    try {
+        await prisma.publication.create({
+            data: { title, authors, journal: journal || null, year, abstract: abstract || null, link: link || null, order, isPublished: true },
+        });
+        revalidatePath('/admin/publications');
+        revalidatePath('/');
+    } catch (e) {
+        console.error(e);
+        return { success: false, message: 'Database error.' };
+    }
+    redirect('/admin/publications');
+}
+
+export async function updatePublication(id: string, formData: FormData) {
+    await verifyAdmin();
+    const title    = formData.get('title') as string;
+    const authors  = formData.get('authors') as string;
+    const journal  = formData.get('journal') as string;
+    const year     = parseInt(formData.get('year') as string, 10);
+    const abstract = formData.get('abstract') as string;
+    const link     = formData.get('link') as string;
+    const order    = parseInt(formData.get('order') as string, 10) || 0;
+
+    if (!title || !authors || isNaN(year)) {
+        return { success: false, message: 'Title, authors, and year are required.' };
+    }
+    try {
+        await prisma.publication.update({
+            where: { id },
+            data: { title, authors, journal: journal || null, year, abstract: abstract || null, link: link || null, order },
+        });
+        revalidatePath('/admin/publications');
+        revalidatePath('/');
+    } catch (e) {
+        console.error(e);
+        return { success: false, message: 'Database error.' };
+    }
+    redirect('/admin/publications');
+}
+
+export async function togglePublicationPublished(id: string, current: boolean) {
+    await verifyAdmin();
+    await prisma.publication.update({ where: { id }, data: { isPublished: !current } });
+    revalidatePath('/admin/publications');
+    revalidatePath('/');
+}
+
+export async function deletePublication(id: string) {
+    await verifyAdmin();
+    await prisma.publication.delete({ where: { id } });
+    revalidatePath('/admin/publications');
+    revalidatePath('/');
+}
+
+export async function seedDefaultPublications() {
+    await verifyAdmin();
+    const count = await prisma.publication.count();
+    if (count > 0) return { skipped: true, message: 'Publications already in database — seed skipped.' };
+    for (const p of FALLBACK_PUBLICATIONS) {
+        await prisma.publication.create({ data: { ...p, isPublished: true } });
+    }
+    revalidatePath('/admin/publications');
+    revalidatePath('/');
+    return { skipped: false, message: `Seeded ${FALLBACK_PUBLICATIONS.length} publications.` };
 }

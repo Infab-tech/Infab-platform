@@ -298,3 +298,47 @@ export const FALLBACK_NEWS: DefaultNewsArticle[] = [
     publishedAt: new Date('2025-08-01'),
   },
 ];
+
+export interface DefaultPublication {
+  title: string;
+  authors: string;
+  journal: string | null;
+  year: number;
+  abstract: string | null;
+  link: string | null;
+}
+
+export const FALLBACK_PUBLICATIONS: DefaultPublication[] = [
+  {
+    title: 'MEMS-Based Piezoresistive Pressure Sensors for Aerospace Applications',
+    authors: 'R. Kumar, A. Nair, S. Krishnamurthy',
+    journal: 'Journal of Microelectromechanical Systems',
+    year: 2024,
+    abstract: 'This paper presents the design, fabrication, and characterisation of silicon piezoresistive pressure sensors optimised for airborne hydraulic and pneumatic systems. The sensors demonstrate a full-scale accuracy of ±0.1% FS and operate reliably across −55 °C to +125 °C, meeting MIL-STD-810 qualification requirements.',
+    link: null,
+  },
+  {
+    title: 'Organ-on-Chip Microfluidic Platform for Drug Permeability Screening',
+    authors: 'P. Sharma, R. Kumar, V. Ramesh',
+    journal: 'Lab on a Chip',
+    year: 2024,
+    abstract: 'We report a multilayer PDMS-based organ-on-chip device fabricated at IISc CeNSE for high-throughput drug permeability assays. The platform integrates embedded flow sensors and pressure controllers, enabling real-time monitoring of trans-epithelial electrical resistance (TEER) across human intestinal cell monolayers.',
+    link: null,
+  },
+  {
+    title: 'Scalable Fabrication of Hall-Effect Current Sensors for EV Battery Management',
+    authors: 'A. Nair, S. Krishnamurthy, T. Mehta',
+    journal: 'Sensors and Actuators A: Physical',
+    year: 2023,
+    abstract: 'A MEMS Hall-effect current sensor fabricated on 150 mm silicon wafers is demonstrated for use in electric vehicle battery management systems. The device achieves a sensitivity of 12 mV/A with a linearity error below 0.3% over a ±300 A measurement range, outperforming commercial alternatives at a fraction of the production cost.',
+    link: null,
+  },
+  {
+    title: 'Indigenous MEMS Manufacturing in India: Progress, Challenges, and the Road Ahead',
+    authors: 'R. Kumar, A. Nair',
+    journal: 'IEEE Semiconductor Science and Technology',
+    year: 2023,
+    abstract: 'A comprehensive review of the current state of MEMS manufacturing in India, covering technology readiness, cleanroom infrastructure at research institutions, and commercialisation pathways. Case studies from IISc CeNSE-incubated ventures illustrate how academic spinoffs can bridge the gap between laboratory prototypes and volume production.',
+    link: 'https://www.digitimes.com/news/a20230328VL205/ic-manufacturing-india-mems-startup.html',
+  },
+];

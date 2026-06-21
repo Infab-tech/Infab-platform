@@ -3,6 +3,7 @@ import About from '@/components/sections/About';
 import Products from '@/components/sections/Products';
 import News from '@/components/sections/News';
 import Partners from '@/components/sections/Partners';
+import Publications from '@/components/sections/Publications';
 
 export default function Home() {
   return (
@@ -12,8 +13,7 @@ export default function Home() {
       <Products />
       <News />
       <Partners />
-      {/* Future sections will go here below the Hero */}
-      <div className="h-screen bg-[var(--bg-primary)]"></div>
+      <Publications />
     </div>
   );
 }

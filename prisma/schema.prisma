@@ -105,7 +105,23 @@ model TeamMember {
   updatedAt DateTime @default(now()) @updatedAt
 }
 
-// 8. USER ROLES (RBAC)
+// 8. PUBLICATIONS
+model Publication {
+  id          String   @id @default(cuid())
+  title       String
+  authors     String
+  journal     String?
+  year        Int
+  abstract    String?  @db.Text
+  link        String?
+  imageUrl    String?
+  isPublished Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+}
+
+// 9. USER ROLES (RBAC)
 model userRole {
   email     String   @id
   role      String   @default("CUSTOMER") // CUSTOMER, ADMIN
