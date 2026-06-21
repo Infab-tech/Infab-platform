@@ -40,14 +40,6 @@ const business = [
   { name: 'Priyanka K C', title: 'Administration', bio: 'Supports day-to-day administrative functions and organisational workflows.', photo: '/assests/team/priyanka.jpg' },
 ];
 
-const interns = [
-  { name: 'Palash Srivastava', title: 'Intern', photo: '/assests/team/palash.jpg' },
-  { name: 'Sreelakshmi Anil', title: 'Intern', photo: '/assests/team/sreelakshmi.jpg' },
-  { name: 'Swaminath B', title: 'Intern', photo: '/assests/team/swaminath.jpg' },
-  { name: 'Priyam Badyal', title: 'Intern', photo: '/assests/team/priyam.jpg' },
-  { name: 'Vaisakh Melaveetil', title: 'Intern', photo: '/assests/team/vaisakh.jpg' },
-];
-
 /* ── Helpers ──────────────────────────────────────────────────────────────── */
 
 function getInitials(name: string): string {
@@ -61,61 +53,52 @@ function getInitials(name: string): string {
 
 interface Member { name: string; title: string; bio?: string; photo?: string; }
 
-function Avatar({ name, photo, size }: { name: string; photo?: string; size: 'lg' | 'md' | 'sm' }) {
-  const dims = size === 'lg' ? 'w-20 h-20' : size === 'md' ? 'w-12 h-12' : 'w-8 h-8';
-  const radius = size === 'lg' ? 'rounded-2xl' : size === 'md' ? 'rounded-xl' : 'rounded-lg';
-  const textSize = size === 'lg' ? 'text-2xl' : size === 'md' ? 'text-base' : 'text-xs';
-  if (photo) {
-    return (
-      <div className={`${dims} ${radius} overflow-hidden flex-shrink-0 border border-[var(--accent-primary)]/20`}>
-        <Image src={photo} alt={name} width={size === 'lg' ? 80 : size === 'md' ? 48 : 32} height={size === 'lg' ? 80 : size === 'md' ? 48 : 32} className="w-full h-full object-cover object-top" />
-      </div>
-    );
-  }
-  return (
-    <div className={`${dims} ${radius} bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex-shrink-0 flex items-center justify-center font-bold ${textSize} text-[var(--accent-primary)]`}>
-      {getInitials(name)}
-    </div>
-  );
-}
-
+/* Large card — founder / leadership. Photo fills the top half. */
 function LeadershipCard({ m }: { m: Member }) {
   return (
-    <div className="rounded-2xl border border-[var(--accent-primary)]/30 bg-[var(--bg-secondary)] p-10 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/60 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/10">
-      <div className="flex items-start gap-6 mb-6">
-        <Avatar name={m.name} photo={m.photo} size="lg" />
-        <div className="pt-1">
-          <h3 className="text-xl font-bold text-[var(--text-primary)] mb-1">{m.name}</h3>
-          <p className="font-mono text-xs uppercase tracking-widest text-[var(--accent-primary)]">{m.title}</p>
-        </div>
+    <div className="rounded-2xl border border-[var(--accent-primary)]/30 bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/60 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/10">
+      {/* Photo */}
+      <div className="h-72 bg-[var(--bg-primary)] border-b border-[var(--accent-primary)]/20 relative overflow-hidden">
+        {m.photo ? (
+          <Image src={m.photo} alt={m.name} fill className="object-cover object-top" />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-5xl font-bold text-[var(--accent-primary)]/40">
+            {getInitials(m.name)}
+          </div>
+        )}
+        {/* bottom fade */}
+        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[var(--bg-secondary)] to-transparent" />
       </div>
-      {m.bio && <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{m.bio}</p>}
+      {/* Info */}
+      <div className="px-8 pb-8 pt-2">
+        <h3 className="text-xl font-bold text-[var(--text-primary)] mb-1">{m.name}</h3>
+        <p className="font-mono text-xs uppercase tracking-widest text-[var(--accent-primary)] mb-4">{m.title}</p>
+        {m.bio && <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{m.bio}</p>}
+      </div>
     </div>
   );
 }
 
+/* Regular member card — photo fills the top, info below. */
 function MemberCard({ m }: { m: Member }) {
   return (
-    <div className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-xl hover:shadow-[var(--accent-primary)]/5">
-      <div className="flex items-center gap-3 mb-4">
-        <Avatar name={m.name} photo={m.photo} size="md" />
-        <div>
-          <h3 className="text-sm font-bold text-[var(--text-primary)] leading-tight">{m.name}</h3>
-          <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--accent-primary)] mt-0.5">{m.title}</p>
-        </div>
+    <div className="group rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-xl hover:shadow-[var(--accent-primary)]/5">
+      {/* Photo */}
+      <div className="h-52 bg-[var(--bg-primary)] border-b border-[var(--border-primary)] relative overflow-hidden">
+        {m.photo ? (
+          <Image src={m.photo} alt={m.name} fill className="object-cover object-top transition-transform duration-500 group-hover:scale-105" />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-3xl font-bold text-[var(--accent-primary)]/40 bg-[var(--accent-primary)]/5">
+            {getInitials(m.name)}
+          </div>
+        )}
+        <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[var(--bg-secondary)] to-transparent" />
       </div>
-      {m.bio && <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{m.bio}</p>}
-    </div>
-  );
-}
-
-function InternChip({ m }: { m: { name: string; title: string; photo?: string } }) {
-  return (
-    <div className="flex items-center gap-3 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] px-4 py-3">
-      <Avatar name={m.name} photo={m.photo} size="sm" />
-      <div>
-        <p className="text-sm font-semibold text-[var(--text-primary)]">{m.name}</p>
-        <p className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-secondary)]">{m.title}</p>
+      {/* Info */}
+      <div className="px-5 pb-5 pt-2">
+        <h3 className="text-sm font-bold text-[var(--text-primary)] leading-tight mb-0.5">{m.name}</h3>
+        <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--accent-primary)] mb-3">{m.title}</p>
+        {m.bio && <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{m.bio}</p>}
       </div>
     </div>
   );
@@ -132,7 +115,7 @@ export default function TeamPage() {
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-[var(--text-primary)] mb-6 leading-tight max-w-3xl">Our Team</h1>
           <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
           <p className="text-xl text-[var(--text-secondary)] leading-relaxed max-w-2xl">
-            18 passionate technologists, scientists, and operators building India&apos;s most advanced MEMS and microfluidics company from IISc CeNSE, Bengaluru.
+            13 passionate technologists, scientists, and operators building India&apos;s most advanced MEMS and microfluidics company from IISc CeNSE, Bengaluru.
           </p>
         </div>
       </div>
@@ -145,7 +128,7 @@ export default function TeamPage() {
             <h2 className="text-4xl font-bold tracking-tight text-[var(--text-primary)]">Leadership</h2>
             <div className="w-12 h-1 bg-[var(--accent-primary)] mt-6"></div>
           </div>
-          <div className="max-w-xl">
+          <div className="max-w-sm">
             <LeadershipCard m={founder} />
           </div>
         </div>
@@ -159,7 +142,7 @@ export default function TeamPage() {
             <h2 className="text-4xl font-bold tracking-tight text-[var(--text-primary)]">Research &amp; Science</h2>
             <div className="w-12 h-1 bg-[var(--accent-primary)] mt-6"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {research.map((m) => <MemberCard key={m.name} m={m} />)}
           </div>
         </div>
@@ -203,23 +186,6 @@ export default function TeamPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {business.map((m) => <MemberCard key={m.name} m={m} />)}
-          </div>
-        </div>
-      </div>
-
-      {/* Interns */}
-      <div className="border-b border-[var(--border-primary)] py-24 bg-[var(--bg-secondary)]">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="mb-12">
-            <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">Next Generation</span>
-            <h2 className="text-4xl font-bold tracking-tight text-[var(--text-primary)]">Interns</h2>
-            <div className="w-12 h-1 bg-[var(--accent-primary)] mt-6"></div>
-            <p className="mt-6 text-[var(--text-secondary)] max-w-2xl">
-              INFAB actively mentors the next generation of MEMS engineers and deep-tech builders through hands-on internship programmes at our IISc CeNSE facility.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-            {interns.map((m) => <InternChip key={m.name} m={m} />)}
           </div>
         </div>
       </div>
