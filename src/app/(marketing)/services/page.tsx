@@ -222,6 +222,287 @@ export default function ServicesPage() {
               </div>
             ))}
           </div>
+
+          {/* ── Process Capabilities Accordion ───────────────────────────── */}
+          <div className="mt-24">
+            <div className="mb-10">
+              <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">Cleanroom Process Capabilities</span>
+              <h3 className="text-3xl font-bold tracking-tight text-[var(--text-primary)] mb-4">What we can run for you</h3>
+              <p className="text-[var(--text-secondary)] max-w-2xl">
+                Our cleanroom at IISc CeNSE covers four core process families. Click any category to see the equipment, specifications, and what it enables.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3">
+
+              {/* 1. Lithography */}
+              <details className="group rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden">
+                <summary className="flex items-center justify-between px-8 py-6 cursor-pointer select-none list-none">
+                  <div className="flex items-center gap-5">
+                    <div className="w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex items-center justify-center flex-shrink-0">
+                      <i className="ph ph-sun text-xl text-[var(--accent-primary)]"></i>
+                    </div>
+                    <div>
+                      <div className="font-mono text-xs uppercase tracking-widest text-[var(--text-secondary)] mb-0.5">Process 01</div>
+                      <h4 className="text-lg font-bold text-[var(--text-primary)]">Lithography</h4>
+                    </div>
+                  </div>
+                  <i className="ph ph-plus text-xl text-[var(--accent-primary)] group-open:hidden"></i>
+                  <i className="ph ph-minus text-xl text-[var(--accent-primary)] hidden group-open:block"></i>
+                </summary>
+                <div className="px-8 pb-8 border-t border-[var(--border-primary)]">
+                  <p className="text-[var(--text-secondary)] text-sm leading-relaxed mt-6 mb-8 max-w-3xl">
+                    Photolithographic patterning is the foundation of every MEMS device. We support both contact and proximity lithography on silicon, glass, quartz, SOI, and polymer substrates, with full front-to-back alignment capability for multi-layer devices.
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
+                      <div className="h-40 overflow-hidden border-b border-[var(--border-primary)]">
+                        <Image src="/assests/services/mjb4.png" alt="Karl Süss MJB4 Mask Aligner" width={480} height={160} className="w-full h-full object-cover" />
+                      </div>
+                      <div className="p-5">
+                        <h5 className="font-bold text-[var(--text-primary)] mb-1">Karl Süss MJB4 Mask Aligner</h5>
+                        <ul className="text-xs text-[var(--text-secondary)] space-y-1 mt-2">
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Wavelength: 365 nm (i-line)</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Min. feature size: 2 µm</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Wafer size: up to 4&quot;</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Front &amp; back alignment</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Contact, soft &amp; vacuum contact modes</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
+                      <div className="h-40 overflow-hidden border-b border-[var(--border-primary)]">
+                        <Image src="/assests/services/evg620.jpg" alt="EVG620 Mask Aligner" width={480} height={160} className="w-full h-full object-cover" />
+                      </div>
+                      <div className="p-5">
+                        <h5 className="font-bold text-[var(--text-primary)] mb-1">EVG620 Mask Aligner</h5>
+                        <ul className="text-xs text-[var(--text-secondary)] space-y-1 mt-2">
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Wavelength: 365 nm (i-line) / broadband</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Min. feature size: 2 µm</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Wafer size: up to 6&quot;</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Proximity &amp; contact exposure</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Automated chuck loading</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-6 p-5 rounded-xl bg-[var(--accent-primary)]/5 border border-[var(--accent-primary)]/10">
+                    <p className="text-xs font-mono text-[var(--accent-primary)] font-semibold uppercase tracking-wider mb-2">Resist Processes Supported</p>
+                    <p className="text-sm text-[var(--text-secondary)]">Positive (AZ, S1800 series), negative (SU-8, AZ nLOF), lift-off (LOR + positive), image-reversal (AZ5214), thick resist (&gt;50 µm), and multi-layer stacks.</p>
+                  </div>
+                </div>
+              </details>
+
+              {/* 2. Dry Etch */}
+              <details className="group rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden">
+                <summary className="flex items-center justify-between px-8 py-6 cursor-pointer select-none list-none">
+                  <div className="flex items-center gap-5">
+                    <div className="w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex items-center justify-center flex-shrink-0">
+                      <i className="ph ph-flame text-xl text-[var(--accent-primary)]"></i>
+                    </div>
+                    <div>
+                      <div className="font-mono text-xs uppercase tracking-widest text-[var(--text-secondary)] mb-0.5">Process 02</div>
+                      <h4 className="text-lg font-bold text-[var(--text-primary)]">Dry Etching</h4>
+                    </div>
+                  </div>
+                  <i className="ph ph-plus text-xl text-[var(--accent-primary)] group-open:hidden"></i>
+                  <i className="ph ph-minus text-xl text-[var(--accent-primary)] hidden group-open:block"></i>
+                </summary>
+                <div className="px-8 pb-8 border-t border-[var(--border-primary)]">
+                  <p className="text-[var(--text-secondary)] text-sm leading-relaxed mt-6 mb-8 max-w-3xl">
+                    Dry etching uses reactive gases or plasma to remove material from a substrate with high anisotropy and resolution, making it ideal for defining fine features in micro- and nano-fabrication. Our DRIE and plasma systems handle everything from bulk silicon micromachining to surface cleaning.
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
+                      <div className="h-40 overflow-hidden border-b border-[var(--border-primary)]">
+                        <Image src="/assests/services/drie.jpg" alt="DRIE System" width={480} height={160} className="w-full h-full object-cover" />
+                      </div>
+                      <div className="p-5">
+                        <h5 className="font-bold text-[var(--text-primary)] mb-1">Deep Reactive Ion Etch (DRIE)</h5>
+                        <ul className="text-xs text-[var(--text-secondary)] space-y-1 mt-2">
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Bosch process — alternating etch/passivation</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Etch depth: up to 300 µm</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Aspect ratio: &gt; 20:1</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Sidewall angle: 88–90°</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Etch rate: ~3–5 µm/min (silicon)</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
+                      <div className="h-40 overflow-hidden border-b border-[var(--border-primary)]">
+                        <Image src="/assests/services/asher.png" alt="Plasma Asher" width={480} height={160} className="w-full h-full object-cover object-top" />
+                      </div>
+                      <div className="p-5">
+                        <h5 className="font-bold text-[var(--text-primary)] mb-1">O₂ Plasma Asher</h5>
+                        <ul className="text-xs text-[var(--text-secondary)] space-y-1 mt-2">
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Photoresist strip &amp; descum</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Surface activation for bonding</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>PDMS bonding preparation</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Organic contamination removal</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Wafer size: 2&quot;– 6&quot;</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </details>
+
+              {/* 3. Wet Processing */}
+              <details className="group rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden">
+                <summary className="flex items-center justify-between px-8 py-6 cursor-pointer select-none list-none">
+                  <div className="flex items-center gap-5">
+                    <div className="w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex items-center justify-center flex-shrink-0">
+                      <i className="ph ph-drop text-xl text-[var(--accent-primary)]"></i>
+                    </div>
+                    <div>
+                      <div className="font-mono text-xs uppercase tracking-widest text-[var(--text-secondary)] mb-0.5">Process 03</div>
+                      <h4 className="text-lg font-bold text-[var(--text-primary)]">Wet Processing</h4>
+                    </div>
+                  </div>
+                  <i className="ph ph-plus text-xl text-[var(--accent-primary)] group-open:hidden"></i>
+                  <i className="ph ph-minus text-xl text-[var(--accent-primary)] hidden group-open:block"></i>
+                </summary>
+                <div className="px-8 pb-8 border-t border-[var(--border-primary)]">
+                  <p className="text-[var(--text-secondary)] text-sm leading-relaxed mt-6 mb-8 max-w-3xl">
+                    Wet processing covers resist coating, chemical etching, cleaning, and wafer bonding. Our wet bench suite handles the full range of standard cleans, anisotropic silicon etching, and oxide growth, alongside spin-coating for resists, polymers, and PDMS layers.
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
+                      <div className="h-40 overflow-hidden border-b border-[var(--border-primary)]">
+                        <Image src="/assests/services/spincoater.jpg" alt="Spin Coater" width={480} height={160} className="w-full h-full object-cover" />
+                      </div>
+                      <div className="p-5">
+                        <h5 className="font-bold text-[var(--text-primary)] mb-1">Laurell Spin Coater</h5>
+                        <ul className="text-xs text-[var(--text-secondary)] space-y-1 mt-2">
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Speed range: 500 – 8,000 rpm</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Materials: photoresist, SU-8, PDMS, SOG</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Thickness control: ±2% uniformity</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Wafer size: 2&quot;– 6&quot;</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
+                      <div className="h-40 overflow-hidden border-b border-[var(--border-primary)]">
+                        <Image src="/assests/services/evg-bonder.jpg" alt="EVG Wafer Bonder" width={480} height={160} className="w-full h-full object-cover" />
+                      </div>
+                      <div className="p-5">
+                        <h5 className="font-bold text-[var(--text-primary)] mb-1">EVG Wafer Bonder</h5>
+                        <ul className="text-xs text-[var(--text-secondary)] space-y-1 mt-2">
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Anodic bonding (Si–glass)</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Fusion bonding (Si–Si)</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Adhesive &amp; eutectic bonding</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Temperature: up to 400 °C</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Bond force: up to 60 kN</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-6 p-5 rounded-xl bg-[var(--accent-primary)]/5 border border-[var(--accent-primary)]/10">
+                    <p className="text-xs font-mono text-[var(--accent-primary)] font-semibold uppercase tracking-wider mb-2">Wet Bench Chemistries</p>
+                    <p className="text-sm text-[var(--text-secondary)]">RCA-1 / RCA-2 cleans, Piranha (H₂SO₄:H₂O₂), HF oxide strip, KOH anisotropic silicon etch, TMAH etch, buffered oxide etch (BOE), and standard developer/rinse baths.</p>
+                  </div>
+                </div>
+              </details>
+
+              {/* 4. Inline Characterisation */}
+              <details className="group rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden">
+                <summary className="flex items-center justify-between px-8 py-6 cursor-pointer select-none list-none">
+                  <div className="flex items-center gap-5">
+                    <div className="w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex items-center justify-center flex-shrink-0">
+                      <i className="ph ph-magnifying-glass-plus text-xl text-[var(--accent-primary)]"></i>
+                    </div>
+                    <div>
+                      <div className="font-mono text-xs uppercase tracking-widest text-[var(--text-secondary)] mb-0.5">Process 04</div>
+                      <h4 className="text-lg font-bold text-[var(--text-primary)]">Inline Characterisation</h4>
+                    </div>
+                  </div>
+                  <i className="ph ph-plus text-xl text-[var(--accent-primary)] group-open:hidden"></i>
+                  <i className="ph ph-minus text-xl text-[var(--accent-primary)] hidden group-open:block"></i>
+                </summary>
+                <div className="px-8 pb-8 border-t border-[var(--border-primary)]">
+                  <p className="text-[var(--text-secondary)] text-sm leading-relaxed mt-6 mb-8 max-w-3xl">
+                    Every wafer run is monitored at key process checkpoints using our in-house characterisation suite. This enables real-time yield feedback and rapid process correction without leaving the facility — critical for tight design-test-iterate cycles.
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
+                      <div className="h-40 overflow-hidden border-b border-[var(--border-primary)]">
+                        <Image src="/assests/services/dektakxt.jpg" alt="Bruker DektakXT Profilometer" width={480} height={160} className="w-full h-full object-cover" />
+                      </div>
+                      <div className="p-5">
+                        <h5 className="font-bold text-[var(--text-primary)] mb-1">Bruker DektakXT Profilometer</h5>
+                        <ul className="text-xs text-[var(--text-secondary)] space-y-1 mt-2">
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Step height range: 5 Å – 2,000 µm</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Vertical resolution: 0.1 Å</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Scan length: up to 55 mm</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Film thickness, etch depth, roughness Ra</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Wafer bow &amp; stress measurement</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] p-5">
+                      <h5 className="font-bold text-[var(--text-primary)] mb-4">Additional Characterisation Tools</h5>
+                      <div className="space-y-4">
+                        <div>
+                          <p className="text-xs font-semibold text-[var(--text-primary)] mb-1">Optical Microscopy</p>
+                          <p className="text-xs text-[var(--text-secondary)]">Nikon inspection microscope — bright/dark field, 50×/100×/200× objectives. Used for CD measurement, defect inspection, and layer alignment verification.</p>
+                        </div>
+                        <div>
+                          <p className="text-xs font-semibold text-[var(--text-primary)] mb-1">SEM (via CeNSE)</p>
+                          <p className="text-xs text-[var(--text-secondary)]">Access to field-emission SEM at IISc CeNSE for high-resolution surface imaging, cross-section inspection, and sidewall angle measurement.</p>
+                        </div>
+                        <div>
+                          <p className="text-xs font-semibold text-[var(--text-primary)] mb-1">Electrical Testing</p>
+                          <p className="text-xs text-[var(--text-secondary)]">Wafer-level probe station for I-V, C-V, and resistance measurements. JEDEC-compliant parametric test protocols for yield analysis.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </details>
+
+            </div>
+          </div>
+
+          {/* ── Microqubic MRCL Series ───────────────────────────────────── */}
+          <div className="mt-16 rounded-2xl border border-[var(--accent-primary)]/20 bg-[var(--bg-secondary)] overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+              {/* Text side */}
+              <div className="p-10 flex flex-col justify-center">
+                <span className="inline-block font-mono text-xs font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">Featured Equipment</span>
+                <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-4">Microqubic 2D/3D Imaging System</h3>
+                <div className="w-10 h-1 bg-[var(--accent-primary)] mb-6"></div>
+                <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-4">
+                  INFAB integrates the <strong className="text-[var(--text-primary)]">Microqubic MRCL Series</strong> modular microscope system into our inline characterisation and inspection workflow. Designed for high-resolution 2D and 3D optical analysis, it supports a wide range of MEMS, microfluidics, and thin-film applications with unmatched ease of use and flexibility.
+                </p>
+                <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-6">
+                  Developed by Microqubic AG (Switzerland), this advanced yet compact instrument enables <strong className="text-[var(--text-primary)]">multi-angle imaging</strong>, <strong className="text-[var(--text-primary)]">tilt/rotate inspection</strong>, and <strong className="text-[var(--text-primary)]">precise surface evaluation</strong> without requiring bulky conventional microscope setups.
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { icon: 'ph-arrows-out', label: 'Multi-angle imaging' },
+                    { icon: 'ph-arrows-clockwise', label: 'Tilt / rotate inspection' },
+                    { icon: 'ph-chart-bar', label: '3D surface profiling' },
+                    { icon: 'ph-bluetooth', label: 'Bluetooth joystick control' },
+                  ].map((feat) => (
+                    <div key={feat.label} className="flex items-center gap-2 text-xs text-[var(--text-secondary)]">
+                      <i className={`ph ${feat.icon} text-[var(--accent-primary)] text-base flex-shrink-0`}></i>
+                      {feat.label}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              {/* Image placeholder — swap src once image is added */}
+              <div className="bg-[var(--bg-primary)] border-l border-[var(--accent-primary)]/10 flex items-center justify-center min-h-72 lg:min-h-full">
+                <div className="text-center p-10 opacity-40">
+                  <i className="ph ph-microscope text-7xl text-[var(--accent-primary)] mb-4 block"></i>
+                  <p className="font-mono text-xs uppercase tracking-widest text-[var(--text-secondary)]">
+                    Add image to<br />/public/assests/services/microqubic-mrcl.jpg
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
