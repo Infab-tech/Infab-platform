@@ -58,21 +58,25 @@ export default function Navbar() {
         
         {/* Brand Logo Wrapper */}
         <div className="flex items-center">
-          <Image 
-            src="/assests/cropped-infab-logo.webp" 
-            alt="INFAB Semiconductor Logo" 
-            width={160} 
-            height={40} 
-            priority
-            className={`object-contain w-auto h-20 transition-all duration-300 ${(!scrolled && isHome) ? 'invert mix-blend-screen' : 'brand-logo-adaptive'}`}
-          />
+          <Link href="/">
+            <Image 
+              src="/assests/cropped-infab-logo.webp" 
+              alt="INFAB Semiconductor Logo" 
+              width={160} 
+              height={40} 
+              priority
+              className={`object-contain w-auto h-20 transition-all duration-300 ${(!scrolled && isHome) ? 'invert mix-blend-screen' : 'brand-logo-adaptive'}`}
+            />
+          </Link>
         </div>
 
         {/* Desktop Navigation links */}
-        <nav className="hidden md:flex items-center gap-8">
-          <Link href="/#about" className="text-sm font-medium tracking-wide opacity-80 hover:opacity-100 transition-opacity">About Us</Link>
-          <Link href="/#products" className="text-sm font-medium tracking-wide opacity-80 hover:opacity-100 transition-opacity">Products</Link>
-          <Link href="/#facilities" className="text-sm font-medium tracking-wide opacity-80 hover:opacity-100 transition-opacity">Facilities</Link>
+        <nav className="hidden md:flex items-center gap-6">
+          <Link href="/about" className="text-sm font-medium tracking-wide opacity-80 hover:opacity-100 transition-opacity">About Us</Link>
+          <Link href="/products" className="text-sm font-medium tracking-wide opacity-80 hover:opacity-100 transition-opacity">Products</Link>
+          <Link href="/services#facilities" className="text-sm font-medium tracking-wide opacity-80 hover:opacity-100 transition-opacity">Facilities</Link>
+          <Link href="/team" className="text-sm font-medium tracking-wide opacity-80 hover:opacity-100 transition-opacity">Team</Link>
+          <Link href="/news" className="text-sm font-medium tracking-wide opacity-80 hover:opacity-100 transition-opacity">News</Link>
           <Link href="/contact" className="text-sm font-medium tracking-wide opacity-80 hover:opacity-100 transition-opacity">Contact</Link>
         </nav>
 
