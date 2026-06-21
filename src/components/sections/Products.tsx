@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 interface Market {
   id: string;
@@ -20,7 +21,7 @@ const markets: Market[] = [
         icon: "ph-airplane-tilt",
         image: "/assests/20250705_1547_Fighter-Jet-Landing-Gear_simple_compose_01jzd1cytpft2ts0vfa1hav51t-600x400.png",
         links: ["SP Pressure Sensors", "TP Pressure Transducers", "Differential Switches"],
-        linkHref: "#aerospace"
+        linkHref: "/products#aerospace"
     },
     {
         id: "healthcare",
@@ -30,7 +31,7 @@ const markets: Market[] = [
         icon: "ph-dna",
         image: "/assests/Development-of-Special-Bonding-for-mRNA-Chip-600x480.png",
         links: ["Microfluidic Chips", "Pressure Controllers", "Flow Sensors"],
-        linkHref: "#healthcare"
+        linkHref: "/products#healthcare"
     },
     {
         id: "mems",
@@ -40,7 +41,7 @@ const markets: Market[] = [
         icon: "ph-cpu",
         image: "/assests/ia_1000000002-600x375.jpg",
         links: ["MEMS Process Services", "Hall & Flow Sensors", "Our Facilities"],
-        linkHref: "#mems"
+        linkHref: "/services"
     }
 ];
 
@@ -108,13 +109,13 @@ export default function Products() {
                                 </ul>
 
                                 {/* Action Link */}
-                                <a
+                                <Link
                                     href={market.linkHref}
                                     className="mt-auto group inline-flex items-center gap-2 font-mono text-sm font-semibold uppercase tracking-wider text-[var(--text-primary)] transition-colors hover:text-[var(--accent-primary)]"
                                 >
                                     Explore Segment
                                     <i className="ph ph-arrow-right transition-transform group-hover:translate-x-1"></i>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     ))}
