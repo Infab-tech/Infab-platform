@@ -4,6 +4,7 @@ import { prisma } from '@/lib/supabase/prisma';
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
+import { FALLBACK_PRODUCTS, FALLBACK_NEWS } from '@/lib/content-defaults';
 
 // Helper function to double-check admin authorization on the server
 async function verifyAdmin() {
@@ -290,4 +291,53 @@ export async function toggleNewsPublished(id: string, currentStatus: boolean) {
     });
     revalidatePath('/admin/news');
     revalidatePath('/news');
+}
+
+// ── Seed default content into the DB ─────────────────────────────────────────
+
+export async function seedDefaultProducts() {
+    await verifyAdmin();
+    const count = await prisma.product.count();
+    if (count > 0) return { skipped: true, message: 'Products already in database — seed skipped.' };
+
+    for (const p of FALLBACK_PRODUCTS) {
+        const slug = p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + Date.now().toString().slice(-6);
+        await prisma.product.create({
+            data: {
+                name: p.name,
+                slug,
+                category: p.category,
+                description: p.description,
+                specs: p.specs,
+                imageUrl: p.imageUrl ?? null,
+                imageUrls: p.imageUrl ? [p.imageUrl] : [],
+                isActive: true,
+            },
+        });
+    }
+    revalidatePath('/admin/products');
+    revalidatePath('/products');
+    return { skipped: false, message: `Seeded ${FALLBACK_PRODUCTS.length} products into the database.` };
+}
+
+export async function seedDefaultNews() {
+    await verifyAdmin();
+    const count = await prisma.newsArticle.count();
+    if (count > 0) return { skipped: true, message: 'Articles already in database — seed skipped.' };
+
+    for (const a of FALLBACK_NEWS) {
+        await prisma.newsArticle.create({
+            data: {
+                title: a.title,
+                description: a.description,
+                category: a.category,
+                link: a.link,
+                publishedAt: a.publishedAt,
+                isPublished: true,
+            },
+        });
+    }
+    revalidatePath('/admin/news');
+    revalidatePath('/news');
+    return { skipped: false, message: `Seeded ${FALLBACK_NEWS.length} articles into the database.` };
 }
