@@ -352,6 +352,7 @@ export async function addTeamMember(formData: FormData) {
     const bio = formData.get('bio') as string;
     const section = formData.get('section') as string;
     const photoUrl = formData.get('photoUrl') as string;
+    const linkedinUrl = formData.get('linkedinUrl') as string;
     const order = parseInt(formData.get('order') as string, 10) || 0;
 
     if (!name || !title || !section) {
@@ -360,7 +361,7 @@ export async function addTeamMember(formData: FormData) {
 
     try {
         await prisma.teamMember.create({
-            data: { name, title, bio: bio || null, section, photoUrl: photoUrl || null, order, isActive: true },
+            data: { name, title, bio: bio || null, section, photoUrl: photoUrl || null, linkedinUrl: linkedinUrl || null, order, isActive: true },
         });
         revalidatePath('/admin/team');
         revalidatePath('/team');
@@ -380,6 +381,7 @@ export async function updateTeamMember(id: string, formData: FormData) {
     const bio = formData.get('bio') as string;
     const section = formData.get('section') as string;
     const photoUrl = formData.get('photoUrl') as string;
+    const linkedinUrl = formData.get('linkedinUrl') as string;
     const order = parseInt(formData.get('order') as string, 10) || 0;
 
     if (!name || !title || !section) {
@@ -389,7 +391,7 @@ export async function updateTeamMember(id: string, formData: FormData) {
     try {
         await prisma.teamMember.update({
             where: { id },
-            data: { name, title, bio: bio || null, section, photoUrl: photoUrl || null, order },
+            data: { name, title, bio: bio || null, section, photoUrl: photoUrl || null, linkedinUrl: linkedinUrl || null, order },
         });
         revalidatePath('/admin/team');
         revalidatePath('/team');

@@ -109,6 +109,20 @@ export default function NewTeamMemberPage() {
             ></textarea>
           </div>
 
+          <div className="flex flex-col gap-2">
+            <label htmlFor="linkedinUrl" className="font-mono text-xs font-semibold uppercase text-[var(--text-secondary)]">
+              <span className="inline-flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 256 256"><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v96a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0ZM216,208a8,8,0,0,1-8-8V160a36,36,0,0,0-72,0v40a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A52,52,0,0,1,216,160v40A8,8,0,0,1,216,208ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"></path></svg>
+                LinkedIn URL <span className="normal-case font-normal">(optional)</span>
+              </span>
+            </label>
+            <input
+              type="url" id="linkedinUrl" name="linkedinUrl"
+              placeholder="https://linkedin.com/in/username"
+              className="bg-[var(--text-primary)]/[0.03] border border-[var(--text-primary)]/10 rounded-lg px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
+            />
+          </div>
+
           {error && (
             <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-400 rounded-lg text-sm font-medium">{error}</div>
           )}

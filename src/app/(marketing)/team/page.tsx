@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 /* ── Types ────────────────────────────────────────────────────────────────── */
 
-interface Member { name: string; title: string; bio?: string | null; photo?: string | null; }
+interface Member { name: string; title: string; bio?: string | null; photo?: string | null; linkedinUrl?: string | null; }
 
 const SECTION_CONFIG: Array<{ key: string; eyebrow: string; heading: string; alt: string; bg: boolean }> = [
   { key: 'FOUNDER',     eyebrow: 'Founder',    heading: 'Leadership',                alt: 'founder',     bg: false },
@@ -48,8 +48,18 @@ function LeadershipCard({ m }: { m: Member }) {
         <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[var(--bg-secondary)] to-transparent" />
       </div>
       <div className="px-8 pb-8 pt-2">
-        <h3 className="text-xl font-bold text-[var(--text-primary)] mb-1">{m.name}</h3>
-        <p className="font-mono text-xs uppercase tracking-widest text-[var(--accent-primary)] mb-4">{m.title}</p>
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <h3 className="text-xl font-bold text-[var(--text-primary)] mb-1">{m.name}</h3>
+            <p className="font-mono text-xs uppercase tracking-widest text-[var(--accent-primary)] mb-4">{m.title}</p>
+          </div>
+          {m.linkedinUrl && (
+            <a href={m.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label={`${m.name} on LinkedIn`}
+              className="flex-shrink-0 mt-1 w-8 h-8 rounded-lg border border-[var(--border-primary)] flex items-center justify-center text-[var(--text-secondary)] hover:border-[#0077b5]/60 hover:text-[#0077b5] transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 256 256"><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v96a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0ZM216,208a8,8,0,0,1-8-8V160a36,36,0,0,0-72,0v40a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A52,52,0,0,1,216,160v40A8,8,0,0,1,216,208ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"></path></svg>
+            </a>
+          )}
+        </div>
         {m.bio && <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{m.bio}</p>}
       </div>
     </div>
@@ -71,8 +81,18 @@ function MemberCard({ m }: { m: Member }) {
         <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[var(--bg-secondary)] to-transparent" />
       </div>
       <div className="px-5 pb-5 pt-2">
-        <h3 className="text-sm font-bold text-[var(--text-primary)] leading-tight mb-0.5">{m.name}</h3>
-        <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--accent-primary)] mb-3">{m.title}</p>
+        <div className="flex items-start justify-between gap-2">
+          <div className="min-w-0">
+            <h3 className="text-sm font-bold text-[var(--text-primary)] leading-tight mb-0.5">{m.name}</h3>
+            <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--accent-primary)] mb-3">{m.title}</p>
+          </div>
+          {m.linkedinUrl && (
+            <a href={m.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label={`${m.name} on LinkedIn`}
+              className="flex-shrink-0 mt-0.5 w-7 h-7 rounded-md border border-[var(--border-primary)] flex items-center justify-center text-[var(--text-secondary)] hover:border-[#0077b5]/60 hover:text-[#0077b5] transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" viewBox="0 0 256 256"><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v96a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0ZM216,208a8,8,0,0,1-8-8V160a36,36,0,0,0-72,0v40a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A52,52,0,0,1,216,160v40A8,8,0,0,1,216,208ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"></path></svg>
+            </a>
+          )}
+        </div>
         {m.bio && <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{m.bio}</p>}
       </div>
     </div>
@@ -96,7 +116,7 @@ export default async function TeamPage() {
       totalCount = rows.length;
       for (const r of rows) {
         if (!membersBySection[r.section]) membersBySection[r.section] = [];
-        membersBySection[r.section].push({ name: r.name, title: r.title, bio: r.bio, photo: r.photoUrl });
+        membersBySection[r.section].push({ name: r.name, title: r.title, bio: r.bio, photo: r.photoUrl, linkedinUrl: r.linkedinUrl });
       }
     }
   } catch {
@@ -107,7 +127,7 @@ export default async function TeamPage() {
     // Build from fallback
     for (const m of FALLBACK_TEAM) {
       if (!membersBySection[m.section]) membersBySection[m.section] = [];
-      membersBySection[m.section].push({ name: m.name, title: m.title, bio: m.bio, photo: m.photoUrl });
+      membersBySection[m.section].push({ name: m.name, title: m.title, bio: m.bio, photo: m.photoUrl, linkedinUrl: null });
       totalCount++;
     }
   }
