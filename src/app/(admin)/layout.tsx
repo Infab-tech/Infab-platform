@@ -76,11 +76,11 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             </aside>
 
             {/* Main Content Area */}
-            <main className="flex-1 overflow-y-auto bg-[var(--bg-primary)] relative">
-                <div className="absolute top-6 right-8 z-50">
+            <main className="flex-1 overflow-y-auto bg-[var(--bg-primary)] flex flex-col">
+                <div className="flex justify-end px-8 pt-6 pb-2">
                     <ThemeToggle />
                 </div>
-                <div className="p-8">
+                <div className="px-8 pb-8 flex-1">
                     {children}
                 </div>
             </main>
