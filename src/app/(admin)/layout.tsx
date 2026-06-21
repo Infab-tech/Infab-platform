@@ -49,7 +49,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
                         <i className="ph ph-receipt text-xl text-[var(--accent-primary)]"></i> Quote Requests
                     </Link>
                     <Link href="/admin/products" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[var(--text-primary)]/5 transition-colors">
-                        <i className="ph ph-microchip text-xl text-[var(--accent-primary)]"></i> Products
+                        <i className="ph ph-package text-xl text-[var(--accent-primary)]"></i> Products
                     </Link>
                     <Link href="/admin/news" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[var(--text-primary)]/5 transition-colors">
                         <i className="ph ph-newspaper text-xl text-[var(--accent-primary)]"></i> News
