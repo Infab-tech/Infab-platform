@@ -24,6 +24,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
+  // Prevent reading oversized requests into memory
+  const contentLength = req.headers.get('content-length');
+  if (contentLength && parseInt(contentLength, 10) > 5 * 1024 * 1024) {
+    return NextResponse.json({ error: 'Payload too large. Maximum file size is 5MB.' }, { status: 413 });
+  }
+
   let adminClient: ReturnType<typeof createAdminClient>;
   try {
     adminClient = createAdminClient();
@@ -38,6 +44,11 @@ export async function POST(req: NextRequest) {
 
   if (!file) {
     return NextResponse.json({ error: 'No file provided.' }, { status: 400 });
+  }
+
+  const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+  if (!allowedTypes.includes(file.type)) {
+    return NextResponse.json({ error: 'Invalid file type. Only JPEG, PNG, and WebP are allowed.' }, { status: 415 });
   }
 
   // Ensure bucket exists (creates it if not)

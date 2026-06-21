@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation';
 import { FALLBACK_PRODUCTS, FALLBACK_NEWS, FALLBACK_TEAM, FALLBACK_PUBLICATIONS } from '@/lib/content-defaults';
 
 // Helper function to double-check admin authorization on the server
-async function verifyAdmin() {
+export async function verifyAdmin() {
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
 
@@ -528,4 +528,65 @@ export async function seedDefaultPublications() {
     revalidatePath('/admin/publications');
     revalidatePath('/');
     return { skipped: false, message: `Seeded ${FALLBACK_PUBLICATIONS.length} publications.` };
+}
+
+// ── PARTNERS ─────────────────────────────────────────────────────────────────
+
+export async function addPartner(formData: FormData) {
+    await verifyAdmin();
+    const name = formData.get('name') as string;
+    const logoUrl = formData.get('logoUrl') as string;
+    const websiteUrl = formData.get('websiteUrl') as string;
+    const order = parseInt(formData.get('order') as string, 10) || 0;
+
+    if (!name) return { success: false, message: 'Name is required.' };
+
+    try {
+        await prisma.partner.create({
+            data: { name, logoUrl: logoUrl || null, websiteUrl: websiteUrl || null, order, isActive: true }
+        });
+        revalidatePath('/admin/partners');
+        revalidatePath('/');
+    } catch (e) {
+        console.error(e);
+        return { success: false, message: 'Database error.' };
+    }
+    redirect('/admin/partners');
+}
+
+export async function updatePartner(id: string, formData: FormData) {
+    await verifyAdmin();
+    const name = formData.get('name') as string;
+    const logoUrl = formData.get('logoUrl') as string;
+    const websiteUrl = formData.get('websiteUrl') as string;
+    const order = parseInt(formData.get('order') as string, 10) || 0;
+
+    if (!name) return { success: false, message: 'Name is required.' };
+
+    try {
+        await prisma.partner.update({
+            where: { id },
+            data: { name, logoUrl: logoUrl || null, websiteUrl: websiteUrl || null, order }
+        });
+        revalidatePath('/admin/partners');
+        revalidatePath('/');
+    } catch (e) {
+        console.error(e);
+        return { success: false, message: 'Database error.' };
+    }
+    redirect('/admin/partners');
+}
+
+export async function togglePartnerActive(id: string, current: boolean) {
+    await verifyAdmin();
+    await prisma.partner.update({ where: { id }, data: { isActive: !current } });
+    revalidatePath('/admin/partners');
+    revalidatePath('/');
+}
+
+export async function deletePartner(id: string) {
+    await verifyAdmin();
+    await prisma.partner.delete({ where: { id } });
+    revalidatePath('/admin/partners');
+    revalidatePath('/');
 }

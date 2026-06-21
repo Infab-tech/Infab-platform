@@ -1,6 +1,7 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
+import { loadCartDraft, saveCartDraft } from '@/app/actions/cart';
 
 export interface CartItem {
   productId: string;
@@ -26,17 +27,36 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [hydrated, setHydrated] = useState(false);
 
+  const initRef = useRef(false);
+
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) setItems(JSON.parse(stored));
-    } catch {}
-    setHydrated(true);
+    async function initCart() {
+      // First try to load from server
+      const { success, items: serverItems } = await loadCartDraft();
+      if (success && Array.isArray(serverItems) && serverItems.length > 0) {
+        setItems(serverItems as unknown as CartItem[]);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(serverItems));
+      } else {
+        // Fallback to local storage
+        try {
+          const stored = localStorage.getItem(STORAGE_KEY);
+          if (stored) setItems(JSON.parse(stored));
+        } catch {}
+      }
+      setHydrated(true);
+      initRef.current = true;
+    }
+    initCart();
   }, []);
 
   useEffect(() => {
-    if (hydrated) {
+    if (hydrated && initRef.current) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+      // Sync to server in background
+      const timeout = setTimeout(() => {
+        saveCartDraft(items);
+      }, 1000);
+      return () => clearTimeout(timeout);
     }
   }, [items, hydrated]);
 

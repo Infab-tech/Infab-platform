@@ -81,3 +81,35 @@ export async function registerUser(formData: FormData) {
 
     redirect('/dashboard');
 }
+
+export async function resetPassword(formData: FormData) {
+    const email = formData.get('email') as string;
+    const supabase = await createClient();
+
+    const origin = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${origin}/update-password`,
+    });
+
+    if (error) {
+        return { success: false, message: error.message };
+    }
+
+    return { success: true, message: 'Password reset email sent! Check your inbox.' };
+}
+
+export async function updatePassword(formData: FormData) {
+    const password = formData.get('password') as string;
+    const supabase = await createClient();
+
+    const { error } = await supabase.auth.updateUser({
+        password: password,
+    });
+
+    if (error) {
+        return { success: false, message: error.message };
+    }
+
+    redirect('/dashboard');
+}

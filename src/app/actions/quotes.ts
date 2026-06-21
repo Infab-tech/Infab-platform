@@ -3,6 +3,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { prisma } from '@/lib/supabase/prisma';
 import { revalidatePath } from 'next/cache';
+import { sendEmail } from '@/lib/email';
 
 export async function sendQuoteMessage(quoteId: string, text: string) {
     if (!text || text.trim() === '') return { success: false, message: 'Message is empty' };
@@ -46,6 +47,21 @@ export async function sendQuoteMessage(quoteId: string, text: string) {
 
     revalidatePath(`/orders/${quoteId}`);
     revalidatePath(`/admin/orders/${quoteId}`);
+
+    // Send email notification
+    if (isAdmin) {
+        sendEmail({
+            to: quote.userEmail,
+            subject: `New message regarding your Quote #${quoteId.slice(-6).toUpperCase()}`,
+            html: `<p>An admin has replied to your quote request:</p><p><em>"${text.trim()}"</em></p><p><a href="${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/orders/${quoteId}">View Quote</a></p>`
+        });
+    } else {
+        sendEmail({
+            to: 'admin@infab.com',
+            subject: `New message on Quote #${quoteId.slice(-6).toUpperCase()}`,
+            html: `<p>Customer ${user.email} has replied to quote request #${quoteId.slice(-6).toUpperCase()}:</p><p><em>"${text.trim()}"</em></p>`
+        });
+    }
 
     return { success: true };
 }

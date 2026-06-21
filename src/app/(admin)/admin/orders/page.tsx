@@ -2,15 +2,26 @@ import { prisma } from '@/lib/supabase/prisma';
 import { updateQuoteStatus } from '@/app/actions/admin';
 import DeleteQuoteRequestButton from './DeleteQuoteRequestButton';
 
+import Pagination from '@/components/ui/Pagination';
+
 export const metadata = {
     title: 'Quote Requests | Admin Console',
 };
 
-export default async function AdminOrdersPage() {
+export default async function AdminOrdersPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+    const { page } = await searchParams;
+    const currentPage = Math.max(1, parseInt(page || '1', 10));
+    const PAGE_SIZE = 10;
+
+    const totalQuotes = await prisma.quoteRequest.count({ where: { deletedByAdmin: false } });
+    const totalPages = Math.ceil(totalQuotes / PAGE_SIZE);
+
     // Fetch quotes with the nested product data
     const quotes = await prisma.quoteRequest.findMany({
         where: { deletedByAdmin: false },
         orderBy: { createdAt: 'desc' },
+        skip: (currentPage - 1) * PAGE_SIZE,
+        take: PAGE_SIZE,
         include: {
             items: {
                 include: { product: true }
@@ -129,6 +140,7 @@ export default async function AdminOrdersPage() {
                     </table>
                 </div>
             </div>
+            {totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} />}
         </div>
     );
 }

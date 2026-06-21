@@ -5,11 +5,10 @@ import { useState, useRef } from 'react';
 interface ImageUploaderProps {
   existingUrls?: string[];
   onChange: (urls: string[]) => void;
+  bucket?: string;
 }
 
-const BUCKET = 'product-images';
-
-export default function ImageUploader({ existingUrls = [], onChange }: ImageUploaderProps) {
+export default function ImageUploader({ existingUrls = [], onChange, bucket = 'product-images' }: ImageUploaderProps) {
   const [urls, setUrls] = useState<string[]>(existingUrls);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -25,7 +24,7 @@ export default function ImageUploader({ existingUrls = [], onChange }: ImageUplo
 
       const fd = new FormData();
       fd.append('file', file);
-      fd.append('bucket', BUCKET);
+      fd.append('bucket', bucket);
 
       const res = await fetch('/api/admin/upload', { method: 'POST', body: fd });
       const json = await res.json();

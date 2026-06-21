@@ -51,6 +51,8 @@ model QuoteRequest {
   
   items          QuoteItem[]
   messages       QuoteMessage[]
+
+  @@index([userId])
 }
 
 // 4. QUOTE ITEMS (The individual products inside the request)
@@ -62,6 +64,8 @@ model QuoteItem {
   
   quoteRequest   QuoteRequest @relation(fields: [quoteRequestId], references: [id], onDelete: Cascade)
   product        Product      @relation(fields: [productId], references: [id])
+
+  @@index([quoteRequestId])
 }
 
 // 5. QUOTE MESSAGES (Two-way chat system)
@@ -75,6 +79,8 @@ model QuoteMessage {
   createdAt      DateTime     @default(now())
   
   quoteRequest   QuoteRequest @relation(fields: [quoteRequestId], references: [id], onDelete: Cascade)
+
+  @@index([quoteRequestId])
 }
 
 // 6. NEWS ARTICLES
@@ -88,6 +94,8 @@ model NewsArticle {
   isPublished Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now()) @updatedAt
+
+  @@index([publishedAt])
 }
 
 // 7. TEAM MEMBERS
@@ -129,4 +137,23 @@ model userRole {
   updatedAt DateTime @default(now()) @updatedAt
 
   @@map("UserRole")
+}
+
+// 10. PARTNERS (Clients, collaborators, etc.)
+model Partner {
+  id          String   @id @default(cuid())
+  name        String
+  logoUrl     String?
+  websiteUrl  String?
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+}
+
+// 11. CART DRAFT (Server-side persistence for user's quote cart)
+model CartDraft {
+  userId    String   @id
+  items     Json     // Stores the cart items array
+  updatedAt DateTime @default(now()) @updatedAt
 }

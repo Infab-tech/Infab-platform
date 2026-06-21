@@ -2,6 +2,8 @@ import { prisma } from '@/lib/supabase/prisma';
 import { toggleProductStatus, deleteProduct, seedDefaultProducts } from '@/app/actions/admin';
 import Link from 'next/link';
 
+import Pagination from '@/components/ui/Pagination';
+
 export const metadata = {
     title: 'Products Management | Admin Console',
 };
@@ -12,10 +14,19 @@ const CATEGORY_CONFIG: Record<string, { icon: string; colour: string; label: str
     MEMS:       { icon: 'ph-cpu',           colour: 'text-cyan-400 bg-cyan-400/10',   label: 'MEMS' },
 };
 
-export default async function AdminProductsPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
+export default async function AdminProductsPage({ searchParams }: { searchParams: Promise<{ error?: string, page?: string }> }) {
     const params = await searchParams;
+    const page = params?.page;
+    const currentPage = Math.max(1, parseInt(page || '1', 10));
+    const PAGE_SIZE = 10;
+
+    const totalProducts = await prisma.product.count();
+    const totalPages = Math.ceil(totalProducts / PAGE_SIZE);
+
     const products = await prisma.product.findMany({
-        orderBy: { category: 'asc' }
+        orderBy: { category: 'asc' },
+        skip: (currentPage - 1) * PAGE_SIZE,
+        take: PAGE_SIZE,
     });
 
     const isUsingFallback = products.length === 0;
@@ -176,6 +187,7 @@ export default async function AdminProductsPage({ searchParams }: { searchParams
                     </table>
                 </div>
             </div>
+            {totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} />}
         </div>
     );
 }

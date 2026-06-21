@@ -3,13 +3,15 @@ import { prisma } from '@/lib/supabase/prisma';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { sendQuoteMessage } from '@/app/actions/quotes';
-import { updateQuoteStatus } from '@/app/actions/admin';
+import { updateQuoteStatus, verifyAdmin } from '@/app/actions/admin';
 
 export default async function AdminQuoteDetailsPage({ params }: { params: Promise<{ id: string }> }) {
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
 
     if (!user) redirect('/login');
+
+    await verifyAdmin();
 
     const { id } = await params;
 

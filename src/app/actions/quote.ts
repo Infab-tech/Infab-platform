@@ -3,6 +3,7 @@
 import { prisma } from '@/lib/supabase/prisma';
 import { createClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
+import { sendEmail } from '@/lib/email';
 
 export async function submitQuoteRequest(formData: FormData) {
     try {
@@ -19,8 +20,14 @@ export async function submitQuoteRequest(formData: FormData) {
         const quantity = parseInt(formData.get('quantity') as string, 10);
         const notes = formData.get('notes') as string;
 
-        if (!productId || isNaN(quantity) || quantity < 1) {
-            return { success: false, message: "Invalid product selection or quantity." };
+        if (!productId || isNaN(quantity) || quantity < 1 || productId.startsWith('default-')) {
+            return { success: false, message: "Invalid product selection or quantity. Fallback products cannot be quoted." };
+        }
+
+        // Verify product exists in DB
+        const productExists = await prisma.product.findUnique({ where: { id: productId } });
+        if (!productExists) {
+            return { success: false, message: "Selected product does not exist." };
         }
 
         // 3. Create the Quote Request and the Quote Item in one transaction
@@ -44,6 +51,13 @@ export async function submitQuoteRequest(formData: FormData) {
         revalidatePath('/dashboard');
         revalidatePath('/orders');
 
+        // 5. Send notification
+        sendEmail({
+            to: 'admin@infab.com', // Replace with actual admin email or fetch from DB
+            subject: 'New Quote Request Submitted',
+            html: `<p>A new quote request has been submitted by ${user.email}.</p><p>Notes: ${notes || 'None'}</p>`
+        });
+
         return { success: true, message: "Quote requested successfully." };
     } catch (error) {
         console.error("Failed to submit quote:", error);
@@ -64,13 +78,31 @@ export async function submitMultiItemQuote(items: RFQCartItem[], notes: string) 
 
         if (!items.length) return { success: false, message: 'Your cart is empty.' };
 
+        // Filter out items with fake IDs or negative quantities
+        const validItems = items.filter(i => i.quantity >= 1 && !i.productId.startsWith('default-'));
+        if (!validItems.length) {
+            return { success: false, message: 'Your cart contains invalid items or fallback products that cannot be quoted.' };
+        }
+
+        // Verify products exist in DB to prevent foreign key errors
+        const dbProducts = await prisma.product.findMany({
+            where: { id: { in: validItems.map(i => i.productId) } },
+            select: { id: true }
+        });
+        const validProductIds = new Set(dbProducts.map(p => p.id));
+        const finalItems = validItems.filter(i => validProductIds.has(i.productId));
+
+        if (!finalItems.length) {
+            return { success: false, message: 'None of the products in your cart are currently available.' };
+        }
+
         await prisma.quoteRequest.create({
             data: {
                 userId: user.id,
                 userEmail: user.email || 'unknown',
                 notes: notes || null,
                 items: {
-                    create: items.map((i) => ({
+                    create: finalItems.map((i) => ({
                         productId: i.productId,
                         quantity: i.quantity,
                     })),
@@ -82,6 +114,12 @@ export async function submitMultiItemQuote(items: RFQCartItem[], notes: string) 
         revalidatePath('/orders');
         revalidatePath('/admin/orders');
         revalidatePath('/admin');
+
+        sendEmail({
+            to: 'admin@infab.com', // Replace with actual admin email
+            subject: 'New Multi-Item Quote Request',
+            html: `<p>A new multi-item quote request has been submitted by ${user.email}.</p><p>Items: ${finalItems.length}</p><p>Notes: ${notes || 'None'}</p>`
+        });
 
         return { success: true, message: 'Quote request submitted successfully.' };
     } catch (error) {

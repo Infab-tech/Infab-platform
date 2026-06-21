@@ -2,13 +2,24 @@ import { prisma } from '@/lib/supabase/prisma';
 import { updateInquiryStatus } from '@/app/actions/admin';
 import DeleteInquiryButton from './DeleteInquiryButton';
 
+import Pagination from '@/components/ui/Pagination';
+
 export const metadata = {
     title: 'Inquiries | Admin Console',
 };
 
-export default async function AdminInquiriesPage() {
+export default async function AdminInquiriesPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+    const { page } = await searchParams;
+    const currentPage = Math.max(1, parseInt(page || '1', 10));
+    const PAGE_SIZE = 10;
+
+    const totalInquiries = await prisma.inquiry.count();
+    const totalPages = Math.ceil(totalInquiries / PAGE_SIZE);
+
     const inquiries = await prisma.inquiry.findMany({
-        orderBy: { createdAt: 'desc' }
+        orderBy: { createdAt: 'desc' },
+        skip: (currentPage - 1) * PAGE_SIZE,
+        take: PAGE_SIZE,
     });
 
     return (
@@ -90,6 +101,7 @@ export default async function AdminInquiriesPage() {
                     </table>
                 </div>
             </div>
+            {totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} />}
         </div>
     );
 }

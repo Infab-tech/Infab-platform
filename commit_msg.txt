@@ -1,0 +1,38 @@
+Address audit findings: security, bugs, missing features, and UX gaps
+
+Security fixes:
+- upload route: validate MIME type (JPEG/PNG/WebP only) and enforce 5 MB
+  size limit before reading request body
+- quote actions: reject fake fallback IDs (default-*) and verify each
+  productId exists in the DB before creating QuoteItems, preventing FK
+  errors and invalid submissions
+- admin orders detail: add explicit verifyAdmin() check (was relying on
+  layout only)
+- middleware: added /admin/* and customer portal route protection
+
+Auth:
+- resetPassword and updatePassword server actions added
+- /forgot-password page: sends Supabase reset email
+- /update-password page: handles the reset link callback
+
+Partners:
+- Partners component wired to DB (new Partner model in schema)
+- /admin/partners CRUD: list, add, edit, delete, seed defaults
+
+Admin list pages:
+- Added pagination component (Pagination.tsx) and wired to inquiries,
+  orders, products, news, and team list pages
+
+Email notifications:
+- lib/email.ts: thin Nodemailer/Resend wrapper
+- Quote submit actions now fire admin notification emails
+
+Cart:
+- cart-context.tsx: server-sync draft on login; cart cleared on logout
+
+Misc:
+- Removed src/proxy.ts (superseded by src/middleware.ts)
+- Error, loading, and not-found boundaries added for (admin) and
+  (customer) route groups
+
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>

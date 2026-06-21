@@ -3,6 +3,8 @@ import { toggleTeamMemberActive, deleteTeamMember, seedDefaultTeam } from '@/app
 import Link from 'next/link';
 import Image from 'next/image';
 
+import Pagination from '@/components/ui/Pagination';
+
 export const metadata = { title: 'Team Management | Admin Console' };
 
 const SECTION_LABELS: Record<string, string> = {
@@ -27,10 +29,21 @@ function sectionClass(s: string) {
   return SECTION_COLOURS[s] ?? 'text-[var(--text-secondary)] bg-[var(--text-primary)]/5';
 }
 
-export default async function AdminTeamPage() {
+export default async function AdminTeamPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+  const { page } = await searchParams;
+  const currentPage = Math.max(1, parseInt(page || '1', 10));
+  const PAGE_SIZE = 10;
+
+  const totalMembers = await prisma.teamMember.count();
+  const totalPages = Math.ceil(totalMembers / PAGE_SIZE);
+
   let members: Awaited<ReturnType<typeof prisma.teamMember.findMany>> = [];
   try {
-    members = await prisma.teamMember.findMany({ orderBy: [{ section: 'asc' }, { order: 'asc' }] });
+    members = await prisma.teamMember.findMany({ 
+        orderBy: [{ section: 'asc' }, { order: 'asc' }],
+        skip: (currentPage - 1) * PAGE_SIZE,
+        take: PAGE_SIZE,
+    });
   } catch {
     // DB not connected yet
   }
@@ -189,6 +202,7 @@ export default async function AdminTeamPage() {
           </table>
         </div>
       </div>
+      {totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} />}
     </div>
   );
 }

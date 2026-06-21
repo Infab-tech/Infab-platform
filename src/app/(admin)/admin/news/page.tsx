@@ -2,6 +2,8 @@ import { prisma } from '@/lib/supabase/prisma';
 import { toggleNewsPublished, deleteNewsArticle, seedDefaultNews } from '@/app/actions/admin';
 import Link from 'next/link';
 
+import Pagination from '@/components/ui/Pagination';
+
 export const metadata = { title: 'News Management | Admin Console' };
 
 const CATEGORY_COLOURS: Record<string, string> = {
@@ -17,10 +19,21 @@ function categoryClass(cat: string) {
   return CATEGORY_COLOURS[cat] ?? 'text-[var(--text-secondary)] bg-[var(--text-primary)]/5';
 }
 
-export default async function AdminNewsPage() {
+export default async function AdminNewsPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+  const { page } = await searchParams;
+  const currentPage = Math.max(1, parseInt(page || '1', 10));
+  const PAGE_SIZE = 10;
+
+  const totalArticles = await prisma.newsArticle.count();
+  const totalPages = Math.ceil(totalArticles / PAGE_SIZE);
+
   let articles: Awaited<ReturnType<typeof prisma.newsArticle.findMany>> = [];
   try {
-    articles = await prisma.newsArticle.findMany({ orderBy: { publishedAt: 'desc' } });
+    articles = await prisma.newsArticle.findMany({ 
+        orderBy: { publishedAt: 'desc' },
+        skip: (currentPage - 1) * PAGE_SIZE,
+        take: PAGE_SIZE,
+    });
   } catch {
     // DB not connected yet
   }
@@ -189,6 +202,7 @@ export default async function AdminNewsPage() {
           </table>
         </div>
       </div>
+      {totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} />}
     </div>
   );
 }
