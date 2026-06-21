@@ -54,6 +54,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
                     <Link href="/admin/news" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[var(--text-primary)]/5 transition-colors">
                         <i className="ph ph-newspaper text-xl text-[var(--accent-primary)]"></i> News
                     </Link>
+                    <Link href="/admin/team" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[var(--text-primary)]/5 transition-colors">
+                        <i className="ph ph-users-three text-xl text-[var(--accent-primary)]"></i> Team
+                    </Link>
                     <Link href="/admin/staff" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[var(--text-primary)]/5 transition-colors">
                         <i className="ph ph-shield-check text-xl text-[var(--accent-primary)]"></i> Staff Access
                     </Link>

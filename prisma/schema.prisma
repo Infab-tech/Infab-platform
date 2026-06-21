@@ -90,7 +90,21 @@ model NewsArticle {
   updatedAt   DateTime @default(now()) @updatedAt
 }
 
-// 7. USER ROLES (RBAC)
+// 7. TEAM MEMBERS
+model TeamMember {
+  id       String   @id @default(cuid())
+  name     String
+  title    String
+  bio      String?  @db.Text
+  section  String   // FOUNDER | RESEARCH | ENGINEERING | CONSULTANTS | BUSINESS
+  photoUrl String?
+  order    Int      @default(0)
+  isActive Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+// 8. USER ROLES (RBAC)
 model userRole {
   email     String   @id
   role      String   @default("CUSTOMER") // CUSTOMER, ADMIN

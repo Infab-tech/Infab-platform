@@ -218,6 +218,36 @@ export const FALLBACK_PRODUCTS: DefaultProduct[] = [
   },
 ];
 
+export interface DefaultTeamMember {
+  name: string;
+  title: string;
+  bio?: string;
+  section: string;
+  photoUrl?: string;
+  order: number;
+}
+
+export const FALLBACK_TEAM: DefaultTeamMember[] = [
+  // FOUNDER
+  { name: 'Muthuraman Swaminathan', title: 'Founder & CEO', section: 'FOUNDER', order: 1, photoUrl: '/assests/team/muthuraman.jpg', bio: "Driving INFAB's mission to create a bridge between fundamental research and industrial deployment through cutting-edge MEMS and microfluidic innovation. Incubated at CeNSE, IISc Bangalore." },
+  // RESEARCH
+  { name: 'Dr. Mohammed Yosuff Caffiyar', title: 'Principal Scientist', section: 'RESEARCH', order: 1, photoUrl: '/assests/team/yosuff.jpg', bio: "Leads core MEMS device science, sensor physics, and process development at INFAB's cleanroom facilities." },
+  { name: 'Dr. Saara K', title: 'Research Director', section: 'RESEARCH', order: 2, photoUrl: '/assests/team/saara.jpg', bio: 'Directs research programmes across MEMS sensor architectures and microfluidic platform development.' },
+  // ENGINEERING
+  { name: 'Prem A', title: 'Sr. Design Engineer', section: 'ENGINEERING', order: 1, photoUrl: '/assests/team/prem.jpg', bio: 'Senior MEMS and sensor design engineer with hands-on experience in layout, simulation, and device qualification.' },
+  { name: 'Amos Heeber', title: 'Design Engineer', section: 'ENGINEERING', order: 2, photoUrl: '/assests/team/amos.jpg', bio: 'Design engineer focused on MEMS device architecture, mask layout, and hardware integration.' },
+  { name: 'Ragin Raj K', title: 'Hardware Designer', section: 'ENGINEERING', order: 3, photoUrl: '/assests/team/ragin.jpg', bio: 'Hardware and electronics designer responsible for sensor readout circuits and system integration.' },
+  { name: 'Stephen N S', title: 'Project Coordinator', section: 'ENGINEERING', order: 4, bio: 'Coordinates cross-functional engineering projects, timelines, and customer deliverables.' },
+  // CONSULTANTS
+  { name: 'Dr. Kashyap Dhruv', title: 'Software Consultant', section: 'CONSULTANTS', order: 1, bio: 'Advises on embedded firmware, data acquisition systems, and software toolchain for MEMS product lines.' },
+  { name: 'Jobin Vijay', title: 'Hardware Design Consultant', section: 'CONSULTANTS', order: 2, photoUrl: '/assests/team/jobin.jpg', bio: 'External hardware design consultant supporting schematic, PCB, and system-level design reviews.' },
+  { name: 'Rahul Sharma', title: 'Finance Consultant', section: 'CONSULTANTS', order: 3, photoUrl: '/assests/team/rahul.jpg', bio: 'Financial strategy and startup finance advisor, supporting fundraising, grants, and investor relations.' },
+  // BUSINESS
+  { name: 'Dilip Kamat', title: 'Business Development', section: 'BUSINESS', order: 1, photoUrl: '/assests/team/dilip.jpg', bio: 'Leads B2B sales, strategic partnerships, and market development for aerospace and healthcare verticals.' },
+  { name: 'Rajita M', title: 'Administration', section: 'BUSINESS', order: 2, photoUrl: '/assests/team/rajita.jpg', bio: 'Handles administrative operations, procurement, and office coordination across INFAB\'s facilities.' },
+  { name: 'Priyanka K C', title: 'Administration', section: 'BUSINESS', order: 3, photoUrl: '/assests/team/priyanka.jpg', bio: 'Supports day-to-day administrative functions and organisational workflows.' },
+];
+
 export interface DefaultNewsArticle {
   title: string;
   description: string;

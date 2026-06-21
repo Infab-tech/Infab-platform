@@ -4,7 +4,7 @@ import { prisma } from '@/lib/supabase/prisma';
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
-import { FALLBACK_PRODUCTS, FALLBACK_NEWS } from '@/lib/content-defaults';
+import { FALLBACK_PRODUCTS, FALLBACK_NEWS, FALLBACK_TEAM } from '@/lib/content-defaults';
 
 // Helper function to double-check admin authorization on the server
 async function verifyAdmin() {
@@ -340,4 +340,109 @@ export async function seedDefaultNews() {
     revalidatePath('/admin/news');
     revalidatePath('/news');
     return { skipped: false, message: `Seeded ${FALLBACK_NEWS.length} articles into the database.` };
+}
+
+// ── Team Member Actions ───────────────────────────────────────────────────────
+
+export async function addTeamMember(formData: FormData) {
+    await verifyAdmin();
+
+    const name = formData.get('name') as string;
+    const title = formData.get('title') as string;
+    const bio = formData.get('bio') as string;
+    const section = formData.get('section') as string;
+    const photoUrl = formData.get('photoUrl') as string;
+    const order = parseInt(formData.get('order') as string, 10) || 0;
+
+    if (!name || !title || !section) {
+        return { success: false, message: 'Name, title, and section are required.' };
+    }
+
+    try {
+        await prisma.teamMember.create({
+            data: { name, title, bio: bio || null, section, photoUrl: photoUrl || null, order, isActive: true },
+        });
+        revalidatePath('/admin/team');
+        revalidatePath('/team');
+    } catch (error) {
+        console.error('Failed to add team member:', error);
+        return { success: false, message: 'Database error. Could not save team member.' };
+    }
+
+    redirect('/admin/team');
+}
+
+export async function updateTeamMember(id: string, formData: FormData) {
+    await verifyAdmin();
+
+    const name = formData.get('name') as string;
+    const title = formData.get('title') as string;
+    const bio = formData.get('bio') as string;
+    const section = formData.get('section') as string;
+    const photoUrl = formData.get('photoUrl') as string;
+    const order = parseInt(formData.get('order') as string, 10) || 0;
+
+    if (!name || !title || !section) {
+        return { success: false, message: 'Name, title, and section are required.' };
+    }
+
+    try {
+        await prisma.teamMember.update({
+            where: { id },
+            data: { name, title, bio: bio || null, section, photoUrl: photoUrl || null, order },
+        });
+        revalidatePath('/admin/team');
+        revalidatePath('/team');
+    } catch (error) {
+        console.error('Failed to update team member:', error);
+        return { success: false, message: 'Database error. Could not update team member.' };
+    }
+
+    redirect('/admin/team');
+}
+
+export async function deleteTeamMember(id: string) {
+    try {
+        await verifyAdmin();
+        await prisma.teamMember.delete({ where: { id } });
+        revalidatePath('/admin/team');
+        revalidatePath('/team');
+        return { success: true };
+    } catch (e: unknown) {
+        console.error('Failed to delete team member:', e);
+        return { success: false, message: 'Failed to delete team member.' };
+    }
+}
+
+export async function toggleTeamMemberActive(id: string, currentStatus: boolean) {
+    await verifyAdmin();
+    await prisma.teamMember.update({
+        where: { id },
+        data: { isActive: !currentStatus },
+    });
+    revalidatePath('/admin/team');
+    revalidatePath('/team');
+}
+
+export async function seedDefaultTeam() {
+    await verifyAdmin();
+    const count = await prisma.teamMember.count();
+    if (count > 0) return { skipped: true, message: 'Team already in database — seed skipped.' };
+
+    for (const m of FALLBACK_TEAM) {
+        await prisma.teamMember.create({
+            data: {
+                name: m.name,
+                title: m.title,
+                bio: m.bio ?? null,
+                section: m.section,
+                photoUrl: m.photoUrl ?? null,
+                order: m.order,
+                isActive: true,
+            },
+        });
+    }
+    revalidatePath('/admin/team');
+    revalidatePath('/team');
+    return { skipped: false, message: `Seeded ${FALLBACK_TEAM.length} team members into the database.` };
 }
