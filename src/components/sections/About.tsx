@@ -19,21 +19,21 @@ export default function About() {
             <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
 
             <p className="text-[var(--text-secondary)] mb-6 text-lg leading-relaxed">
-              Incubated at <strong className="text-[var(--text-primary)] font-medium">CeNSE, Indian Institute of Science (IISc), Bangalore</strong>, INFAB Semiconductor is a pioneering technology company specializing in the design, development, and high-precision manufacturing of advanced MEMS sensors and microfluidic chips.
+              Incubated at <strong className="text-[var(--text-primary)] font-medium">CeNSE, Indian Institute of Science (IISc), Bengaluru</strong>, INFAB Semiconductor Pvt. Ltd is a pioneering Indian deep-tech company specialising in the design, development, and manufacturing of advanced MEMS sensors, actuators, and microfluidic devices.
             </p>
             <p className="text-[var(--text-secondary)] mb-10 text-lg leading-relaxed">
-              From aerospace pressure transducers to custom glass-bonding mRNA chips, we deliver international-standard solutions engineered entirely in India.
+              Combining world-class facilities with cutting-edge expertise, we build Made-in-India innovations — from aerospace pressure transducers to custom glass-bonding mRNA chips — for the world.
             </p>
 
-            {/* Refined Pillars */}
-            <div className="flex flex-col gap-8">
+            {/* Three Pillars */}
+            <div className="flex flex-col gap-7">
               <div className="flex gap-5 items-start">
                 <div className="flex-shrink-0 mt-1">
                   <i className="ph ph-lightbulb-filament text-2xl text-[var(--text-primary)]"></i>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Proprietary Innovation</h3>
-                  <p className="text-[var(--text-secondary)]">Advanced MEMS and microfluidics design intellectual property.</p>
+                  <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Innovation</h3>
+                  <p className="text-[var(--text-secondary)]">Leveraging advanced fabrication techniques to deliver breakthrough MEMS and microfluidics technologies.</p>
                 </div>
               </div>
               <div className="flex gap-5 items-start">
@@ -41,8 +41,17 @@ export default function About() {
                   <i className="ph ph-shield-check text-2xl text-[var(--text-primary)]"></i>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Uncompromising Quality</h3>
-                  <p className="text-[var(--text-secondary)]">Adherence to strict semiconductor standards and aerospace testing.</p>
+                  <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Quality</h3>
+                  <p className="text-[var(--text-secondary)]">Delivering devices that meet the most stringent performance and reliability standards — ISO 9001 &amp; AS 9100D certified.</p>
+                </div>
+              </div>
+              <div className="flex gap-5 items-start">
+                <div className="flex-shrink-0 mt-1">
+                  <i className="ph ph-globe-hemisphere-east text-2xl text-[var(--text-primary)]"></i>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Impact</h3>
+                  <p className="text-[var(--text-secondary)]">Powering critical sectors — aerospace, healthcare, and life sciences — with Indian-made hardware solutions.</p>
                 </div>
               </div>
             </div>
@@ -84,7 +93,7 @@ export default function About() {
               <div className="font-sans text-5xl font-bold leading-none text-[var(--text-primary)] mb-3">
                 <AnimatedNumber target={10} suffix="+" />
               </div>
-              <p className="text-sm font-medium text-[var(--text-secondary)] uppercase tracking-wider">Govt. Partners</p>
+              <p className="text-sm font-medium text-[var(--text-secondary)] uppercase tracking-wider">Industry Partners</p>
             </div>
 
           </div>
