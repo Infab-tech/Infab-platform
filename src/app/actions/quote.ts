@@ -52,8 +52,8 @@ export async function submitQuoteRequest(formData: FormData) {
         revalidatePath('/orders');
 
         // 5. Send notification
-        sendEmail({
-            to: 'info@infab-tech.com', // Replace with actual admin email or fetch from DB
+        await sendEmail({
+            to: process.env.ADMIN_EMAIL || 'info@infab-tech.com',
             subject: 'New Quote Request Submitted',
             html: `<p>A new quote request has been submitted by ${user.email}.</p><p>Notes: ${notes || 'None'}</p>`
         });
@@ -115,8 +115,8 @@ export async function submitMultiItemQuote(items: RFQCartItem[], notes: string) 
         revalidatePath('/admin/orders');
         revalidatePath('/admin');
 
-        sendEmail({
-            to: 'info@infab-tech.com', // Replace with actual admin email
+        await sendEmail({
+            to: process.env.ADMIN_EMAIL || 'info@infab-tech.com',
             subject: 'New Multi-Item Quote Request',
             html: `<p>A new multi-item quote request has been submitted by ${user.email}.</p><p>Items: ${finalItems.length}</p><p>Notes: ${notes || 'None'}</p>`
         });

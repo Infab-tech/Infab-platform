@@ -34,8 +34,8 @@ export async function deleteCustomerAccount(userId: string, userEmail: string) {
     }
 
     try {
-        // 1. Delete from auth.users using raw SQL
-        await prisma.$executeRawUnsafe(`DELETE FROM auth.users WHERE id = $1`, userId);
+        // 1. Delete from auth.users — parameterised to prevent injection
+        await prisma.$executeRaw`DELETE FROM auth.users WHERE id = ${userId}::uuid`;
 
         // 2. Delete any UserRole entry (just in case they were listed as CUSTOMER)
         await prisma.userRole.deleteMany({

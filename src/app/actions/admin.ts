@@ -700,7 +700,12 @@ export async function deletePartner(id: string) {
 
 export async function updateApplicationStatus(id: string, status: string) {
     await verifyAdmin();
-    await prisma.jobApplication.update({ where: { id }, data: { status: status as any } });
+    const { ApplicationStatus } = await import('@prisma/client');
+    const validStatuses = Object.values(ApplicationStatus) as string[];
+    if (!validStatuses.includes(status)) {
+        throw new Error(`Invalid status: ${status}`);
+    }
+    await prisma.jobApplication.update({ where: { id }, data: { status: status as (typeof ApplicationStatus)[keyof typeof ApplicationStatus] } });
     revalidatePath('/admin/careers');
 }
 
