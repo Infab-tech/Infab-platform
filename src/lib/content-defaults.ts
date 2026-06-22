@@ -206,12 +206,12 @@ export const FALLBACK_TEAM: DefaultTeamMember[] = [
   { name: 'Stephen N S', title: 'Project Coordinator', section: 'ENGINEERING', order: 4, photoUrl: '/team/7.jpg', bio: 'Coordinates cross-functional engineering projects, timelines, and customer deliverables.' },
   // CONSULTANTS
   { name: 'Dr. Kashyap Dhruv', title: 'Software Consultant', section: 'CONSULTANTS', order: 1, photoUrl: '/team/8.jpg', bio: 'Advises on embedded firmware, data acquisition systems, and software toolchain for MEMS product lines.' },
-  { name: 'Jobin Vijay', title: 'Hardware Design Consultant', section: 'CONSULTANTS', order: 2, photoUrl: '/team/9.jpg', bio: 'External hardware design consultant supporting schematic, PCB, and system-level design reviews.' },
+  { name: 'Jobin Vijay', title: 'Hardware Design Consultant', section: 'CONSULTANTS', order: 2, bio: 'External hardware design consultant supporting schematic, PCB, and system-level design reviews.' },
   { name: 'Rahul Sharma', title: 'Finance Consultant', section: 'CONSULTANTS', order: 3, photoUrl: '/team/10.jpg', bio: 'Financial strategy and startup finance advisor, supporting fundraising, grants, and investor relations.' },
   // BUSINESS
   { name: 'Dilip Kamat', title: 'Business Development', section: 'BUSINESS', order: 1, photoUrl: '/team/11.jpg', bio: 'Leads B2B sales, strategic partnerships, and market development for aerospace and healthcare verticals.' },
-  { name: 'Rajita M', title: 'Administration', section: 'BUSINESS', order: 2, photoUrl: '/team/12.jpg', bio: 'Handles administrative operations, procurement, and office coordination across INFAB\'s facilities.' },
-  { name: 'Priyanka K C', title: 'Administration', section: 'BUSINESS', order: 3, photoUrl: '/team/13.jpg', bio: 'Supports day-to-day administrative functions and organisational workflows.' },
+  { name: 'Rajita M', title: 'Administration', section: 'BUSINESS', order: 2, bio: 'Handles administrative operations, procurement, and office coordination across INFAB\'s facilities.' },
+  { name: 'Priyanka K C', title: 'Administration', section: 'BUSINESS', order: 3, bio: 'Supports day-to-day administrative functions and organisational workflows.' },
 ];
 
 export interface DefaultNewsArticle {
@@ -277,22 +277,26 @@ export interface DefaultRecognition {
 export const FALLBACK_RECOGNITIONS: DefaultRecognition[] = [
   {
     title: 'ISO 9001:2015',
-    body: 'Quality Management System',
+    body: 'Certified Quality Management System — ensuring consistent, high-quality products and services meeting customer and regulatory requirements.',
+    issuer: 'Bureau Veritas',
     order: 1,
   },
   {
     title: 'AS 9100D',
-    body: 'Aerospace Quality Management',
+    body: 'Aerospace Quality Management System certification — the international standard for quality in aviation, space, and defence manufacturing.',
+    issuer: 'Bureau Veritas',
     order: 2,
   },
   {
     title: 'IISc CeNSE Incubatee',
-    body: 'Indian Institute of Science',
+    body: 'Incubated at the Centre for Nano Science and Engineering (CeNSE), Indian Institute of Science — one of India\'s premier deep-tech incubation programmes.',
+    issuer: 'InCeNSE, IISc Bengaluru',
     order: 3,
   },
   {
     title: 'BIRAC Collaboration',
-    body: 'Biotechnology Industry Research Assistance Council',
+    body: 'Supported by the Biotechnology Industry Research Assistance Council (BIRAC) for the development of organ-on-chip microfluidic platforms.',
+    issuer: 'Dept. of Biotechnology, Govt. of India',
     order: 4,
   },
 ];

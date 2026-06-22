@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/supabase/prisma';
 import { FALLBACK_RECOGNITIONS } from '@/lib/content-defaults';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface RecShape {
   id: string;
@@ -54,9 +55,15 @@ export default async function Recognitions() {
             Recognition & Certificates
           </h2>
           <div className="w-12 h-1 bg-[var(--accent-primary)] mb-6"></div>
-          <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
+          <p className="text-[var(--text-secondary)] text-lg leading-relaxed mb-6">
             Our commitment to quality, backed by industry-standard certifications and institutional support.
           </p>
+          <Link
+            href="/about#recognition"
+            className="inline-flex items-center gap-2 font-mono text-sm font-semibold uppercase tracking-wider text-[var(--accent-primary)] hover:text-[var(--text-primary)] transition-colors"
+          >
+            View All Certifications <i className="ph ph-arrow-right"></i>
+          </Link>
         </div>
 
         {/* Cards */}

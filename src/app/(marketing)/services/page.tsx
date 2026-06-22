@@ -7,34 +7,69 @@ export const metadata: Metadata = {
   description: 'End-to-end MEMS and microfluidics services — from concept to qualified device — using world-class cleanroom facilities at IISc CeNSE.',
 };
 
-const customDesignCapabilities = [
+// MEMS capabilities — matches infabsemi.com MEMS page exactly
+const memsCapabilities = [
   {
     icon: 'ph-pencil-ruler',
-    title: 'Custom Design',
-    description: 'Tailored microchannel and MEMS architecture design for specific application needs.',
+    title: 'Custom MEMS Device Design',
+    description: 'We specialise in designing MEMS devices tailored to specific application requirements — from concept feasibility to tape-out-ready layouts.',
+  },
+  {
+    icon: 'ph-cpu',
+    title: 'Silicon Micromachining',
+    description: 'Leveraging bulk and surface micromachining techniques to create complex 3D microstructures in silicon with high precision and repeatability.',
+  },
+  {
+    icon: 'ph-stack',
+    title: 'Thin-Film Deposition & Etching',
+    description: 'Full thin-film capabilities including PVD (sputtering, e-beam evaporation), PECVD, thermal oxidation, and pattern etching for metals, dielectrics, and piezoelectrics.',
+  },
+  {
+    icon: 'ph-package',
+    title: 'Wafer Bonding & Packaging',
+    description: 'Anodic bonding (Si–glass), fusion bonding (Si–Si), adhesive and eutectic bonding for hermetically sealed microstructures and MEMS packaging.',
   },
   {
     icon: 'ph-flask',
-    title: 'Simulation & Optimization',
-    description: 'Use of CFD and multiphysics tools to optimize device performance before fabrication.',
+    title: 'Material Versatility',
+    description: 'We work with silicon, glass, quartz, SOI, SiC, polymers, and specialty substrates — selecting the optimal material for your application constraints.',
   },
   {
     icon: 'ph-factory',
-    title: 'Design for Manufacturability',
-    description: 'Ensuring designs are scalable and ready for production, from prototyping to volume manufacturing.',
+    title: 'Prototyping to Production',
+    description: 'Streamlined process from rapid prototype to small-volume production, with design-for-manufacturability reviews at every stage.',
   },
 ];
 
-const microfluidicsSteps = [
-  { num: '01', title: 'Design and Simulation', description: 'Custom microchannel design tailored to specific application requirements, supported by simulation-based optimization using CFD (Computational Fluid Dynamics) and multiphysics tools.' },
-  { num: '02', title: 'Fabrication', description: 'Cleanroom fabrication utilizing a mix of silicon, glass, and polymer processing. Capabilities include Photolithography & Mask Alignment, Thin Film Deposition, Etching Processes (DRIE, RIE, and wet etching), and Wafer Bonding & Dicing.' },
-  { num: '03', title: 'Prototyping & Production', description: 'Focus on "Design for Manufacturability" to ensure a smooth transition from rapid prototyping to mass production.' },
+// MEMS process capability cards — 3-card grid matching infabsemi.com
+const memsProcesses = [
+  { icon: 'ph-waves', title: 'Dry Etching', detail: 'Bosch-process DRIE for high-aspect-ratio silicon structures. Etch depth up to 300 µm with vertical sidewalls and aspect ratios > 20:1.' },
+  { icon: 'ph-drop', title: 'Wet Etching', detail: 'KOH and TMAH anisotropic silicon etching, HF oxide strip, BOE, Piranha (H₂SO₄:H₂O₂), and RCA cleans.' },
+  { icon: 'ph-sun', title: 'Lithography', detail: 'UV and deep-UV contact/proximity lithography with minimum feature sizes down to 2 µm on silicon, glass, quartz, SOI, and polymer substrates.' },
 ];
 
-const memsProcesses = [
-  { icon: 'ph-sun', title: 'Lithography', detail: 'UV and deep-UV lithography with minimum feature sizes down to 2 µm. Substrate compatibility: silicon, glass, quartz, SOI, SiC.' },
-  { icon: 'ph-waves', title: 'Dry Etching', detail: 'Bosch-process DRIE for high-aspect-ratio silicon structures. Etch depth up to 300 µm with vertical sidewalls.' },
-  { icon: 'ph-drop', title: 'Wet Processing', detail: 'Chemical etching (KOH, TMAH, BOE), standard cleans (RCA, Piranha), and spin coating for resists and polymers.' },
+// Microfluidics Design Services — matches infabsemi.com
+const microfluidicsDesign = [
+  { icon: 'ph-pencil-ruler', title: 'Custom Micro-Channel Design', description: 'Tailored microchannel architecture designed to meet specific flow, pressure, and biological requirements of your application.' },
+  { icon: 'ph-chart-line-up', title: 'Simulation-Driven Optimization', description: 'CFD and multiphysics simulation (COMSOL, Ansys Fluent) to optimise device performance — flow uniformity, mixing efficiency, droplet size — before committing to fabrication.' },
+  { icon: 'ph-test-tube', title: 'Material & Process Selection', description: 'Expert guidance on substrate selection — PDMS, glass, silicon, thermoplastics — matched to your optical, chemical, and biocompatibility requirements.' },
+  { icon: 'ph-timer', title: 'Rapid Prototyping', description: 'Fast design-to-device cycles using soft lithography and SU-8 mold processes. Functional prototypes delivered in weeks, not months.' },
+  { icon: 'ph-gear', title: 'Design for Manufacturability', description: 'Every design is reviewed for scalability and yield. We ensure a smooth transition from research prototype to repeatable small-volume production.' },
+];
+
+// Microfluidics Fabrication Services — matches infabsemi.com
+const microfluidicsFabrication = [
+  { icon: 'ph-drop', title: 'Soft Lithography (PDMS)', description: 'Standard PDMS-based microfluidic fabrication using SU-8 master molds. Optically transparent chips suitable for fluorescence and brightfield imaging.' },
+  { icon: 'ph-flask', title: 'Glass and Silicon Etching', description: 'Precision wet and dry etching of glass and silicon substrates for high-resolution, chemically resistant microchannels — ideal for aggressive solvents and high-temperature applications.' },
+  { icon: 'ph-squares-four', title: 'Polymer Microfabrication', description: 'Fabrication using thermoplastics, SU-8, and cyclic olefin copolymer (COC) for disposable, cost-effective lab-on-chip devices.' },
+  { icon: 'ph-link', title: 'Hybrid Integration', description: 'Combining PDMS, glass, and silicon in a single device — bonding dissimilar materials to achieve complex multi-layer microfluidic architectures.' },
+];
+
+// Microfluidic Device Showcase — real INFAB projects
+const microfluidicsDevices = [
+  { title: 'Silicon & SU-8 Mold', description: 'High-resolution SU-8 master molds on silicon for repeatable PDMS soft lithography, enabling sub-10 µm feature sizes across multilayer designs.' },
+  { title: 'Cancer-on-Chip', description: 'Multi-layer organ-on-chip platform developed in collaboration with BIRAC and Manipal Hospital for cancer cell co-culture under physiological shear stress.' },
+  { title: 'mRNA Chip in Glass', description: 'Herringbone micromixer fabricated in borosilicate glass for mRNA-LNP synthesis — enabling precise nanoparticle size control for RNA delivery applications.' },
 ];
 
 const facilities = [
@@ -78,23 +113,23 @@ export default function ServicesPage() {
         </div>
       </div>
 
-      {/* Custom MEMS Design & Foundry */}
-      <div id="custom-design" className="border-b border-[var(--border-primary)] py-32 bg-[var(--bg-secondary)]">
+      {/* ── MEMS Fabrication Services ──────────────────────────────────────── */}
+      <div id="mems" className="border-b border-[var(--border-primary)] py-32 bg-[var(--bg-secondary)]">
         <div className="mx-auto max-w-7xl px-6">
           {/* Section header */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-end mb-16">
             <div>
               <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">Service 01</span>
-              <h2 className="text-4xl font-bold tracking-tight text-[var(--text-primary)] mb-6">Custom MEMS Design &amp; Foundry</h2>
+              <h2 className="text-4xl font-bold tracking-tight text-[var(--text-primary)] mb-6">MEMS Fabrication Services</h2>
               <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
               <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
-                From concept to qualified device — INFAB offers end-to-end MEMS design services backed by world-class cleanroom fabrication at IISc CeNSE. Whether you need a novel sensor architecture or a production-ready die, our engineers work alongside your team across every phase.
+                From concept to qualified device — INFAB offers end-to-end MEMS design and fabrication services backed by world-class cleanroom capabilities at IISc CeNSE. Our experienced team supports clients from research institutions to industrial OEMs, covering the complete MEMS development lifecycle.
               </p>
             </div>
             <div className="flex flex-col gap-4">
               <div className="rounded-2xl border border-[var(--accent-primary)]/20 bg-[var(--bg-primary)] p-6">
-                <p className="font-mono text-xs font-semibold uppercase tracking-widest text-[var(--accent-primary)] mb-2">Engagement Model</p>
-                <ul className="text-sm text-[var(--text-secondary)] space-y-1">
+                <p className="font-mono text-xs font-semibold uppercase tracking-widest text-[var(--accent-primary)] mb-3">Engagement Model</p>
+                <ul className="text-sm text-[var(--text-secondary)] space-y-2">
                   <li className="flex items-center gap-2"><i className="ph ph-check-circle text-[var(--accent-primary)]"></i> Concept feasibility &amp; architecture review</li>
                   <li className="flex items-center gap-2"><i className="ph ph-check-circle text-[var(--accent-primary)]"></i> Simulation → tape-out → prototype delivery</li>
                   <li className="flex items-center gap-2"><i className="ph ph-check-circle text-[var(--accent-primary)]"></i> Iterative design-test cycles (weeks, not months)</li>
@@ -107,9 +142,9 @@ export default function ServicesPage() {
             </div>
           </div>
 
-          {/* Capabilities grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {customDesignCapabilities.map((cap) => (
+          {/* 6 capability cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {memsCapabilities.map((cap) => (
               <div key={cap.title} className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-primary)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
                 <div className="w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex items-center justify-center mb-5">
                   <i className={`ph ${cap.icon} text-xl text-[var(--accent-primary)]`}></i>
@@ -119,37 +154,19 @@ export default function ServicesPage() {
               </div>
             ))}
           </div>
-        </div>
-      </div>
 
-      {/* Microfluidics Solution */}
-      <div id="microfluidics" className="border-b border-[var(--border-primary)] py-32">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <div>
-              <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">Service 02</span>
-              <h2 className="text-4xl font-bold tracking-tight text-[var(--text-primary)] mb-6">Microfluidics Solution</h2>
-              <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
-              <p className="text-[var(--text-secondary)] text-lg leading-relaxed mb-8">
-                We bring your microfluidic concepts to life through advanced cleanroom fabrication, combining silicon, glass, and polymer processing under one roof. From initial design to final packaged chip, INFAB handles the complete development cycle.
-              </p>
-              {/* Real lab photo */}
-              <div className="rounded-2xl overflow-hidden border border-[var(--border-primary)] mb-8">
-                <Image src="/assests/services/microfluidics-showcase.png" alt="INFAB Microfluidics Cleanroom" width={640} height={360} className="w-full object-cover" />
-              </div>
-              <Link href="/contact" className="inline-flex items-center gap-2 font-mono text-sm font-semibold uppercase tracking-wider text-[var(--accent-primary)] hover:text-[var(--text-primary)] transition-colors">
-                Request a Quote <i className="ph ph-arrow-right"></i>
-              </Link>
-            </div>
-            <div className="flex flex-col gap-6">
-              {microfluidicsSteps.map((step) => (
-                <div key={step.num} className="flex gap-6 items-start">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex items-center justify-center">
-                    <span className="font-mono text-sm font-bold text-[var(--accent-primary)]">{step.num}</span>
+          {/* 3 process cards */}
+          <div className="pt-10 border-t border-[var(--border-primary)]">
+            <p className="font-mono text-xs font-semibold uppercase tracking-widest text-[var(--accent-primary)] mb-6">Core Process Capabilities</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {memsProcesses.map((p) => (
+                <div key={p.title} className="flex gap-5 items-start rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-primary)] p-6 transition-all duration-300 hover:border-[var(--accent-primary)]/40">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex items-center justify-center">
+                    <i className={`ph ${p.icon} text-lg text-[var(--accent-primary)]`}></i>
                   </div>
-                  <div className="pt-2">
-                    <h3 className="text-base font-bold text-[var(--text-primary)] mb-1">{step.title}</h3>
-                    <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{step.description}</p>
+                  <div>
+                    <h3 className="text-base font-bold text-[var(--text-primary)] mb-2">{p.title}</h3>
+                    <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{p.detail}</p>
                   </div>
                 </div>
               ))}
@@ -158,34 +175,70 @@ export default function ServicesPage() {
         </div>
       </div>
 
-      {/* MEMS Fabrication */}
-      <div id="mems" className="border-b border-[var(--border-primary)] py-32 bg-[var(--bg-secondary)]">
+      {/* ── Microfluidics Solution ─────────────────────────────────────────── */}
+      <div id="microfluidics" className="border-b border-[var(--border-primary)] py-32">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start mb-16">
-            <div>
-              <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">Service 03</span>
-              <h2 className="text-4xl font-bold tracking-tight text-[var(--text-primary)] mb-6">MEMS Fabrication Services</h2>
-              <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
-              <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
-                INFAB offers comprehensive MEMS process services for prototyping and small-volume production. Our experienced team supports clients from research institutions to industrial OEMs.
-              </p>
-            </div>
-            <div className="rounded-2xl overflow-hidden border border-[var(--border-primary)]">
-              <Image src="/assests/services/mems-fabrication.png" alt="INFAB MEMS Fabrication Facility" width={640} height={427} className="w-full object-cover" />
+          {/* Section header */}
+          <div className="mb-16 max-w-3xl">
+            <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">Service 02</span>
+            <h2 className="text-4xl font-bold tracking-tight text-[var(--text-primary)] mb-6">Microfluidics Solution</h2>
+            <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
+            <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
+              We bring your microfluidic concepts to life through advanced cleanroom fabrication, combining silicon, glass, and polymer processing under one roof. From initial design to final packaged chip, INFAB handles the complete development cycle.
+            </p>
+          </div>
+
+          {/* Design Services */}
+          <div className="mb-16">
+            <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2">Design Services</h3>
+            <div className="w-8 h-0.5 bg-[var(--accent-primary)] mb-8"></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {microfluidicsDesign.map((item) => (
+                <div key={item.title} className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-xl hover:shadow-[var(--accent-primary)]/5">
+                  <div className="w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex items-center justify-center mb-5">
+                    <i className={`ph ${item.icon} text-xl text-[var(--accent-primary)]`}></i>
+                  </div>
+                  <h4 className="text-sm font-bold text-[var(--text-primary)] mb-2">{item.title}</h4>
+                  <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{item.description}</p>
+                </div>
+              ))}
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {memsProcesses.map((p) => (
-              <div key={p.title} className="flex gap-5 items-start rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-primary)] p-6 transition-all duration-300 hover:border-[var(--accent-primary)]/40">
-                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex items-center justify-center">
-                  <i className={`ph ${p.icon} text-lg text-[var(--accent-primary)]`}></i>
+
+          {/* Fabrication Services */}
+          <div className="mb-16">
+            <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2">Fabrication Services</h3>
+            <div className="w-8 h-0.5 bg-[var(--accent-primary)] mb-8"></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {microfluidicsFabrication.map((item) => (
+                <div key={item.title} className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-xl hover:shadow-[var(--accent-primary)]/5">
+                  <div className="w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex items-center justify-center mb-5">
+                    <i className={`ph ${item.icon} text-xl text-[var(--accent-primary)]`}></i>
+                  </div>
+                  <h4 className="text-sm font-bold text-[var(--text-primary)] mb-2">{item.title}</h4>
+                  <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{item.description}</p>
                 </div>
-                <div>
-                  <h3 className="text-base font-bold text-[var(--text-primary)] mb-2">{p.title}</h3>
-                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{p.detail}</p>
+              ))}
+            </div>
+          </div>
+
+          {/* Microfluidic Devices Showcase */}
+          <div>
+            <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2">Microfluidic Devices</h3>
+            <div className="w-8 h-0.5 bg-[var(--accent-primary)] mb-8"></div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {microfluidicsDevices.map((dev) => (
+                <div key={dev.title} className="rounded-2xl border border-[var(--accent-primary)]/20 bg-[var(--bg-secondary)] p-8 hover:border-[var(--accent-primary)]/40 transition-colors">
+                  <h4 className="text-base font-bold text-[var(--text-primary)] mb-3">{dev.title}</h4>
+                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{dev.description}</p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            <div className="mt-8">
+              <Link href="/contact" className="inline-flex items-center gap-2 font-mono text-sm font-semibold uppercase tracking-wider text-[var(--accent-primary)] hover:text-[var(--text-primary)] transition-colors">
+                Request a Quote <i className="ph ph-arrow-right"></i>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

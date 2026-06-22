@@ -61,7 +61,6 @@ export default function NewProductPage() {
               <option value="" disabled className="text-black">Select a category</option>
               <option value="AEROSPACE" className="text-black">Aerospace &amp; Defence</option>
               <option value="HEALTHCARE" className="text-black">Healthcare &amp; Life Sciences</option>
-              <option value="MEMS" className="text-black">MEMS &amp; Semiconductor</option>
             </select>
           </div>
 
