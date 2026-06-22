@@ -25,7 +25,7 @@ export default function ProductImageCarousel({ urls, name, height = 'h-48' }: Pr
   const next = () => setIdx((i) => (i + 1) % urls.length);
 
   return (
-    <div className={`relative w-full ${height} bg-[#080d18] border-b border-[var(--border-primary)] overflow-hidden`}>
+    <div className={`relative w-full ${height} bg-white border-b border-[var(--border-primary)] overflow-hidden`}>
       <Image
         src={urls[idx]}
         alt={`${name} — image ${idx + 1} of ${urls.length}`}

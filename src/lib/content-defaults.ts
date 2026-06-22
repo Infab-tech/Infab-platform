@@ -14,6 +14,9 @@ export interface DefaultProduct {
   description: string;
   specs: string[];
   imageUrl?: string;
+  datasheetUrl?: string;
+  drawingUrl?: string;
+  cadFileUrls?: string[];
 }
 
 export const FALLBACK_PRODUCTS: DefaultProduct[] = [
@@ -178,44 +181,7 @@ export const FALLBACK_PRODUCTS: DefaultProduct[] = [
       'Throughput: µL to mL/min',
     ],
   },
-  // ── MEMS & Semiconductor ─────────────────────────────────────────────────
-  {
-    name: 'Piezoresistive MEMS Sensor Die',
-    category: 'MEMS',
-    imageUrl: '/assests/products/microchip.jpg',
-    description:
-      'Bare piezoresistive MEMS die for OEM integration. Available in bulk silicon and SOI variants with wafer-level testing, dicing, and optional hermetic packaging.',
-    specs: [
-      'Process: Bulk Si / SOI',
-      'Testing: Wafer-level probe',
-      'Packaging: Custom hermetic',
-      'Wafer Size: 4" / 6"',
-    ],
-  },
-  {
-    name: 'Hall Effect Sensor IC',
-    category: 'MEMS',
-    description:
-      'Monolithic Hall sensor IC with integrated amplifier, offset compensation, and digital SPI output. Designed for brushless DC motor commutation and high-precision position encoding.',
-    specs: [
-      'Range: ±100 mT',
-      'Output: SPI digital',
-      'Package: 2×2 mm QFN',
-      'Supply: 3.3 V / 5 V',
-    ],
-  },
-  {
-    name: 'Calorimetric Thermal Flow Sensor',
-    category: 'MEMS',
-    description:
-      'Calorimetric MEMS flow sensor with integrated heater and thermopile for differential-temperature-based sensing of gas and liquid flows at sub-sccm resolution.',
-    specs: [
-      'Range: 0–500 sccm',
-      'Principle: Calorimetric',
-      'Output: Analog 0–5 V',
-      'Media: Gas & liquid',
-    ],
-  },
+
 ];
 
 export interface DefaultTeamMember {
@@ -229,23 +195,23 @@ export interface DefaultTeamMember {
 
 export const FALLBACK_TEAM: DefaultTeamMember[] = [
   // FOUNDER
-  { name: 'Muthuraman Swaminathan', title: 'Founder & CEO', section: 'FOUNDER', order: 1, photoUrl: '/assests/team/muthuraman.jpg', bio: "Driving INFAB's mission to create a bridge between fundamental research and industrial deployment through cutting-edge MEMS and microfluidic innovation. Incubated at CeNSE, IISc Bangalore." },
+  { name: 'Muthuraman Swaminathan', title: 'Founder & CEO', section: 'FOUNDER', order: 1, photoUrl: '/team/1.jpg', bio: "Driving INFAB's mission to create a bridge between fundamental research and industrial deployment through cutting-edge MEMS and microfluidic innovation. Incubated at CeNSE, IISc Bangalore." },
   // RESEARCH
-  { name: 'Dr. Mohammed Yosuff Caffiyar', title: 'Principal Scientist', section: 'RESEARCH', order: 1, photoUrl: '/assests/team/yosuff.jpg', bio: "Leads core MEMS device science, sensor physics, and process development at INFAB's cleanroom facilities." },
-  { name: 'Dr. Saara K', title: 'Research Director', section: 'RESEARCH', order: 2, photoUrl: '/assests/team/saara.jpg', bio: 'Directs research programmes across MEMS sensor architectures and microfluidic platform development.' },
+  { name: 'Dr. Mohammed Yosuff Caffiyar', title: 'Principal Scientist', section: 'RESEARCH', order: 1, photoUrl: '/team/2.jpg', bio: "Leads core MEMS device science, sensor physics, and process development at INFAB's cleanroom facilities." },
+  { name: 'Dr. Saara K', title: 'Research Director', section: 'RESEARCH', order: 2, photoUrl: '/team/3.jpg', bio: 'Directs research programmes across MEMS sensor architectures and microfluidic platform development.' },
   // ENGINEERING
-  { name: 'Prem A', title: 'Sr. Design Engineer', section: 'ENGINEERING', order: 1, photoUrl: '/assests/team/prem.jpg', bio: 'Senior MEMS and sensor design engineer with hands-on experience in layout, simulation, and device qualification.' },
-  { name: 'Amos Heeber', title: 'Design Engineer', section: 'ENGINEERING', order: 2, photoUrl: '/assests/team/amos.jpg', bio: 'Design engineer focused on MEMS device architecture, mask layout, and hardware integration.' },
-  { name: 'Ragin Raj K', title: 'Hardware Designer', section: 'ENGINEERING', order: 3, photoUrl: '/assests/team/ragin.jpg', bio: 'Hardware and electronics designer responsible for sensor readout circuits and system integration.' },
-  { name: 'Stephen N S', title: 'Project Coordinator', section: 'ENGINEERING', order: 4, bio: 'Coordinates cross-functional engineering projects, timelines, and customer deliverables.' },
+  { name: 'Prem A', title: 'Sr. Design Engineer', section: 'ENGINEERING', order: 1, photoUrl: '/team/4.jpg', bio: 'Senior MEMS and sensor design engineer with hands-on experience in layout, simulation, and device qualification.' },
+  { name: 'Amos Heeber', title: 'Design Engineer', section: 'ENGINEERING', order: 2, photoUrl: '/team/5.jpg', bio: 'Design engineer focused on MEMS device architecture, mask layout, and hardware integration.' },
+  { name: 'Ragin Raj K', title: 'Hardware Designer', section: 'ENGINEERING', order: 3, photoUrl: '/team/6.jpg', bio: 'Hardware and electronics designer responsible for sensor readout circuits and system integration.' },
+  { name: 'Stephen N S', title: 'Project Coordinator', section: 'ENGINEERING', order: 4, photoUrl: '/team/7.jpg', bio: 'Coordinates cross-functional engineering projects, timelines, and customer deliverables.' },
   // CONSULTANTS
-  { name: 'Dr. Kashyap Dhruv', title: 'Software Consultant', section: 'CONSULTANTS', order: 1, bio: 'Advises on embedded firmware, data acquisition systems, and software toolchain for MEMS product lines.' },
-  { name: 'Jobin Vijay', title: 'Hardware Design Consultant', section: 'CONSULTANTS', order: 2, photoUrl: '/assests/team/jobin.jpg', bio: 'External hardware design consultant supporting schematic, PCB, and system-level design reviews.' },
-  { name: 'Rahul Sharma', title: 'Finance Consultant', section: 'CONSULTANTS', order: 3, photoUrl: '/assests/team/rahul.jpg', bio: 'Financial strategy and startup finance advisor, supporting fundraising, grants, and investor relations.' },
+  { name: 'Dr. Kashyap Dhruv', title: 'Software Consultant', section: 'CONSULTANTS', order: 1, photoUrl: '/team/8.jpg', bio: 'Advises on embedded firmware, data acquisition systems, and software toolchain for MEMS product lines.' },
+  { name: 'Jobin Vijay', title: 'Hardware Design Consultant', section: 'CONSULTANTS', order: 2, photoUrl: '/team/9.jpg', bio: 'External hardware design consultant supporting schematic, PCB, and system-level design reviews.' },
+  { name: 'Rahul Sharma', title: 'Finance Consultant', section: 'CONSULTANTS', order: 3, photoUrl: '/team/10.jpg', bio: 'Financial strategy and startup finance advisor, supporting fundraising, grants, and investor relations.' },
   // BUSINESS
-  { name: 'Dilip Kamat', title: 'Business Development', section: 'BUSINESS', order: 1, photoUrl: '/assests/team/dilip.jpg', bio: 'Leads B2B sales, strategic partnerships, and market development for aerospace and healthcare verticals.' },
-  { name: 'Rajita M', title: 'Administration', section: 'BUSINESS', order: 2, photoUrl: '/assests/team/rajita.jpg', bio: 'Handles administrative operations, procurement, and office coordination across INFAB\'s facilities.' },
-  { name: 'Priyanka K C', title: 'Administration', section: 'BUSINESS', order: 3, photoUrl: '/assests/team/priyanka.jpg', bio: 'Supports day-to-day administrative functions and organisational workflows.' },
+  { name: 'Dilip Kamat', title: 'Business Development', section: 'BUSINESS', order: 1, photoUrl: '/team/11.jpg', bio: 'Leads B2B sales, strategic partnerships, and market development for aerospace and healthcare verticals.' },
+  { name: 'Rajita M', title: 'Administration', section: 'BUSINESS', order: 2, photoUrl: '/team/12.jpg', bio: 'Handles administrative operations, procurement, and office coordination across INFAB\'s facilities.' },
+  { name: 'Priyanka K C', title: 'Administration', section: 'BUSINESS', order: 3, photoUrl: '/team/13.jpg', bio: 'Supports day-to-day administrative functions and organisational workflows.' },
 ];
 
 export interface DefaultNewsArticle {
@@ -299,75 +265,34 @@ export const FALLBACK_NEWS: DefaultNewsArticle[] = [
   },
 ];
 
-export interface DefaultPublication {
+export interface DefaultRecognition {
   title: string;
-  authors: string;
-  journal: string | null;
-  year: number;
-  abstract: string | null;
-  link: string | null;
-}
-
-export interface DefaultPartner {
-  name: string;
-  category: 'supporter' | 'customer';
+  body: string;
+  certNumber?: string;
+  issuer?: string;
+  logoUrl?: string;
   order: number;
 }
 
-export const FALLBACK_PARTNERS: DefaultPartner[] = [
-  // Supporters / Incubators
-  { name: 'AIC',              category: 'supporter', order: 1 },
-  { name: 'BIRAC',            category: 'supporter', order: 2 },
-  { name: 'InCeNSE · IISc',  category: 'supporter', order: 3 },
-  { name: 'CDIIC',            category: 'supporter', order: 4 },
-  { name: 'Elevate',          category: 'supporter', order: 5 },
-  { name: 'fSID',             category: 'supporter', order: 6 },
-  { name: 'MeitY',            category: 'supporter', order: 7 },
-  // Customers / Collaborators
-  { name: 'Hindustan Aeronautics Ltd',   category: 'customer', order: 8 },
-  { name: 'Aeronautical Development Agency', category: 'customer', order: 9 },
-  { name: 'BITS Pilani',                 category: 'customer', order: 10 },
-  { name: 'CEERI',                       category: 'customer', order: 11 },
-  { name: 'CSIO Chandigarh',             category: 'customer', order: 12 },
-  { name: 'IIT Hyderabad',               category: 'customer', order: 13 },
-  { name: 'AmarBio',                     category: 'customer', order: 14 },
-  { name: 'NIIST',                       category: 'customer', order: 15 },
-  { name: 'NIPER',                       category: 'customer', order: 16 },
-  { name: 'UR Therapeutics',             category: 'customer', order: 17 },
-  { name: 'Metallic Bellows India',      category: 'customer', order: 18 },
-];
-
-export const FALLBACK_PUBLICATIONS: DefaultPublication[] = [
+export const FALLBACK_RECOGNITIONS: DefaultRecognition[] = [
   {
-    title: 'MEMS-Based Piezoresistive Pressure Sensors for Aerospace Applications',
-    authors: 'R. Kumar, A. Nair, S. Krishnamurthy',
-    journal: 'Journal of Microelectromechanical Systems',
-    year: 2024,
-    abstract: 'This paper presents the design, fabrication, and characterisation of silicon piezoresistive pressure sensors optimised for airborne hydraulic and pneumatic systems. The sensors demonstrate a full-scale accuracy of ±0.1% FS and operate reliably across −55 °C to +125 °C, meeting MIL-STD-810 qualification requirements.',
-    link: null,
+    title: 'ISO 9001:2015',
+    body: 'Quality Management System',
+    order: 1,
   },
   {
-    title: 'Organ-on-Chip Microfluidic Platform for Drug Permeability Screening',
-    authors: 'P. Sharma, R. Kumar, V. Ramesh',
-    journal: 'Lab on a Chip',
-    year: 2024,
-    abstract: 'We report a multilayer PDMS-based organ-on-chip device fabricated at IISc CeNSE for high-throughput drug permeability assays. The platform integrates embedded flow sensors and pressure controllers, enabling real-time monitoring of trans-epithelial electrical resistance (TEER) across human intestinal cell monolayers.',
-    link: null,
+    title: 'AS 9100D',
+    body: 'Aerospace Quality Management',
+    order: 2,
   },
   {
-    title: 'Scalable Fabrication of Hall-Effect Current Sensors for EV Battery Management',
-    authors: 'A. Nair, S. Krishnamurthy, T. Mehta',
-    journal: 'Sensors and Actuators A: Physical',
-    year: 2023,
-    abstract: 'A MEMS Hall-effect current sensor fabricated on 150 mm silicon wafers is demonstrated for use in electric vehicle battery management systems. The device achieves a sensitivity of 12 mV/A with a linearity error below 0.3% over a ±300 A measurement range, outperforming commercial alternatives at a fraction of the production cost.',
-    link: null,
+    title: 'IISc CeNSE Incubatee',
+    body: 'Indian Institute of Science',
+    order: 3,
   },
   {
-    title: 'Indigenous MEMS Manufacturing in India: Progress, Challenges, and the Road Ahead',
-    authors: 'R. Kumar, A. Nair',
-    journal: 'IEEE Semiconductor Science and Technology',
-    year: 2023,
-    abstract: 'A comprehensive review of the current state of MEMS manufacturing in India, covering technology readiness, cleanroom infrastructure at research institutions, and commercialisation pathways. Case studies from IISc CeNSE-incubated ventures illustrate how academic spinoffs can bridge the gap between laboratory prototypes and volume production.',
-    link: 'https://www.digitimes.com/news/a20230328VL205/ic-manufacturing-india-mems-startup.html',
+    title: 'BIRAC Collaboration',
+    body: 'Biotechnology Industry Research Assistance Council',
+    order: 4,
   },
 ];

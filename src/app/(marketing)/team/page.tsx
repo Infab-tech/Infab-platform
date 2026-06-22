@@ -36,31 +36,30 @@ function getInitials(name: string): string {
 /* Large card — founder / leadership */
 function LeadershipCard({ m }: { m: Member }) {
   return (
-    <div className="rounded-2xl border border-[var(--accent-primary)]/30 bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/60 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/10">
-      <div className="aspect-[4/5] w-full bg-[var(--bg-primary)] border-b border-[var(--accent-primary)]/20 relative overflow-hidden">
+    <div className="rounded-2xl border border-[var(--accent-primary)]/30 bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/60 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/10 flex flex-col md:flex-row">
+      <div className="md:w-1/3 aspect-square md:aspect-auto md:min-h-full bg-[var(--bg-primary)] border-b md:border-b-0 md:border-r border-[var(--accent-primary)]/20 relative overflow-hidden flex-shrink-0">
         {m.photo ? (
-          <Image src={m.photo} alt={m.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover object-top" />
+          <Image src={m.photo} alt={m.name} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover object-top" />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-5xl font-bold text-[var(--accent-primary)]/40">
+          <div className="w-full h-full flex items-center justify-center text-5xl font-bold text-[var(--accent-primary)]/40 min-h-[300px]">
             {getInitials(m.name)}
           </div>
         )}
-        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[var(--bg-secondary)] to-transparent" />
       </div>
-      <div className="px-8 pb-8 pt-2">
+      <div className="p-8 md:p-12 flex flex-col justify-center flex-grow">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <h3 className="text-xl font-bold text-[var(--text-primary)] mb-1">{m.name}</h3>
-            <p className="font-mono text-xs uppercase tracking-widest text-[var(--accent-primary)] mb-4">{m.title}</p>
+            <h3 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-1">{m.name}</h3>
+            <p className="font-mono text-sm uppercase tracking-widest text-[var(--accent-primary)] mb-6">{m.title}</p>
           </div>
           {m.linkedinUrl && (
             <a href={m.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label={`${m.name} on LinkedIn`}
-              className="flex-shrink-0 mt-1 w-8 h-8 rounded-lg border border-[var(--border-primary)] flex items-center justify-center text-[var(--text-secondary)] hover:border-[#0077b5]/60 hover:text-[#0077b5] transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 256 256"><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v96a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0ZM216,208a8,8,0,0,1-8-8V160a36,36,0,0,0-72,0v40a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A52,52,0,0,1,216,160v40A8,8,0,0,1,216,208ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"></path></svg>
+              className="flex-shrink-0 w-10 h-10 rounded-lg border border-[var(--border-primary)] flex items-center justify-center text-[var(--text-secondary)] hover:border-[#0077b5]/60 hover:text-[#0077b5] transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256"><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v96a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0ZM216,208a8,8,0,0,1-8-8V160a36,36,0,0,0-72,0v40a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A52,52,0,0,1,216,160v40A8,8,0,0,1,216,208ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"></path></svg>
             </a>
           )}
         </div>
-        {m.bio && <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{m.bio}</p>}
+        {m.bio && <p className="text-base text-[var(--text-secondary)] leading-relaxed">{m.bio}</p>}
       </div>
     </div>
   );
@@ -69,31 +68,25 @@ function LeadershipCard({ m }: { m: Member }) {
 /* Regular member card */
 function MemberCard({ m }: { m: Member }) {
   return (
-    <div className="group rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-xl hover:shadow-[var(--accent-primary)]/5">
-      <div className="aspect-[4/5] w-full bg-[var(--bg-primary)] border-b border-[var(--border-primary)] relative overflow-hidden">
+    <div className="group rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-xl hover:shadow-[var(--accent-primary)]/5 flex items-center p-4 gap-4">
+      <div className="w-20 h-20 rounded-full border border-[var(--border-primary)] relative overflow-hidden flex-shrink-0 bg-[var(--bg-primary)]">
         {m.photo ? (
-          <Image src={m.photo} alt={m.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover object-top transition-transform duration-500 group-hover:scale-105" />
+          <Image src={m.photo} alt={m.name} fill sizes="80px" className="object-cover object-top transition-transform duration-500 group-hover:scale-110" />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-3xl font-bold text-[var(--accent-primary)]/40 bg-[var(--accent-primary)]/5">
+          <div className="w-full h-full flex items-center justify-center text-xl font-bold text-[var(--accent-primary)]/40 bg-[var(--accent-primary)]/5">
             {getInitials(m.name)}
           </div>
         )}
-        <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[var(--bg-secondary)] to-transparent" />
       </div>
-      <div className="px-5 pb-5 pt-2">
-        <div className="flex items-start justify-between gap-2">
-          <div className="min-w-0">
-            <h3 className="text-sm font-bold text-[var(--text-primary)] leading-tight mb-0.5">{m.name}</h3>
-            <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--accent-primary)] mb-3">{m.title}</p>
-          </div>
-          {m.linkedinUrl && (
-            <a href={m.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label={`${m.name} on LinkedIn`}
-              className="flex-shrink-0 mt-0.5 w-7 h-7 rounded-md border border-[var(--border-primary)] flex items-center justify-center text-[var(--text-secondary)] hover:border-[#0077b5]/60 hover:text-[#0077b5] transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" viewBox="0 0 256 256"><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v96a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0ZM216,208a8,8,0,0,1-8-8V160a36,36,0,0,0-72,0v40a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A52,52,0,0,1,216,160v40A8,8,0,0,1,216,208ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"></path></svg>
-            </a>
-          )}
-        </div>
-        {m.bio && <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{m.bio}</p>}
+      <div className="flex flex-col justify-center min-w-0 flex-grow">
+        <h3 className="text-sm font-bold text-[var(--text-primary)] leading-tight mb-0.5">{m.name}</h3>
+        <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--accent-primary)] mb-1 truncate">{m.title}</p>
+        {m.linkedinUrl && (
+          <a href={m.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label={`${m.name} on LinkedIn`}
+            className="mt-1 w-6 h-6 rounded border border-[var(--border-primary)] flex items-center justify-center text-[var(--text-secondary)] hover:border-[#0077b5]/60 hover:text-[#0077b5] transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 256 256"><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v96a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0ZM216,208a8,8,0,0,1-8-8V160a36,36,0,0,0-72,0v40a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A52,52,0,0,1,216,160v40A8,8,0,0,1,216,208ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"></path></svg>
+          </a>
+        )}
       </div>
     </div>
   );
@@ -164,8 +157,8 @@ export default async function TeamPage() {
                 <div className="w-12 h-1 bg-[var(--accent-primary)] mt-6"></div>
               </div>
               {isFounder ? (
-                <div className="max-w-sm">
-                  <LeadershipCard m={members[0]} />
+                <div className="flex flex-col gap-6">
+                  {members.map((m) => <LeadershipCard key={m.name} m={m} />)}
                 </div>
               ) : (
                 <div className={sec.key === 'ENGINEERING' ? engineeringCols : cols}>
@@ -177,19 +170,22 @@ export default async function TeamPage() {
         );
       })}
 
-      {/* Careers CTA */}
-      <div className="py-20">
-        <div className="mx-auto max-w-7xl px-6 text-center">
-          <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-4">Join Our Journey</h2>
-          <p className="text-[var(--text-secondary)] max-w-2xl mx-auto mb-8">
-            We are always looking for passionate MEMS engineers, process scientists, and deep-tech innovators to join our facility in Bengaluru.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex h-12 items-center justify-center rounded-md bg-[var(--accent-primary)] px-8 text-sm font-semibold uppercase tracking-wider text-white transition-all hover:brightness-110"
-          >
-            Get in Touch
-          </Link>
+      {/* Careers CTA Banner */}
+      <div className="py-20 bg-[var(--bg-secondary)] border-t border-[var(--border-primary)]">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="rounded-2xl border border-[var(--accent-primary)]/20 bg-[var(--accent-primary)]/5 p-12 text-center relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent-primary)]/10 to-transparent pointer-events-none" />
+            <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-4 relative z-10">Join Our Journey</h2>
+            <p className="text-[var(--text-secondary)] max-w-2xl mx-auto mb-8 relative z-10 text-lg">
+              We are always looking for passionate MEMS engineers, process scientists, and deep-tech innovators to join our team in Bengaluru.
+            </p>
+            <Link
+              href="/careers"
+              className="relative z-10 inline-flex h-12 items-center justify-center rounded-md bg-[var(--accent-primary)] px-8 text-sm font-semibold uppercase tracking-wider text-[var(--bg-primary)] transition-all hover:brightness-110 shadow-lg shadow-[var(--accent-primary)]/20"
+            >
+              View Open Roles
+            </Link>
+          </div>
         </div>
       </div>
 

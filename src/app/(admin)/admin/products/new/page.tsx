@@ -88,6 +88,26 @@ export default function NewProductPage() {
             <p className="text-xs text-[var(--text-secondary)]">Comma-separated. Each value becomes a pill badge on the product card.</p>
           </div>
 
+          {/* Document Links */}
+          <div className="flex flex-col gap-4 p-5 rounded-xl border border-[var(--text-primary)]/10 bg-[var(--text-primary)]/[0.02]">
+            <h3 className="font-mono text-xs font-semibold uppercase text-[var(--text-secondary)] mb-2 border-b border-[var(--text-primary)]/10 pb-2">Downloadable Files</h3>
+            
+            <div className="flex flex-col gap-2">
+              <label htmlFor="datasheetUrl" className="font-mono text-[10px] font-semibold uppercase text-[var(--text-secondary)]">Datasheet URL</label>
+              <input type="url" id="datasheetUrl" name="datasheetUrl" placeholder="https://..." className="bg-[var(--bg-primary)] border border-[var(--text-primary)]/10 rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors" />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label htmlFor="drawingUrl" className="font-mono text-[10px] font-semibold uppercase text-[var(--text-secondary)]">2D Drawing URL</label>
+              <input type="url" id="drawingUrl" name="drawingUrl" placeholder="https://..." className="bg-[var(--bg-primary)] border border-[var(--text-primary)]/10 rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors" />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label htmlFor="cadFileUrls" className="font-mono text-[10px] font-semibold uppercase text-[var(--text-secondary)]">3D CAD Files URLs (JSON Array)</label>
+              <input type="text" id="cadFileUrls" name="cadFileUrls" placeholder='["https://..."]' className="bg-[var(--bg-primary)] border border-[var(--text-primary)]/10 rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors" />
+            </div>
+          </div>
+
           {/* Images */}
           <div className="flex flex-col gap-2">
             <p className="font-mono text-xs font-semibold uppercase text-[var(--text-secondary)]">

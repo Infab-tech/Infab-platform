@@ -17,14 +17,23 @@ interface ProductData {
   specs: string[];
   imageUrl?: string | null;
   imageUrls: string[];
+  datasheetUrl: string | null;
+  drawingUrl: string | null;
+  cadFileUrls: string[];
 }
 
-const fallbackProducts: ProductData[] = FALLBACK_PRODUCTS.map((p, i) => ({ ...p, id: `default-${i}`, imageUrls: p.imageUrl ? [p.imageUrl] : [] }));
+const fallbackProducts: ProductData[] = FALLBACK_PRODUCTS.map((p, i) => ({
+  ...p,
+  id: `default-${i}`,
+  imageUrls: p.imageUrl ? [p.imageUrl] : [],
+  datasheetUrl: p.datasheetUrl || null,
+  drawingUrl: p.drawingUrl || null,
+  cadFileUrls: p.cadFileUrls || [],
+}));
 
 const categories = [
   { id: 'aerospace', key: 'AEROSPACE', label: 'Aerospace & Defence', icon: 'ph-airplane-tilt', description: 'INFAB pressure sensors and modules exceed the rigorous requirements of the most demanding airborne applications. Our products sustain high environmental stresses and deliver state-of-the-art precision, long-term stability, and reliability.' },
   { id: 'healthcare', key: 'HEALTHCARE', label: 'Healthcare & Life Sciences', icon: 'ph-dna', description: 'INFAB products and technologies are integrated into the most advanced medical equipment. Our microfluidic platforms enable next-generation diagnostics, drug delivery, and biological research.' },
-  { id: 'mems', key: 'MEMS', label: 'MEMS & Semiconductor', icon: 'ph-cpu', description: 'INFAB specialises in the fabrication of Micro-Electro-Mechanical Systems (MEMS) and offers a comprehensive range of process services. Our state-of-the-art facilities and experienced team ensure the highest quality and precision.' },
 ];
 
 function SpecTable({ specs }: { specs: string[] }) {
@@ -63,7 +72,7 @@ function ProductCard({ product }: { product: ProductData }) {
     ...product.imageUrls.filter((u) => u !== product.imageUrl),
   ];
   return (
-    <div className="group flex flex-col rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
+    <div className="group flex flex-col rounded-2xl border border-[var(--border-primary)] bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
       <ProductImageCarousel urls={allImages} name={product.name} />
 
       <div className="p-6 flex flex-col flex-grow">
@@ -79,6 +88,15 @@ function ProductCard({ product }: { product: ProductData }) {
 
         {/* Spec table */}
         <SpecTable specs={product.specs} />
+
+        {/* Downloads */}
+        {(product.datasheetUrl || product.drawingUrl || product.cadFileUrls.length > 0) && (
+          <div className="flex gap-2 mb-4 flex-wrap">
+             {product.datasheetUrl && <a href={product.datasheetUrl} target="_blank" className="text-[10px] uppercase font-mono font-bold tracking-wider text-[var(--accent-primary)] bg-[var(--accent-primary)]/10 px-2.5 py-1 rounded hover:bg-[var(--accent-primary)] hover:text-white transition-colors">Datasheet</a>}
+             {product.drawingUrl && <a href={product.drawingUrl} target="_blank" className="text-[10px] uppercase font-mono font-bold tracking-wider text-[var(--accent-primary)] bg-[var(--accent-primary)]/10 px-2.5 py-1 rounded hover:bg-[var(--accent-primary)] hover:text-white transition-colors">2D Drawing</a>}
+             {product.cadFileUrls.map((url, i) => <a key={i} href={url} target="_blank" className="text-[10px] uppercase font-mono font-bold tracking-wider text-[var(--accent-primary)] bg-[var(--accent-primary)]/10 px-2.5 py-1 rounded hover:bg-[var(--accent-primary)] hover:text-white transition-colors">3D CAD</a>)}
+          </div>
+        )}
 
         <Link
           href={`/contact?product=${encodeURIComponent(product.name)}`}
@@ -97,7 +115,7 @@ export default async function ProductsPage() {
     const rows = await prisma.product.findMany({
       where: { isActive: true },
       orderBy: { category: 'asc' },
-      select: { id: true, name: true, category: true, description: true, specs: true, imageUrl: true, imageUrls: true },
+      select: { id: true, name: true, category: true, description: true, specs: true, imageUrl: true, imageUrls: true, datasheetUrl: true, drawingUrl: true, cadFileUrls: true },
     });
     dbProducts = rows.map((r) => ({
       id: r.id,
@@ -107,6 +125,9 @@ export default async function ProductsPage() {
       specs: Array.isArray(r.specs) ? (r.specs as string[]) : [],
       imageUrl: r.imageUrl,
       imageUrls: r.imageUrls ?? [],
+      datasheetUrl: r.datasheetUrl,
+      drawingUrl: r.drawingUrl,
+      cadFileUrls: r.cadFileUrls ?? [],
     }));
   } catch {
     // DB not available — use fallback

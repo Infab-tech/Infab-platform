@@ -10,50 +10,31 @@ export const metadata: Metadata = {
 const customDesignCapabilities = [
   {
     icon: 'ph-pencil-ruler',
-    title: 'Application-Specific Architecture',
-    description: 'We translate your sensor or actuator concept into an optimised MEMS architecture — selecting the right transduction principle, material stack, and device geometry for your target application.',
-  },
-  {
-    icon: 'ph-monitor-play',
-    title: 'Multi-Physics Simulation',
-    description: 'FEM and CFD simulation using COMSOL Multiphysics and Ansys to model electrostatic, piezoresistive, thermal, and fluidic behaviour before a single wafer is processed.',
-  },
-  {
-    icon: 'ph-graph',
-    title: 'Process Design Kit (PDK)',
-    description: 'Layout design using our in-house PDK covering lithography, DRIE, thin-film, and packaging design rules. Compatible with standard EDA toolchains for seamless tape-out.',
+    title: 'Custom Design',
+    description: 'Tailored microchannel and MEMS architecture design for specific application needs.',
   },
   {
     icon: 'ph-flask',
-    title: 'Rapid Prototyping',
-    description: 'Fast-turn prototyping within our IISc CeNSE cleanroom — from mask generation to diced devices in weeks, not months, enabling tight design-test-iterate cycles.',
+    title: 'Simulation & Optimization',
+    description: 'Use of CFD and multiphysics tools to optimize device performance before fabrication.',
   },
   {
     icon: 'ph-factory',
     title: 'Design for Manufacturability',
-    description: 'Every design is reviewed for yield, reliability, and scalability. We identify process sensitivities early so your prototype transitions smoothly to small-volume production.',
-  },
-  {
-    icon: 'ph-shield-check',
-    title: 'IP-Protected Development',
-    description: 'Full NDA-backed engagement. Your MEMS architecture, process integration flows, and measurement data remain your intellectual property throughout the project.',
+    description: 'Ensuring designs are scalable and ready for production, from prototyping to volume manufacturing.',
   },
 ];
 
 const microfluidicsSteps = [
-  { num: '01', title: 'Design & Simulation', description: 'CAD layout and CFD simulation of microfluidic networks, channel geometries, and flow dynamics using COMSOL and custom tools.' },
-  { num: '02', title: 'Mask & Lithography', description: 'Photomask generation and photolithographic patterning on silicon, glass, and polymer substrates to micron-level precision.' },
-  { num: '03', title: 'Etching & Bonding', description: 'Wet/dry etching for channel formation, followed by anodic bonding, fusion bonding, or adhesive bonding for chip sealing.' },
-  { num: '04', title: 'Packaging & Test', description: 'Fluidic interconnect packaging, optical testing, leak testing, and functional characterisation before delivery.' },
+  { num: '01', title: 'Design and Simulation', description: 'Custom microchannel design tailored to specific application requirements, supported by simulation-based optimization using CFD (Computational Fluid Dynamics) and multiphysics tools.' },
+  { num: '02', title: 'Fabrication', description: 'Cleanroom fabrication utilizing a mix of silicon, glass, and polymer processing. Capabilities include Photolithography & Mask Alignment, Thin Film Deposition, Etching Processes (DRIE, RIE, and wet etching), and Wafer Bonding & Dicing.' },
+  { num: '03', title: 'Prototyping & Production', description: 'Focus on "Design for Manufacturability" to ensure a smooth transition from rapid prototyping to mass production.' },
 ];
 
 const memsProcesses = [
-  { icon: 'ph-sun', title: 'Photolithography', detail: 'UV and deep-UV lithography with minimum feature sizes down to 2 µm. Substrate compatibility: silicon, glass, quartz, SOI, SiC.' },
-  { icon: 'ph-waves', title: 'Deep Reactive Ion Etching (DRIE)', detail: 'Bosch-process DRIE for high-aspect-ratio silicon structures. Etch depth up to 300 µm with vertical sidewalls.' },
-  { icon: 'ph-stack', title: 'Thin Film Deposition', detail: 'LPCVD, PECVD, sputtering, and thermal oxidation for dielectric, metal, and piezoelectric thin films (SiO₂, Si₃N₄, Al, Au, PZT).' },
-  { icon: 'ph-link', title: 'Wafer Bonding', detail: 'Silicon-to-silicon fusion bonding, silicon-to-glass anodic bonding, and eutectic bonding for hermetic sealing and 3D integration.' },
-  { icon: 'ph-cube', title: 'MEMS Packaging', detail: 'Wafer-level chip-scale packaging (WLCSP), die-level packaging, hermetic metal packages, and PCB-level integration for sensors.' },
-  { icon: 'ph-chart-line', title: 'Process Characterisation & Yield', detail: 'Full wafer-level electrical testing, parametric measurement, and yield analysis. CEA/JEDEC-compliant test protocols.' },
+  { icon: 'ph-sun', title: 'Lithography', detail: 'UV and deep-UV lithography with minimum feature sizes down to 2 µm. Substrate compatibility: silicon, glass, quartz, SOI, SiC.' },
+  { icon: 'ph-waves', title: 'Dry Etching', detail: 'Bosch-process DRIE for high-aspect-ratio silicon structures. Etch depth up to 300 µm with vertical sidewalls.' },
+  { icon: 'ph-drop', title: 'Wet Processing', detail: 'Chemical etching (KOH, TMAH, BOE), standard cleans (RCA, Piranha), and spin coating for resists and polymers.' },
 ];
 
 const facilities = [
@@ -62,7 +43,6 @@ const facilities = [
   { icon: 'ph-waves', title: 'Deep Reactive Ion Etch (DRIE)', description: 'Bosch-process DRIE chamber for high-aspect-ratio silicon structures. Etch depth up to 300 µm with vertical sidewalls and tight CD control.', photo: '/assests/services/drie.jpg' },
   { icon: 'ph-sun', title: 'Lithography Tools', description: 'MJB4 & EVG620 mask aligners for UV and deep-UV lithography with feature sizes down to 2 µm on silicon, glass, and polymer substrates.', photo: '/assests/services/mjb4.png' },
   { icon: 'ph-drop', title: 'Microfluidics Lab', description: 'Dedicated PDMS fabrication, spin coating, and soft lithography equipment. UV curing station, plasma bonding, and fluidic testing benches.', photo: '/assests/services/spincoater.jpg' },
-  { icon: 'ph-monitor', title: 'Design & Simulation Centre', description: 'Workstation cluster running COMSOL Multiphysics, Cadence, Ansys, and custom MEMS design tools for sensor design, simulation, and layout.', photo: '/assests/services/infab-section-1.png' },
 ];
 
 export default function ServicesPage() {
@@ -78,6 +58,23 @@ export default function ServicesPage() {
           <p className="text-xl text-[var(--text-secondary)] leading-relaxed max-w-2xl">
             End-to-end MEMS and microfluidics services — from concept to qualified device — using world-class cleanroom facilities at IISc CeNSE.
           </p>
+        </div>
+      </div>
+
+      {/* Sticky Tab Navigation */}
+      <div className="sticky top-20 z-40 w-full border-b border-[var(--border-primary)] bg-[var(--bg-secondary)]/80 backdrop-blur-md">
+        <div className="mx-auto max-w-7xl px-6">
+          <nav className="-mb-px flex space-x-8 overflow-x-auto" aria-label="Tabs">
+            <a href="#mems" className="whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-bold text-[var(--text-secondary)] hover:border-[var(--accent-primary)] hover:text-[var(--text-primary)] transition-colors">
+              MEMS
+            </a>
+            <a href="#microfluidics" className="whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-bold text-[var(--text-secondary)] hover:border-[var(--accent-primary)] hover:text-[var(--text-primary)] transition-colors">
+              Microfluidics
+            </a>
+            <a href="#facilities" className="whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-bold text-[var(--text-secondary)] hover:border-[var(--accent-primary)] hover:text-[var(--text-primary)] transition-colors">
+              Facilities
+            </a>
+          </nav>
         </div>
       </div>
 
@@ -439,21 +436,18 @@ export default function ServicesPage() {
                         </ul>
                       </div>
                     </div>
-                    <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] p-5">
-                      <h5 className="font-bold text-[var(--text-primary)] mb-4">Additional Characterisation Tools</h5>
-                      <div className="space-y-4">
-                        <div>
-                          <p className="text-xs font-semibold text-[var(--text-primary)] mb-1">Optical Microscopy</p>
-                          <p className="text-xs text-[var(--text-secondary)]">Nikon inspection microscope — bright/dark field, 50×/100×/200× objectives. Used for CD measurement, defect inspection, and layer alignment verification.</p>
-                        </div>
-                        <div>
-                          <p className="text-xs font-semibold text-[var(--text-primary)] mb-1">SEM (via CeNSE)</p>
-                          <p className="text-xs text-[var(--text-secondary)]">Access to field-emission SEM at IISc CeNSE for high-resolution surface imaging, cross-section inspection, and sidewall angle measurement.</p>
-                        </div>
-                        <div>
-                          <p className="text-xs font-semibold text-[var(--text-primary)] mb-1">Electrical Testing</p>
-                          <p className="text-xs text-[var(--text-secondary)]">Wafer-level probe station for I-V, C-V, and resistance measurements. JEDEC-compliant parametric test protocols for yield analysis.</p>
-                        </div>
+                    <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
+                      <div className="h-52 relative border-b border-[var(--border-primary)] bg-[var(--bg-secondary)] flex items-center justify-center">
+                        <i className="ph ph-scan text-5xl text-[var(--text-secondary)] opacity-50"></i>
+                      </div>
+                      <div className="p-5">
+                        <h5 className="font-bold text-[var(--text-primary)] mb-1">KMOS Ultra Scan</h5>
+                        <ul className="text-xs text-[var(--text-secondary)] space-y-1 mt-2">
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>High-resolution curvature & wafer bow mapping</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>2D/3D thin film stress measurement</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Precise surface tilt & absolute reflectance</li>
+                          <li className="flex items-center gap-2"><i className="ph ph-check text-[var(--accent-primary)]"></i>Programmable X-Y laser scanning array</li>
+                        </ul>
                       </div>
                     </div>
                   </div>

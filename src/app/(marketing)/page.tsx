@@ -4,7 +4,7 @@ import Products from '@/components/sections/Products';
 import CtaBanner from '@/components/sections/CtaBanner';
 import News from '@/components/sections/News';
 import Partners from '@/components/sections/Partners';
-import Publications from '@/components/sections/Publications';
+import Recognitions from '@/components/sections/Recognitions';
 
 export default function Home() {
   return (
@@ -15,7 +15,7 @@ export default function Home() {
       <CtaBanner />
       <News />
       <Partners />
-      <Publications />
+      <Recognitions />
     </div>
   );
 }

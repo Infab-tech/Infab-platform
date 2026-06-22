@@ -4,7 +4,7 @@ import { prisma } from '@/lib/supabase/prisma';
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
-import { FALLBACK_PRODUCTS, FALLBACK_NEWS, FALLBACK_TEAM, FALLBACK_PUBLICATIONS, FALLBACK_PARTNERS } from '@/lib/content-defaults';
+import { FALLBACK_PRODUCTS, FALLBACK_NEWS, FALLBACK_TEAM, FALLBACK_RECOGNITIONS } from '@/lib/content-defaults';
 
 // Helper function to double-check admin authorization on the server
 export async function verifyAdmin() {
@@ -132,9 +132,14 @@ export async function addNewProduct(formData: FormData) {
         return { success: false, message: 'Missing required fields.' };
     }
 
+    const datasheetUrl = formData.get('datasheetUrl') as string;
+    const drawingUrl = formData.get('drawingUrl') as string;
+    const cadFileUrlsRaw = formData.get('cadFileUrls') as string;
+
     const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + Date.now().toString().slice(-6);
     const specs = specsRaw ? specsRaw.split(',').map((s) => s.trim()).filter(Boolean) : [];
     const imageUrls: string[] = imageUrlsRaw ? JSON.parse(imageUrlsRaw) : [];
+    const cadFileUrls: string[] = cadFileUrlsRaw ? JSON.parse(cadFileUrlsRaw) : [];
 
     try {
         await prisma.product.create({
@@ -146,6 +151,9 @@ export async function addNewProduct(formData: FormData) {
                 specs,
                 imageUrl: imageUrls[0] ?? null,
                 imageUrls,
+                datasheetUrl: datasheetUrl || null,
+                drawingUrl: drawingUrl || null,
+                cadFileUrls,
                 isActive: true,
             },
         });
@@ -172,8 +180,13 @@ export async function updateProduct(id: string, formData: FormData) {
         return { success: false, message: 'Missing required fields.' };
     }
 
+    const datasheetUrl = formData.get('datasheetUrl') as string;
+    const drawingUrl = formData.get('drawingUrl') as string;
+    const cadFileUrlsRaw = formData.get('cadFileUrls') as string;
+
     const specs = specsRaw ? specsRaw.split(',').map((s) => s.trim()).filter(Boolean) : [];
     const imageUrls: string[] = imageUrlsRaw ? JSON.parse(imageUrlsRaw) : [];
+    const cadFileUrls: string[] = cadFileUrlsRaw ? JSON.parse(cadFileUrlsRaw) : [];
 
     try {
         await prisma.product.update({
@@ -185,6 +198,9 @@ export async function updateProduct(id: string, formData: FormData) {
                 specs,
                 imageUrl: imageUrls[0] ?? null,
                 imageUrls,
+                datasheetUrl: datasheetUrl || null,
+                drawingUrl: drawingUrl || null,
+                cadFileUrls,
             },
         });
         revalidatePath('/admin/products');
@@ -449,85 +465,174 @@ export async function seedDefaultTeam() {
     return { skipped: false, message: `Seeded ${FALLBACK_TEAM.length} team members into the database.` };
 }
 
-// ── PUBLICATIONS ─────────────────────────────────────────────────────────────
+// ── RECOGNITIONS ─────────────────────────────────────────────────────────────
 
-export async function addPublication(formData: FormData) {
+export async function addRecognition(formData: FormData) {
     await verifyAdmin();
-    const title    = formData.get('title') as string;
-    const authors  = formData.get('authors') as string;
-    const journal  = formData.get('journal') as string;
-    const year     = parseInt(formData.get('year') as string, 10);
-    const abstract = formData.get('abstract') as string;
-    const link     = formData.get('link') as string;
-    const order    = parseInt(formData.get('order') as string, 10) || 0;
+    const title = formData.get('title') as string;
+    const body = formData.get('body') as string;
+    const certNumber = formData.get('certNumber') as string;
+    const issuer = formData.get('issuer') as string;
+    const logoUrl = formData.get('logoUrl') as string;
+    const order = parseInt(formData.get('order') as string, 10) || 0;
 
-    if (!title || !authors || isNaN(year)) {
-        return { success: false, message: 'Title, authors, and year are required.' };
+    if (!title || !body) {
+        return { success: false, message: 'Title and body are required.' };
     }
     try {
-        await prisma.publication.create({
-            data: { title, authors, journal: journal || null, year, abstract: abstract || null, link: link || null, order, isPublished: true },
+        await prisma.recognition.create({
+            data: { title, body, certNumber: certNumber || null, issuer: issuer || null, logoUrl: logoUrl || null, order, isActive: true },
         });
-        revalidatePath('/admin/publications');
+        revalidatePath('/admin/recognitions');
         revalidatePath('/');
+        revalidatePath('/about');
     } catch (e) {
         console.error(e);
         return { success: false, message: 'Database error.' };
     }
-    redirect('/admin/publications');
+    redirect('/admin/recognitions');
 }
 
-export async function updatePublication(id: string, formData: FormData) {
+export async function updateRecognition(id: string, formData: FormData) {
     await verifyAdmin();
-    const title    = formData.get('title') as string;
-    const authors  = formData.get('authors') as string;
-    const journal  = formData.get('journal') as string;
-    const year     = parseInt(formData.get('year') as string, 10);
-    const abstract = formData.get('abstract') as string;
-    const link     = formData.get('link') as string;
-    const order    = parseInt(formData.get('order') as string, 10) || 0;
+    const title = formData.get('title') as string;
+    const body = formData.get('body') as string;
+    const certNumber = formData.get('certNumber') as string;
+    const issuer = formData.get('issuer') as string;
+    const logoUrl = formData.get('logoUrl') as string;
+    const order = parseInt(formData.get('order') as string, 10) || 0;
 
-    if (!title || !authors || isNaN(year)) {
-        return { success: false, message: 'Title, authors, and year are required.' };
+    if (!title || !body) {
+        return { success: false, message: 'Title and body are required.' };
     }
     try {
-        await prisma.publication.update({
+        await prisma.recognition.update({
             where: { id },
-            data: { title, authors, journal: journal || null, year, abstract: abstract || null, link: link || null, order },
+            data: { title, body, certNumber: certNumber || null, issuer: issuer || null, logoUrl: logoUrl || null, order },
         });
-        revalidatePath('/admin/publications');
+        revalidatePath('/admin/recognitions');
         revalidatePath('/');
+        revalidatePath('/about');
     } catch (e) {
         console.error(e);
         return { success: false, message: 'Database error.' };
     }
-    redirect('/admin/publications');
+    redirect('/admin/recognitions');
 }
 
-export async function togglePublicationPublished(id: string, current: boolean) {
+export async function toggleRecognitionActive(id: string, current: boolean) {
     await verifyAdmin();
-    await prisma.publication.update({ where: { id }, data: { isPublished: !current } });
-    revalidatePath('/admin/publications');
+    await prisma.recognition.update({ where: { id }, data: { isActive: !current } });
+    revalidatePath('/admin/recognitions');
     revalidatePath('/');
+    revalidatePath('/about');
 }
 
-export async function deletePublication(id: string) {
+export async function deleteRecognition(id: string) {
     await verifyAdmin();
-    await prisma.publication.delete({ where: { id } });
-    revalidatePath('/admin/publications');
+    await prisma.recognition.delete({ where: { id } });
+    revalidatePath('/admin/recognitions');
     revalidatePath('/');
+    revalidatePath('/about');
 }
 
-export async function seedDefaultPublications() {
+export async function seedDefaultRecognitions() {
     await verifyAdmin();
-    const count = await prisma.publication.count();
-    if (count > 0) return { skipped: true, message: 'Publications already in database — seed skipped.' };
-    for (const p of FALLBACK_PUBLICATIONS) {
-        await prisma.publication.create({ data: { ...p, isPublished: true } });
+    const count = await prisma.recognition.count();
+    if (count > 0) return { skipped: true, message: 'Recognitions already in database — seed skipped.' };
+    for (const r of FALLBACK_RECOGNITIONS) {
+        await prisma.recognition.create({ data: { ...r, isActive: true } });
     }
-    revalidatePath('/admin/publications');
+    revalidatePath('/admin/recognitions');
     revalidatePath('/');
-    return { skipped: false, message: `Seeded ${FALLBACK_PUBLICATIONS.length} publications.` };
+    revalidatePath('/about');
+    return { skipped: false, message: `Seeded ${FALLBACK_RECOGNITIONS.length} recognitions.` };
+}
+
+// ── CAREERS (JOB OPENINGS) ───────────────────────────────────────────────────
+import { JobType } from '@prisma/client';
+
+export async function addJobOpening(formData: FormData) {
+    await verifyAdmin();
+    const title = formData.get('title') as string;
+    const department = formData.get('department') as string;
+    const type = formData.get('type') as JobType;
+    const location = formData.get('location') as string;
+    const description = formData.get('description') as string;
+    const requirementsRaw = formData.get('requirements') as string;
+    const applyLink = formData.get('applyLink') as string;
+    const deadline = formData.get('deadline') as string;
+
+    if (!title || !department || !type || !description) {
+        return { success: false, message: 'Missing required fields.' };
+    }
+
+    const requirements = requirementsRaw ? requirementsRaw.split('\n').map(s => s.trim()).filter(Boolean) : [];
+
+    try {
+        await prisma.jobOpening.create({
+            data: {
+                title, department, type, location: location || 'Bangalore, India',
+                description, requirements, applyLink: applyLink || null,
+                deadline: deadline ? new Date(deadline) : null, isActive: true
+            }
+        });
+        revalidatePath('/admin/careers');
+        revalidatePath('/careers');
+    } catch (e) {
+        console.error(e);
+        return { success: false, message: 'Database error.' };
+    }
+    redirect('/admin/careers');
+}
+
+export async function updateJobOpening(id: string, formData: FormData) {
+    await verifyAdmin();
+    const title = formData.get('title') as string;
+    const department = formData.get('department') as string;
+    const type = formData.get('type') as JobType;
+    const location = formData.get('location') as string;
+    const description = formData.get('description') as string;
+    const requirementsRaw = formData.get('requirements') as string;
+    const applyLink = formData.get('applyLink') as string;
+    const deadline = formData.get('deadline') as string;
+
+    if (!title || !department || !type || !description) {
+        return { success: false, message: 'Missing required fields.' };
+    }
+
+    const requirements = requirementsRaw ? requirementsRaw.split('\n').map(s => s.trim()).filter(Boolean) : [];
+
+    try {
+        await prisma.jobOpening.update({
+            where: { id },
+            data: {
+                title, department, type, location: location || 'Bangalore, India',
+                description, requirements, applyLink: applyLink || null,
+                deadline: deadline ? new Date(deadline) : null
+            }
+        });
+        revalidatePath('/admin/careers');
+        revalidatePath('/careers');
+    } catch (e) {
+        console.error(e);
+        return { success: false, message: 'Database error.' };
+    }
+    redirect('/admin/careers');
+}
+
+export async function toggleJobOpeningActive(id: string, current: boolean) {
+    await verifyAdmin();
+    await prisma.jobOpening.update({ where: { id }, data: { isActive: !current } });
+    revalidatePath('/admin/careers');
+    revalidatePath('/careers');
+}
+
+export async function deleteJobOpening(id: string) {
+    await verifyAdmin();
+    await prisma.jobOpening.delete({ where: { id } });
+    revalidatePath('/admin/careers');
+    revalidatePath('/careers');
 }
 
 // ── PARTNERS ─────────────────────────────────────────────────────────────────
@@ -590,17 +695,4 @@ export async function deletePartner(id: string) {
     revalidatePath('/admin/partners');
     revalidatePath('/');
 }
-
-export async function seedDefaultPartners() {
-    await verifyAdmin();
-    const count = await prisma.partner.count();
-    if (count > 0) return { skipped: true, message: 'Partners already in database — seed skipped.' };
-    for (const p of FALLBACK_PARTNERS) {
-        await prisma.partner.create({
-            data: { name: p.name, order: p.order, isActive: true }
-        });
-    }
-    revalidatePath('/admin/partners');
-    revalidatePath('/');
-    return { skipped: false, message: `Seeded ${FALLBACK_PARTNERS.length} partners.` };
-}
+

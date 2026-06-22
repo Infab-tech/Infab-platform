@@ -12,7 +12,7 @@ export default async function CatalogPage() {
     const rows = await prisma.product.findMany({
       where: { isActive: true },
       orderBy: { category: 'asc' },
-      select: { id: true, name: true, category: true, description: true, specs: true, imageUrl: true, imageUrls: true },
+      select: { id: true, name: true, category: true, description: true, specs: true, imageUrl: true, imageUrls: true, datasheetUrl: true, drawingUrl: true, cadFileUrls: true },
     });
 
     if (rows.length > 0) {
@@ -24,6 +24,9 @@ export default async function CatalogPage() {
         specs: Array.isArray(r.specs) ? (r.specs as string[]) : [],
         imageUrl: r.imageUrl,
         imageUrls: r.imageUrls ?? [],
+        datasheetUrl: r.datasheetUrl,
+        drawingUrl: r.drawingUrl,
+        cadFileUrls: Array.isArray(r.cadFileUrls) ? (r.cadFileUrls as string[]) : [],
       }));
     }
   } catch {
@@ -39,6 +42,9 @@ export default async function CatalogPage() {
       specs: p.specs,
       imageUrl: p.imageUrl ?? null,
       imageUrls: p.imageUrl ? [p.imageUrl] : [],
+      datasheetUrl: null,
+      drawingUrl: null,
+      cadFileUrls: [],
     }));
   }
 
@@ -47,7 +53,7 @@ export default async function CatalogPage() {
       <div className="mb-8">
         <h2 className="text-3xl font-bold mb-2 text-[var(--text-primary)]">Product Catalog</h2>
         <p className="text-[var(--text-secondary)]">
-          Browse our full range of MEMS sensors and microfluidic products. Add items to your RFQ cart and submit a quote request in one go.
+          Browse our full range of aerospace sensors and microfluidic products. Add items to your RFQ cart and submit a quote request in one go.
         </p>
       </div>
 

@@ -25,19 +25,22 @@ model Inquiry {
 
 // 2. PRODUCTS
 model Product {
-  id          String   @id @default(cuid())
-  name        String
-  slug        String   @unique
-  category    String
-  description String   @db.Text
-  specs       Json?
-  imageUrl    String?
-  imageUrls   String[]
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now()) @updatedAt
+  id           String   @id @default(cuid())
+  name         String
+  slug         String   @unique
+  category     String
+  description  String   @db.Text
+  specs        Json?
+  imageUrl     String?
+  imageUrls    String[]
+  datasheetUrl String?
+  drawingUrl   String?
+  cadFileUrls  String[]
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now()) @updatedAt
 
-  quoteItems  QuoteItem[]
+  quoteItems   QuoteItem[]
 
   @@index([isActive, category])
 }
@@ -119,22 +122,16 @@ model TeamMember {
   updatedAt DateTime @default(now()) @updatedAt
 }
 
-// 8. PUBLICATIONS
-model Publication {
+// 8. RECOGNITIONS
+model Recognition {
   id          String   @id @default(cuid())
-  title       String
-  authors     String
-  journal     String?
-  year        Int
-  abstract    String?  @db.Text
-  link        String?
-  imageUrl    String?
-  isPublished Boolean  @default(true)
+  title       String   // e.g. "ISO 9001:2015"
+  body        String   // short description
+  certNumber  String?  // optional cert number
+  issuer      String?  // e.g. "Bureau Veritas"
+  logoUrl     String?  // Supabase Storage
   order       Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now()) @updatedAt
-
-  @@index([isPublished, order])
+  isActive    Boolean  @default(true)
 }
 
 // 9. USER ROLES (RBAC)
@@ -164,4 +161,25 @@ model CartDraft {
   userId    String   @id
   items     Json     // Stores the cart items array
   updatedAt DateTime @default(now()) @updatedAt
+}
+
+// 12. CAREERS
+model JobOpening {
+  id           String      @id @default(cuid())
+  title        String
+  department   String
+  type         JobType     // FULL_TIME | PART_TIME | INTERNSHIP
+  location     String      @default("Bangalore, India")
+  description  String
+  requirements String[]
+  deadline     DateTime?
+  applyLink    String?
+  isActive     Boolean     @default(true)
+  createdAt    DateTime    @default(now())
+}
+
+enum JobType {
+  FULL_TIME
+  PART_TIME
+  INTERNSHIP
 }

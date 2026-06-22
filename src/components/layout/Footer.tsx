@@ -22,7 +22,7 @@ export default function Footer() {
       {/* Footer */}
       <footer className="bg-[var(--bg-secondary)] border-t border-[var(--border-primary)]">
         <div className="mx-auto max-w-7xl px-6 py-16">
-          <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-5">
 
             {/* Brand Column */}
             <div className="lg:col-span-1">
@@ -52,18 +52,32 @@ export default function Footer() {
             </div>
 
             {/* Products Column */}
-            <div>
+            <div className="lg:col-span-1">
               <h3 className="mb-5 font-mono text-xs font-bold uppercase tracking-widest text-[var(--text-primary)]">Products</h3>
               <ul className="flex flex-col gap-3">
                 {[
-                  { label: 'Aerospace Sensors', href: '/products#aerospace' },
-                  { label: 'SP Series Pressure', href: '/products#aerospace' },
-                  { label: 'TP Series Transducers', href: '/products#aerospace' },
-                  { label: 'Microfluidic Chips', href: '/products#healthcare' },
-                  { label: 'Organ-on-Chip', href: '/products#healthcare' },
-                  { label: 'MEMS Sensor Dies', href: '/products#mems' },
+                  { label: 'Aerospace & Defence', href: '/products#aerospace' },
+                  { label: 'Healthcare & Life Sciences', href: '/products#healthcare' },
                 ].map((item) => (
                   <li key={item.href + item.label}>
+                    <Link href={item.href} className="text-sm text-[var(--text-secondary)] transition-colors hover:text-[var(--accent-primary)]">
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Services Column */}
+            <div className="lg:col-span-1">
+              <h3 className="mb-5 font-mono text-xs font-bold uppercase tracking-widest text-[var(--text-primary)]">Services</h3>
+              <ul className="flex flex-col gap-3">
+                {[
+                  { label: 'MEMS', href: '/services#mems' },
+                  { label: 'Microfluidics', href: '/services#microfluidics' },
+                  { label: 'Facilities', href: '/services#facilities' },
+                ].map((item) => (
+                  <li key={item.href}>
                     <Link href={item.href} className="text-sm text-[var(--text-secondary)] transition-colors hover:text-[var(--accent-primary)]">
                       {item.label}
                     </Link>
@@ -79,6 +93,7 @@ export default function Footer() {
                 {[
                   { label: 'About Us', href: '/about' },
                   { label: 'Our Team', href: '/team' },
+                  { label: 'Careers', href: '/careers' },
                   { label: 'Services & Facilities', href: '/services' },
                   { label: 'News & Events', href: '/news' },
                   { label: 'Contact Us', href: '/contact' },

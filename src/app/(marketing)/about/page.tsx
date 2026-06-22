@@ -1,17 +1,10 @@
 import type { Metadata } from 'next';
-import AnimatedNumber from '@/components/ui/AnimatedNumber';
+import Recognitions from '@/components/sections/Recognitions';
 
 export const metadata: Metadata = {
   title: 'About Us | INFAB Semiconductor',
   description: 'Pioneering Indian deep-tech company specializing in advanced MEMS sensors, actuators, and microfluidic devices. Incubated at CeNSE, IISc Bengaluru.',
 };
-
-const stats = [
-  { icon: 'ph-timer', target: 10, suffix: '+', label: 'Years of MEMS Expertise' },
-  { icon: 'ph-buildings', target: 3, suffix: '', label: 'Market Segments Served' },
-  { icon: 'ph-package', target: 25, suffix: '+', label: 'Products & Services' },
-  { icon: 'ph-certificate', target: 1, suffix: 'st', label: 'CeNSE IISc Incubatee' },
-];
 
 const values = [
   {
@@ -53,27 +46,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Stats Strip */}
-      <div className="border-b border-[var(--border-primary)] bg-[var(--bg-primary)]">
-        <div className="mx-auto max-w-7xl px-6 py-16">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5"
-              >
-                <div className="text-3xl text-[var(--text-secondary)] mb-4 flex justify-center">
-                  <i className={`ph ${stat.icon}`}></i>
-                </div>
-                <div className="font-sans text-5xl font-bold leading-none text-[var(--text-primary)] mb-3">
-                  <AnimatedNumber target={stat.target} suffix={stat.suffix} />
-                </div>
-                <p className="text-sm font-medium text-[var(--text-secondary)] uppercase tracking-wider">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+
 
       {/* Who We Are */}
       <div className="border-b border-[var(--border-primary)] py-32">
@@ -178,7 +151,7 @@ export default function AboutPage() {
       </div>
 
       {/* Core Values */}
-      <div className="py-32">
+      <div className="py-32 bg-[var(--bg-primary)] border-b border-[var(--border-primary)]">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mb-16">
             <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">
@@ -205,6 +178,9 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
+
+      {/* Recognitions */}
+      <Recognitions />
 
     </div>
   );

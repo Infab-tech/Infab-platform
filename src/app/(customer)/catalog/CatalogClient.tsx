@@ -13,12 +13,14 @@ export interface CatalogProduct {
   specs: string[];
   imageUrl: string | null;
   imageUrls: string[];
+  datasheetUrl: string | null;
+  drawingUrl: string | null;
+  cadFileUrls: string[];
 }
 
 const CATEGORY_CONFIG: Record<string, { label: string; icon: string; colour: string }> = {
   AEROSPACE:  { label: 'Aerospace & Defence',      icon: 'ph-airplane-tilt', colour: 'text-blue-400 bg-blue-400/10' },
   HEALTHCARE: { label: 'Healthcare & Life Sciences', icon: 'ph-dna',          colour: 'text-green-400 bg-green-400/10' },
-  MEMS:       { label: 'MEMS & Semiconductor',       icon: 'ph-cpu',          colour: 'text-cyan-400 bg-cyan-400/10'  },
 };
 
 function AddToRFQButton({ product }: { product: CatalogProduct }) {
@@ -124,7 +126,7 @@ export default function CatalogClient({ products }: { products: CatalogProduct[]
           return (
             <div
               key={product.id}
-              className="group flex flex-col rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/30 hover:shadow-xl hover:shadow-[var(--accent-primary)]/5"
+              className="group flex flex-col rounded-2xl border border-[var(--border-primary)] bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/30 hover:shadow-xl hover:shadow-[var(--accent-primary)]/5"
             >
               {/* Image carousel */}
               {(() => {
@@ -160,6 +162,15 @@ export default function CatalogClient({ products }: { products: CatalogProduct[]
                     {product.specs.length > 3 && (
                       <span className="px-2 py-0.5 rounded bg-[var(--text-primary)]/5 text-[var(--text-secondary)] font-mono text-[10px]">+{product.specs.length - 3} more</span>
                     )}
+                  </div>
+                )}
+
+                {/* Downloads */}
+                {(product.datasheetUrl || product.drawingUrl || product.cadFileUrls?.length > 0) && (
+                  <div className="flex gap-2 flex-wrap mb-2">
+                     {product.datasheetUrl && <a href={product.datasheetUrl} target="_blank" className="text-[10px] uppercase font-mono font-bold tracking-wider text-[var(--accent-primary)] bg-[var(--accent-primary)]/10 px-2 py-1 rounded hover:bg-[var(--accent-primary)] hover:text-white transition-colors">Datasheet</a>}
+                     {product.drawingUrl && <a href={product.drawingUrl} target="_blank" className="text-[10px] uppercase font-mono font-bold tracking-wider text-[var(--accent-primary)] bg-[var(--accent-primary)]/10 px-2 py-1 rounded hover:bg-[var(--accent-primary)] hover:text-white transition-colors">2D Drawing</a>}
+                     {product.cadFileUrls?.map((url, i) => <a key={i} href={url} target="_blank" className="text-[10px] uppercase font-mono font-bold tracking-wider text-[var(--accent-primary)] bg-[var(--accent-primary)]/10 px-2 py-1 rounded hover:bg-[var(--accent-primary)] hover:text-white transition-colors">3D CAD</a>)}
                   </div>
                 )}
 
