@@ -491,14 +491,14 @@ export default function ServicesPage() {
                   ))}
                 </div>
               </div>
-              {/* Image placeholder — swap src once image is added */}
-              <div className="bg-[var(--bg-primary)] border-l border-[var(--accent-primary)]/10 flex items-center justify-center min-h-72 lg:min-h-full">
-                <div className="text-center p-10 opacity-40">
-                  <i className="ph ph-microscope text-7xl text-[var(--accent-primary)] mb-4 block"></i>
-                  <p className="font-mono text-xs uppercase tracking-widest text-[var(--text-secondary)]">
-                    Add image to<br />/public/assests/services/microqubic-mrcl.jpg
-                  </p>
-                </div>
+              {/* Image */}
+              <div className="relative bg-black border-l border-[var(--accent-primary)]/10 flex items-center justify-center min-h-72 lg:min-h-full">
+                <Image
+                  src="/assests/services/MICROQUBIC-MRCL.jpg"
+                  alt="Microqubic MRCL Series"
+                  fill
+                  className="object-contain p-6"
+                />
               </div>
             </div>
           </div>
