@@ -56,7 +56,7 @@ export default function ForgotPasswordPage() {
                         />
                     </Link>
                     <h1 className="text-2xl font-bold text-[var(--text-primary)]">Reset Password</h1>
-                    <p className="text-[var(--text-secondary)] mt-2">We'll email you a link to reset it</p>
+                    <p className="text-[var(--text-secondary)] mt-2">We&apos;ll email you a link to reset it</p>
                 </div>
 
                 <div className="bg-[var(--bg-secondary)] border border-[var(--text-primary)]/10 p-8 rounded-2xl shadow-2xl">

@@ -76,10 +76,9 @@ export default function ApplyForm({ jobId, jobTitle }: { jobId: string; jobTitle
         <input ref={fileRef} name="resume" type="file" accept=".pdf,.doc,.docx" required className="hidden"
           onChange={(e) => setFileName(e.target.files?.[0]?.name ?? null)}
         />
-        <button
-          type="button"
+        <div
           onClick={() => fileRef.current?.click()}
-          className={`flex items-center gap-3 px-4 py-3 rounded-lg border-2 border-dashed text-sm text-left transition-colors
+          className={`flex items-center gap-3 px-4 py-3 rounded-lg border-2 border-dashed text-sm text-left transition-colors cursor-pointer
             ${fileName
               ? 'border-[var(--accent-primary)]/50 bg-[var(--accent-primary)]/5 text-[var(--accent-primary)]'
               : 'border-[var(--text-primary)]/15 hover:border-[var(--accent-primary)]/40 hover:bg-[var(--accent-primary)]/5 text-[var(--text-secondary)]'
@@ -91,12 +90,12 @@ export default function ApplyForm({ jobId, jobTitle }: { jobId: string; jobTitle
             <button
               type="button"
               onClick={(e) => { e.stopPropagation(); setFileName(null); if (fileRef.current) fileRef.current.value = ''; }}
-              className="ml-auto flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-red-400 hover:bg-red-500/10"
+              className="ml-auto flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-red-400 hover:bg-red-500/10 cursor-pointer"
             >
               <i className="ph ph-x text-xs"></i>
             </button>
           )}
-        </button>
+        </div>
         <p className="text-xs text-[var(--text-secondary)]">Accepted formats: PDF, DOC, DOCX. Maximum size: 5 MB.</p>
       </div>
 

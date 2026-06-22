@@ -69,11 +69,11 @@ function LeadershipCard({ m }: { m: Member }) {
 function MemberCard({ m }: { m: Member }) {
   return (
     <div className="group rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-xl hover:shadow-[var(--accent-primary)]/5 flex items-center p-4 gap-4">
-      <div className="w-28 h-28 rounded-xl border border-[var(--border-primary)] relative overflow-hidden flex-shrink-0 bg-[var(--bg-primary)]">
+      <div className="w-44 h-44 rounded-xl border border-[var(--border-primary)] relative overflow-hidden flex-shrink-0 bg-[var(--bg-primary)]">
         {m.photo ? (
-          <Image src={m.photo} alt={m.name} fill sizes="112px" className="object-cover object-top transition-transform duration-500 group-hover:scale-105" />
+          <Image src={m.photo} alt={m.name} fill sizes="176px" className="object-cover object-top transition-transform duration-500 group-hover:scale-105" />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-2xl font-bold text-[var(--accent-primary)]/40 bg-[var(--accent-primary)]/5">
+          <div className="w-full h-full flex items-center justify-center text-3xl font-bold text-[var(--accent-primary)]/40 bg-[var(--accent-primary)]/5">
             {getInitials(m.name)}
           </div>
         )}
@@ -146,7 +146,6 @@ export default async function TeamPage() {
         if (members.length === 0) return null;
         const isFounder = sec.key === 'FOUNDER';
         const cols = isFounder ? '' : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6';
-        const engineeringCols = sec.key === 'ENGINEERING' ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6' : cols;
 
         return (
           <div key={sec.key} className={`border-b border-[var(--border-primary)] py-24${sec.bg ? ' bg-[var(--bg-secondary)]' : ''}`}>
@@ -161,7 +160,7 @@ export default async function TeamPage() {
                   {members.map((m) => <LeadershipCard key={m.name} m={m} />)}
                 </div>
               ) : (
-                <div className={sec.key === 'ENGINEERING' ? engineeringCols : cols}>
+                <div className={cols}>
                   {members.map((m) => <MemberCard key={m.name} m={m} />)}
                 </div>
               )}

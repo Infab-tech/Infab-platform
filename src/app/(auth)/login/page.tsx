@@ -110,7 +110,7 @@ export default function LoginPage() {
                     
                     <div className="mt-6 text-center">
                         <Link href="/register" className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors">
-                            Don't have an account? <span className="font-semibold text-[var(--text-primary)]">Request access</span>
+                            Don&apos;t have an account? <span className="font-semibold text-[var(--text-primary)]">Request access</span>
                         </Link>
                     </div>
                 </div>

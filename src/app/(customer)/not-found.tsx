@@ -7,7 +7,7 @@ export default function CustomerNotFound() {
         <i className="ph ph-file-dashed text-5xl text-[var(--text-secondary)] mb-4 inline-block"></i>
         <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-2">Page Not Found</h2>
         <p className="text-[var(--text-secondary)] mb-8">
-          We couldn't find the page you're looking for. It might have been removed or the link may be broken.
+          We couldn&apos;t find the page you&apos;re looking for. It might have been removed or the link may be broken.
         </p>
         <Link
           href="/dashboard"

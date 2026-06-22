@@ -44,7 +44,7 @@ export default async function OrdersPage() {
         <div className="bg-[var(--bg-secondary)] border border-[var(--text-primary)]/10 rounded-xl p-12 text-center text-[var(--text-secondary)] flex flex-col items-center">
           <i className="ph ph-receipt text-5xl mb-4 opacity-50"></i>
           <p className="text-lg font-medium text-[var(--text-primary)] mb-2">No quotes found.</p>
-          <p>You haven't requested any quotes yet. Click the button above to get started.</p>
+          <p>You haven&apos;t requested any quotes yet. Click the button above to get started.</p>
         </div>
       ) : (
         <div className="bg-[var(--bg-secondary)] border border-[var(--text-primary)]/10 rounded-xl overflow-hidden">

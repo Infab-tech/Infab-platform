@@ -2,25 +2,25 @@ import React from 'react';
 import Link from 'next/link';
 
 interface Market {
-  id: string;
-  tag: string;
-  title: string;
-  description: string;
-  icon: string;
-  image: string;
-  links: string[];
-  linkHref: string;
+    id: string;
+    tag: string;
+    title: string;
+    description: string;
+    icon: string;
+    image: string;
+    links: string[];
+    linkHref: string;
 }
 
 const markets: Market[] = [
     {
         id: "aerospace",
         tag: "Aerospace & Defence",
-        title: "Pressure Sensors & Transducers",
+        title: "Pressure Switches & Transducers",
         description: "Advanced pressure switches, MEMS-based pressure transducers, differential pressure switches, flow transmitters, and Hall sensors for commercial and defence aircraft.",
         icon: "ph-airplane-tilt",
         image: "/assests/20250705_1547_Fighter-Jet-Landing-Gear_simple_compose_01jzd1cytpft2ts0vfa1hav51t-600x400.png",
-        links: ["SP Pressure Sensors", "TP Pressure Transducers", "Differential Switches"],
+        links: ["Pressure Switches", "Pressure Transducers", "Differential Switches"],
         linkHref: "/products#aerospace"
     },
     {
@@ -36,11 +36,11 @@ const markets: Market[] = [
     {
         id: "mems",
         tag: "MEMS & Semiconductor",
-        title: "MEMS Fabrication Services",
+        title: "Semiconductor Fabrication Services",
         description: "Comprehensive MEMS and semiconductor fabrication using state-of-the-art cleanroom facilities at IISc CeNSE — supporting prototyping and production.",
         icon: "ph-cpu",
         image: "/assests/ia_1000000002-600x375.jpg",
-        links: ["MEMS Process Services", "Hall & Flow Sensors", "Our Facilities"],
+        links: ["MEMS Device", "Silicon Photonics", "Advanced Semiconductor Devices"],
         linkHref: "/services"
     }
 ];
@@ -74,10 +74,10 @@ export default function Products() {
                             {/* Top Graphic Area */}
                             <div className="h-56 relative border-b border-[var(--border-primary)] bg-[var(--bg-tertiary)] overflow-hidden">
                                 {/* Image */}
-                                <img 
-                                    src={market.image} 
-                                    alt={market.title} 
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                                <img
+                                    src={market.image}
+                                    alt={market.title}
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                 />
 
                                 {/* Floating Icon Badge */}

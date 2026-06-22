@@ -43,7 +43,7 @@ export default function Contact() {
             Connect With Engineering
           </span>
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-[var(--text-primary)] mb-6">
-            Let's build the future.
+            Let&apos;s build the future.
           </h2>
           <p className="text-[var(--text-secondary)] text-lg">
             Reach out to discuss your MEMS or microfluidics requirements, custom fabrication needs, or partnership opportunities.
@@ -136,9 +136,9 @@ export default function Contact() {
             <div className="bg-[var(--bg-secondary)] border border-[var(--border-primary)] p-8 rounded-2xl shadow-xl">
               <h4 className="text-xl font-bold text-[var(--text-primary)] mb-6 border-b border-[var(--border-primary)] pb-4">Corporate Office</h4>
               <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-6">
-                889/1435, 11th Cross Rd,<br />
-                MCECHS Layout Phase 2, Jakkur,<br />
-                Bengaluru, Karnataka 560064
+                1341, Venkateshwara Nagar main road,<br />
+                MCECHS layout, Dr. Shivaram Karanth Nagar,<br />
+                Jakkur, Bengaluru 560077
               </p>
               <div className="flex flex-col gap-3">
                 <a href="tel:918045039946" className="flex items-center gap-3 text-[var(--accent-primary)] text-sm font-medium hover:brightness-110 transition-colors">
@@ -185,7 +185,7 @@ export default function Contact() {
             </div>
             <div className="w-full h-64 md:h-80 rounded-xl overflow-hidden">
               <iframe
-                src="https://maps.google.com/maps?q=MCECHS%20Layout%20Phase%202,%20Jakkur,%20Bengaluru&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                src="https://maps.google.com/maps?q=1341%20Venkateshwara%20Nagar%20main%20road%20MCECHS%20layout%20Dr%20Shivaram%20Karanth%20Nagar%20Jakkur%20Bengaluru%20560077&t=&z=14&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

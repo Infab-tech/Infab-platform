@@ -40,9 +40,9 @@ export default async function CustomerQuoteDetailsPage({ params }: { params: Pro
         <div className="max-w-4xl mx-auto flex flex-col h-[calc(100vh-8rem)]">
             <div className="flex justify-between items-center mb-6 flex-shrink-0">
                 <div>
-                    <a href="/orders" className="text-sm font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mb-2 inline-flex items-center gap-1">
+                    <Link href="/orders" className="text-sm font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mb-2 inline-flex items-center gap-1">
                         <i className="ph ph-arrow-left"></i> Back to Orders
-                    </a>
+                    </Link>
                     <h2 className="text-3xl font-bold">Quote #{quote.id.slice(-6).toUpperCase()}</h2>
                 </div>
                 <div>

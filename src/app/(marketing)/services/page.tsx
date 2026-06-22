@@ -73,11 +73,12 @@ const microfluidicsDevices = [
 ];
 
 const facilities = [
-  { icon: 'ph-circles-three', title: 'Class 100 Cleanroom', description: 'ISO Class 5 (Class 100) environment. Full suite of photolithography, deposition, and etch equipment for 4" and 6" wafers.', photo: '/assests/services/cwb-semi-clean.jpg' },
   { icon: 'ph-magnifying-glass', title: 'Characterisation Lab', description: 'Full suite of surface, electrical, and optical characterisation equipment including SEM, AFM, profilometer, C-V and I-V measurement stations.', photo: '/assests/services/dektakxt.jpg' },
   { icon: 'ph-waves', title: 'Deep Reactive Ion Etch (DRIE)', description: 'Bosch-process DRIE chamber for high-aspect-ratio silicon structures. Etch depth up to 300 µm with vertical sidewalls and tight CD control.', photo: '/assests/services/drie.jpg' },
   { icon: 'ph-sun', title: 'Lithography Tools', description: 'MJB4 & EVG620 mask aligners for UV and deep-UV lithography with feature sizes down to 2 µm on silicon, glass, and polymer substrates.', photo: '/assests/services/mjb4.png' },
   { icon: 'ph-drop', title: 'Microfluidics Lab', description: 'Dedicated PDMS fabrication, spin coating, and soft lithography equipment. UV curing station, plasma bonding, and fluidic testing benches.', photo: '/assests/services/spincoater.jpg' },
+  { icon: 'ph-flask', title: 'Inhouse Testing Facilities', description: 'On-site device testing for electrical, mechanical, and fluidic performance validation. Rapid turnaround for design-test-iterate cycles without leaving the facility.', photo: null },
+  { icon: 'ph-printer', title: '3D Printing', description: 'Rapid prototyping with high-resolution 3D printing for jigs, fixtures, and custom microfluidic housings to accelerate device packaging and testing.', photo: null },
 ];
 
 export default function ServicesPage() {
@@ -254,14 +255,54 @@ export default function ServicesPage() {
               INFAB operates from two sites in Bengaluru, leveraging one of India&apos;s finest academic cleanroom facilities alongside a dedicated corporate R&amp;D centre.
             </p>
           </div>
+          {/* ── Imaging System (Microqubic MRCL) ─────────────────────────── */}
+          <div className="mb-16 rounded-2xl border border-[var(--accent-primary)]/20 bg-[var(--bg-secondary)] overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+              <div className="p-10 flex flex-col justify-center">
+                <span className="inline-block font-mono text-xs font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">Imaging System</span>
+                <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-4">Microqubic 2D/3D Imaging System</h3>
+                <div className="w-10 h-1 bg-[var(--accent-primary)] mb-6"></div>
+                <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-4">
+                  INFAB integrates the <strong className="text-[var(--text-primary)]">Microqubic MRCL Series</strong> modular microscope system into our inline characterisation and inspection workflow. Designed for high-resolution 2D and 3D optical analysis, it supports a wide range of MEMS, microfluidics, and thin-film applications with unmatched ease of use and flexibility.
+                </p>
+                <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-6">
+                  Developed by Microqubic AG (Switzerland), this advanced yet compact instrument enables <strong className="text-[var(--text-primary)]">multi-angle imaging</strong>, <strong className="text-[var(--text-primary)]">tilt/rotate inspection</strong>, and <strong className="text-[var(--text-primary)]">precise surface evaluation</strong> without requiring bulky conventional microscope setups.
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { icon: 'ph-arrows-out', label: 'Multi-angle imaging' },
+                    { icon: 'ph-arrows-clockwise', label: 'Tilt / rotate inspection' },
+                    { icon: 'ph-chart-bar', label: '3D surface profiling' },
+                    { icon: 'ph-bluetooth', label: 'Bluetooth joystick control' },
+                  ].map((feat) => (
+                    <div key={feat.label} className="flex items-center gap-2 text-xs text-[var(--text-secondary)]">
+                      <i className={`ph ${feat.icon} text-[var(--accent-primary)] text-base flex-shrink-0`}></i>
+                      {feat.label}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="relative bg-black border-l border-[var(--accent-primary)]/10 flex items-center justify-center min-h-72 lg:min-h-full">
+                <Image
+                  src="/assests/services/MICROQUBIC-MRCL.jpg"
+                  alt="Microqubic MRCL Series"
+                  fill
+                  className="object-contain p-6"
+                />
+              </div>
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {facilities.map((f) => (
               <div key={f.title} className="group rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
-                {f.photo && (
-                  <div className="h-44 overflow-hidden border-b border-[var(--border-primary)]">
+                <div className="h-44 overflow-hidden border-b border-[var(--border-primary)] bg-[var(--bg-primary)] flex items-center justify-center">
+                  {f.photo ? (
                     <Image src={f.photo} alt={f.title} width={480} height={176} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                  </div>
-                )}
+                  ) : (
+                    <i className={`ph ${f.icon} text-6xl text-[var(--accent-primary)]/20`}></i>
+                  )}
+                </div>
                 <div className="p-8">
                   <div className="w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex items-center justify-center mb-5">
                     <i className={`ph ${f.icon} text-xl text-[var(--accent-primary)]`}></i>
@@ -278,9 +319,6 @@ export default function ServicesPage() {
             <div className="mb-10">
               <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">Cleanroom Process Capabilities</span>
               <h3 className="text-3xl font-bold tracking-tight text-[var(--text-primary)] mb-4">What we can run for you</h3>
-              <p className="text-[var(--text-secondary)] max-w-2xl">
-                Our cleanroom at IISc CeNSE covers four core process families. Click any category to see the equipment, specifications, and what it enables.
-              </p>
             </div>
 
             <div className="flex flex-col gap-3">
@@ -510,45 +548,6 @@ export default function ServicesPage() {
             </div>
           </div>
 
-          {/* ── Microqubic MRCL Series ───────────────────────────────────── */}
-          <div className="mt-16 rounded-2xl border border-[var(--accent-primary)]/20 bg-[var(--bg-secondary)] overflow-hidden">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-              {/* Text side */}
-              <div className="p-10 flex flex-col justify-center">
-                <span className="inline-block font-mono text-xs font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">Featured Equipment</span>
-                <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-4">Microqubic 2D/3D Imaging System</h3>
-                <div className="w-10 h-1 bg-[var(--accent-primary)] mb-6"></div>
-                <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-4">
-                  INFAB integrates the <strong className="text-[var(--text-primary)]">Microqubic MRCL Series</strong> modular microscope system into our inline characterisation and inspection workflow. Designed for high-resolution 2D and 3D optical analysis, it supports a wide range of MEMS, microfluidics, and thin-film applications with unmatched ease of use and flexibility.
-                </p>
-                <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-6">
-                  Developed by Microqubic AG (Switzerland), this advanced yet compact instrument enables <strong className="text-[var(--text-primary)]">multi-angle imaging</strong>, <strong className="text-[var(--text-primary)]">tilt/rotate inspection</strong>, and <strong className="text-[var(--text-primary)]">precise surface evaluation</strong> without requiring bulky conventional microscope setups.
-                </p>
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { icon: 'ph-arrows-out', label: 'Multi-angle imaging' },
-                    { icon: 'ph-arrows-clockwise', label: 'Tilt / rotate inspection' },
-                    { icon: 'ph-chart-bar', label: '3D surface profiling' },
-                    { icon: 'ph-bluetooth', label: 'Bluetooth joystick control' },
-                  ].map((feat) => (
-                    <div key={feat.label} className="flex items-center gap-2 text-xs text-[var(--text-secondary)]">
-                      <i className={`ph ${feat.icon} text-[var(--accent-primary)] text-base flex-shrink-0`}></i>
-                      {feat.label}
-                    </div>
-                  ))}
-                </div>
-              </div>
-              {/* Image */}
-              <div className="relative bg-black border-l border-[var(--accent-primary)]/10 flex items-center justify-center min-h-72 lg:min-h-full">
-                <Image
-                  src="/assests/services/MICROQUBIC-MRCL.jpg"
-                  alt="Microqubic MRCL Series"
-                  fill
-                  className="object-contain p-6"
-                />
-              </div>
-            </div>
-          </div>
 
         </div>
       </div>

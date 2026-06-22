@@ -122,7 +122,7 @@ export default function Footer() {
                 <div>
                   <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-[var(--accent-primary)]">Corporate Office</p>
                   <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
-                    889/1435, 11th Cross Rd<br />MCECHS Layout, Jakkur<br />Bengaluru — 560064
+                    1341, Venkateshwara Nagar main road<br />MCECHS layout, Dr. Shivaram Karanth Nagar<br />Jakkur, Bengaluru — 560077
                   </p>
                   <a href="tel:+918045039946" className="mt-1 block text-sm text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors">+91 80 4503 9946</a>
                   <a href="mailto:info@infab-tech.com" className="block text-sm text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors">info@infab-tech.com</a>

@@ -63,10 +63,10 @@ export default function About() {
             {/* Card 1 */}
             <div className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
               <div className="text-3xl text-[var(--text-secondary)] mb-4 flex justify-center"><i className="ph ph-certificate"></i></div>
-              <div className="font-sans text-5xl font-bold leading-none text-[var(--text-primary)] mb-3">
-                <AnimatedNumber target={1} suffix="st" />
+              <div className="font-sans text-3xl font-bold leading-none text-[var(--text-primary)] mb-3">
+                IISc CeNSE
               </div>
-              <p className="text-sm font-medium text-[var(--text-secondary)] uppercase tracking-wider">CeNSE IISc Incubatee</p>
+              <p className="text-sm font-medium text-[var(--text-secondary)] uppercase tracking-wider">Incubated</p>
             </div>
 
             {/* Card 2 */}
@@ -89,11 +89,11 @@ export default function About() {
 
             {/* Card 4 */}
             <div className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5 lg:translate-y-8">
-              <div className="text-3xl text-[var(--text-secondary)] mb-4 flex justify-center"><i className="ph ph-sparkles"></i></div>
-              <div className="font-sans text-5xl font-bold leading-none text-[var(--text-primary)] mb-3">
-                <AnimatedNumber target={10} suffix="+" />
+              <div className="text-3xl text-[var(--text-secondary)] mb-4 flex justify-center"><i className="ph ph-seal-check"></i></div>
+              <div className="font-sans text-4xl font-bold leading-none text-[var(--text-primary)] mb-3">
+                ISO
               </div>
-              <p className="text-sm font-medium text-[var(--text-secondary)] uppercase tracking-wider">Industry Partners</p>
+              <p className="text-sm font-medium text-[var(--text-secondary)] uppercase tracking-wider">Certified</p>
             </div>
 
           </div>

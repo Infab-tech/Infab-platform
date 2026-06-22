@@ -215,19 +215,30 @@ export default async function NewsPage() {
         </div>
       </div>
 
-      {/* Subscribe CTA */}
+      {/* Connect CTA */}
       <div className="border-t border-[var(--border-primary)] bg-[var(--bg-secondary)] py-20">
         <div className="mx-auto max-w-7xl px-6 text-center">
-          <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-4">Stay up to date</h2>
+          <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-4">Have a question or partnership inquiry?</h2>
           <p className="text-[var(--text-secondary)] mb-8">
-            Get the latest INFAB news, product launches, and research updates.
+            Reach out to the INFAB team directly — we typically respond within one business day.
           </p>
-          <a
-            href="mailto:info@infabsemi.com?subject=Subscribe to INFAB Updates"
-            className="inline-flex h-12 items-center justify-center rounded-md bg-[var(--accent-primary)] px-8 text-sm font-semibold uppercase tracking-wider text-white transition-all hover:brightness-110"
-          >
-            Subscribe via Email
-          </a>
+          <div className="flex flex-wrap justify-center gap-4">
+            <a
+              href="https://wa.me/919980909371"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-12 items-center justify-center gap-3 rounded-md bg-[#25D366] px-8 text-sm font-semibold uppercase tracking-wider text-white transition-all hover:brightness-110"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256"><path d="M187.58,144.84l-32-16a8,8,0,0,0-8,.5l-14.69,9.8a40.55,40.55,0,0,1-16-16l9.8-14.69a8,8,0,0,0,.5-8l-16-32A8,8,0,0,0,104,64a40,40,0,0,0-40,40,88.1,88.1,0,0,0,88,88,40,40,0,0,0,40-40A8,8,0,0,0,187.58,144.84ZM152,176a72.08,72.08,0,0,1-72-72,24,24,0,0,1,19.29-23.54l11.48,22.95L101,117.11a8,8,0,0,0-.73,7.65,56.47,56.47,0,0,0,30.15,30.15,8,8,0,0,0,7.65-.73l13.7-9.29L174.54,156.7A24,24,0,0,1,152,176ZM128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a88,88,0,0,1-44.06-11.81,8,8,0,0,0-6.54-.67L40,216l12.47-37.4a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Z"></path></svg>
+              WhatsApp Us
+            </a>
+            <Link
+              href="/contact"
+              className="inline-flex h-12 items-center justify-center rounded-md border border-[var(--accent-primary)] px-8 text-sm font-semibold uppercase tracking-wider text-[var(--accent-primary)] transition-all hover:bg-[var(--accent-primary)] hover:text-[var(--bg-primary)]"
+            >
+              Contact Page
+            </Link>
+          </div>
         </div>
       </div>
 

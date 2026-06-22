@@ -2,6 +2,7 @@ import { prisma } from '@/lib/supabase/prisma';
 import { updateApplicationStatus, deleteApplication } from '@/app/actions/admin';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import StatusForm from './StatusForm';
 
 export const metadata = { title: 'Applications | Admin Console' };
 
@@ -122,22 +123,7 @@ export default async function ApplicationsPage({ params }: { params: Promise<{ i
 
                     {/* Status */}
                     <td className="p-5">
-                      <form action={async (fd: FormData) => {
-                        'use server';
-                        const newStatus = fd.get('status') as string;
-                        await updateApplicationStatus(app.id, newStatus);
-                      }}>
-                        <select
-                          name="status"
-                          defaultValue={app.status}
-                          onChange={(e) => e.currentTarget.form?.requestSubmit()}
-                          className={`text-xs font-bold rounded px-2 py-1 border-0 cursor-pointer focus:outline-none focus:ring-1 focus:ring-[var(--accent-primary)] ${STATUS_STYLES[app.status]}`}
-                        >
-                          {ALL_STATUSES.map((s) => (
-                            <option key={s} value={s} className="bg-[var(--bg-primary)] text-[var(--text-primary)]">{s}</option>
-                          ))}
-                        </select>
-                      </form>
+                      <StatusForm appId={app.id} currentStatus={app.status} />
                     </td>
 
                     {/* Resume */}

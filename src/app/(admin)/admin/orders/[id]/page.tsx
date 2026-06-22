@@ -39,9 +39,9 @@ export default async function AdminQuoteDetailsPage({ params }: { params: Promis
         <div className="max-w-5xl mx-auto flex flex-col h-[calc(100vh-8rem)]">
             <div className="flex justify-between items-center mb-6 flex-shrink-0">
                 <div>
-                    <a href="/admin/orders" className="text-sm font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mb-2 inline-flex items-center gap-1">
+                    <Link href="/admin/orders" className="text-sm font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mb-2 inline-flex items-center gap-1">
                         <i className="ph ph-arrow-left"></i> Back to Quote Requests
-                    </a>
+                    </Link>
                     <h2 className="text-3xl font-bold flex items-center gap-4">
                         Quote #{quote.id.slice(-6).toUpperCase()}
                         <span className={`px-3 py-1 rounded text-xs font-bold uppercase tracking-wider ${
