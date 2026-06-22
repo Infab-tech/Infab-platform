@@ -3,12 +3,16 @@
 import { useState } from 'react';
 import { addNewProduct } from '@/app/actions/admin';
 import ImageUploader from '@/components/ui/ImageUploader';
+import DocUploader from '@/components/ui/DocUploader';
 import Link from 'next/link';
 
 export default function NewProductPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [datasheetUrl, setDatasheetUrl] = useState<string | null>(null);
+  const [drawingUrl, setDrawingUrl] = useState<string | null>(null);
+  const [cadFileUrls, setCadFileUrls] = useState<string[]>([]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -16,6 +20,9 @@ export default function NewProductPage() {
     setError(null);
     const fd = new FormData(e.currentTarget);
     fd.set('imageUrls', JSON.stringify(imageUrls));
+    fd.set('datasheetUrl', datasheetUrl ?? '');
+    fd.set('drawingUrl', drawingUrl ?? '');
+    fd.set('cadFileUrls', JSON.stringify(cadFileUrls));
     const result = await addNewProduct(fd);
     if (result && !result.success) {
       setError(result.message ?? 'Something went wrong.');
@@ -87,23 +94,21 @@ export default function NewProductPage() {
             <p className="text-xs text-[var(--text-secondary)]">Comma-separated. Each value becomes a pill badge on the product card.</p>
           </div>
 
-          {/* Document Links */}
+          {/* Downloadable Files */}
           <div className="flex flex-col gap-4 p-5 rounded-xl border border-[var(--text-primary)]/10 bg-[var(--text-primary)]/[0.02]">
-            <h3 className="font-mono text-xs font-semibold uppercase text-[var(--text-secondary)] mb-2 border-b border-[var(--text-primary)]/10 pb-2">Downloadable Files</h3>
-            
+            <h3 className="font-mono text-xs font-semibold uppercase text-[var(--text-secondary)] border-b border-[var(--text-primary)]/10 pb-2">
+              Downloadable Files <span className="normal-case font-normal text-[var(--text-secondary)]/60">(optional — shown as download buttons on product cards)</span>
+            </h3>
+            <DocUploader label="Datasheet (PDF)" existingUrl={null} onChange={setDatasheetUrl} />
+            <DocUploader label="2D Drawing (PDF)" existingUrl={null} onChange={setDrawingUrl} />
             <div className="flex flex-col gap-2">
-              <label htmlFor="datasheetUrl" className="font-mono text-[10px] font-semibold uppercase text-[var(--text-secondary)]">Datasheet URL</label>
-              <input type="url" id="datasheetUrl" name="datasheetUrl" placeholder="https://..." className="bg-[var(--bg-primary)] border border-[var(--text-primary)]/10 rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors" />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label htmlFor="drawingUrl" className="font-mono text-[10px] font-semibold uppercase text-[var(--text-secondary)]">2D Drawing URL</label>
-              <input type="url" id="drawingUrl" name="drawingUrl" placeholder="https://..." className="bg-[var(--bg-primary)] border border-[var(--text-primary)]/10 rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors" />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label htmlFor="cadFileUrls" className="font-mono text-[10px] font-semibold uppercase text-[var(--text-secondary)]">3D CAD Files URLs (JSON Array)</label>
-              <input type="text" id="cadFileUrls" name="cadFileUrls" placeholder='["https://..."]' className="bg-[var(--bg-primary)] border border-[var(--text-primary)]/10 rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors" />
+              <span className="font-mono text-[10px] font-semibold uppercase text-[var(--text-secondary)]">3D CAD File (PDF/ZIP)</span>
+              <DocUploader
+                label="3D CAD"
+                existingUrl={null}
+                onChange={(url) => setCadFileUrls(url ? [url] : [])}
+                accept=".pdf,.zip,application/pdf,application/zip"
+              />
             </div>
           </div>
 
@@ -113,7 +118,7 @@ export default function NewProductPage() {
               Product Images <span className="normal-case font-normal">(optional)</span>
             </p>
             <p className="text-xs text-[var(--text-secondary)] -mt-1">
-              Requires the <code className="font-mono text-[var(--accent-primary)]">product-images</code> Supabase Storage bucket to be created and set to public.
+              First image becomes the thumbnail. Requires the <code className="font-mono text-[var(--accent-primary)]">product-images</code> Supabase Storage bucket.
             </p>
             <ImageUploader onChange={setImageUrls} />
           </div>

@@ -46,9 +46,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'No file provided.' }, { status: 400 });
   }
 
-  const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+  const imageTypes = ['image/jpeg', 'image/png', 'image/webp'];
+  const docTypes = ['application/pdf'];
+  const isDocBucket = bucket === 'product-docs';
+  const allowedTypes = isDocBucket ? [...imageTypes, ...docTypes] : imageTypes;
   if (!allowedTypes.includes(file.type)) {
-    return NextResponse.json({ error: 'Invalid file type. Only JPEG, PNG, and WebP are allowed.' }, { status: 415 });
+    const msg = isDocBucket
+      ? 'Invalid file type. Only JPEG, PNG, WebP, and PDF are allowed.'
+      : 'Invalid file type. Only JPEG, PNG, and WebP are allowed.';
+    return NextResponse.json({ error: msg }, { status: 415 });
   }
 
   // Ensure bucket exists (creates it if not)

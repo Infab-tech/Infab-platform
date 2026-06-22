@@ -37,9 +37,9 @@ function getInitials(name: string): string {
 function LeadershipCard({ m }: { m: Member }) {
   return (
     <div className="rounded-2xl border border-[var(--accent-primary)]/30 bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/60 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/10 flex flex-col md:flex-row">
-      <div className="md:w-1/3 aspect-square md:aspect-auto md:min-h-full bg-[var(--bg-primary)] border-b md:border-b-0 md:border-r border-[var(--accent-primary)]/20 relative overflow-hidden flex-shrink-0">
+      <div className="w-full aspect-[4/3] md:w-56 md:aspect-auto md:min-h-[280px] bg-[var(--bg-primary)] border-b md:border-b-0 md:border-r border-[var(--accent-primary)]/20 relative overflow-hidden flex-shrink-0">
         {m.photo ? (
-          <Image src={m.photo} alt={m.name} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover object-top" />
+          <Image src={m.photo} alt={m.name} fill sizes="(max-width: 768px) 100vw, 224px" className="object-cover object-top" />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-5xl font-bold text-[var(--accent-primary)]/40 min-h-[300px]">
             {getInitials(m.name)}
@@ -69,11 +69,11 @@ function LeadershipCard({ m }: { m: Member }) {
 function MemberCard({ m }: { m: Member }) {
   return (
     <div className="group rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-xl hover:shadow-[var(--accent-primary)]/5 flex items-center p-4 gap-4">
-      <div className="w-20 h-20 rounded-full border border-[var(--border-primary)] relative overflow-hidden flex-shrink-0 bg-[var(--bg-primary)]">
+      <div className="w-28 h-28 rounded-xl border border-[var(--border-primary)] relative overflow-hidden flex-shrink-0 bg-[var(--bg-primary)]">
         {m.photo ? (
-          <Image src={m.photo} alt={m.name} fill sizes="80px" className="object-cover object-top transition-transform duration-500 group-hover:scale-110" />
+          <Image src={m.photo} alt={m.name} fill sizes="112px" className="object-cover object-top transition-transform duration-500 group-hover:scale-105" />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-xl font-bold text-[var(--accent-primary)]/40 bg-[var(--accent-primary)]/5">
+          <div className="w-full h-full flex items-center justify-center text-2xl font-bold text-[var(--accent-primary)]/40 bg-[var(--accent-primary)]/5">
             {getInitials(m.name)}
           </div>
         )}

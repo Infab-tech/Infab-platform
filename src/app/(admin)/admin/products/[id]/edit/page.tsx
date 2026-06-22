@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { updateProduct } from '@/app/actions/admin';
 import { useParams } from 'next/navigation';
 import ImageUploader from '@/components/ui/ImageUploader';
+import DocUploader from '@/components/ui/DocUploader';
 import Link from 'next/link';
 
 interface ProductData {
@@ -11,7 +12,7 @@ interface ProductData {
   name: string;
   category: string;
   description: string;
-  specs: string; // pre-joined comma string from API
+  specs: string;
   imageUrls: string[];
   datasheetUrl: string | null;
   drawingUrl: string | null;
@@ -25,6 +26,9 @@ export default function EditProductPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [datasheetUrl, setDatasheetUrl] = useState<string | null>(null);
+  const [drawingUrl, setDrawingUrl] = useState<string | null>(null);
+  const [cadFileUrls, setCadFileUrls] = useState<string[]>([]);
 
   useEffect(() => {
     fetch(`/api/admin/products/${id}`)
@@ -32,6 +36,9 @@ export default function EditProductPage() {
       .then((data) => {
         setProduct(data);
         setImageUrls(data.imageUrls ?? []);
+        setDatasheetUrl(data.datasheetUrl ?? null);
+        setDrawingUrl(data.drawingUrl ?? null);
+        setCadFileUrls(data.cadFileUrls ?? []);
         setLoading(false);
       })
       .catch(() => { setError('Failed to load product.'); setLoading(false); });
@@ -43,6 +50,9 @@ export default function EditProductPage() {
     setError(null);
     const fd = new FormData(e.currentTarget);
     fd.set('imageUrls', JSON.stringify(imageUrls));
+    fd.set('datasheetUrl', datasheetUrl ?? '');
+    fd.set('drawingUrl', drawingUrl ?? '');
+    fd.set('cadFileUrls', JSON.stringify(cadFileUrls));
     const result = await updateProduct(id, fd);
     if (result && !result.success) {
       setError(result.message ?? 'Something went wrong.');
@@ -124,24 +134,19 @@ export default function EditProductPage() {
             <p className="text-xs text-[var(--text-secondary)]">Comma-separated. Each value becomes a pill badge on the product card.</p>
           </div>
 
-          {/* Document Links */}
+          {/* Downloadable Files */}
           <div className="flex flex-col gap-4 p-5 rounded-xl border border-[var(--text-primary)]/10 bg-[var(--text-primary)]/[0.02]">
-            <h3 className="font-mono text-xs font-semibold uppercase text-[var(--text-secondary)] mb-2 border-b border-[var(--text-primary)]/10 pb-2">Downloadable Files</h3>
-            
-            <div className="flex flex-col gap-2">
-              <label htmlFor="datasheetUrl" className="font-mono text-[10px] font-semibold uppercase text-[var(--text-secondary)]">Datasheet URL</label>
-              <input type="url" id="datasheetUrl" name="datasheetUrl" defaultValue={product.datasheetUrl || ''} placeholder="https://..." className="bg-[var(--bg-primary)] border border-[var(--text-primary)]/10 rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors" />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label htmlFor="drawingUrl" className="font-mono text-[10px] font-semibold uppercase text-[var(--text-secondary)]">2D Drawing URL</label>
-              <input type="url" id="drawingUrl" name="drawingUrl" defaultValue={product.drawingUrl || ''} placeholder="https://..." className="bg-[var(--bg-primary)] border border-[var(--text-primary)]/10 rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors" />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label htmlFor="cadFileUrls" className="font-mono text-[10px] font-semibold uppercase text-[var(--text-secondary)]">3D CAD Files URLs (JSON Array)</label>
-              <input type="text" id="cadFileUrls" name="cadFileUrls" defaultValue={product.cadFileUrls ? JSON.stringify(product.cadFileUrls) : '[]'} placeholder='["https://..."]' className="bg-[var(--bg-primary)] border border-[var(--text-primary)]/10 rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors" />
-            </div>
+            <h3 className="font-mono text-xs font-semibold uppercase text-[var(--text-secondary)] border-b border-[var(--text-primary)]/10 pb-2">
+              Downloadable Files <span className="normal-case font-normal text-[var(--text-secondary)]/60">(optional)</span>
+            </h3>
+            <DocUploader label="Datasheet (PDF)" existingUrl={datasheetUrl} onChange={setDatasheetUrl} />
+            <DocUploader label="2D Drawing (PDF)" existingUrl={drawingUrl} onChange={setDrawingUrl} />
+            <DocUploader
+              label="3D CAD File"
+              existingUrl={cadFileUrls[0] ?? null}
+              onChange={(url) => setCadFileUrls(url ? [url] : [])}
+              accept=".pdf,.zip,application/pdf,application/zip"
+            />
           </div>
 
           <div className="flex flex-col gap-2">
