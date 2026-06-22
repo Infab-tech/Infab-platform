@@ -83,7 +83,16 @@ export default async function AdminCareersPage({ searchParams }: { searchParams:
                 <tr key={job.id} className="border-b border-[var(--text-primary)]/5 hover:bg-[var(--text-primary)]/[0.02] transition-colors text-[var(--text-primary)]">
                   <td className="p-5">
                     <div className="font-semibold text-[var(--text-primary)]">{job.title}</div>
-                    <div className="text-xs text-[var(--text-secondary)] line-clamp-1">{job.description}</div>
+                    <div className="text-xs text-[var(--text-secondary)] line-clamp-1 mt-0.5">{job.description}</div>
+                    {job.applyLink ? (
+                      <a href={job.applyLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 mt-1 text-[10px] font-mono text-[var(--accent-primary)] hover:underline truncate max-w-xs">
+                        <i className="ph ph-link text-xs"></i> {job.applyLink}
+                      </a>
+                    ) : (
+                      <span className="inline-flex items-center gap-1 mt-1 text-[10px] font-mono text-[var(--text-secondary)]/50">
+                        <i className="ph ph-envelope-simple text-xs"></i> mailto fallback
+                      </span>
+                    )}
                   </td>
                   <td className="p-5">
                     <span className="px-2 py-1 bg-[var(--text-primary)]/5 rounded text-xs">{job.department}</span>

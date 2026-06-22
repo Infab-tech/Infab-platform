@@ -45,53 +45,52 @@ export default async function CareersPage() {
 
           {jobs.length > 0 ? (
             <div className="flex flex-col gap-6">
-              {jobs.map((job) => (
-                <div key={job.id} className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-xl hover:shadow-[var(--accent-primary)]/5">
-                  <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
-                    <div>
-                      <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-2">{job.title}</h3>
-                      <div className="flex flex-wrap gap-2">
-                        <span className="inline-flex px-3 py-1 rounded bg-[var(--text-primary)]/5 text-xs font-mono font-bold tracking-wider text-[var(--text-secondary)]">
-                          {job.department}
-                        </span>
-                        <span className="inline-flex px-3 py-1 rounded bg-[var(--text-primary)]/5 text-xs font-mono font-bold tracking-wider text-[var(--text-secondary)]">
-                          {job.location}
-                        </span>
-                        <span className="inline-flex px-3 py-1 rounded bg-[var(--text-primary)]/5 text-xs font-mono font-bold tracking-wider text-[var(--text-secondary)]">
-                          {job.type}
-                        </span>
+              {jobs.map((job) => {
+                const applyHref = job.applyLink || `mailto:info@infabsemi.com?subject=Application for ${encodeURIComponent(job.title)}`;
+                return (
+                  <div key={job.id} className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-xl hover:shadow-[var(--accent-primary)]/5">
+                    <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
+                      <div>
+                        <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-2">{job.title}</h3>
+                        <div className="flex flex-wrap gap-2">
+                          <span className="inline-flex px-3 py-1 rounded bg-[var(--text-primary)]/5 text-xs font-mono font-bold tracking-wider text-[var(--text-secondary)]">
+                            {job.department}
+                          </span>
+                          <span className="inline-flex px-3 py-1 rounded bg-[var(--text-primary)]/5 text-xs font-mono font-bold tracking-wider text-[var(--text-secondary)]">
+                            {job.location}
+                          </span>
+                          <span className="inline-flex px-3 py-1 rounded bg-[var(--text-primary)]/5 text-xs font-mono font-bold tracking-wider text-[var(--text-secondary)]">
+                            {job.type.replace(/_/g, ' ')}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  
-                  <div className="text-[var(--text-secondary)] prose prose-sm prose-invert max-w-none mb-8 whitespace-pre-wrap">
-                    {job.description}
-                  </div>
 
-                  <div className="border-t border-[var(--border-primary)] pt-6 flex justify-end">
-                    <Link
-                      href={`mailto:info@infabsemi.com?subject=Application for ${encodeURIComponent(job.title)}`}
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-[var(--accent-primary)] px-6 text-xs font-semibold uppercase tracking-wider text-[var(--bg-primary)] transition-all hover:brightness-110"
-                    >
-                      Apply Now
-                    </Link>
+                    <div className="text-[var(--text-secondary)] prose prose-sm prose-invert max-w-none mb-8 whitespace-pre-wrap">
+                      {job.description}
+                    </div>
+
+                    <div className="border-t border-[var(--border-primary)] pt-6 flex justify-end">
+                      <a
+                        href={applyHref}
+                        target={job.applyLink ? '_blank' : undefined}
+                        rel={job.applyLink ? 'noopener noreferrer' : undefined}
+                        className="inline-flex h-10 items-center justify-center rounded-md bg-[var(--accent-primary)] px-6 text-xs font-semibold uppercase tracking-wider text-[var(--bg-primary)] transition-all hover:brightness-110"
+                      >
+                        Apply Now
+                      </a>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           ) : (
             <div className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-12 text-center">
               <i className="ph ph-briefcase text-4xl text-[var(--text-secondary)]/30 mb-4 inline-block"></i>
               <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2">No open positions right now</h3>
-              <p className="text-[var(--text-secondary)] mb-6">
-                We aren&apos;t actively hiring for any specific roles at the moment, but we&apos;re always eager to meet talented people.
+              <p className="text-[var(--text-secondary)]">
+                We aren&apos;t actively hiring for any specific roles at the moment, but we&apos;re always eager to meet talented people. Check back soon.
               </p>
-              <Link
-                href="mailto:info@infabsemi.com?subject=General Application"
-                className="inline-flex h-10 items-center justify-center rounded-md border border-[var(--accent-primary)]/40 px-6 text-xs font-semibold uppercase tracking-wider text-[var(--accent-primary)] transition-all hover:bg-[var(--accent-primary)] hover:text-[var(--bg-primary)]"
-              >
-                Send Open Application
-              </Link>
             </div>
           )}
         </div>

@@ -15,7 +15,7 @@ export default function Home() {
       <CtaBanner />
       <News />
       <Partners />
-      <Recognitions />
+      <Recognitions limit={3} />
     </div>
   );
 }

@@ -12,7 +12,7 @@ interface RecShape {
   logoUrl: string | null;
 }
 
-export default async function Recognitions() {
+export default async function Recognitions({ limit }: { limit?: number } = {}) {
   let recs: RecShape[] = [];
 
   try {
@@ -42,6 +42,8 @@ export default async function Recognitions() {
 
   if (recs.length === 0) return null;
 
+  const visible = limit ? recs.slice(0, limit) : recs;
+
   return (
     <section className="py-24 bg-[var(--bg-secondary)] border-t border-[var(--border-primary)]" id="recognition">
       <div className="mx-auto max-w-7xl px-6">
@@ -68,7 +70,7 @@ export default async function Recognitions() {
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {recs.map((rec) => (
+          {visible.map((rec) => (
             <article
               key={rec.id}
               className="group flex flex-col rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden transition-all duration-300 hover:border-[var(--accent-primary)]/30 hover:shadow-xl hover:shadow-[var(--accent-primary)]/5"
