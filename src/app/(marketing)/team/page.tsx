@@ -135,7 +135,7 @@ export default async function TeamPage() {
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-[var(--text-primary)] mb-6 leading-tight max-w-3xl">Our Team</h1>
           <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
           <p className="text-xl text-[var(--text-secondary)] leading-relaxed max-w-2xl">
-            {totalCount} passionate technologists, scientists, and operators building India&apos;s most advanced MEMS and microfluidics company from IISc CeNSE, Bengaluru.
+            Passionate technologists, scientists, and operators building India&apos;s most advanced MEMS and microfluidics company from IISc CeNSE, Bengaluru.
           </p>
         </div>
       </div>

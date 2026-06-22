@@ -14,13 +14,15 @@ export default async function AdminCareersPage({ searchParams }: { searchParams:
   const totalJobs = await prisma.jobOpening.count();
   const totalPages = Math.ceil(totalJobs / PAGE_SIZE);
 
-  let jobs: Awaited<ReturnType<typeof prisma.jobOpening.findMany>> = [];
+  type JobWithCount = Awaited<ReturnType<typeof prisma.jobOpening.findMany>>[0] & { _count: { applications: number } };
+  let jobs: JobWithCount[] = [];
   try {
-    jobs = await prisma.jobOpening.findMany({ 
+    jobs = await prisma.jobOpening.findMany({
         orderBy: [{ createdAt: 'desc' }],
         skip: (currentPage - 1) * PAGE_SIZE,
         take: PAGE_SIZE,
-    });
+        include: { _count: { select: { applications: true } } },
+    }) as JobWithCount[];
   } catch {
     // DB not connected yet
   }
@@ -68,13 +70,14 @@ export default async function AdminCareersPage({ searchParams }: { searchParams:
                 <th className="p-5 font-semibold">Type</th>
                 <th className="p-5 font-semibold">Location</th>
                 <th className="p-5 font-semibold">Status</th>
+                <th className="p-5 font-semibold">Applications</th>
                 <th className="p-5 font-semibold text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="text-sm">
               {jobs.length === 0 && (
                 <tr>
-                  <td colSpan={6} className="p-10 text-center text-[var(--text-secondary)]">
+                  <td colSpan={7} className="p-10 text-center text-[var(--text-secondary)]">
                     No job openings yet. Click &ldquo;+ Add Job&rdquo;.
                   </td>
                 </tr>
@@ -113,6 +116,19 @@ export default async function AdminCareersPage({ searchParams }: { searchParams:
                         <span className="w-2 h-2 rounded-full bg-red-500"></span> Hidden
                       </span>
                     )}
+                  </td>
+                  <td className="p-5">
+                    <Link
+                      href={`/admin/careers/${job.id}/applications`}
+                      className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded transition-colors
+                        ${job._count.applications > 0
+                          ? 'bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] hover:bg-[var(--accent-primary)]/20'
+                          : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                        }`}
+                    >
+                      <i className="ph ph-users"></i>
+                      {job._count.applications}
+                    </Link>
                   </td>
                   <td className="p-5">
                     <div className="flex justify-end gap-3">

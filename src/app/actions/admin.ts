@@ -695,4 +695,18 @@ export async function deletePartner(id: string) {
     revalidatePath('/admin/partners');
     revalidatePath('/');
 }
+
+// ── Job Application Actions ───────────────────────────────────────────────────
+
+export async function updateApplicationStatus(id: string, status: string) {
+    await verifyAdmin();
+    await prisma.jobApplication.update({ where: { id }, data: { status: status as any } });
+    revalidatePath('/admin/careers');
+}
+
+export async function deleteApplication(id: string) {
+    await verifyAdmin();
+    await prisma.jobApplication.delete({ where: { id } });
+    revalidatePath('/admin/careers');
+}
 

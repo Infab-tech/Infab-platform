@@ -165,21 +165,48 @@ model CartDraft {
 
 // 12. CAREERS
 model JobOpening {
-  id           String      @id @default(cuid())
+  id           String           @id @default(cuid())
   title        String
   department   String
-  type         JobType     // FULL_TIME | PART_TIME | INTERNSHIP
-  location     String      @default("Bangalore, India")
+  type         JobType
+  location     String           @default("Bangalore, India")
   description  String
   requirements String[]
   deadline     DateTime?
   applyLink    String?
-  isActive     Boolean     @default(true)
-  createdAt    DateTime    @default(now())
+  isActive     Boolean          @default(true)
+  createdAt    DateTime         @default(now())
+
+  applications JobApplication[]
 }
 
 enum JobType {
   FULL_TIME
   PART_TIME
+  CONTRACT
   INTERNSHIP
+}
+
+// 13. JOB APPLICATIONS
+model JobApplication {
+  id          String            @id @default(cuid())
+  jobId       String
+  job         JobOpening        @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  name        String
+  email       String
+  phone       String?
+  coverLetter String?           @db.Text
+  resumeUrl   String
+  status      ApplicationStatus @default(NEW)
+  createdAt   DateTime          @default(now())
+
+  @@index([jobId])
+  @@index([status])
+}
+
+enum ApplicationStatus {
+  NEW
+  REVIEWED
+  SHORTLISTED
+  REJECTED
 }
