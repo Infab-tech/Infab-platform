@@ -8,21 +8,21 @@ export default function About() {
       <div className="mx-auto max-w-7xl px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
 
-          {/* Left Column: Clean, editorial typography */}
+          {/* Left Column */}
           <div>
             <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">
-              Deep-Tech Pioneering
+              Who We Are
             </span>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight text-[var(--text-primary)] leading-tight">
-              Engineering the future of micro-systems.
+              Precision-built MEMS.<br />Made in India.
             </h2>
             <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
 
             <p className="text-[var(--text-secondary)] mb-6 text-lg leading-relaxed">
-              Incubated at <strong className="text-[var(--text-primary)] font-medium">CeNSE, Indian Institute of Science (IISc), Bengaluru</strong>, INFAB Semiconductor Pvt. Ltd is a pioneering Indian deep-tech company specialising in the design, development, and manufacturing of advanced MEMS sensors, actuators, and microfluidic devices.
+              INFAB Semiconductor designs and manufactures MEMS sensors, microfluidic chips, and semiconductor devices — handling everything in-house from design through fabrication, test, and packaging. Incubated at <strong className="text-[var(--text-primary)] font-medium">InCeNSE, Bengaluru</strong>.
             </p>
             <p className="text-[var(--text-secondary)] mb-10 text-lg leading-relaxed">
-              Combining world-class facilities with cutting-edge expertise, we build Made-in-India innovations — from aerospace pressure transducers to custom glass-bonding mRNA chips — for the world.
+              Our devices fly in aircraft, enable drug discovery in labs, and push India&apos;s semiconductor capability forward — serving aerospace, healthcare, and MEMS fabrication clients from a single Bengaluru facility.
             </p>
 
             {/* Three Pillars */}
@@ -32,8 +32,8 @@ export default function About() {
                   <i className="ph ph-lightbulb-filament text-2xl text-[var(--text-primary)]"></i>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Innovation</h3>
-                  <p className="text-[var(--text-secondary)]">Leveraging advanced fabrication techniques to deliver breakthrough MEMS and microfluidics technologies.</p>
+                  <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Designed Here</h3>
+                  <p className="text-[var(--text-secondary)]">Every device is engineered from scratch for your application — not adapted from a catalog. Concept feasibility to tape-out-ready layouts, entirely in-house.</p>
                 </div>
               </div>
               <div className="flex gap-5 items-start">
@@ -41,8 +41,8 @@ export default function About() {
                   <i className="ph ph-shield-check text-2xl text-[var(--text-primary)]"></i>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Quality</h3>
-                  <p className="text-[var(--text-secondary)]">Delivering devices that meet the most stringent performance and reliability standards — ISO 9001 &amp; AS 9100D certified.</p>
+                  <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Certified Quality</h3>
+                  <p className="text-[var(--text-secondary)]">ISO 9001:2015 and AS 9100D certified. Every device ships with full test data and traceability — no shortcuts on process qualification.</p>
                 </div>
               </div>
               <div className="flex gap-5 items-start">
@@ -50,21 +50,21 @@ export default function About() {
                   <i className="ph ph-globe-hemisphere-east text-2xl text-[var(--text-primary)]"></i>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Impact</h3>
-                  <p className="text-[var(--text-secondary)]">Powering critical sectors — aerospace, healthcare, and life sciences — with Indian-made hardware solutions.</p>
+                  <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-1">3 Markets</h3>
+                  <p className="text-[var(--text-secondary)]">Aerospace &amp; Defence, Healthcare &amp; Life Sciences, Semiconductor MEMS — all served from one facility, without outsourcing your IP.</p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Premium Solid Cards */}
+          {/* Right Column: Stat Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
             {/* Card 1 */}
             <div className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
               <div className="text-3xl text-[var(--text-secondary)] mb-4 flex justify-center"><i className="ph ph-certificate"></i></div>
               <div className="font-sans text-3xl font-bold leading-none text-[var(--text-primary)] mb-3">
-                IISc CeNSE
+                InCeNSE
               </div>
               <p className="text-sm font-medium text-[var(--text-secondary)] uppercase tracking-wider">Incubated</p>
             </div>

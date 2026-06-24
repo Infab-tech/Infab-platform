@@ -33,6 +33,8 @@ const NAV_SECTIONS: NavSection[] = [
         title: 'Content',
         items: [
             { href: '/admin/products', icon: 'ph-package', label: 'Products' },
+            { href: '/admin/services', icon: 'ph-wrench', label: 'Services' },
+            { href: '/admin/facilities', icon: 'ph-factory', label: 'Facilities' },
             { href: '/admin/news', icon: 'ph-newspaper', label: 'News' },
             { href: '/admin/team', icon: 'ph-users-three', label: 'Team' },
             { href: '/admin/recognitions', icon: 'ph-seal-check', label: 'Recognitions' },

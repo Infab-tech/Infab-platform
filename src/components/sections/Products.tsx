@@ -37,7 +37,7 @@ const markets: Market[] = [
         id: "mems",
         tag: "MEMS & Semiconductor",
         title: "Semiconductor Fabrication Services",
-        description: "Comprehensive MEMS and semiconductor fabrication using state-of-the-art cleanroom facilities at IISc CeNSE — supporting prototyping and production.",
+        description: "End-to-end MEMS design through fabrication — your device from concept to qualified part. No overseas foundry, no IP risk. Prototyping to small-volume production.",
         icon: "ph-cpu",
         image: "/assests/ia_1000000002-600x375.jpg",
         links: ["MEMS Device", "Silicon Photonics", "Advanced Semiconductor Devices"],

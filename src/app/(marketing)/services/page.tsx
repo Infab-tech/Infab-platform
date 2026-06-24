@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { prisma } from '@/lib/supabase/prisma';
+import { FALLBACK_FACILITIES, FALLBACK_SERVICE_ITEMS } from '@/lib/content-defaults';
 
 export const metadata: Metadata = {
   title: 'Services | INFAB Semiconductor',
-  description: 'End-to-end MEMS and microfluidics services — from concept to qualified device — using world-class cleanroom facilities at IISc CeNSE.',
+  description: 'End-to-end MEMS and microfluidics services — from concept to qualified device. Custom MEMS design, silicon micromachining, microfluidic fabrication, and cleanroom services in Bengaluru.',
 };
 
 // MEMS capabilities — matches infabsemi.com MEMS page exactly
@@ -81,7 +83,35 @@ const facilities = [
   { icon: 'ph-printer', title: '3D Printing', description: 'Rapid prototyping with high-resolution 3D printing for jigs, fixtures, and custom microfluidic housings to accelerate device packaging and testing.', photo: null },
 ];
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  // Fetch from DB, fall back to hardcoded content
+  let dbFacilities: { icon: string; title: string; description: string; photoUrl: string | null }[] = [];
+  let dbMEMSCapabilities: { icon: string; title: string; description: string }[] = [];
+  let dbMEMSProcesses: { icon: string; title: string; description: string; detail: string | null }[] = [];
+  let dbMicroDesign: { icon: string; title: string; description: string }[] = [];
+  let dbMicroFab: { icon: string; title: string; description: string }[] = [];
+  let dbMicroDevices: { title: string; description: string }[] = [];
+
+  try {
+    const [facItems, svcItems] = await Promise.all([
+      prisma.facilityItem.findMany({ where: { isActive: true }, orderBy: { order: 'asc' } }),
+      prisma.serviceItem.findMany({ where: { isActive: true }, orderBy: { order: 'asc' } }),
+    ]);
+    if (facItems.length > 0) dbFacilities = facItems;
+    const byCat = (cat: string) => svcItems.filter((s) => s.category === cat);
+    if (byCat('mems-capability').length > 0) dbMEMSCapabilities = byCat('mems-capability');
+    if (byCat('mems-process').length > 0) dbMEMSProcesses = byCat('mems-process');
+    if (byCat('micro-design').length > 0) dbMicroDesign = byCat('micro-design');
+    if (byCat('micro-fab').length > 0) dbMicroFab = byCat('micro-fab');
+    if (byCat('micro-device').length > 0) dbMicroDevices = byCat('micro-device');
+  } catch { /* use hardcoded fallback */ }
+
+  const activeFacilities = dbFacilities.length > 0 ? dbFacilities : FALLBACK_FACILITIES.map((f) => ({ ...f, photoUrl: f.photoUrl ?? null }));
+  const activeCapabilities = dbMEMSCapabilities.length > 0 ? dbMEMSCapabilities : memsCapabilities;
+  const activeProcesses = dbMEMSProcesses.length > 0 ? dbMEMSProcesses : memsProcesses;
+  const activeDesign = dbMicroDesign.length > 0 ? dbMicroDesign : microfluidicsDesign;
+  const activeFab = dbMicroFab.length > 0 ? dbMicroFab : microfluidicsFabrication;
+  const activeDevices = dbMicroDevices.length > 0 ? dbMicroDevices : microfluidicsDevices;
   return (
     <div className="bg-[var(--bg-primary)]">
 
@@ -92,7 +122,7 @@ export default function ServicesPage() {
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-[var(--text-primary)] mb-6 leading-tight max-w-3xl">Services</h1>
           <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
           <p className="text-xl text-[var(--text-secondary)] leading-relaxed max-w-2xl">
-            End-to-end MEMS and microfluidics services — from concept to qualified device — using world-class cleanroom facilities at IISc CeNSE.
+            End-to-end MEMS and microfluidics services — from concept to qualified device. Custom design, fabrication, characterisation, and packaging under one roof in Bengaluru.
           </p>
         </div>
       </div>
@@ -124,7 +154,7 @@ export default function ServicesPage() {
               <h2 className="text-4xl font-bold tracking-tight text-[var(--text-primary)] mb-6">MEMS Fabrication Services</h2>
               <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
               <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
-                From concept to qualified device — INFAB offers end-to-end MEMS design and fabrication services backed by world-class cleanroom capabilities at IISc CeNSE. Our experienced team supports clients from research institutions to industrial OEMs, covering the complete MEMS development lifecycle.
+                From concept to qualified device — INFAB offers end-to-end MEMS design and fabrication services backed by cleanroom capabilities in Bengaluru. Our team supports research institutions and industrial OEMs through the complete MEMS development lifecycle.
               </p>
             </div>
             <div className="flex flex-col gap-4">
@@ -145,7 +175,7 @@ export default function ServicesPage() {
 
           {/* 6 capability cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {memsCapabilities.map((cap) => (
+            {activeCapabilities.map((cap) => (
               <div key={cap.title} className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-primary)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
                 <div className="w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex items-center justify-center mb-5">
                   <i className={`ph ${cap.icon} text-xl text-[var(--accent-primary)]`}></i>
@@ -160,7 +190,7 @@ export default function ServicesPage() {
           <div className="pt-10 border-t border-[var(--border-primary)]">
             <p className="font-mono text-xs font-semibold uppercase tracking-widest text-[var(--accent-primary)] mb-6">Core Process Capabilities</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {memsProcesses.map((p) => (
+              {activeProcesses.map((p) => (
                 <div key={p.title} className="flex gap-5 items-start rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-primary)] p-6 transition-all duration-300 hover:border-[var(--accent-primary)]/40">
                   <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex items-center justify-center">
                     <i className={`ph ${p.icon} text-lg text-[var(--accent-primary)]`}></i>
@@ -194,7 +224,7 @@ export default function ServicesPage() {
             <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2">Design Services</h3>
             <div className="w-8 h-0.5 bg-[var(--accent-primary)] mb-8"></div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {microfluidicsDesign.map((item) => (
+              {activeDesign.map((item) => (
                 <div key={item.title} className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-xl hover:shadow-[var(--accent-primary)]/5">
                   <div className="w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex items-center justify-center mb-5">
                     <i className={`ph ${item.icon} text-xl text-[var(--accent-primary)]`}></i>
@@ -211,7 +241,7 @@ export default function ServicesPage() {
             <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2">Fabrication Services</h3>
             <div className="w-8 h-0.5 bg-[var(--accent-primary)] mb-8"></div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {microfluidicsFabrication.map((item) => (
+              {activeFab.map((item) => (
                 <div key={item.title} className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-xl hover:shadow-[var(--accent-primary)]/5">
                   <div className="w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex items-center justify-center mb-5">
                     <i className={`ph ${item.icon} text-xl text-[var(--accent-primary)]`}></i>
@@ -228,7 +258,7 @@ export default function ServicesPage() {
             <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2">Microfluidic Devices</h3>
             <div className="w-8 h-0.5 bg-[var(--accent-primary)] mb-8"></div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {microfluidicsDevices.map((dev) => (
+              {activeDevices.map((dev) => (
                 <div key={dev.title} className="rounded-2xl border border-[var(--accent-primary)]/20 bg-[var(--bg-secondary)] p-8 hover:border-[var(--accent-primary)]/40 transition-colors">
                   <h4 className="text-base font-bold text-[var(--text-primary)] mb-3">{dev.title}</h4>
                   <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{dev.description}</p>
@@ -294,11 +324,11 @@ export default function ServicesPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {facilities.map((f) => (
+            {activeFacilities.map((f) => (
               <div key={f.title} className="group rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
                 <div className="h-44 overflow-hidden border-b border-[var(--border-primary)] bg-[var(--bg-primary)] flex items-center justify-center">
-                  {f.photo ? (
-                    <Image src={f.photo} alt={f.title} width={480} height={176} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  {f.photoUrl ? (
+                    <Image src={f.photoUrl} alt={f.title} width={480} height={176} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   ) : (
                     <i className={`ph ${f.icon} text-6xl text-[var(--accent-primary)]/20`}></i>
                   )}

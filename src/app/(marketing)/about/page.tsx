@@ -3,7 +3,7 @@ import Recognitions from '@/components/sections/Recognitions';
 
 export const metadata: Metadata = {
   title: 'About Us | INFAB Semiconductor',
-  description: 'Pioneering Indian deep-tech company specializing in advanced MEMS sensors, actuators, and microfluidic devices. Incubated at CeNSE, IISc Bengaluru.',
+  description: 'INFAB Semiconductor — MEMS sensors, microfluidic chips, and semiconductor fabrication services, designed and built in Bengaluru. InCeNSE incubated. ISO 9001 & AS 9100D certified.',
 };
 
 const values = [
@@ -24,7 +24,7 @@ const values = [
   },
 ];
 
-const supporters = ['AIC', 'BIRAC', 'INCENSE', 'CDIIC', 'Elevate', 'fSID', 'MeitY'];
+const supporters = ['AIC', 'BIRAC', 'InCeNSE', 'CDIIC', 'Elevate', 'fSID', 'MeitY'];
 
 export default function AboutPage() {
   return (
@@ -41,7 +41,7 @@ export default function AboutPage() {
           </h1>
           <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
           <p className="text-xl text-[var(--text-secondary)] leading-relaxed max-w-2xl">
-            Pioneering India&apos;s deep-tech future through precision MEMS engineering, microfluidic innovation, and world-class semiconductor fabrication.
+            Designing and manufacturing MEMS sensors, microfluidic chips, and semiconductor devices — entirely in Bengaluru, for clients across aerospace, healthcare, and research.
           </p>
         </div>
       </div>
@@ -62,7 +62,7 @@ export default function AboutPage() {
               </h2>
               <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
               <p className="text-[var(--text-secondary)] text-lg leading-relaxed mb-6">
-                INFAB Semiconductor Pvt. Ltd is a pioneering Indian deep-tech company specialising in the design, development, and manufacturing of advanced MEMS sensors, actuators, and microfluidic devices. Headquartered in Bengaluru and incubated at the <strong className="text-[var(--text-primary)] font-medium">Centre for Nano Science and Engineering (CeNSE), Indian Institute of Science</strong>, we combine world-class cleanroom facilities with cutting-edge expertise to build Made-in-India innovations for the world.
+                INFAB Semiconductor Pvt. Ltd designs and manufactures MEMS sensors, actuators, and microfluidic devices. Headquartered in Bengaluru and incubated at <strong className="text-[var(--text-primary)] font-medium">InCeNSE</strong>, we handle the full development cycle — design, fabrication, test, and packaging — under one roof, building Made-in-India products for global applications.
               </p>
               <p className="text-[var(--text-secondary)] text-lg leading-relaxed mb-6">
                 Our portfolio includes MEMS pressure transducers, pressure switches, Hall sensors, flow sensors, and microfluidic chips — engineered for exceptional precision and reliability. We also offer advanced semiconductor process services to accelerate next-generation device development.
@@ -80,12 +80,12 @@ export default function AboutPage() {
                     <i className="ph ph-flask text-2xl text-[var(--accent-primary)]"></i>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-[var(--text-primary)]">Incubated at IISc CeNSE</h3>
+                    <h3 className="text-lg font-bold text-[var(--text-primary)]">Incubated at InCeNSE</h3>
                     <p className="text-xs font-mono uppercase tracking-wider text-[var(--accent-primary)]">InCeNSE, Bengaluru</p>
                   </div>
                 </div>
                 <p className="text-[var(--text-secondary)] leading-relaxed mb-6">
-                  INFAB Semiconductor is incubated at <strong className="text-[var(--text-primary)]">InCeNSE</strong> — the incubator at the Centre for Nano Science and Engineering (CeNSE), Indian Institute of Science (IISc). This partnership gives us direct access to world-class cleanroom facilities, scientific expertise, and a vibrant deep-tech innovation ecosystem.
+                  INFAB Semiconductor is incubated at <strong className="text-[var(--text-primary)]">InCeNSE</strong> — the deep-tech incubator at the Centre for Nano Science and Engineering, Bengaluru. This gives us direct access to cleanroom facilities, scientific expertise, and a connected deep-tech ecosystem.
                 </p>
                 <div className="border-t border-[var(--border-primary)] pt-6">
                   <p className="font-mono text-xs uppercase tracking-wider text-[var(--text-secondary)] mb-3">Supported by</p>
@@ -105,7 +105,7 @@ export default function AboutPage() {
                   <h4 className="font-bold text-[var(--text-primary)]">Bengaluru, Karnataka</h4>
                 </div>
                 <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                  Operating from two sites — our R&amp;D cleanroom at IISc campus and our corporate office &amp; lab in Jakkur, with direct access to India&apos;s finest academic semiconductor infrastructure.
+                  Operating from two sites — our R&amp;D cleanroom at InCeNSE and our corporate office &amp; lab in Jakkur, Bengaluru.
                 </p>
               </div>
             </div>
@@ -133,7 +133,7 @@ export default function AboutPage() {
               <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-4">Our Mission</h3>
               <div className="w-8 h-0.5 bg-[var(--accent-primary)] mb-6"></div>
               <p className="text-[var(--text-secondary)] leading-relaxed text-lg">
-                To translate pioneering research into transformative industrial applications through state-of-the-art MEMS and Microfluidics technologies — designed and manufactured in India to the highest international standards of quality, reliability, and performance.
+                To translate research into industrial applications through MEMS and microfluidics technologies — designed and manufactured entirely in India, certified to the highest international quality and reliability standards.
               </p>
             </div>
             <div className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-primary)] p-10 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">

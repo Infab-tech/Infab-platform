@@ -195,7 +195,7 @@ export interface DefaultTeamMember {
 
 export const FALLBACK_TEAM: DefaultTeamMember[] = [
   // FOUNDER
-  { name: 'Muthuraman Swaminathan', title: 'Founder & CEO', section: 'FOUNDER', order: 1, photoUrl: '/team/1.jpg', bio: "Driving INFAB's mission to create a bridge between fundamental research and industrial deployment through cutting-edge MEMS and microfluidic innovation. Incubated at CeNSE, IISc Bangalore." },
+  { name: 'Muthuraman Swaminathan', title: 'Founder & CEO', section: 'FOUNDER', order: 1, photoUrl: '/team/1.jpg', bio: "Driving INFAB's mission to bridge research and industrial deployment in MEMS and microfluidics. Incubated at InCeNSE, Bengaluru." },
   // RESEARCH
   { name: 'Dr. Mohammed Yosuff Caffiyar', title: 'Principal Scientist', section: 'RESEARCH', order: 1, photoUrl: '/team/2.jpg', bio: "Leads core MEMS device science, sensor physics, and process development at INFAB's cleanroom facilities." },
   { name: 'Dr. Saara K', title: 'Research Director', section: 'RESEARCH', order: 2, photoUrl: '/team/3.jpg', bio: 'Directs research programmes across MEMS sensor architectures and microfluidic platform development.' },
@@ -242,15 +242,15 @@ export const FALLBACK_NEWS: DefaultNewsArticle[] = [
   {
     title: 'Indian MEMS Startup INFAB Shares Perspective on Surging Domestic Market',
     description:
-      "INFAB Semiconductor featured in Digitimes, sharing insights on the rapidly growing Indian MEMS market. The article covers our view on domestic semiconductor manufacturing opportunities, the role of IISc incubation, and India's path to MEMS self-reliance.",
+      "INFAB Semiconductor featured in Digitimes, sharing insights on the rapidly growing Indian MEMS market. The article covers our view on domestic semiconductor manufacturing opportunities and India's path to MEMS self-reliance.",
     category: 'Research & Papers',
     link: 'https://www.digitimes.com/news/a20230328VL205/ic-manufacturing-india-mems-startup.html',
     publishedAt: new Date('2025-09-05'),
   },
   {
-    title: "INFAB Semiconductor — IISc Spinoff Advancing India's Semiconductor Manufacturing",
+    title: "INFAB Semiconductor — Advancing India's MEMS and Semiconductor Manufacturing",
     description:
-      'A feature on INFAB Semiconductor as a spinoff from the Indian Institute of Science, highlighting our journey from cleanroom research at CeNSE to commercial MEMS sensor manufacturing for aerospace, healthcare, and semiconductor applications.',
+      'A feature on INFAB Semiconductor, highlighting the journey from cleanroom research at InCeNSE to commercial MEMS sensor manufacturing for aerospace, healthcare, and semiconductor applications.',
     category: 'Partnerships & MoUs',
     link: null,
     publishedAt: new Date('2025-09-05'),
@@ -258,7 +258,7 @@ export const FALLBACK_NEWS: DefaultNewsArticle[] = [
   {
     title: "INFAB: Powering India's Deep-Tech Future from the Inside Out",
     description:
-      "YourStory profiles INFAB Semiconductor's mission to build world-class MEMS technology in India. The piece covers our founding story at IISc CeNSE, our product portfolio spanning aerospace and microfluidics, and the vision behind making India a global MEMS hub.",
+      "YourStory profiles INFAB Semiconductor's mission to build MEMS technology in India. The piece covers our founding story at InCeNSE, our product portfolio spanning aerospace and microfluidics, and the vision behind making India a global MEMS hub.",
     category: 'Research & Papers',
     link: 'https://yourstory.com/2025/08/infab-semiconductor-mems-innovation',
     publishedAt: new Date('2025-08-01'),
@@ -288,9 +288,9 @@ export const FALLBACK_RECOGNITIONS: DefaultRecognition[] = [
     order: 2,
   },
   {
-    title: 'IISc CeNSE Incubatee',
-    body: 'Incubated at the Centre for Nano Science and Engineering (CeNSE), Indian Institute of Science — one of India\'s premier deep-tech incubation programmes.',
-    issuer: 'InCeNSE, IISc Bengaluru',
+    title: 'InCeNSE Incubated',
+    body: 'Incubated at InCeNSE — the deep-tech incubator at the Centre for Nano Science and Engineering, Bengaluru. One of India\'s premier MEMS and semiconductor incubation programmes.',
+    issuer: 'InCeNSE, Bengaluru',
     order: 3,
   },
   {
@@ -299,4 +299,64 @@ export const FALLBACK_RECOGNITIONS: DefaultRecognition[] = [
     issuer: 'Dept. of Biotechnology, Govt. of India',
     order: 4,
   },
+];
+
+// ── FACILITIES ────────────────────────────────────────────────────────────────
+
+export interface DefaultFacilityItem {
+  icon: string;
+  title: string;
+  description: string;
+  photoUrl?: string;
+  isFeatured?: boolean;
+  order: number;
+}
+
+export const FALLBACK_FACILITIES: DefaultFacilityItem[] = [
+  { icon: 'ph-magnifying-glass', title: 'Characterisation Lab', description: 'Full suite of surface, electrical, and optical characterisation equipment including SEM, AFM, profilometer, C-V and I-V measurement stations.', photoUrl: '/assests/services/dektakxt.jpg', order: 1 },
+  { icon: 'ph-waves', title: 'Deep Reactive Ion Etch (DRIE)', description: 'Bosch-process DRIE chamber for high-aspect-ratio silicon structures. Etch depth up to 300 µm with vertical sidewalls and tight CD control.', photoUrl: '/assests/services/drie.jpg', order: 2 },
+  { icon: 'ph-sun', title: 'Lithography Tools', description: 'MJB4 & EVG620 mask aligners for UV and deep-UV lithography with feature sizes down to 2 µm on silicon, glass, and polymer substrates.', photoUrl: '/assests/services/mjb4.png', order: 3 },
+  { icon: 'ph-drop', title: 'Microfluidics Lab', description: 'Dedicated PDMS fabrication, spin coating, and soft lithography equipment. UV curing station, plasma bonding, and fluidic testing benches.', photoUrl: '/assests/services/spincoater.jpg', order: 4 },
+  { icon: 'ph-flask', title: 'Inhouse Testing Facilities', description: 'On-site device testing for electrical, mechanical, and fluidic performance validation. Rapid turnaround for design-test-iterate cycles without leaving the facility.', order: 5 },
+  { icon: 'ph-printer', title: '3D Printing', description: 'Rapid prototyping with high-resolution 3D printing for jigs, fixtures, and custom microfluidic housings to accelerate device packaging and testing.', order: 6 },
+];
+
+// ── SERVICE ITEMS ─────────────────────────────────────────────────────────────
+
+export interface DefaultServiceItem {
+  category: string;
+  icon: string;
+  title: string;
+  description: string;
+  detail?: string;
+  order: number;
+}
+
+export const FALLBACK_SERVICE_ITEMS: DefaultServiceItem[] = [
+  // MEMS Capabilities
+  { category: 'mems-capability', icon: 'ph-pencil-ruler', title: 'Custom MEMS Device Design', description: 'We specialise in designing MEMS devices tailored to specific application requirements — from concept feasibility to tape-out-ready layouts.', order: 1 },
+  { category: 'mems-capability', icon: 'ph-cpu', title: 'Silicon Micromachining', description: 'Leveraging bulk and surface micromachining techniques to create complex 3D microstructures in silicon with high precision and repeatability.', order: 2 },
+  { category: 'mems-capability', icon: 'ph-stack', title: 'Thin-Film Deposition & Etching', description: 'Full thin-film capabilities including PVD (sputtering, e-beam evaporation), PECVD, thermal oxidation, and pattern etching for metals, dielectrics, and piezoelectrics.', order: 3 },
+  { category: 'mems-capability', icon: 'ph-package', title: 'Wafer Bonding & Packaging', description: 'Anodic bonding (Si–glass), fusion bonding (Si–Si), adhesive and eutectic bonding for hermetically sealed microstructures and MEMS packaging.', order: 4 },
+  { category: 'mems-capability', icon: 'ph-flask', title: 'Material Versatility', description: 'We work with silicon, glass, quartz, SOI, SiC, polymers, and specialty substrates — selecting the optimal material for your application constraints.', order: 5 },
+  { category: 'mems-capability', icon: 'ph-factory', title: 'Prototyping to Production', description: 'Streamlined process from rapid prototype to small-volume production, with design-for-manufacturability reviews at every stage.', order: 6 },
+  // MEMS Processes
+  { category: 'mems-process', icon: 'ph-waves', title: 'Dry Etching', description: 'Bosch-process DRIE for high-aspect-ratio silicon structures.', detail: 'Etch depth up to 300 µm with vertical sidewalls and aspect ratios > 20:1.', order: 1 },
+  { category: 'mems-process', icon: 'ph-drop', title: 'Wet Etching', description: 'KOH and TMAH anisotropic silicon etching, HF oxide strip, BOE, Piranha (H₂SO₄:H₂O₂), and RCA cleans.', order: 2 },
+  { category: 'mems-process', icon: 'ph-sun', title: 'Lithography', description: 'UV and deep-UV contact/proximity lithography.', detail: 'Minimum feature sizes down to 2 µm on silicon, glass, quartz, SOI, and polymer substrates.', order: 3 },
+  // Microfluidics Design
+  { category: 'micro-design', icon: 'ph-pencil-ruler', title: 'Custom Micro-Channel Design', description: 'Tailored microchannel architecture designed to meet specific flow, pressure, and biological requirements of your application.', order: 1 },
+  { category: 'micro-design', icon: 'ph-chart-line-up', title: 'Simulation-Driven Optimization', description: 'CFD and multiphysics simulation (COMSOL, Ansys Fluent) to optimise device performance before committing to fabrication.', order: 2 },
+  { category: 'micro-design', icon: 'ph-test-tube', title: 'Material & Process Selection', description: 'Expert guidance on substrate selection — PDMS, glass, silicon, thermoplastics — matched to your optical, chemical, and biocompatibility requirements.', order: 3 },
+  { category: 'micro-design', icon: 'ph-timer', title: 'Rapid Prototyping', description: 'Fast design-to-device cycles using soft lithography and SU-8 mold processes. Functional prototypes delivered in weeks, not months.', order: 4 },
+  { category: 'micro-design', icon: 'ph-gear', title: 'Design for Manufacturability', description: 'Every design is reviewed for scalability and yield. We ensure a smooth transition from research prototype to repeatable small-volume production.', order: 5 },
+  // Microfluidics Fabrication
+  { category: 'micro-fab', icon: 'ph-drop', title: 'Soft Lithography (PDMS)', description: 'Standard PDMS-based microfluidic fabrication using SU-8 master molds. Optically transparent chips suitable for fluorescence and brightfield imaging.', order: 1 },
+  { category: 'micro-fab', icon: 'ph-flask', title: 'Glass and Silicon Etching', description: 'Precision wet and dry etching of glass and silicon substrates for high-resolution, chemically resistant microchannels.', order: 2 },
+  { category: 'micro-fab', icon: 'ph-squares-four', title: 'Polymer Microfabrication', description: 'Fabrication using thermoplastics, SU-8, and cyclic olefin copolymer (COC) for disposable, cost-effective lab-on-chip devices.', order: 3 },
+  { category: 'micro-fab', icon: 'ph-link', title: 'Hybrid Integration', description: 'Combining PDMS, glass, and silicon in a single device — bonding dissimilar materials to achieve complex multi-layer microfluidic architectures.', order: 4 },
+  // Microfluidics Devices
+  { category: 'micro-device', icon: 'ph-circles-three', title: 'Silicon & SU-8 Mold', description: 'High-resolution SU-8 master molds on silicon for repeatable PDMS soft lithography, enabling sub-10 µm feature sizes across multilayer designs.', order: 1 },
+  { category: 'micro-device', icon: 'ph-cell-signal-full', title: 'Cancer-on-Chip', description: 'Multi-layer organ-on-chip platform developed in collaboration with BIRAC and Manipal Hospital for cancer cell co-culture under physiological shear stress.', order: 2 },
+  { category: 'micro-device', icon: 'ph-dna', title: 'mRNA Chip in Glass', description: 'Herringbone micromixer fabricated in borosilicate glass for mRNA-LNP synthesis — enabling precise nanoparticle size control for RNA delivery applications.', order: 3 },
 ];

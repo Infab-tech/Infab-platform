@@ -8,7 +8,7 @@ export default function Footer() {
     <>
       {/* WhatsApp Floating Widget */}
       <a
-        href="https://wa.me/919980909371"
+        href="https://wa.me/919008589371"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
@@ -35,7 +35,7 @@ export default function Footer() {
                     className="mb-4 brand-logo-adaptive h-auto w-auto"
                 />
               <p className="mb-6 text-sm leading-relaxed text-[var(--text-secondary)]">
-                Pioneering Indian deep-tech company specializing in advanced MEMS sensors and medical microfluidic devices. Incubated at CeNSE, IISc Bengaluru.
+                MEMS sensors, microfluidic chips, and semiconductor fabrication services — designed and manufactured in Bengaluru. InCeNSE incubated. ISO 9001 & AS 9100D certified.
               </p>
               {/* Social Icons */}
               <div className="flex gap-3">
@@ -114,7 +114,7 @@ export default function Footer() {
                 <div>
                   <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-[var(--accent-primary)]">Incubation Lab</p>
                   <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
-                    InCeNSE @ CeNSE, IISc<br />Bangalore — 560012
+                    InCeNSE, Bangalore — 560012
                   </p>
                   <a href="tel:+918023607755" className="mt-1 block text-sm text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors">+91 80 2360 7755</a>
                   <a href="mailto:info@infabsemi.com" className="block text-sm text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors">info@infabsemi.com</a>

@@ -210,3 +210,35 @@ enum ApplicationStatus {
   SHORTLISTED
   REJECTED
 }
+
+// 14. FACILITY ITEMS (admin-editable facilities list)
+model FacilityItem {
+  id          String   @id @default(cuid())
+  icon        String   @default("ph-wrench")
+  title       String
+  description String   @db.Text
+  photoUrl    String?
+  isFeatured  Boolean  @default(false)
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+
+  @@index([isActive, order])
+}
+
+// 15. SERVICE ITEMS (admin-editable services list)
+model ServiceItem {
+  id          String   @id @default(cuid())
+  category    String   // "mems-capability" | "mems-process" | "micro-design" | "micro-fab" | "micro-device"
+  icon        String   @default("ph-gear")
+  title       String
+  description String   @db.Text
+  detail      String?  @db.Text
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+
+  @@index([isActive, category, order])
+}

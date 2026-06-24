@@ -5,12 +5,12 @@ import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'INFAB Semiconductor | Advanced MEMS & Microfluidic Solutions',
-  description: 'Pioneering Indian deep-tech company specializing in advanced MEMS sensors, actuators, and medical microfluidic devices. IISc CeNSE incubated. ISO 9001 & AS 9100D certified.',
-  keywords: ['MEMS', 'microfluidics', 'semiconductor', 'INFAB', 'IISc', 'pressure sensor', 'cleanroom', 'India'],
+  description: 'MEMS sensors, microfluidic chips, and semiconductor fabrication services — designed and built in India. InCeNSE incubated. ISO 9001 & AS 9100D certified.',
+  keywords: ['MEMS', 'microfluidics', 'semiconductor', 'INFAB', 'InCeNSE', 'pressure sensor', 'cleanroom', 'India'],
   authors: [{ name: 'INFAB Semiconductor Pvt. Ltd.' }],
   openGraph: {
     title: 'INFAB Semiconductor | Advanced MEMS & Microfluidic Solutions',
-    description: 'Pioneering Indian deep-tech company specializing in MEMS sensors, actuators, and microfluidic devices. IISc CeNSE incubated.',
+    description: 'MEMS sensors, microfluidic chips, and semiconductor fabrication — designed and built in India. InCeNSE incubated. ISO 9001 & AS 9100D certified.',
     url: 'https://infabsemi.com',
     siteName: 'INFAB Semiconductor',
     locale: 'en_IN',

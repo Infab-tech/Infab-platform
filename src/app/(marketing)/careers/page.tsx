@@ -31,7 +31,7 @@ export default async function CareersPage() {
           </h1>
           <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
           <p className="text-xl text-[var(--text-secondary)] leading-relaxed max-w-2xl">
-            We are always looking for passionate engineers, scientists, and operators to build India&apos;s deep-tech future at IISc CeNSE, Bengaluru.
+            We are always looking for engineers, scientists, and operators to help build India&apos;s deep-tech future — working out of our InCeNSE facility in Bengaluru.
           </p>
         </div>
       </div>

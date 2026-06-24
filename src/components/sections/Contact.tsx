@@ -123,9 +123,8 @@ export default function Contact() {
             <div className="bg-[var(--bg-secondary)] border border-[var(--border-primary)] p-8 rounded-2xl shadow-xl">
               <h4 className="text-xl font-bold text-[var(--text-primary)] mb-6 border-b border-[var(--border-primary)] pb-4">R&D Facility</h4>
               <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-6">
-                InCeNSE – Incubator @ CeNSE<br />
+                InCeNSE<br />
                 Centre for Nano Science and Engineering<br />
-                Indian Institute of Science<br />
                 Bengaluru, Karnataka 560012
               </p>
               <a href="tel:918023607755" className="flex items-center gap-3 text-[var(--accent-primary)] text-sm font-medium hover:brightness-110 transition-colors">
@@ -160,7 +159,7 @@ export default function Contact() {
           <div className="w-full rounded-2xl overflow-hidden border border-[var(--border-primary)] shadow-xl bg-[var(--bg-secondary)] p-2 flex flex-col">
             <div className="px-4 pt-3 pb-4">
               <h4 className="text-sm font-bold text-[var(--text-primary)] mb-1">R&D Facility</h4>
-              <p className="text-xs text-[var(--text-secondary)]">InCeNSE, IISc Bengaluru</p>
+              <p className="text-xs text-[var(--text-secondary)]">InCeNSE, Bengaluru</p>
             </div>
             <div className="w-full h-64 md:h-80 rounded-xl overflow-hidden">
               <iframe
