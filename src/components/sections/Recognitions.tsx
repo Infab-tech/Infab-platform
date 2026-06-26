@@ -85,6 +85,7 @@ export default async function Recognitions({ limit }: { limit?: number } = {}) {
                       src={rec.logoUrl}
                       alt={rec.title}
                       fill
+                      sizes="64px"
                       className="object-contain p-1"
                     />
                   </div>

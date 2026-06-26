@@ -109,7 +109,7 @@ export default function Contact() {
                   Thank you! Your message has been received securely.
                 </div>
               )}
-              
+
               {submitStatus === 'error' && (
                 <div className="mt-4 p-4 bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 rounded-lg text-sm text-center font-medium">
                   Something went wrong. Please try again or email us directly.
@@ -123,8 +123,7 @@ export default function Contact() {
             <div className="bg-[var(--bg-secondary)] border border-[var(--border-primary)] p-8 rounded-2xl shadow-xl">
               <h4 className="text-xl font-bold text-[var(--text-primary)] mb-6 border-b border-[var(--border-primary)] pb-4">R&D Facility</h4>
               <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-6">
-                InCeNSE<br />
-                Centre for Nano Science and Engineering<br />
+                INCeNSE, IISc<br />
                 Bengaluru, Karnataka 560012
               </p>
               <a href="tel:918023607755" className="flex items-center gap-3 text-[var(--accent-primary)] text-sm font-medium hover:brightness-110 transition-colors">
@@ -135,9 +134,10 @@ export default function Contact() {
             <div className="bg-[var(--bg-secondary)] border border-[var(--border-primary)] p-8 rounded-2xl shadow-xl">
               <h4 className="text-xl font-bold text-[var(--text-primary)] mb-6 border-b border-[var(--border-primary)] pb-4">Corporate Office</h4>
               <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-6">
+                PVR Towers, 5th floor,<br />
                 1341, Venkateshwara Nagar main road,<br />
                 MCECHS layout, Dr. Shivaram Karanth Nagar,<br />
-                Jakkur, Bengaluru 560077
+                Jakkur, Bengaluru 560064
               </p>
               <div className="flex flex-col gap-3">
                 <a href="tel:918045039946" className="flex items-center gap-3 text-[var(--accent-primary)] text-sm font-medium hover:brightness-110 transition-colors">
@@ -159,11 +159,11 @@ export default function Contact() {
           <div className="w-full rounded-2xl overflow-hidden border border-[var(--border-primary)] shadow-xl bg-[var(--bg-secondary)] p-2 flex flex-col">
             <div className="px-4 pt-3 pb-4">
               <h4 className="text-sm font-bold text-[var(--text-primary)] mb-1">R&D Facility</h4>
-              <p className="text-xs text-[var(--text-secondary)]">InCeNSE, Bengaluru</p>
+              <p className="text-xs text-[var(--text-secondary)]">INCeNSE, Bengaluru</p>
             </div>
             <div className="w-full h-64 md:h-80 rounded-xl overflow-hidden">
               <iframe
-                src="https://maps.google.com/maps?q=InCeNSE%20IISc%20Bengaluru&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                src="https://maps.google.com/maps?q=INCeNSE%20IISc%20Bengaluru&t=&z=14&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -184,7 +184,7 @@ export default function Contact() {
             </div>
             <div className="w-full h-64 md:h-80 rounded-xl overflow-hidden">
               <iframe
-                src="https://maps.google.com/maps?q=1341%20Venkateshwara%20Nagar%20main%20road%20MCECHS%20layout%20Dr%20Shivaram%20Karanth%20Nagar%20Jakkur%20Bengaluru%20560077&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                src="https://maps.google.com/maps?q=Infab+Semiconductor+Pvt+Ltd&t=&z=14&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

@@ -2,7 +2,7 @@ import React from 'react';
 import { prisma } from '@/lib/supabase/prisma';
 import Image from 'next/image';
 
-const fallbackSupporters = ["AIC", "BIRAC", "InCeNSE", "CDIIC", "Elevate", "fSID", "MeitY"];
+const fallbackSupporters = ["AIC", "BIRAC", "INCeNSE", "CDIIC", "Elevate", "FSID", "MeitY"];
 const fallbackCustomers = ["Hindustan Aeronautics Ltd", "Aeronautical Development Agency", "BITS Pilani", "CEERI", "CSIO Chandigarh", "IIT Hyderabad", "AmarBio", "NIIST", "NIPER", "UR Therapeutics", "Metallic Bellows India"];
 
 export default async function Partners() {

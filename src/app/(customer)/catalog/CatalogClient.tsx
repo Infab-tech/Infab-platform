@@ -126,7 +126,7 @@ export default function CatalogClient({ products }: { products: CatalogProduct[]
           return (
             <div
               key={product.id}
-              className="group flex flex-col rounded-2xl border border-[var(--border-primary)] bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/30 hover:shadow-xl hover:shadow-[var(--accent-primary)]/5"
+              className="group flex flex-col rounded-2xl border border-[var(--border-primary)] bg-white dark:bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/30 hover:shadow-xl hover:shadow-[var(--accent-primary)]/5"
             >
               {/* Image carousel */}
               {(() => {

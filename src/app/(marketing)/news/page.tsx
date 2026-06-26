@@ -26,14 +26,6 @@ const FALLBACK_ARTICLES: ArticleShape[] = FALLBACK_NEWS.map((a, i) => ({
   link: a.link,
 }));
 
-const categories = [
-  { label: 'Product Launches', count: 8 },
-  { label: 'Partnerships & MoUs', count: 4 },
-  { label: 'Awards & Recognition', count: 5 },
-  { label: 'Funding & Investors', count: 3 },
-  { label: 'Research & Papers', count: 12 },
-  { label: 'Events & Conferences', count: 9 },
-];
 
 function fmt(date: Date) {
   return date.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -62,6 +54,16 @@ export default async function NewsPage() {
   }
 
   const articles = dbArticles.length > 0 ? dbArticles : FALLBACK_ARTICLES;
+
+  const categoryCounts: Record<string, number> = {};
+  for (const article of articles) {
+    const cat = article.category || 'Uncategorized';
+    categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+  }
+  
+  const dynamicCategories = Object.keys(categoryCounts)
+    .sort()
+    .map(label => ({ label, count: categoryCounts[label] }));
 
   return (
     <div className="bg-[var(--bg-primary)]">
@@ -145,7 +147,7 @@ export default async function NewsPage() {
                   Categories
                 </h3>
                 <ul className="flex flex-col gap-1">
-                  {categories.map((cat) => (
+                  {dynamicCategories.map((cat) => (
                     <li key={cat.label}>
                       <button className="w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm text-[var(--text-secondary)] hover:bg-[var(--text-primary)]/5 hover:text-[var(--text-primary)] transition-colors text-left">
                         <span>{cat.label}</span>
@@ -158,19 +160,23 @@ export default async function NewsPage() {
                 </ul>
               </div>
 
-              {/* Recent Articles */}
+              {/* Featured Articles */}
               <div className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-8">
                 <h3 className="font-mono text-xs font-bold uppercase tracking-widest text-[var(--text-primary)] mb-6">
-                  Recent
+                  Featured News
                 </h3>
-                <ul className="flex flex-col gap-5">
+                <ul className="flex flex-col gap-6">
                   {articles.slice(0, 3).map((a) => (
-                    <li key={a.id} className="flex gap-3 items-start">
-                      <span className="flex-shrink-0 mt-1 w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)]"></span>
-                      <div>
-                        <p className="text-xs font-mono text-[var(--accent-primary)] mb-1">{fmtShort(a.date)}</p>
-                        <p className="text-sm text-[var(--text-primary)] leading-snug line-clamp-2">{a.title}</p>
-                      </div>
+                    <li key={a.id} className="border-b border-[var(--border-primary)] pb-6 last:border-0 last:pb-0">
+                      <a href={a.link} target="_blank" rel="noopener noreferrer" className="group block">
+                        <p className="text-xs font-mono text-[var(--accent-primary)] mb-2">{fmtShort(a.date)}</p>
+                        <h4 className="text-sm font-bold text-[var(--text-primary)] leading-snug line-clamp-2 group-hover:text-[var(--accent-primary)] transition-colors">
+                          {a.title}
+                        </h4>
+                        <div className="mt-3 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)] group-hover:text-[var(--accent-primary)] transition-colors">
+                          Read More <i className="ph ph-arrow-right transition-transform group-hover:translate-x-1"></i>
+                        </div>
+                      </a>
                     </li>
                   ))}
                 </ul>
@@ -183,7 +189,7 @@ export default async function NewsPage() {
                 </h3>
                 <div className="flex gap-3">
                   <a
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/company/infab-semiconductor-pvt-ltd/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border-primary)] text-[var(--text-secondary)] transition-colors hover:border-[var(--accent-primary)]/50 hover:text-[var(--accent-primary)]"
@@ -192,16 +198,7 @@ export default async function NewsPage() {
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256"><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v96a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0ZM216,208a8,8,0,0,1-8-8V160a36,36,0,0,0-72,0v40a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A52,52,0,0,1,216,160v40A8,8,0,0,1,216,208ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"></path></svg>
                   </a>
                   <a
-                    href="https://twitter.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border-primary)] text-[var(--text-secondary)] transition-colors hover:border-[var(--accent-primary)]/50 hover:text-[var(--accent-primary)]"
-                    aria-label="Twitter / X"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256"><path d="M214.75,211.71l-62.6-98.36,61.77-67.95a8,8,0,0,0-11.84-10.76l-58.36,64.17L99.27,44.29A8,8,0,0,0,92.23,40H48a8,8,0,0,0-6.75,12.29l62.6,98.36L41.08,218.61a8,8,0,1,0,11.84,10.76l58.36-64.17,56.45,88.71A8,8,0,0,0,174.77,256H219.23a8,8,0,0,0,6.75-12.29ZM186.34,240l-56-88H146.2l-21.26,23.39L62.06,64H87.66l129.28,176Z"></path></svg>
-                  </a>
-                  <a
-                    href="mailto:info@infabsemi.com"
+                    href="mailto:info@infab-tech.com.com"
                     className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border-primary)] text-[var(--text-secondary)] transition-colors hover:border-[var(--accent-primary)]/50 hover:text-[var(--accent-primary)]"
                     aria-label="Email"
                   >

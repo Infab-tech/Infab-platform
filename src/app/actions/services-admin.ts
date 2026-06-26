@@ -24,6 +24,15 @@ export async function seedServiceItems() {
   return { success: true };
 }
 
+export async function resetServiceItems() {
+  await requireAdmin();
+  await prisma.serviceItem.deleteMany({});
+  await prisma.serviceItem.createMany({ data: FALLBACK_SERVICE_ITEMS });
+  revalidatePath('/services');
+  revalidatePath('/admin/services');
+  return { success: true };
+}
+
 export async function createServiceItem(formData: FormData) {
   await requireAdmin();
   const category = formData.get('category') as string;

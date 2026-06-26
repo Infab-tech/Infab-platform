@@ -24,6 +24,16 @@ export async function seedFacilities() {
   return { success: true };
 }
 
+export async function resetFacilities() {
+  await requireAdmin();
+  await prisma.facilityItem.deleteMany({});
+  await prisma.facilityItem.createMany({ data: FALLBACK_FACILITIES });
+  revalidatePath('/services');
+  revalidatePath('/admin/facilities');
+  return { success: true };
+}
+
+
 export async function createFacility(formData: FormData) {
   await requireAdmin();
   const title = formData.get('title') as string;
@@ -51,7 +61,7 @@ export async function updateFacility(id: string, formData: FormData) {
   const photoUrl = (formData.get('photoUrl') as string) || null;
   const isFeatured = formData.get('isFeatured') === 'true';
   const order = parseInt((formData.get('order') as string) || '0', 10);
-  const isActive = formData.get('isActive') !== 'false';
+  const isActive = !!formData.get('isActive');
 
   if (!title || !description) return { error: 'Title and description are required.' };
 

@@ -5,12 +5,12 @@ import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'INFAB Semiconductor | Advanced MEMS & Microfluidic Solutions',
-  description: 'MEMS sensors, microfluidic chips, and semiconductor fabrication services — designed and built in India. InCeNSE incubated. ISO 9001 & AS 9100D certified.',
-  keywords: ['MEMS', 'microfluidics', 'semiconductor', 'INFAB', 'InCeNSE', 'pressure sensor', 'cleanroom', 'India'],
+  description: 'MEMS sensors, microfluidic chips, and semiconductor fabrication services — designed and built in India. INCeNSE incubated. ISO 9001 & AS 9100D certified.',
+  keywords: ['MEMS', 'microfluidics', 'semiconductor', 'INFAB', 'INCeNSE', 'pressure sensor', 'cleanroom', 'India'],
   authors: [{ name: 'INFAB Semiconductor Pvt. Ltd.' }],
   openGraph: {
     title: 'INFAB Semiconductor | Advanced MEMS & Microfluidic Solutions',
-    description: 'MEMS sensors, microfluidic chips, and semiconductor fabrication — designed and built in India. InCeNSE incubated. ISO 9001 & AS 9100D certified.',
+    description: 'MEMS sensors, microfluidic chips, and semiconductor fabrication — designed and built in India. INCeNSE incubated. ISO 9001 & AS 9100D certified.',
     url: 'https://infabsemi.com',
     siteName: 'INFAB Semiconductor',
     locale: 'en_IN',
@@ -34,10 +34,10 @@ export default async function RootLayout({
 }) {
   const cookieStore = await cookies();
   const theme = cookieStore.get('theme')?.value;
-  const isLight = theme === 'light';
+  const isDark = theme === 'dark';
 
   return (
-    <html lang="en" className={`scroll-smooth ${isLight ? 'light' : ''}`} data-scroll-behavior="smooth">
+    <html lang="en" className={`scroll-smooth ${isDark ? 'dark' : ''}`} data-scroll-behavior="smooth">
       <head>
         <Script src="https://unpkg.com/@phosphor-icons/web" strategy="lazyOnload" />
       </head>

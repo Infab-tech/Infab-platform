@@ -22,17 +22,14 @@ export async function middleware(req: NextRequest) {
     }
   );
 
-  // Refresh session so it doesn't expire while the user is active
   const { data: { user } } = await supabase.auth.getUser();
 
-  // Protect /admin routes — redirect to login if not authenticated
   if (!user && req.nextUrl.pathname.startsWith('/admin')) {
     const url = req.nextUrl.clone();
     url.pathname = '/login';
     return NextResponse.redirect(url);
   }
 
-  // Protect customer portal routes — redirect to login if not authenticated
   const customerRoutes = ['/dashboard', '/catalog', '/cart', '/orders', '/profile'];
   if (!user && customerRoutes.some(r => req.nextUrl.pathname.startsWith(r))) {
     const url = req.nextUrl.clone();

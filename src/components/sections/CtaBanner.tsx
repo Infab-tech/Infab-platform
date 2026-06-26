@@ -6,10 +6,10 @@ export default function CtaBanner() {
             <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center justify-between gap-8">
                 <div>
                     <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-2">
-                        Need a custom MEMS solution?
+                        Need a custom solution?
                     </h2>
                     <p className="text-[var(--text-secondary)] max-w-xl">
-                        Our engineers work directly with your team — from concept and simulation through cleanroom fabrication and qualification testing.
+                        Our engineers work directly with your team — from concept, design, prototyping to final packaging and qualification testing.
                     </p>
                 </div>
                 <div className="flex items-center gap-4 shrink-0">

@@ -1,5 +1,4 @@
 import Hero from '@/components/sections/Hero';
-import CredentialStrip from '@/components/sections/CredentialStrip';
 import About from '@/components/sections/About';
 import Products from '@/components/sections/Products';
 import CtaBanner from '@/components/sections/CtaBanner';
@@ -11,7 +10,6 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       <Hero />
-      <CredentialStrip />
       <About />
       <Products />
       <CtaBanner />

@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/supabase/prisma';
 import Link from 'next/link';
-import { seedFacilities } from '@/app/actions/facilities';
+import { seedFacilities, resetFacilities } from '@/app/actions/facilities';
 import FacilityForm from './FacilityForm';
 import DeleteFacilityButton from './DeleteFacilityButton';
 
@@ -9,6 +9,11 @@ export const metadata = { title: 'Facilities | Admin' };
 async function SeedAction() {
   'use server';
   await seedFacilities();
+}
+
+async function ResetAction() {
+  'use server';
+  await resetFacilities();
 }
 
 export default async function FacilitiesAdminPage() {
@@ -26,13 +31,21 @@ export default async function FacilitiesAdminPage() {
           <h1 className="text-3xl font-bold mb-1">Facilities</h1>
           <p className="text-[var(--text-secondary)]">Manage the facility cards shown on the Services page.</p>
         </div>
-        {!isSeeded && (
-          <form action={SeedAction}>
-            <button type="submit" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/30 text-[var(--accent-primary)] text-sm font-semibold hover:bg-[var(--accent-primary)]/20 transition-colors">
-              <i className="ph ph-database"></i> Seed Defaults
-            </button>
-          </form>
-        )}
+        <div className="flex gap-2">
+          {!isSeeded ? (
+            <form action={SeedAction}>
+              <button type="submit" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/30 text-[var(--accent-primary)] text-sm font-semibold hover:bg-[var(--accent-primary)]/20 transition-colors">
+                <i className="ph ph-database"></i> Seed Defaults
+              </button>
+            </form>
+          ) : (
+            <form action={ResetAction}>
+              <button type="submit" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500/10 border border-red-500/30 text-red-500 text-sm font-semibold hover:bg-red-500/20 transition-colors">
+                <i className="ph ph-arrow-counter-clockwise"></i> Reset to Defaults
+              </button>
+            </form>
+          )}
+        </div>
       </div>
 
       {/* Add New */}
@@ -62,7 +75,12 @@ export default async function FacilitiesAdminPage() {
                   {f.isFeatured && <span className="px-2 py-0.5 rounded text-xs bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] font-mono">featured</span>}
                 </div>
                 <p className="text-sm text-[var(--text-secondary)] line-clamp-2">{f.description}</p>
-                {f.photoUrl && <p className="text-xs text-[var(--accent-primary)] mt-1 font-mono truncate">{f.photoUrl}</p>}
+                {f.photoUrl && (
+                  <div className="mt-2">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={f.photoUrl} alt="Facility photo" className="h-12 w-12 rounded object-cover border border-[var(--border-primary)]" />
+                  </div>
+                )}
               </div>
               <div className="flex items-center gap-2 flex-shrink-0">
                 <Link

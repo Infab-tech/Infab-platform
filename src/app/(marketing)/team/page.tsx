@@ -14,12 +14,12 @@ export const metadata: Metadata = {
 interface Member { name: string; title: string; bio?: string | null; photo?: string | null; linkedinUrl?: string | null; }
 
 const SECTION_CONFIG: Array<{ key: string; eyebrow: string; heading: string; alt: string; bg: boolean }> = [
-  { key: 'FOUNDER',     eyebrow: 'Founder',    heading: 'Leadership',                alt: 'founder',     bg: false },
-  { key: 'RESEARCH',    eyebrow: 'Science',    heading: 'Research & Science',        alt: 'research',    bg: true  },
-  { key: 'ENGINEERING', eyebrow: 'Technical',  heading: 'Engineering',               alt: 'engineering', bg: false },
-  { key: 'CONSULTANTS', eyebrow: 'Advisory',   heading: 'Consultants',               alt: 'consultants', bg: true  },
-  { key: 'BUSINESS',    eyebrow: 'Operations', heading: 'Business & Administration', alt: 'business',    bg: false },
-  { key: 'INTERN',      eyebrow: 'Next Gen',   heading: 'Interns',                   alt: 'interns',     bg: true  },
+  { key: 'FOUNDER', eyebrow: 'Founder', heading: 'Leadership', alt: 'founder', bg: false },
+  { key: 'RESEARCH', eyebrow: 'Science', heading: 'Research & Science', alt: 'research', bg: true },
+  { key: 'ENGINEERING', eyebrow: 'Technical', heading: 'Engineering', alt: 'engineering', bg: false },
+  { key: 'CONSULTANTS', eyebrow: 'Advisory', heading: 'Consultants', alt: 'consultants', bg: true },
+  { key: 'BUSINESS', eyebrow: 'Operations', heading: 'Business & Administration', alt: 'business', bg: false },
+  { key: 'INTERN', eyebrow: 'Next Gen', heading: 'Interns', alt: 'interns', bg: true },
 ];
 
 /* ── Helpers ──────────────────────────────────────────────────────────────── */
@@ -135,7 +135,7 @@ export default async function TeamPage() {
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-[var(--text-primary)] mb-6 leading-tight max-w-3xl">Our Team</h1>
           <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
           <p className="text-xl text-[var(--text-secondary)] leading-relaxed max-w-2xl">
-            The engineers, scientists, and operators behind INFAB — building India&apos;s MEMS and microfluidics capability from our InCeNSE facility in Bengaluru.
+            The engineers, scientists, and operators behind INFAB — building India&apos;s MEMS and microfluidics capability from our INCeNSE facility in Bengaluru.
           </p>
         </div>
       </div>
@@ -178,12 +178,17 @@ export default async function TeamPage() {
             <p className="text-[var(--text-secondary)] max-w-2xl mx-auto mb-8 relative z-10 text-lg">
               We are always looking for passionate MEMS engineers, process scientists, and deep-tech innovators to join our team in Bengaluru.
             </p>
-            <Link
-              href="/careers"
-              className="relative z-10 inline-flex h-12 items-center justify-center rounded-md bg-[var(--accent-primary)] px-8 text-sm font-semibold uppercase tracking-wider text-[var(--bg-primary)] transition-all hover:brightness-110 shadow-lg shadow-[var(--accent-primary)]/20"
-            >
-              View Open Roles
-            </Link>
+            <div className="flex flex-col items-center gap-6 relative z-10">
+              <Link
+                href="/careers"
+                className="inline-flex h-12 items-center justify-center rounded-md bg-[var(--accent-primary)] px-8 text-sm font-semibold uppercase tracking-wider text-[var(--bg-primary)] transition-all hover:brightness-110 shadow-lg shadow-[var(--accent-primary)]/20"
+              >
+                View Open Roles
+              </Link>
+              <p className="text-[var(--text-secondary)] text-sm">
+                Send your CV to mail: <a href="mailto:info@infab-tech.com" className="font-semibold text-[var(--accent-primary)] hover:underline">info@infab-tech.com</a>
+              </p>
+            </div>
           </div>
         </div>
       </div>

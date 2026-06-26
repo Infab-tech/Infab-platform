@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/supabase/prisma';
 import type { ServiceItem } from '@prisma/client';
 import Link from 'next/link';
-import { seedServiceItems } from '@/app/actions/services-admin';
+import { seedServiceItems, resetServiceItems } from '@/app/actions/services-admin';
 import ServiceItemForm from './ServiceItemForm';
 import DeleteServiceItemButton from './DeleteServiceItemButton';
 
@@ -10,6 +10,11 @@ export const metadata = { title: 'Services | Admin' };
 async function SeedAction() {
   'use server';
   await seedServiceItems();
+}
+
+async function ResetAction() {
+  'use server';
+  await resetServiceItems();
 }
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -26,7 +31,9 @@ export default async function ServicesAdminPage() {
   try {
     items = await prisma.serviceItem.findMany({ orderBy: [{ category: 'asc' }, { order: 'asc' }] });
     isSeeded = items.length > 0;
-  } catch { /* fallback */ }
+  } catch (error) {
+    console.error("Error fetching services in admin panel:", error);
+  }
 
   const grouped = items.reduce<Record<string, ServiceItem[]>>((acc, item) => {
     if (!acc[item.category]) acc[item.category] = [];
@@ -41,13 +48,21 @@ export default async function ServicesAdminPage() {
           <h1 className="text-3xl font-bold mb-1">Services</h1>
           <p className="text-[var(--text-secondary)]">Manage service capability items shown on the Services page.</p>
         </div>
-        {!isSeeded && (
-          <form action={SeedAction}>
-            <button type="submit" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/30 text-[var(--accent-primary)] text-sm font-semibold hover:bg-[var(--accent-primary)]/20 transition-colors">
-              <i className="ph ph-database"></i> Seed Defaults
-            </button>
-          </form>
-        )}
+        <div className="flex gap-2">
+          {!isSeeded ? (
+            <form action={SeedAction}>
+              <button type="submit" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/30 text-[var(--accent-primary)] text-sm font-semibold hover:bg-[var(--accent-primary)]/20 transition-colors">
+                <i className="ph ph-database"></i> Seed Defaults
+              </button>
+            </form>
+          ) : (
+            <form action={ResetAction}>
+              <button type="submit" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500/10 border border-red-500/30 text-red-500 text-sm font-semibold hover:bg-red-500/20 transition-colors">
+                <i className="ph ph-arrow-counter-clockwise"></i> Reset to Defaults
+              </button>
+            </form>
+          )}
+        </div>
       </div>
 
       {/* Add New */}

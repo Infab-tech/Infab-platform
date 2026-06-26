@@ -26,26 +26,24 @@ export default function Footer() {
 
             {/* Brand Column */}
             <div className="lg:col-span-1">
-                <Image 
-                    src="/assests/cropped-infab-logo.webp"
-                    alt="INFAB Semiconductor"
-                    width={180}
-                    height={60}
-                    style={{ width: 'auto', height: 'auto' }}
-                    className="mb-4 brand-logo-adaptive h-auto w-auto"
-                />
+              <Image
+                src="/assests/cropped-infab-logo.webp"
+                alt="INFAB Semiconductor"
+                width={180}
+                height={60}
+                style={{ width: 'auto', height: 'auto' }}
+                className="mb-4 brand-logo-adaptive h-auto w-auto"
+              />
               <p className="mb-6 text-sm leading-relaxed text-[var(--text-secondary)]">
-                MEMS sensors, microfluidic chips, and semiconductor fabrication services — designed and manufactured in Bengaluru. InCeNSE incubated. ISO 9001 & AS 9100D certified.
+                MEMS sensors, microfluidic chips, and semiconductor fabrication services — designed and manufactured in Bengaluru. INCeNSE incubated. ISO 9001 & AS 9100D certified.
               </p>
               {/* Social Icons */}
               <div className="flex gap-3">
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border-primary)] text-[var(--text-secondary)] transition-colors hover:border-[var(--accent-primary)]/50 hover:text-[var(--accent-primary)]">
+                <a href="https://www.linkedin.com/company/infab-semiconductor-pvt-ltd/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border-primary)] text-[var(--text-secondary)] transition-colors hover:border-[var(--accent-primary)]/50 hover:text-[var(--accent-primary)]">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256"><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v96a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0ZM216,208a8,8,0,0,1-8-8V160a36,36,0,0,0-72,0v40a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A52,52,0,0,1,216,160v40A8,8,0,0,1,216,208ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"></path></svg>
                 </a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X" className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border-primary)] text-[var(--text-secondary)] transition-colors hover:border-[var(--accent-primary)]/50 hover:text-[var(--accent-primary)]">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256"><path d="M214.75,211.71l-62.6-98.36,61.77-67.95a8,8,0,0,0-11.84-10.76l-58.36,64.17L99.27,44.29A8,8,0,0,0,92.23,40H48a8,8,0,0,0-6.75,12.29l62.6,98.36L41.08,218.61a8,8,0,1,0,11.84,10.76l58.36-64.17,56.45,88.71A8,8,0,0,0,174.77,256H219.23a8,8,0,0,0,6.75-12.29ZM186.34,240l-56-88H146.2l-21.26,23.39L62.06,64H87.66l129.28,176Z"></path></svg>
-                </a>
-                <a href="mailto:info@infabsemi.com" aria-label="Email" className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border-primary)] text-[var(--text-secondary)] transition-colors hover:border-[var(--accent-primary)]/50 hover:text-[var(--accent-primary)]">
+
+                <a href="mailto:info@infab-tech.com" aria-label="Email" className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border-primary)] text-[var(--text-secondary)] transition-colors hover:border-[var(--accent-primary)]/50 hover:text-[var(--accent-primary)]">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48Zm-96,85.15L52.57,64H203.43ZM98.71,128,40,181.81V74.19Zm11.84,10.85,12,11.05a8,8,0,0,0,10.82,0l12-11.05,58,53.15H52.57ZM157.29,128,216,74.18V181.82Z"></path></svg>
                 </a>
               </div>
@@ -114,7 +112,7 @@ export default function Footer() {
                 <div>
                   <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-[var(--accent-primary)]">Incubation Lab</p>
                   <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
-                    InCeNSE, Bangalore — 560012
+                    INCeNSE, IISc Bangalore 560012
                   </p>
                   <a href="tel:+918023607755" className="mt-1 block text-sm text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors">+91 80 2360 7755</a>
                   <a href="mailto:info@infabsemi.com" className="block text-sm text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors">info@infabsemi.com</a>
@@ -122,7 +120,7 @@ export default function Footer() {
                 <div>
                   <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-[var(--accent-primary)]">Corporate Office</p>
                   <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
-                    1341, Venkateshwara Nagar main road<br />MCECHS layout, Dr. Shivaram Karanth Nagar<br />Jakkur, Bengaluru — 560077
+                    PVR Towers, 5th floor<br />1341, Venkateshwara Nagar main road<br />MCECHS layout, Dr. Shivaram Karanth Nagar<br />Jakkur, Bengaluru — 560064
                   </p>
                   <a href="tel:+918045039946" className="mt-1 block text-sm text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors">+91 80 4503 9946</a>
                   <a href="mailto:info@infab-tech.com" className="block text-sm text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors">info@infab-tech.com</a>

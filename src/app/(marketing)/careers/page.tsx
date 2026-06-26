@@ -27,11 +27,11 @@ export default async function CareersPage() {
             Careers
           </span>
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-[var(--text-primary)] mb-6 leading-tight max-w-3xl">
-            Join the Revolution
+            Join Us
           </h1>
           <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
           <p className="text-xl text-[var(--text-secondary)] leading-relaxed max-w-2xl">
-            We are always looking for engineers, scientists, and operators to help build India&apos;s deep-tech future — working out of our InCeNSE facility in Bengaluru.
+            We are always looking for engineers, scientists, and operators to help build India&apos;s deep-tech future.
           </p>
         </div>
       </div>

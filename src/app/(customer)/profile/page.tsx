@@ -39,7 +39,7 @@ export default async function ProfilePage() {
                     <div>
                         <label className="block font-mono text-xs font-semibold uppercase text-[var(--text-secondary)] mb-2">Account ID</label>
                         <div className="bg-white/[0.02] border border-[var(--text-primary)]/10 rounded-lg px-4 py-3 text-[var(--text-primary)] font-mono text-sm truncate">
-                            {user.id}
+                            {user.user_metadata?.customer_id || user.id}
                         </div>
                     </div>
                 </div>
@@ -52,10 +52,10 @@ export default async function ProfilePage() {
                     <p className="text-sm text-[var(--text-secondary)]">Request a secure password reset link via email.</p>
                 </div>
                 <a
-                    href="/forgot-password"
+                    href="/profile/change-password"
                     className="px-6 py-3 rounded-lg bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] font-bold uppercase tracking-wider text-sm hover:bg-[var(--accent-primary)] hover:text-[var(--bg-primary)] transition-colors border border-[var(--accent-primary)]/20"
                 >
-                    Reset Password
+                    Change Password
                 </a>
             </div>
 

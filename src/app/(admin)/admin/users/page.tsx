@@ -61,6 +61,7 @@ export default async function AdminUsersPage() {
                                 const lastName = meta.last_name || '';
                                 const fullName = [firstName, lastName].filter(Boolean).join(' ');
                                 const org = meta.organization || '—';
+                                const customerId = meta.customer_id || user.id.substring(0, 8).toUpperCase();
                                 const isAdmin = adminEmails.includes(user.email?.toLowerCase());
 
                                 return (
@@ -69,9 +70,14 @@ export default async function AdminUsersPage() {
                                             <div className="font-bold text-[var(--text-primary)]">
                                                 {fullName || 'Unknown Name'}
                                             </div>
-                                            <div className="text-xs text-[var(--text-secondary)] mt-1 font-mono">
+                                            <div className="text-xs text-[var(--text-secondary)] mt-1 font-mono mb-2">
                                                 {user.email}
                                             </div>
+                                            {!isAdmin && (
+                                                <span className="text-[10px] px-2 py-0.5 bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] rounded font-mono font-bold tracking-wider">
+                                                    ID: {customerId}
+                                                </span>
+                                            )}
                                         </td>
                                         <td className="p-5">
                                             <span className="text-[var(--text-primary)]">

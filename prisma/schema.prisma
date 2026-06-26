@@ -242,3 +242,14 @@ model ServiceItem {
 
   @@index([isActive, category, order])
 }
+
+// 16. PASSWORD RESET TOKENS (Custom OTP Flow)
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([email])
+}

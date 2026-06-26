@@ -4,6 +4,7 @@ import { useActionState } from 'react';
 import { updateFacility } from '@/app/actions/facilities';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import SingleImageUploader from '@/components/ui/SingleImageUploader';
 
 const ICONS = [
   'ph-wrench', 'ph-magnifying-glass', 'ph-waves', 'ph-sun', 'ph-drop',
@@ -50,8 +51,8 @@ export default function EditFacilityForm({ facility }: { facility: Facility }) {
         </div>
       </div>
       <div>
-        <label className="block text-xs font-mono uppercase tracking-wider text-[var(--text-secondary)] mb-1">Photo URL</label>
-        <input name="photoUrl" defaultValue={facility.photoUrl ?? ''} placeholder="/assests/services/..." className="w-full rounded-lg border border-[var(--border-primary)] bg-[var(--bg-primary)] px-3 py-2 text-sm focus:outline-none focus:border-[var(--accent-primary)]/60" />
+        <label className="block text-xs font-mono uppercase tracking-wider text-[var(--text-secondary)] mb-1">Photo (optional)</label>
+        <SingleImageUploader name="photoUrl" existingUrl={facility.photoUrl} bucket="facility-photos" />
       </div>
       <div className="flex items-center gap-6">
         <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)] cursor-pointer">

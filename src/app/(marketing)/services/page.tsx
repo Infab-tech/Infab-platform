@@ -44,10 +44,25 @@ const memsCapabilities = [
 ];
 
 // MEMS process capability cards — 3-card grid matching infabsemi.com
-const memsProcesses = [
-  { icon: 'ph-waves', title: 'Dry Etching', detail: 'Bosch-process DRIE for high-aspect-ratio silicon structures. Etch depth up to 300 µm with vertical sidewalls and aspect ratios > 20:1.' },
-  { icon: 'ph-drop', title: 'Wet Etching', detail: 'KOH and TMAH anisotropic silicon etching, HF oxide strip, BOE, Piranha (H₂SO₄:H₂O₂), and RCA cleans.' },
-  { icon: 'ph-sun', title: 'Lithography', detail: 'UV and deep-UV contact/proximity lithography with minimum feature sizes down to 2 µm on silicon, glass, quartz, SOI, and polymer substrates.' },
+const memsProcesses: { icon: string; title: string; description: string; detail: string | null }[] = [
+  {
+    icon: 'ph-sun',
+    title: 'Lithography',
+    description: 'UV and deep-UV contact/proximity lithography.',
+    detail: 'UV and deep-UV contact/proximity lithography with minimum feature sizes down to 2 µm on silicon, glass, quartz, SOI, and polymer substrates.',
+  },
+  {
+    icon: 'ph-waves',
+    title: 'Dry Etching',
+    description: 'Bosch-process DRIE for high-aspect-ratio silicon structures.',
+    detail: 'Bosch-process DRIE for high-aspect-ratio silicon structures. Etch depth up to 300 µm with vertical sidewalls and aspect ratios > 20:1.',
+  },
+  {
+    icon: 'ph-drop',
+    title: 'Wet Etching',
+    description: 'KOH and TMAH anisotropic silicon etching, HF oxide strip, BOE, Piranha (H₂SO₄:H₂O₂), and RCA cleans.',
+    detail: null,
+  },
 ];
 
 // Microfluidics Design Services — matches infabsemi.com
@@ -74,15 +89,6 @@ const microfluidicsDevices = [
   { title: 'mRNA Chip in Glass', description: 'Herringbone micromixer fabricated in borosilicate glass for mRNA-LNP synthesis — enabling precise nanoparticle size control for RNA delivery applications.' },
 ];
 
-const facilities = [
-  { icon: 'ph-magnifying-glass', title: 'Characterisation Lab', description: 'Full suite of surface, electrical, and optical characterisation equipment including SEM, AFM, profilometer, C-V and I-V measurement stations.', photo: '/assests/services/dektakxt.jpg' },
-  { icon: 'ph-waves', title: 'Deep Reactive Ion Etch (DRIE)', description: 'Bosch-process DRIE chamber for high-aspect-ratio silicon structures. Etch depth up to 300 µm with vertical sidewalls and tight CD control.', photo: '/assests/services/drie.jpg' },
-  { icon: 'ph-sun', title: 'Lithography Tools', description: 'MJB4 & EVG620 mask aligners for UV and deep-UV lithography with feature sizes down to 2 µm on silicon, glass, and polymer substrates.', photo: '/assests/services/mjb4.png' },
-  { icon: 'ph-drop', title: 'Microfluidics Lab', description: 'Dedicated PDMS fabrication, spin coating, and soft lithography equipment. UV curing station, plasma bonding, and fluidic testing benches.', photo: '/assests/services/spincoater.jpg' },
-  { icon: 'ph-flask', title: 'Inhouse Testing Facilities', description: 'On-site device testing for electrical, mechanical, and fluidic performance validation. Rapid turnaround for design-test-iterate cycles without leaving the facility.', photo: null },
-  { icon: 'ph-printer', title: '3D Printing', description: 'Rapid prototyping with high-resolution 3D printing for jigs, fixtures, and custom microfluidic housings to accelerate device packaging and testing.', photo: null },
-];
-
 export default async function ServicesPage() {
   // Fetch from DB, fall back to hardcoded content
   let dbFacilities: { icon: string; title: string; description: string; photoUrl: string | null }[] = [];
@@ -104,7 +110,9 @@ export default async function ServicesPage() {
     if (byCat('micro-design').length > 0) dbMicroDesign = byCat('micro-design');
     if (byCat('micro-fab').length > 0) dbMicroFab = byCat('micro-fab');
     if (byCat('micro-device').length > 0) dbMicroDevices = byCat('micro-device');
-  } catch { /* use hardcoded fallback */ }
+  } catch (error) {
+    console.error("Error fetching services data from Prisma:", error);
+  }
 
   const activeFacilities = dbFacilities.length > 0 ? dbFacilities : FALLBACK_FACILITIES.map((f) => ({ ...f, photoUrl: f.photoUrl ?? null }));
   const activeCapabilities = dbMEMSCapabilities.length > 0 ? dbMEMSCapabilities : memsCapabilities;
@@ -197,7 +205,7 @@ export default async function ServicesPage() {
                   </div>
                   <div>
                     <h3 className="text-base font-bold text-[var(--text-primary)] mb-2">{p.title}</h3>
-                    <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{p.detail}</p>
+                    <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{p.detail || p.description}</p>
                   </div>
                 </div>
               ))}
@@ -285,50 +293,18 @@ export default async function ServicesPage() {
               INFAB operates from two sites in Bengaluru, leveraging one of India&apos;s finest academic cleanroom facilities alongside a dedicated corporate R&amp;D centre.
             </p>
           </div>
-          {/* ── Imaging System (Microqubic MRCL) ─────────────────────────── */}
-          <div className="mb-16 rounded-2xl border border-[var(--accent-primary)]/20 bg-[var(--bg-secondary)] overflow-hidden">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-              <div className="p-10 flex flex-col justify-center">
-                <span className="inline-block font-mono text-xs font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">Imaging System</span>
-                <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-4">Microqubic 2D/3D Imaging System</h3>
-                <div className="w-10 h-1 bg-[var(--accent-primary)] mb-6"></div>
-                <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-4">
-                  INFAB integrates the <strong className="text-[var(--text-primary)]">Microqubic MRCL Series</strong> modular microscope system into our inline characterisation and inspection workflow. Designed for high-resolution 2D and 3D optical analysis, it supports a wide range of MEMS, microfluidics, and thin-film applications with unmatched ease of use and flexibility.
-                </p>
-                <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-6">
-                  Developed by Microqubic AG (Switzerland), this advanced yet compact instrument enables <strong className="text-[var(--text-primary)]">multi-angle imaging</strong>, <strong className="text-[var(--text-primary)]">tilt/rotate inspection</strong>, and <strong className="text-[var(--text-primary)]">precise surface evaluation</strong> without requiring bulky conventional microscope setups.
-                </p>
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { icon: 'ph-arrows-out', label: 'Multi-angle imaging' },
-                    { icon: 'ph-arrows-clockwise', label: 'Tilt / rotate inspection' },
-                    { icon: 'ph-chart-bar', label: '3D surface profiling' },
-                    { icon: 'ph-bluetooth', label: 'Bluetooth joystick control' },
-                  ].map((feat) => (
-                    <div key={feat.label} className="flex items-center gap-2 text-xs text-[var(--text-secondary)]">
-                      <i className={`ph ${feat.icon} text-[var(--accent-primary)] text-base flex-shrink-0`}></i>
-                      {feat.label}
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="relative bg-black border-l border-[var(--accent-primary)]/10 flex items-center justify-center min-h-72 lg:min-h-full">
-                <Image
-                  src="/assests/services/MICROQUBIC-MRCL.jpg"
-                  alt="Microqubic MRCL Series"
-                  fill
-                  className="object-contain p-6"
-                />
-              </div>
-            </div>
-          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {activeFacilities.map((f) => (
               <div key={f.title} className="group rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
-                <div className="h-44 overflow-hidden border-b border-[var(--border-primary)] bg-[var(--bg-primary)] flex items-center justify-center">
+                <div className="aspect-[4/3] w-full overflow-hidden border-b border-[var(--border-primary)] bg-[var(--bg-primary)] flex items-center justify-center relative bg-black/5 dark:bg-white/5">
                   {f.photoUrl ? (
-                    <Image src={f.photoUrl} alt={f.title} width={480} height={176} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <>
+                      {/* Blurred background fill */}
+                      <Image src={f.photoUrl} alt="" fill className="object-cover blur-2xl opacity-40 scale-125 dark:opacity-20" aria-hidden="true" />
+                      {/* Main contained image */}
+                      <Image src={f.photoUrl} alt={f.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-contain z-10 p-4 transition-transform duration-500 group-hover:scale-105 drop-shadow-lg" />
+                    </>
                   ) : (
                     <i className={`ph ${f.icon} text-6xl text-[var(--accent-primary)]/20`}></i>
                   )}
@@ -375,7 +351,7 @@ export default async function ServicesPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
                       <div className="h-52 relative border-b border-[var(--border-primary)] bg-[var(--bg-primary)]">
-                        <Image src="/assests/services/mjb4.png" alt="Karl Süss MJB4 Mask Aligner" fill className="object-contain p-4" />
+                        <Image src="/assests/services/mjb4.png" alt="Karl Süss MJB4 Mask Aligner" fill sizes="(max-width: 768px) 100vw, 480px" className="object-contain p-4" />
                       </div>
                       <div className="p-5">
                         <h5 className="font-bold text-[var(--text-primary)] mb-1">Karl Süss MJB4 Mask Aligner</h5>
@@ -390,7 +366,7 @@ export default async function ServicesPage() {
                     </div>
                     <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
                       <div className="h-52 relative border-b border-[var(--border-primary)] bg-[var(--bg-primary)]">
-                        <Image src="/assests/services/evg620.jpg" alt="EVG620 Mask Aligner" fill className="object-contain p-4" />
+                        <Image src="/assests/services/evg620.jpg" alt="EVG620 Mask Aligner" fill sizes="(max-width: 768px) 100vw, 480px" className="object-contain p-4" />
                       </div>
                       <div className="p-5">
                         <h5 className="font-bold text-[var(--text-primary)] mb-1">EVG620 Mask Aligner</h5>
@@ -433,7 +409,7 @@ export default async function ServicesPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
                       <div className="h-52 relative border-b border-[var(--border-primary)] bg-[var(--bg-primary)]">
-                        <Image src="/assests/services/drie.jpg" alt="DRIE System" fill className="object-contain p-4" />
+                        <Image src="/assests/services/drie.jpg" alt="DRIE System" fill sizes="(max-width: 768px) 100vw, 480px" className="object-contain p-4" />
                       </div>
                       <div className="p-5">
                         <h5 className="font-bold text-[var(--text-primary)] mb-1">Deep Reactive Ion Etch (DRIE)</h5>
@@ -448,7 +424,7 @@ export default async function ServicesPage() {
                     </div>
                     <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
                       <div className="h-52 relative border-b border-[var(--border-primary)] bg-[var(--bg-primary)]">
-                        <Image src="/assests/services/asher.png" alt="Plasma Asher" fill className="object-contain p-4" />
+                        <Image src="/assests/services/asher.png" alt="Plasma Asher" fill sizes="(max-width: 768px) 100vw, 480px" className="object-contain p-4" />
                       </div>
                       <div className="p-5">
                         <h5 className="font-bold text-[var(--text-primary)] mb-1">O₂ Plasma Asher</h5>
@@ -487,7 +463,7 @@ export default async function ServicesPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
                       <div className="h-52 relative border-b border-[var(--border-primary)] bg-[var(--bg-primary)]">
-                        <Image src="/assests/services/spincoater.jpg" alt="Spin Coater" fill className="object-contain p-4" />
+                        <Image src="/assests/services/spincoater.jpg" alt="Spin Coater" fill sizes="(max-width: 768px) 100vw, 480px" className="object-contain p-4" />
                       </div>
                       <div className="p-5">
                         <h5 className="font-bold text-[var(--text-primary)] mb-1">Laurell Spin Coater</h5>
@@ -501,7 +477,7 @@ export default async function ServicesPage() {
                     </div>
                     <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
                       <div className="h-52 relative border-b border-[var(--border-primary)] bg-[var(--bg-primary)]">
-                        <Image src="/assests/services/evg-bonder.jpg" alt="EVG Wafer Bonder" fill className="object-contain p-4" />
+                        <Image src="/assests/services/evg-bonder.jpg" alt="EVG Wafer Bonder" fill sizes="(max-width: 768px) 100vw, 480px" className="object-contain p-4" />
                       </div>
                       <div className="p-5">
                         <h5 className="font-bold text-[var(--text-primary)] mb-1">EVG Wafer Bonder</h5>
@@ -544,7 +520,7 @@ export default async function ServicesPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-primary)] overflow-hidden">
                       <div className="h-52 relative border-b border-[var(--border-primary)] bg-[var(--bg-primary)]">
-                        <Image src="/assests/services/dektakxt.jpg" alt="Bruker DektakXT Profilometer" fill className="object-contain p-4" />
+                        <Image src="/assests/services/dektakxt.jpg" alt="Bruker DektakXT Profilometer" fill sizes="(max-width: 768px) 100vw, 480px" className="object-contain p-4" />
                       </div>
                       <div className="p-5">
                         <h5 className="font-bold text-[var(--text-primary)] mb-1">Bruker DektakXT Profilometer</h5>

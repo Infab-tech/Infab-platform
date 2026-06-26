@@ -195,7 +195,7 @@ export interface DefaultTeamMember {
 
 export const FALLBACK_TEAM: DefaultTeamMember[] = [
   // FOUNDER
-  { name: 'Muthuraman Swaminathan', title: 'Founder & CEO', section: 'FOUNDER', order: 1, photoUrl: '/team/1.jpg', bio: "Driving INFAB's mission to bridge research and industrial deployment in MEMS and microfluidics. Incubated at InCeNSE, Bengaluru." },
+  { name: 'Muthuraman Swaminathan', title: 'Founder & CEO', section: 'FOUNDER', order: 1, photoUrl: '/team/1.jpg', bio: "Driving INFAB's mission to bridge research and industrial deployment in MEMS and microfluidics. Incubated at INCeNSE, Bengaluru." },
   // RESEARCH
   { name: 'Dr. Mohammed Yosuff Caffiyar', title: 'Principal Scientist', section: 'RESEARCH', order: 1, photoUrl: '/team/2.jpg', bio: "Leads core MEMS device science, sensor physics, and process development at INFAB's cleanroom facilities." },
   { name: 'Dr. Saara K', title: 'Research Director', section: 'RESEARCH', order: 2, photoUrl: '/team/3.jpg', bio: 'Directs research programmes across MEMS sensor architectures and microfluidic platform development.' },
@@ -250,7 +250,7 @@ export const FALLBACK_NEWS: DefaultNewsArticle[] = [
   {
     title: "INFAB Semiconductor — Advancing India's MEMS and Semiconductor Manufacturing",
     description:
-      'A feature on INFAB Semiconductor, highlighting the journey from cleanroom research at InCeNSE to commercial MEMS sensor manufacturing for aerospace, healthcare, and semiconductor applications.',
+      'A feature on INFAB Semiconductor, highlighting the journey from cleanroom research at INCeNSE to commercial MEMS sensor manufacturing for aerospace, healthcare, and semiconductor applications.',
     category: 'Partnerships & MoUs',
     link: null,
     publishedAt: new Date('2025-09-05'),
@@ -258,7 +258,7 @@ export const FALLBACK_NEWS: DefaultNewsArticle[] = [
   {
     title: "INFAB: Powering India's Deep-Tech Future from the Inside Out",
     description:
-      "YourStory profiles INFAB Semiconductor's mission to build MEMS technology in India. The piece covers our founding story at InCeNSE, our product portfolio spanning aerospace and microfluidics, and the vision behind making India a global MEMS hub.",
+      "YourStory profiles INFAB Semiconductor's mission to build MEMS technology in India. The piece covers our founding story at INCeNSE, our product portfolio spanning aerospace and microfluidics, and the vision behind making India a global MEMS hub.",
     category: 'Research & Papers',
     link: 'https://yourstory.com/2025/08/infab-semiconductor-mems-innovation',
     publishedAt: new Date('2025-08-01'),
@@ -288,9 +288,9 @@ export const FALLBACK_RECOGNITIONS: DefaultRecognition[] = [
     order: 2,
   },
   {
-    title: 'InCeNSE Incubated',
-    body: 'Incubated at InCeNSE — the deep-tech incubator at the Centre for Nano Science and Engineering, Bengaluru. One of India\'s premier MEMS and semiconductor incubation programmes.',
-    issuer: 'InCeNSE, Bengaluru',
+    title: 'INCeNSE Incubated',
+    body: 'Incubated at INCeNSE — the deep-tech incubator at the Centre for Nano Science and Engineering, Bengaluru. One of India\'s premier MEMS and semiconductor incubation programmes.',
+    issuer: 'INCeNSE, Bengaluru',
     order: 3,
   },
   {
@@ -319,6 +319,8 @@ export const FALLBACK_FACILITIES: DefaultFacilityItem[] = [
   { icon: 'ph-drop', title: 'Microfluidics Lab', description: 'Dedicated PDMS fabrication, spin coating, and soft lithography equipment. UV curing station, plasma bonding, and fluidic testing benches.', photoUrl: '/assests/services/spincoater.jpg', order: 4 },
   { icon: 'ph-flask', title: 'Inhouse Testing Facilities', description: 'On-site device testing for electrical, mechanical, and fluidic performance validation. Rapid turnaround for design-test-iterate cycles without leaving the facility.', order: 5 },
   { icon: 'ph-printer', title: '3D Printing', description: 'Rapid prototyping with high-resolution 3D printing for jigs, fixtures, and custom microfluidic housings to accelerate device packaging and testing.', order: 6 },
+  { icon: 'ph-magnifying-glass-plus', title: 'Microqubic 2D/3D Imaging System', description: 'High-resolution modular microscope system for multi-angle imaging, tilt/rotate inspection, and 3D surface profiling of MEMS and microfluidics.', photoUrl: '/assests/services/MICROQUBIC-MRCL.jpg', order: 7 },
+  { icon: 'ph-gauge', title: 'Dead Weight Tester', description: 'High-precision pressure calibration standard using calibrated weights to apply known pressures for sensor verification and transducer testing.', photoUrl: '/assests/services/Dead weight tester.jpeg', order: 8 },
 ];
 
 // ── SERVICE ITEMS ─────────────────────────────────────────────────────────────
