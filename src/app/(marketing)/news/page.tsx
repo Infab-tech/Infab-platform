@@ -168,7 +168,7 @@ export default async function NewsPage() {
                 <ul className="flex flex-col gap-6">
                   {articles.slice(0, 3).map((a) => (
                     <li key={a.id} className="border-b border-[var(--border-primary)] pb-6 last:border-0 last:pb-0">
-                      <a href={a.link} target="_blank" rel="noopener noreferrer" className="group block">
+                      <a href={a.link || undefined} target="_blank" rel="noopener noreferrer" className="group block">
                         <p className="text-xs font-mono text-[var(--accent-primary)] mb-2">{fmtShort(a.date)}</p>
                         <h4 className="text-sm font-bold text-[var(--text-primary)] leading-snug line-clamp-2 group-hover:text-[var(--accent-primary)] transition-colors">
                           {a.title}
