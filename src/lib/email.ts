@@ -2,10 +2,10 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy');
 
-export async function sendEmail({ to, subject, html }: { to: string, subject: string, html: string }) {
+export async function sendEmail({ to, subject, html }: { to: string | string[], subject: string, html: string }) {
     if (process.env.NODE_ENV === 'development') {
         console.log('--- DEVELOPMENT MODE EMAIL LOG ---');
-        console.log(`To: ${to}\nSubject: ${subject}\nBody: ${html}`);
+        console.log(`To: ${Array.isArray(to) ? to.join(', ') : to}\nSubject: ${subject}\nBody: ${html}`);
         console.log('----------------------------------');
     }
 

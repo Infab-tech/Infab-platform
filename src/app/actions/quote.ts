@@ -56,9 +56,13 @@ export async function submitQuoteRequest(formData: FormData) {
         const emailNotificationsEnabled = await getAdminEmailNotificationSetting();
         if (emailNotificationsEnabled) {
             await sendEmail({
-                to: process.env.ADMIN_EMAIL || 'info@infab-tech.com',
+                to: process.env.ADMIN_EMAILS ? process.env.ADMIN_EMAILS.split(',') : ['info@infab-tech.com'],
                 subject: 'New Quote Request Submitted',
-                html: `<p>A new quote request has been submitted by ${user.email}.</p><p>Notes: ${notes || 'None'}</p>`
+                html: `<p>A new quote request has been submitted by <strong>${user.email}</strong>.</p>
+                       <p><strong>Product ID:</strong> ${productId}</p>
+                       <p><strong>Quantity:</strong> ${quantity}</p>
+                       <p><strong>Notes:</strong> ${notes || 'None'}</p>
+                       <p>Log in to the admin dashboard to review.</p>`
             }).catch(console.error);
         }
 

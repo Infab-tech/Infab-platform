@@ -45,7 +45,7 @@ export async function submitInquiry(formData: FormData) {
       `;
 
       await sendEmail({
-        to: process.env.ADMIN_EMAIL || 'info@infab-tech.com',
+        to: process.env.ADMIN_EMAILS ? process.env.ADMIN_EMAILS.split(',') : ['info@infab-tech.com'],
         subject: `New Inquiry from ${firstName} ${lastName} - ${interest}`,
         html: emailBody
       }).catch(console.error); // Catch email errors so it doesn't fail the submission
