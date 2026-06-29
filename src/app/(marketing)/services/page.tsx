@@ -8,7 +8,87 @@ import SiliconWafer3D from '@/components/ui/SiliconWafer3D';
 import SemImageSlider from '@/components/ui/SemImageSlider';
 
 export const metadata: Metadata = {
-// ... lines 9 to 93
+  title: 'Services | INFAB Semiconductor',
+  description: 'End-to-end MEMS and microfluidics services  from concept to qualified device. Custom MEMS design, silicon micromachining, microfluidic fabrication, and cleanroom services in Bengaluru.',
+};
+
+// MEMS capabilities — matches infabsemi.com MEMS page exactly
+const memsCapabilities = [
+  {
+    icon: 'ph-pencil-ruler',
+    title: 'Custom MEMS Device Design',
+    description: 'We specialise in designing MEMS devices tailored to specific application requirements from concept feasibility to tape-out-ready layouts.',
+  },
+  {
+    icon: 'ph-cpu',
+    title: 'Silicon Micromachining',
+    description: 'Leveraging bulk and surface micromachining techniques to create complex 3D microstructures in silicon with high precision and repeatability.',
+  },
+  {
+    icon: 'ph-stack',
+    title: 'Thin-Film Deposition & Etching',
+    description: 'Full thin film capabilities including PVD (sputtering, e-beam evaporation), PECVD, thermal oxidation, and pattern etching for metals, dielectrics, and piezoelectrics.',
+  },
+  {
+    icon: 'ph-package',
+    title: 'Wafer Bonding & Packaging',
+    description: 'Anodic bonding (Si–glass), fusion bonding (Si–Si), adhesive and eutectic bonding for hermetically sealed microstructures and MEMS packaging.',
+  },
+  {
+    icon: 'ph-flask',
+    title: 'Material Versatility',
+    description: 'We work with silicon, glass, quartz, SOI, SiC, polymers, and specialty substrates selecting the optimal material for your application constraints.',
+  },
+  {
+    icon: 'ph-factory',
+    title: 'Prototyping to Production',
+    description: 'Streamlined process from rapid prototype to small-volume production, with design-for-manufacturability reviews at every stage.',
+  },
+];
+
+// MEMS process capability cards — 3-card grid matching infabsemi.com
+const memsProcesses: { icon: string; title: string; description: string; detail: string | null }[] = [
+  {
+    icon: 'ph-sun',
+    title: 'Lithography',
+    description: 'UV and deep-UV contact/proximity lithography.',
+    detail: 'UV and deep-UV contact/proximity lithography with minimum feature sizes down to 2 µm on silicon, glass, quartz, SOI, and polymer substrates.',
+  },
+  {
+    icon: 'ph-waves',
+    title: 'Dry Etching',
+    description: 'Bosch process DRIE for high aspect ratio silicon structures.',
+    detail: 'Bosch process DRIE for high aspect ratio silicon structures. Etch depth up to 300 µm with vertical sidewalls and aspect ratios > 20:1.',
+  },
+  {
+    icon: 'ph-drop',
+    title: 'Wet Etching',
+    description: 'KOH and TMAH anisotropic silicon etching, HF oxide strip, BOE, Piranha (H₂SO₄:H₂O₂), and RCA cleans.',
+    detail: null,
+  },
+];
+
+// Microfluidics Design Services — matches infabsemi.com
+const microfluidicsDesign = [
+  { icon: 'ph-pencil-ruler', title: 'Custom Micro Channel Design', description: 'Tailored microchannel architecture designed to meet specific flow, pressure, and biological requirements of your application.' },
+  { icon: 'ph-chart-line-up', title: 'Simulation Driven Optimization', description: 'CFD and multiphysics simulation (COMSOL, Ansys Fluent) to optimise device performance  flow uniformity, mixing efficiency, droplet size before committing to fabrication.' },
+  { icon: 'ph-test-tube', title: 'Material & Process Selection', description: 'Expert guidance on substrate selection  PDMS, glass, silicon, thermoplastics matched to your optical, chemical, and biocompatibility requirements.' },
+  { icon: 'ph-timer', title: 'Rapid Prototyping', description: 'Fast design-to-device cycles using soft lithography and SU-8 mold processes. Functional prototypes delivered in weeks, not months.' },
+  { icon: 'ph-gear', title: 'Design for Manufacturability', description: 'Every design is reviewed for scalability and yield. We ensure a smooth transition from research prototype to repeatable small volume production.' },
+];
+
+// Microfluidics Fabrication Services — matches infabsemi.com
+const microfluidicsFabrication = [
+  { icon: 'ph-drop', title: 'Soft Lithography (PDMS)', description: 'Standard PDMS based microfluidic fabrication using SU-8 master molds. Optically transparent chips suitable for fluorescence and brightfield imaging.' },
+  { icon: 'ph-flask', title: 'Glass and Silicon Etching', description: 'Precision wet and dry etching of glass and silicon substrates for high resolution, chemically resistant microchannels ideal for aggressive solvents and high temperature applications.' },
+  { icon: 'ph-squares-four', title: 'Polymer Microfabrication', description: 'Fabrication using thermoplastics, SU-8, and cyclic olefin copolymer (COC) for disposable, cost-effective lab-on-chip devices.' },
+  { icon: 'ph-link', title: 'Hybrid Integration', description: 'Combining PDMS, glass, and silicon in a single device  bonding dissimilar materials to achieve complex multi layer microfluidic architectures.' },
+];
+
+// Microfluidic Device Showcase — real INFAB projects
+const microfluidicsDevices = [
+  { title: 'Silicon & SU-8 Mold', description: 'High resolution SU-8 master molds on silicon for repeatable PDMS soft lithography, enabling sub-10 µm feature sizes across multilayer designs.' },
+  { title: 'Cancer-on-Chip', description: 'Multi layer organ-on-chip platform developed in collaboration with BIRAC and Manipal Hospital for cancer cell co-culture under physiological shear stress.' },
   { title: 'mRNA Chip in Glass', description: 'Herringbone micromixer fabricated in borosilicate glass for mRNA LNP synthesis  enabling precise nanoparticle size control for RNA delivery applications.' },
 ];
 
