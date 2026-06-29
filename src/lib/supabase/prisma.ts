@@ -7,15 +7,17 @@ for (const key of required) {
   if (!process.env[key]) throw new Error(`Missing environment variable: ${key}`);
 }
 
-const connectionString = process.env.DATABASE_URL!;
-
-const pool = new Pool({ connectionString });
-const adapter = new PrismaPg(pool);
-
 const globalForPrisma = globalThis as unknown as {
     prisma: PrismaClient | undefined;
 };
 
-export const prisma = globalForPrisma.prisma ?? new PrismaClient({ adapter });
+const createPrismaClient = () => {
+    const connectionString = process.env.DATABASE_URL!;
+    const pool = new Pool({ connectionString, max: 5 });
+    const adapter = new PrismaPg(pool);
+    return new PrismaClient({ adapter });
+};
+
+export const prisma = globalForPrisma.prisma ?? createPrismaClient();
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
