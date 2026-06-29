@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import fs from 'fs';
+import path from 'path';
 import { prisma } from '@/lib/supabase/prisma';
 import { FALLBACK_FACILITIES, FALLBACK_SERVICE_ITEMS } from '@/lib/content-defaults';
 import SiliconWafer3D from '@/components/ui/SiliconWafer3D';
@@ -103,7 +104,7 @@ export default async function ServicesPage() {
   let semImages: string[] = [];
 
   try {
-    const sourceFolder = "C:/Users/dell/Documents/InFAB/Website/Infab_website/website/SEM Images_To Show/SEM Images_To Show";
+    const sourceFolder = path.join(process.cwd(), 'public', 'images', 'sem');
     if (fs.existsSync(sourceFolder)) {
       const files = fs.readdirSync(sourceFolder);
       semImages = files.filter(f => /\.(jpg|jpeg|png|webp)$/i.test(f));

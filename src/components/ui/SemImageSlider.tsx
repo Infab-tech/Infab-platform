@@ -43,7 +43,7 @@ export default function SemImageSlider({ images }: { images: string[] }) {
               style={{ width: 'min(85vw, 400px)', aspectRatio: '4/3' }}
             >
               <Image
-                src={`/api/images/sem/${encodeURIComponent(img)}`}
+                src={`/images/sem/${encodeURIComponent(img)}`}
                 alt={img.replace('.jpeg', '')}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
