@@ -11,8 +11,8 @@ const slides = [
     title: "Empowering Healthcare with Microfluidics",
     titleHighlight: "Microfluidics",
     titleBase: "Empowering Healthcare with ",
-    description: "Advanced silicon, glass, and polymer chips processed in our state-of-the-art cleanroom facilities, supporting organ-on-chip, droplet generation, and cell sorting.",
-    image: "/assests/20250705_1247_Microfluidic-Chips-Display_remix_01jzcq1w50ebgbqtaapdw33fcb.png",
+    description: "Advanced silicon, glass, and polymer chips processed in our state of the art cleanroom facilities, supporting organ on chip, droplet generation, and cell sorting.",
+    image: "/assests/products/microfluidics.jpeg",
 
   },
   {
@@ -97,7 +97,7 @@ export default function Hero() {
                   alt={slide.title}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
+                  className={`object-cover ${index === 0 ? '-scale-x-100' : ''}`}
                   priority={index === 0}
                 />
               </div>

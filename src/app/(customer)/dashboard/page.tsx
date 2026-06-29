@@ -29,7 +29,7 @@ export default async function DashboardPage() {
     const ordersInProductionCount = quotes.filter(q => q.status === 'ACCEPTED').length;
 
     return (
-        <div className="max-w-5xl">
+        <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold mb-2">Welcome back, {user.email.split('@')[0]}.</h2>
             <p className="text-[var(--text-secondary)] mb-10">
                 Manage your active quotes, order history, and engineering requests.

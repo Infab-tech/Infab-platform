@@ -4,7 +4,10 @@ import { cookies } from 'next/headers';
 import Script from 'next/script';
 
 export const metadata: Metadata = {
-  title: 'INFAB Semiconductor | Advanced MEMS & Microfluidic Solutions',
+  title: {
+    template: '%s | InFAB',
+    default: 'InFAB Advanced MEMS & Microfluidics Foundry',
+  },
   description: 'MEMS sensors, microfluidic chips, and semiconductor fabrication services — designed and built in India. INCeNSE incubated. ISO 9001 & AS 9100D certified.',
   keywords: ['MEMS', 'microfluidics', 'semiconductor', 'INFAB', 'INCeNSE', 'pressure sensor', 'cleanroom', 'India'],
   authors: [{ name: 'INFAB Semiconductor Pvt. Ltd.' }],

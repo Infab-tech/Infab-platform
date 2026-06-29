@@ -49,7 +49,7 @@ export default async function CatalogPage() {
   }
 
   return (
-    <div className="max-w-6xl">
+    <div className="max-w-6xl mx-auto">
       <div className="mb-8">
         <h2 className="text-3xl font-bold mb-2 text-[var(--text-primary)]">Product Catalog</h2>
         <p className="text-[var(--text-secondary)]">

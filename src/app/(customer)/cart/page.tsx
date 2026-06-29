@@ -41,7 +41,7 @@ export default function CartPage() {
 
   if (count === 0) {
     return (
-      <div className="max-w-3xl">
+      <div className="max-w-3xl mx-auto">
         <h2 className="text-3xl font-bold mb-2 text-[var(--text-primary)]">RFQ Cart</h2>
         <p className="text-[var(--text-secondary)] mb-10">Your cart is empty.</p>
         <div className="bg-[var(--bg-secondary)] border border-[var(--border-primary)] rounded-2xl p-12 text-center flex flex-col items-center gap-4">
@@ -60,7 +60,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="max-w-4xl">
+    <div className="max-w-4xl mx-auto">
       <div className="mb-8 flex items-end justify-between gap-4">
         <div>
           <h2 className="text-3xl font-bold mb-1 text-[var(--text-primary)]">RFQ Cart</h2>

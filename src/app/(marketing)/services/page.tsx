@@ -3,10 +3,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { prisma } from '@/lib/supabase/prisma';
 import { FALLBACK_FACILITIES, FALLBACK_SERVICE_ITEMS } from '@/lib/content-defaults';
+import SiliconWafer3D from '@/components/ui/SiliconWafer3D';
 
 export const metadata: Metadata = {
   title: 'Services | INFAB Semiconductor',
-  description: 'End-to-end MEMS and microfluidics services — from concept to qualified device. Custom MEMS design, silicon micromachining, microfluidic fabrication, and cleanroom services in Bengaluru.',
+  description: 'End-to-end MEMS and microfluidics services  from concept to qualified device. Custom MEMS design, silicon micromachining, microfluidic fabrication, and cleanroom services in Bengaluru.',
 };
 
 // MEMS capabilities — matches infabsemi.com MEMS page exactly
@@ -14,7 +15,7 @@ const memsCapabilities = [
   {
     icon: 'ph-pencil-ruler',
     title: 'Custom MEMS Device Design',
-    description: 'We specialise in designing MEMS devices tailored to specific application requirements — from concept feasibility to tape-out-ready layouts.',
+    description: 'We specialise in designing MEMS devices tailored to specific application requirements from concept feasibility to tape-out-ready layouts.',
   },
   {
     icon: 'ph-cpu',
@@ -24,7 +25,7 @@ const memsCapabilities = [
   {
     icon: 'ph-stack',
     title: 'Thin-Film Deposition & Etching',
-    description: 'Full thin-film capabilities including PVD (sputtering, e-beam evaporation), PECVD, thermal oxidation, and pattern etching for metals, dielectrics, and piezoelectrics.',
+    description: 'Full thin film capabilities including PVD (sputtering, e-beam evaporation), PECVD, thermal oxidation, and pattern etching for metals, dielectrics, and piezoelectrics.',
   },
   {
     icon: 'ph-package',
@@ -34,7 +35,7 @@ const memsCapabilities = [
   {
     icon: 'ph-flask',
     title: 'Material Versatility',
-    description: 'We work with silicon, glass, quartz, SOI, SiC, polymers, and specialty substrates — selecting the optimal material for your application constraints.',
+    description: 'We work with silicon, glass, quartz, SOI, SiC, polymers, and specialty substrates selecting the optimal material for your application constraints.',
   },
   {
     icon: 'ph-factory',
@@ -54,8 +55,8 @@ const memsProcesses: { icon: string; title: string; description: string; detail:
   {
     icon: 'ph-waves',
     title: 'Dry Etching',
-    description: 'Bosch-process DRIE for high-aspect-ratio silicon structures.',
-    detail: 'Bosch-process DRIE for high-aspect-ratio silicon structures. Etch depth up to 300 µm with vertical sidewalls and aspect ratios > 20:1.',
+    description: 'Bosch process DRIE for high aspect ratio silicon structures.',
+    detail: 'Bosch process DRIE for high aspect ratio silicon structures. Etch depth up to 300 µm with vertical sidewalls and aspect ratios > 20:1.',
   },
   {
     icon: 'ph-drop',
@@ -67,26 +68,26 @@ const memsProcesses: { icon: string; title: string; description: string; detail:
 
 // Microfluidics Design Services — matches infabsemi.com
 const microfluidicsDesign = [
-  { icon: 'ph-pencil-ruler', title: 'Custom Micro-Channel Design', description: 'Tailored microchannel architecture designed to meet specific flow, pressure, and biological requirements of your application.' },
-  { icon: 'ph-chart-line-up', title: 'Simulation-Driven Optimization', description: 'CFD and multiphysics simulation (COMSOL, Ansys Fluent) to optimise device performance — flow uniformity, mixing efficiency, droplet size — before committing to fabrication.' },
-  { icon: 'ph-test-tube', title: 'Material & Process Selection', description: 'Expert guidance on substrate selection — PDMS, glass, silicon, thermoplastics — matched to your optical, chemical, and biocompatibility requirements.' },
+  { icon: 'ph-pencil-ruler', title: 'Custom Micro Channel Design', description: 'Tailored microchannel architecture designed to meet specific flow, pressure, and biological requirements of your application.' },
+  { icon: 'ph-chart-line-up', title: 'Simulation Driven Optimization', description: 'CFD and multiphysics simulation (COMSOL, Ansys Fluent) to optimise device performance  flow uniformity, mixing efficiency, droplet size before committing to fabrication.' },
+  { icon: 'ph-test-tube', title: 'Material & Process Selection', description: 'Expert guidance on substrate selection  PDMS, glass, silicon, thermoplastics matched to your optical, chemical, and biocompatibility requirements.' },
   { icon: 'ph-timer', title: 'Rapid Prototyping', description: 'Fast design-to-device cycles using soft lithography and SU-8 mold processes. Functional prototypes delivered in weeks, not months.' },
-  { icon: 'ph-gear', title: 'Design for Manufacturability', description: 'Every design is reviewed for scalability and yield. We ensure a smooth transition from research prototype to repeatable small-volume production.' },
+  { icon: 'ph-gear', title: 'Design for Manufacturability', description: 'Every design is reviewed for scalability and yield. We ensure a smooth transition from research prototype to repeatable small volume production.' },
 ];
 
 // Microfluidics Fabrication Services — matches infabsemi.com
 const microfluidicsFabrication = [
-  { icon: 'ph-drop', title: 'Soft Lithography (PDMS)', description: 'Standard PDMS-based microfluidic fabrication using SU-8 master molds. Optically transparent chips suitable for fluorescence and brightfield imaging.' },
-  { icon: 'ph-flask', title: 'Glass and Silicon Etching', description: 'Precision wet and dry etching of glass and silicon substrates for high-resolution, chemically resistant microchannels — ideal for aggressive solvents and high-temperature applications.' },
+  { icon: 'ph-drop', title: 'Soft Lithography (PDMS)', description: 'Standard PDMS based microfluidic fabrication using SU-8 master molds. Optically transparent chips suitable for fluorescence and brightfield imaging.' },
+  { icon: 'ph-flask', title: 'Glass and Silicon Etching', description: 'Precision wet and dry etching of glass and silicon substrates for high resolution, chemically resistant microchannels ideal for aggressive solvents and high temperature applications.' },
   { icon: 'ph-squares-four', title: 'Polymer Microfabrication', description: 'Fabrication using thermoplastics, SU-8, and cyclic olefin copolymer (COC) for disposable, cost-effective lab-on-chip devices.' },
-  { icon: 'ph-link', title: 'Hybrid Integration', description: 'Combining PDMS, glass, and silicon in a single device — bonding dissimilar materials to achieve complex multi-layer microfluidic architectures.' },
+  { icon: 'ph-link', title: 'Hybrid Integration', description: 'Combining PDMS, glass, and silicon in a single device  bonding dissimilar materials to achieve complex multi layer microfluidic architectures.' },
 ];
 
 // Microfluidic Device Showcase — real INFAB projects
 const microfluidicsDevices = [
-  { title: 'Silicon & SU-8 Mold', description: 'High-resolution SU-8 master molds on silicon for repeatable PDMS soft lithography, enabling sub-10 µm feature sizes across multilayer designs.' },
-  { title: 'Cancer-on-Chip', description: 'Multi-layer organ-on-chip platform developed in collaboration with BIRAC and Manipal Hospital for cancer cell co-culture under physiological shear stress.' },
-  { title: 'mRNA Chip in Glass', description: 'Herringbone micromixer fabricated in borosilicate glass for mRNA-LNP synthesis — enabling precise nanoparticle size control for RNA delivery applications.' },
+  { title: 'Silicon & SU-8 Mold', description: 'High resolution SU-8 master molds on silicon for repeatable PDMS soft lithography, enabling sub-10 µm feature sizes across multilayer designs.' },
+  { title: 'Cancer-on-Chip', description: 'Multi layer organ-on-chip platform developed in collaboration with BIRAC and Manipal Hospital for cancer cell co-culture under physiological shear stress.' },
+  { title: 'mRNA Chip in Glass', description: 'Herringbone micromixer fabricated in borosilicate glass for mRNA LNP synthesis  enabling precise nanoparticle size control for RNA delivery applications.' },
 ];
 
 export default async function ServicesPage() {
@@ -126,12 +127,19 @@ export default async function ServicesPage() {
       {/* Page Hero */}
       <div className="bg-[var(--bg-secondary)] border-b border-[var(--border-primary)] pt-40 pb-24">
         <div className="mx-auto max-w-7xl px-6">
-          <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">What We Do</span>
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-[var(--text-primary)] mb-6 leading-tight max-w-3xl">Services</h1>
-          <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
-          <p className="text-xl text-[var(--text-secondary)] leading-relaxed max-w-2xl">
-            End-to-end MEMS and microfluidics services — from concept to qualified device. Custom design, fabrication, characterisation, and packaging under one roof in Bengaluru.
-          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">What We Do</span>
+              <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-[var(--text-primary)] mb-6 leading-tight max-w-3xl">Services</h1>
+              <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
+              <p className="text-xl text-[var(--text-secondary)] leading-relaxed max-w-2xl">
+                End-to-end MEMS and microfluidics services from concept to qualified device. Custom design, fabrication, characterisation, and packaging under one roof in Bengaluru.
+              </p>
+            </div>
+            <div>
+              <SiliconWafer3D />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -162,7 +170,7 @@ export default async function ServicesPage() {
               <h2 className="text-4xl font-bold tracking-tight text-[var(--text-primary)] mb-6">MEMS Fabrication Services</h2>
               <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
               <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
-                From concept to qualified device — INFAB offers end-to-end MEMS design and fabrication services backed by cleanroom capabilities in Bengaluru. Our team supports research institutions and industrial OEMs through the complete MEMS development lifecycle.
+                From concept to qualified device INFAB offers end-to-end MEMS design and fabrication services backed by cleanroom capabilities in Bengaluru. Our team supports research institutions and industrial OEMs through the complete MEMS development lifecycle.
               </p>
             </div>
             <div className="flex flex-col gap-4">
@@ -299,12 +307,7 @@ export default async function ServicesPage() {
               <div key={f.title} className="group rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
                 <div className="aspect-[4/3] w-full overflow-hidden border-b border-[var(--border-primary)] bg-[var(--bg-primary)] flex items-center justify-center relative bg-black/5 dark:bg-white/5">
                   {f.photoUrl ? (
-                    <>
-                      {/* Blurred background fill */}
-                      <Image src={f.photoUrl} alt="" fill className="object-cover blur-2xl opacity-40 scale-125 dark:opacity-20" aria-hidden="true" />
-                      {/* Main contained image */}
-                      <Image src={f.photoUrl} alt={f.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-contain z-10 p-4 transition-transform duration-500 group-hover:scale-105 drop-shadow-lg" />
-                    </>
+                    <Image src={f.photoUrl} alt={f.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
                   ) : (
                     <i className={`ph ${f.icon} text-6xl text-[var(--accent-primary)]/20`}></i>
                   )}

@@ -35,7 +35,7 @@ export default function Footer() {
                 className="mb-4 brand-logo-adaptive h-auto w-auto"
               />
               <p className="mb-6 text-sm leading-relaxed text-[var(--text-secondary)]">
-                MEMS sensors, microfluidic chips, and semiconductor fabrication services — designed and manufactured in Bengaluru. INCeNSE incubated. ISO 9001 & AS 9100D certified.
+                MEMS sensors, microfluidic chips, and semiconductor fabrication services designed and manufactured in Bengaluru. INCeNSE incubated. ISO 9001 & AS 9100D certified.
               </p>
               {/* Social Icons */}
               <div className="flex gap-3">
@@ -120,7 +120,7 @@ export default function Footer() {
                 <div>
                   <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-[var(--accent-primary)]">Corporate Office</p>
                   <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
-                    PVR Towers, 5th floor<br />1341, Venkateshwara Nagar main road<br />MCECHS layout, Dr. Shivaram Karanth Nagar<br />Jakkur, Bengaluru — 560064
+                    PVR Towers, 5th floor<br />1341, Venkateshwara Nagar main road<br />MCECHS layout, Dr. Shivaram Karanth Nagar<br />Jakkur, Bengaluru 560064
                   </p>
                   <a href="tel:+918045039946" className="mt-1 block text-sm text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors">+91 80 4503 9946</a>
                   <a href="mailto:info@infab-tech.com" className="block text-sm text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors">info@infab-tech.com</a>
@@ -138,7 +138,7 @@ export default function Footer() {
               &copy; {currentYear} INFAB Semiconductor Pvt. Ltd. All rights reserved.
             </p>
             <div className="flex gap-6">
-              <Link href="/privacy-policy" className="text-xs text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors">Privacy Policy</Link>
+              <Link href="/privacy" className="text-xs text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors">Privacy Policy</Link>
               <Link href="/terms" className="text-xs text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors">Terms of Service</Link>
               <Link href="/contact" className="text-xs text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors">Contact</Link>
             </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Recognitions from '@/components/sections/Recognitions';
+import MicrofluidicChip from '@/components/ui/MicrofluidicChip';
 
 export const metadata: Metadata = {
   title: 'About Us | INFAB Semiconductor',
@@ -20,7 +21,7 @@ const values = [
   {
     icon: 'ph-globe-hemisphere-east',
     title: 'Impact',
-    description: 'Powering critical sectors like aerospace, healthcare, and life sciences with Indian-made hardware that improves lives, enhances safety, and advances human knowledge.',
+    description: 'Powering critical sectors like aerospace, healthcare, and life sciences with Indian made hardware that improves lives, enhances safety, and advances human knowledge.',
   },
 ];
 
@@ -33,20 +34,30 @@ export default function AboutPage() {
       {/* Page Hero */}
       <div className="bg-[var(--bg-secondary)] border-b border-[var(--border-primary)] pt-40 pb-24">
         <div className="mx-auto max-w-7xl px-6">
-          <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">
-            Who We Are
-          </span>
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-[var(--text-primary)] mb-6 leading-tight max-w-3xl">
-            About INFAB Semiconductor
-          </h1>
-          <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
-          <p className="text-xl text-[var(--text-secondary)] leading-relaxed max-w-2xl">
-            Designing and manufacturing MEMS sensors, microfluidic chips, and semiconductor devices — entirely in Bengaluru, for clients across aerospace, healthcare, and research.
-          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+            {/* Left: text */}
+            <div>
+              <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">
+                Who We Are
+              </span>
+              <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-[var(--text-primary)] mb-6 leading-tight">
+                About INFAB Semiconductor
+              </h1>
+              <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
+              <p className="text-xl text-[var(--text-secondary)] leading-relaxed">
+                Designing and manufacturing MEMS sensors, microfluidic chips, and semiconductor devices entirely in Bengaluru, for clients across aerospace, healthcare, and research.
+              </p>
+            </div>
+
+            {/* Right: interactive 3D microfluidic chip */}
+            <div>
+              <MicrofluidicChip />
+            </div>
+
+          </div>
         </div>
       </div>
-
-
 
       {/* Who We Are */}
       <div className="border-b border-[var(--border-primary)] py-32">
@@ -62,13 +73,13 @@ export default function AboutPage() {
               </h2>
               <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
               <p className="text-[var(--text-secondary)] text-lg leading-relaxed mb-6">
-                INFAB Semiconductor designs and manufactures MEMS sensors, actuators, and microfluidic devices. Headquartered in Bengaluru, we handle the full development cycle (design, fabrication, test, and packaging) under one roof, building Made-in-India products for global applications.
+                INFAB Semiconductor designs and manufactures MEMS sensors, actuators, and microfluidic devices. Headquartered in Bengaluru, we handle the full development cycle (design, fabrication, test, and packaging) under one roof, building Made in India products for global applications.
               </p>
               <p className="text-[var(--text-secondary)] text-lg leading-relaxed mb-6">
-                Our portfolio includes MEMS pressure transducers, pressure switches, Hall sensors and microfluidic chips - engineered for exceptional precision and reliability. We also offer advanced semiconductor process services to accelerate next-generation device development.
+                Our portfolio includes MEMS pressure transducers, pressure switches, Hall sensors and microfluidic chips engineered for exceptional precision and reliability. We also offer advanced semiconductor process services to accelerate next generation device development.
               </p>
               <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
-                From aerospace pressure transducers to lab-on-a-chip (LOC), we deliver international-standard solutions engineered entirely in India.
+                From aerospace pressure transducers to lab-on-a-chip (LOC), we deliver international standard solutions engineered entirely in India.
               </p>
             </div>
 
@@ -85,7 +96,7 @@ export default function AboutPage() {
                   </div>
                 </div>
                 <p className="text-[var(--text-secondary)] leading-relaxed mb-6">
-                  INFAB Semiconductor is incubated at <strong className="text-[var(--text-primary)]">INCeNSE</strong>, the deep-tech incubator at the Centre for Nano Science and Engineering, IISc Bengaluru. This gives us direct access to cleanroom facilities, scientific expertise, and a connected deep-tech ecosystem.
+                  INFAB Semiconductor is incubated at <strong className="text-[var(--text-primary)]">INCeNSE</strong>, the deep tech incubator at the Centre for Nano Science and Engineering, IISc Bengaluru. This gives us direct access to cleanroom facilities, scientific expertise, and a connected deep tech ecosystem.
                 </p>
                 <div className="border-t border-[var(--border-primary)] pt-6">
                   <p className="font-mono text-xs uppercase tracking-wider text-[var(--text-secondary)] mb-3">Supported by</p>
@@ -105,7 +116,7 @@ export default function AboutPage() {
                   <h4 className="font-bold text-[var(--text-primary)]">Bengaluru, Karnataka</h4>
                 </div>
                 <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                  Operating from two sites — our R&amp;D cleanroom at INCeNSE, IISc and our corporate office &amp; lab in Jakkur, Bengaluru.
+                  Operating from two sites: our R&amp;D cleanroom at INCeNSE, IISc and our corporate office &amp; lab in Jakkur, Bengaluru.
                 </p>
               </div>
             </div>

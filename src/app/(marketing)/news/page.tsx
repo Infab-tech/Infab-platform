@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { prisma } from '@/lib/supabase/prisma';
 import { FALLBACK_NEWS } from '@/lib/content-defaults';
+import OpticalWaveguide3D from '@/components/ui/OpticalWaveguide3D';
 
 export const metadata: Metadata = {
   title: 'News & Events | INFAB Semiconductor',
@@ -71,16 +72,23 @@ export default async function NewsPage() {
       {/* Page Hero */}
       <div className="bg-[var(--bg-secondary)] border-b border-[var(--border-primary)] pt-40 pb-24">
         <div className="mx-auto max-w-7xl px-6">
-          <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">
-            Press &amp; Updates
-          </span>
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-[var(--text-primary)] mb-6 leading-tight max-w-3xl">
-            News &amp; Events
-          </h1>
-          <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
-          <p className="text-xl text-[var(--text-secondary)] leading-relaxed max-w-2xl">
-            Latest announcements, product launches, research milestones, and events from INFAB Semiconductor Pvt. Ltd.
-          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">
+                Press &amp; Updates
+              </span>
+              <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-[var(--text-primary)] mb-6 leading-tight max-w-3xl">
+                News &amp; Events
+              </h1>
+              <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
+              <p className="text-xl text-[var(--text-secondary)] leading-relaxed max-w-2xl">
+                Latest announcements, product launches, research milestones, and events from INFAB Semiconductor Pvt. Ltd.
+              </p>
+            </div>
+            <div>
+              <OpticalWaveguide3D />
+            </div>
+          </div>
         </div>
       </div>
 

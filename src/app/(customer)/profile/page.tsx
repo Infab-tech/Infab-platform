@@ -12,7 +12,7 @@ export default async function ProfilePage() {
     if (!user) return null;
 
     return (
-        <div className="max-w-3xl">
+        <div className="max-w-3xl mx-auto">
             <div className="mb-10">
                 <h2 className="text-3xl font-bold mb-2">Profile Settings</h2>
                 <p className="text-[var(--text-secondary)]">Manage your account and security preferences.</p>

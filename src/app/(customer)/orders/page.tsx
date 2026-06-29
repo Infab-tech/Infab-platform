@@ -29,7 +29,7 @@ export default async function OrdersPage() {
   });
 
   return (
-    <div className="max-w-5xl">
+    <div className="max-w-5xl mx-auto">
       <div className="flex justify-between items-end mb-10">
         <div>
           <h2 className="text-3xl font-bold mb-2">Quotes & Orders</h2>

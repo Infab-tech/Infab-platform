@@ -19,10 +19,10 @@ export default function About() {
             <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
 
             <p className="text-[var(--text-secondary)] mb-6 text-lg leading-relaxed">
-              Incubated at INCeNSE, Indian Institute of Science (IISc), Bengaluru, INFAB Semiconductor Pvt. Ltd is a pioneering Indian deep-tech company specialising in the design, development, and manufacturing of advanced MEMS sensors, actuators, and microfluidic devices.
+              Incubated at INCeNSE, Indian Institute of Science (IISc), Bengaluru, INFAB Semiconductor Pvt. Ltd is a pioneering Indian deep tech company specialising in the design, development, and manufacturing of advanced MEMS sensors, actuators, and microfluidic devices.
             </p>
             <p className="text-[var(--text-secondary)] mb-10 text-lg leading-relaxed">
-              Combining world-class facilities with cutting-edge expertise, we build Made-in-India innovations from aerospace pressure transducers to lab-on-a-chip (LOC) for the world.
+              Combining world class facilities with cutting edge expertise, we build Made in India innovations from aerospace pressure transducers to lab-on-a-chip (LOC) for the world.
             </p>
 
             {/* Three Pillars */}
@@ -42,7 +42,7 @@ export default function About() {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Quality</h3>
-                  <p className="text-[var(--text-secondary)]">Delivering devices that meet the most stringent performance and reliability standards — ISO 9001 & AS 9100D certified.</p>
+                  <p className="text-[var(--text-secondary)]">Delivering devices that meet the most stringent performance and reliability standards  ISO 9001 & AS 9100D certified.</p>
                 </div>
               </div>
               <div className="flex gap-5 items-start">
@@ -51,7 +51,7 @@ export default function About() {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Impact</h3>
-                  <p className="text-[var(--text-secondary)]">Powering sectors like Aerospace & Defence, Healthcare & Life Sciences, Semiconductor MEMS with Indian-made hardware solutions.</p>
+                  <p className="text-[var(--text-secondary)]">Powering sectors like Aerospace & Defence, Healthcare & Life Sciences, Semiconductor MEMS with Indian made hardware solutions.</p>
                 </div>
               </div>
             </div>

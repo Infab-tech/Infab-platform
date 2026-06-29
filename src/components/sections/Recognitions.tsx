@@ -31,8 +31,8 @@ export default async function Recognitions({ limit }: { limit?: number } = {}) {
   } catch { /* fallback */ }
 
   if (recs.length === 0) {
-    recs = FALLBACK_RECOGNITIONS.map((r, i) => ({ 
-      id: `default-${i}`, 
+    recs = FALLBACK_RECOGNITIONS.map((r, i) => ({
+      id: `default-${i}`,
       ...r,
       certNumber: r.certNumber || null,
       issuer: r.issuer || null,
@@ -58,14 +58,16 @@ export default async function Recognitions({ limit }: { limit?: number } = {}) {
           </h2>
           <div className="w-12 h-1 bg-[var(--accent-primary)] mb-6"></div>
           <p className="text-[var(--text-secondary)] text-lg leading-relaxed mb-6">
-            Our commitment to quality, backed by industry-standard certifications and institutional support.
+            Our commitment to quality, backed by industry standard certifications and institutional support.
           </p>
-          <Link
-            href="/about#recognition"
-            className="inline-flex items-center gap-2 font-mono text-sm font-semibold uppercase tracking-wider text-[var(--accent-primary)] hover:text-[var(--text-primary)] transition-colors"
-          >
-            View All Certifications <i className="ph ph-arrow-right"></i>
-          </Link>
+          {limit && (
+            <Link
+              href="/about#recognition"
+              className="inline-flex items-center gap-2 font-mono text-sm font-semibold uppercase tracking-wider text-[var(--accent-primary)] hover:text-[var(--text-primary)] transition-colors"
+            >
+              View All Certifications <i className="ph ph-arrow-right"></i>
+            </Link>
+          )}
         </div>
 
         {/* Cards */}
@@ -90,7 +92,7 @@ export default async function Recognitions({ limit }: { limit?: number } = {}) {
                     />
                   </div>
                 )}
-                
+
                 {/* Title */}
                 <h3 className="text-xl font-bold text-[var(--text-primary)] leading-snug group-hover:text-[var(--accent-primary)] transition-colors">
                   {rec.title}
@@ -105,14 +107,14 @@ export default async function Recognitions({ limit }: { limit?: number } = {}) {
                 {(rec.certNumber || rec.issuer) && (
                   <div className="mt-auto pt-4 border-t border-[var(--border-primary)] flex flex-col gap-1">
                     {rec.certNumber && (
-                       <span className="text-xs font-mono text-[var(--text-secondary)]">
-                         <strong className="text-[var(--text-primary)]">Cert No:</strong> {rec.certNumber}
-                       </span>
+                      <span className="text-xs font-mono text-[var(--text-secondary)]">
+                        <strong className="text-[var(--text-primary)]">Cert No:</strong> {rec.certNumber}
+                      </span>
                     )}
                     {rec.issuer && (
-                       <span className="text-xs font-mono text-[var(--text-secondary)]">
-                         <strong className="text-[var(--text-primary)]">Issuer:</strong> {rec.issuer}
-                       </span>
+                      <span className="text-xs font-mono text-[var(--text-secondary)]">
+                        <strong className="text-[var(--text-primary)]">Issuer:</strong> {rec.issuer}
+                      </span>
                     )}
                   </div>
                 )}

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { prisma } from '@/lib/supabase/prisma';
 import { FALLBACK_TEAM } from '@/lib/content-defaults';
+import CrystalLattice3D from '@/components/ui/CrystalLattice3D';
 
 export const metadata: Metadata = {
   title: 'Our Team | INFAB Semiconductor',
@@ -131,12 +132,19 @@ export default async function TeamPage() {
       {/* Page Hero */}
       <div className="bg-[var(--bg-secondary)] border-b border-[var(--border-primary)] pt-40 pb-24">
         <div className="mx-auto max-w-7xl px-6">
-          <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">The People Behind INFAB</span>
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-[var(--text-primary)] mb-6 leading-tight max-w-3xl">Our Team</h1>
-          <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
-          <p className="text-xl text-[var(--text-secondary)] leading-relaxed max-w-2xl">
-            The engineers, scientists, and operators behind INFAB — building India&apos;s MEMS and microfluidics capability from our INCeNSE facility in Bengaluru.
-          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">The People Behind INFAB</span>
+              <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-[var(--text-primary)] mb-6 leading-tight max-w-3xl">Our Team</h1>
+              <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
+              <p className="text-xl text-[var(--text-secondary)] leading-relaxed max-w-2xl">
+                The engineers, scientists, and operators behind INFAB building India&apos;s MEMS and microfluidics capability from our INCeNSE facility in Bengaluru.
+              </p>
+            </div>
+            <div>
+              <CrystalLattice3D />
+            </div>
+          </div>
         </div>
       </div>
 

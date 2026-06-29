@@ -48,19 +48,19 @@ export async function sendQuoteMessage(quoteId: string, text: string) {
     revalidatePath(`/orders/${quoteId}`);
     revalidatePath(`/admin/orders/${quoteId}`);
 
-    // Send email notification
+    // Send email notification asynchronously
     if (isAdmin) {
-        await sendEmail({
+        sendEmail({
             to: quote.userEmail,
             subject: `New message regarding your Quote #${quoteId.slice(-6).toUpperCase()}`,
             html: `<p>An admin has replied to your quote request:</p><p><em>"${text.trim()}"</em></p><p><a href="${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/orders/${quoteId}">View Quote</a></p>`
-        });
+        }).catch(console.error);
     } else {
-        await sendEmail({
+        sendEmail({
             to: process.env.ADMIN_EMAIL || 'info@infab-tech.com',
             subject: `New message on Quote #${quoteId.slice(-6).toUpperCase()}`,
             html: `<p>Customer ${user.email} has replied to quote request #${quoteId.slice(-6).toUpperCase()}:</p><p><em>"${text.trim()}"</em></p>`
-        });
+        }).catch(console.error);
     }
 
     return { success: true };

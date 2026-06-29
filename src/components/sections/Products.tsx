@@ -17,7 +17,7 @@ const markets: Market[] = [
         id: "aerospace",
         tag: "Aerospace & Defence",
         title: "Pressure Switches & Transducers",
-        description: "Advanced pressure switches, MEMS-based pressure transducers, differential pressure switches and Hall sensors for commercial and defence application.",
+        description: "Advanced pressure switches, MEMS based pressure transducers, differential pressure switches and Hall sensors for commercial and defence application.",
         icon: "ph-airplane-tilt",
         image: "/assests/20250705_1547_Fighter-Jet-Landing-Gear_simple_compose_01jzd1cytpft2ts0vfa1hav51t-600x400.png",
         links: ["Pressure Switches", "Pressure Transducers", "Differential Switches"],
@@ -27,17 +27,17 @@ const markets: Market[] = [
         id: "healthcare",
         tag: "Healthcare & Life Sciences",
         title: "Microfluidic Chips & Flow Systems",
-        description: "Innovative microfluidic chips for advance research on organ-on-chip, droplet generation, cell sorting, and nanoparticle synthesis.",
+        description: "Innovative microfluidic chips for advance research on organ on chip, droplet generation, cell sorting, and nanoparticle synthesis.",
         icon: "ph-dna",
         image: "/assests/Development-of-Special-Bonding-for-mRNA-Chip-600x480.png",
-        links: ["Single & Double Emulsion", "Organ-on-Chip", "Nanoparticle Synthesis"],
+        links: ["Single & Double Emulsion", "Organ on Chip", "Nanoparticle Synthesis"],
         linkHref: "/products#healthcare"
     },
     {
         id: "mems",
         tag: "Semiconductor",
         title: "Semiconductor Fabrication Services",
-        description: "Comprehensive semiconductor fabrication using state-of-the-art cleanroom facilities supporting prototyping and production.",
+        description: "Comprehensive semiconductor fabrication using state of the art cleanroom facilities supporting prototyping and production.",
         icon: "ph-cpu",
         image: "/assests/ia_1000000002-600x375.jpg",
         links: ["MEMS Device", "Silicon Photonics", "Advanced Semiconductor Devices"],
@@ -60,7 +60,7 @@ export default function Products() {
                     </h2>
                     <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
                     <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
-                        Precision-engineered MEMS devices and microfluidic systems for the world's most demanding industries.
+                        Precision engineered MEMS devices and microfluidic systems for the world's most demanding industries.
                     </p>
                 </div>
 

@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server';
 import { prisma } from '@/lib/supabase/prisma';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
-import { sendQuoteMessage } from '@/app/actions/quotes';
+import Chatbox from '@/components/ui/Chatbox';
 
 export default async function CustomerQuoteDetailsPage({ params }: { params: Promise<{ id: string }> }) {
     const supabase = await createClient();
@@ -84,55 +84,7 @@ export default async function CustomerQuoteDetailsPage({ params }: { params: Pro
                 </div>
 
                 {/* Messaging Column */}
-                <div className="md:col-span-2 bg-[var(--bg-secondary)] border border-[var(--text-primary)]/10 rounded-2xl flex flex-col overflow-hidden">
-                    <div className="p-4 border-b border-[var(--text-primary)]/10 bg-[var(--text-primary)]/5">
-                        <h3 className="font-mono text-xs uppercase tracking-widest text-[var(--text-secondary)] font-bold">Messages</h3>
-                    </div>
-                    
-                    <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-4">
-                        {quote.messages.length === 0 && (
-                            <div className="flex-1 flex items-center justify-center text-[var(--text-secondary)] text-sm italic opacity-50">
-                                No messages yet. Say hello!
-                            </div>
-                        )}
-                        {quote.messages.map((msg) => {
-                            const isMe = msg.senderRole === 'CUSTOMER';
-                            return (
-                                <div key={msg.id} className={`flex flex-col ${isMe ? 'items-end' : 'items-start'}`}>
-                                    <div className="text-[10px] text-[var(--text-secondary)] mb-1 mx-1">
-                                        {isMe ? 'You' : 'InFAB Admin'} • {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                                    </div>
-                                    <div className={`px-4 py-2 rounded-2xl max-w-[80%] text-sm ${
-                                        isMe 
-                                        ? 'bg-[var(--accent-primary)] text-black rounded-tr-none' 
-                                        : 'bg-[var(--text-primary)]/10 text-[var(--text-primary)] rounded-tl-none'
-                                    }`}>
-                                        {msg.text}
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-
-                    <div className="p-4 border-t border-[var(--text-primary)]/10">
-                        <form action={async (formData) => {
-                            'use server';
-                            const text = formData.get('message') as string;
-                            await sendQuoteMessage(quote.id, text);
-                        }} className="flex gap-2">
-                            <input 
-                                type="text" 
-                                name="message"
-                                placeholder="Type your message..." 
-                                required
-                                className="flex-1 bg-[var(--text-primary)]/5 border border-[var(--text-primary)]/10 rounded-lg px-4 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
-                            />
-                            <button type="submit" className="bg-[var(--accent-primary)] text-black px-6 py-2 rounded-lg font-bold text-sm uppercase hover:bg-white transition-colors">
-                                Send
-                            </button>
-                        </form>
-                    </div>
-                </div>
+                <Chatbox quoteId={quote.id} messages={quote.messages} currentRole="CUSTOMER" />
             </div>
         </div>
     );

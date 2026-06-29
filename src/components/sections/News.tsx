@@ -76,22 +76,16 @@ export default async function News() {
               key={item.id}
               className="group relative flex flex-col bg-[var(--bg-secondary)] rounded-2xl border border-[var(--border-primary)] overflow-hidden hover:border-[var(--accent-primary)]/30 transition-all duration-300"
             >
-              {/* Abstract graphic top */}
-              <div className="h-32 bg-gradient-to-br from-[var(--bg-tertiary)] to-[var(--bg-primary)] border-b border-[var(--border-primary)] relative overflow-hidden flex items-start justify-end p-6">
-                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" className="opacity-10 absolute -bottom-4 -left-4">
-                  <rect x="10" y="10" width="40" height="40" stroke="currentColor" strokeWidth="2" />
-                  <line x1="10" y1="30" x2="50" y2="30" stroke="currentColor" strokeWidth="2" />
-                </svg>
-                <span className="inline-flex items-center px-3 py-1 bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 text-[var(--accent-primary)] text-xs font-mono font-bold uppercase tracking-wider rounded">
-                  {fmtShort(item.date)}
-                </span>
-              </div>
-
               {/* Content */}
               <div className="p-8 flex flex-col flex-grow">
-                <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--accent-primary)]/70 mb-2">
-                  {item.category}
-                </p>
+                <div className="flex justify-between items-center mb-3">
+                  <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--accent-primary)]/70">
+                    {item.category}
+                  </p>
+                  <span className="inline-flex items-center px-2 py-1 bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 text-[var(--accent-primary)] text-[10px] font-mono font-bold uppercase tracking-wider rounded">
+                    {fmtShort(item.date)}
+                  </span>
+                </div>
                 <h3 className="text-xl font-bold text-[var(--text-primary)] mb-4 leading-snug group-hover:text-[var(--accent-primary)] transition-colors">
                   {item.title}
                 </h3>
