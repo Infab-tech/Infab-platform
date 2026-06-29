@@ -2,29 +2,9 @@
 
 import Image from 'next/image';
 
-const SEM_IMAGES = [
-  "Accelerometer-1.jpeg",
-  "Accelerometer-2.jpeg",
-  "Accelerometer-3.jpeg",
-  "Cantilevers.jpeg",
-  "Combdrive -1.jpeg",
-  "DaCM.jpeg",
-  "In-Plane_RFSwitch.jpeg",
-  "InFAB.jpeg",
-  "Micro Inductor.jpeg",
-  "Microfluidic Channel-1.jpeg",
-  "Microfluidic Channel-2.jpeg",
-  "Microwheel-1.jpeg",
-  "Microwheel-2.jpeg",
-  "RFSwitch.jpeg",
-  "Thermal Actuator-2.jpeg",
-  "Thermal Actuator.jpeg",
-  "XY-Stage.jpeg"
-];
-
-export default function SemImageSlider() {
+export default function SemImageSlider({ images }: { images: string[] }) {
   // Duplicate the array to create a seamless infinite loop
-  const duplicatedImages = [...SEM_IMAGES, ...SEM_IMAGES];
+  const duplicatedImages = [...images, ...images];
 
   return (
     <div className="w-full bg-[var(--bg-secondary)] border-y border-[var(--border-primary)] py-16 overflow-hidden">
