@@ -140,14 +140,14 @@ export default async function ProductsPage() {
     <div className="bg-[var(--bg-primary)]">
 
       {/* Page Hero */}
-      <div className="bg-[var(--bg-secondary)] border-b border-[var(--border-primary)] pt-40 pb-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="bg-[var(--bg-secondary)] border-b border-[var(--border-primary)] pt-32 sm:pt-36 md:pt-40 pb-16 sm:pb-20 md:pb-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-center">
             <div>
               <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">Product Catalog</span>
-              <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-[var(--text-primary)] mb-6 leading-tight max-w-3xl">Our Products</h1>
-              <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
-              <p className="text-xl text-[var(--text-secondary)] leading-relaxed max-w-2xl">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--text-primary)] mb-5 sm:mb-6 leading-tight max-w-3xl">Our Products</h1>
+              <div className="w-12 h-1 bg-[var(--accent-primary)] mb-6 sm:mb-8"></div>
+              <p className="text-base sm:text-xl text-[var(--text-secondary)] leading-relaxed max-w-2xl">
                 Precision-engineered MEMS sensors, microfluidic devices, and semiconductor components serving the world&apos;s most demanding industries.
               </p>
             </div>
@@ -163,7 +163,7 @@ export default async function ProductsPage() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="flex gap-0 overflow-x-auto">
             {categories.map((cat) => (
-              <a key={cat.id} href={`#${cat.id}`} className="flex items-center gap-2 px-6 py-4 font-mono text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)] hover:text-[var(--accent-primary)] border-b-2 border-transparent hover:border-[var(--accent-primary)] transition-all whitespace-nowrap">
+              <a key={cat.id} href={`#${cat.id}`} className="flex items-center gap-2 px-3 sm:px-6 py-4 font-mono text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)] hover:text-[var(--accent-primary)] border-b-2 border-transparent hover:border-[var(--accent-primary)] transition-all whitespace-nowrap">
                 <i className={`ph ${cat.icon}`}></i>
                 {cat.label}
               </a>
@@ -176,9 +176,9 @@ export default async function ProductsPage() {
       {categories.map((cat, idx) => {
         const catProducts = products.filter((p) => p.category === cat.key);
         return (
-          <div key={cat.id} id={cat.id} className={`border-b border-[var(--border-primary)] py-32 ${idx % 2 === 1 ? 'bg-[var(--bg-secondary)]' : ''}`}>
-            <div className="mx-auto max-w-7xl px-6">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
+          <div key={cat.id} id={cat.id} className={`border-b border-[var(--border-primary)] py-16 sm:py-24 lg:py-32 ${idx % 2 === 1 ? 'bg-[var(--bg-secondary)]' : ''}`}>
+            <div className="mx-auto max-w-7xl px-4 sm:px-6">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 mb-10 sm:mb-16">
                 <div className="lg:col-span-1">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex items-center justify-center">

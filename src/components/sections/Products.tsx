@@ -65,14 +65,14 @@ export default function Products() {
                 </div>
 
                 {/* Product Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     {markets.map((market) => (
                         <div
                             key={market.id}
                             className="group flex flex-col rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-[var(--accent-primary)]/50 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/10"
                         >
                             {/* Top Graphic Area */}
-                            <div className="h-56 relative border-b border-[var(--border-primary)] bg-[var(--bg-tertiary)] overflow-hidden">
+                            <div className="aspect-[4/3] sm:h-56 sm:aspect-auto relative border-b border-[var(--border-primary)] bg-[var(--bg-tertiary)] overflow-hidden">
                                 {/* Image */}
                                 <img
                                     src={market.image}
@@ -87,7 +87,7 @@ export default function Products() {
                             </div>
 
                             {/* Content Body */}
-                            <div className="p-8 flex flex-col flex-grow">
+                            <div className="p-6 sm:p-8 flex flex-col flex-grow">
                                 <span className="font-mono text-xs font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-3">
                                     {market.tag}
                                 </span>

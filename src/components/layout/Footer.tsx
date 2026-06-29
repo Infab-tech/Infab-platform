@@ -22,7 +22,7 @@ export default function Footer() {
       {/* Footer */}
       <footer className="bg-[var(--bg-secondary)] border-t border-[var(--border-primary)]">
         <div className="mx-auto max-w-7xl px-6 py-16">
-          <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-5">
+          <div className="grid grid-cols-1 gap-8 sm:gap-10 md:grid-cols-2 lg:grid-cols-5">
 
             {/* Brand Column */}
             <div className="lg:col-span-1">
@@ -35,7 +35,7 @@ export default function Footer() {
                 className="mb-4 brand-logo-adaptive h-auto w-auto"
               />
               <p className="mb-6 text-sm leading-relaxed text-[var(--text-secondary)]">
-                MEMS sensors, microfluidic chips, and semiconductor fabrication services designed and manufactured in Bengaluru. INCeNSE incubated. ISO 9001 & AS 9100D certified.
+                MEMS Sensors, Microfluidic chips, and Semiconductor fabrication services designed and manufactured in Bengaluru. INCeNSE incubated. ISO 9001 & AS 9100D certified.
               </p>
               {/* Social Icons */}
               <div className="flex gap-3">

@@ -32,20 +32,20 @@ export default function AboutPage() {
     <div className="bg-[var(--bg-primary)]">
 
       {/* Page Hero */}
-      <div className="bg-[var(--bg-secondary)] border-b border-[var(--border-primary)] pt-40 pb-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="bg-[var(--bg-secondary)] border-b border-[var(--border-primary)] pt-32 sm:pt-36 md:pt-40 pb-16 sm:pb-20 md:pb-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-center">
 
             {/* Left: text */}
             <div>
               <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">
                 Who We Are
               </span>
-              <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-[var(--text-primary)] mb-6 leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--text-primary)] mb-5 sm:mb-6 leading-tight">
                 About INFAB Semiconductor
               </h1>
               <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
-              <p className="text-xl text-[var(--text-secondary)] leading-relaxed">
+              <p className="text-base sm:text-xl text-[var(--text-secondary)] leading-relaxed">
                 Designing and manufacturing MEMS sensors, microfluidic chips, and semiconductor devices entirely in Bengaluru, for clients across aerospace, healthcare, and research.
               </p>
             </div>
@@ -60,9 +60,9 @@ export default function AboutPage() {
       </div>
 
       {/* Who We Are */}
-      <div className="border-b border-[var(--border-primary)] py-32">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+      <div className="border-b border-[var(--border-primary)] py-16 sm:py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-start">
 
             <div>
               <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">
@@ -126,8 +126,8 @@ export default function AboutPage() {
       </div>
 
       {/* Mission & Vision */}
-      <div className="border-b border-[var(--border-primary)] py-32 bg-[var(--bg-secondary)]">
-        <div className="mx-auto max-w-7xl px-6">
+      <div className="border-b border-[var(--border-primary)] py-16 sm:py-24 lg:py-32 bg-[var(--bg-secondary)]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="text-center mb-16">
             <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">
               Purpose
@@ -162,8 +162,8 @@ export default function AboutPage() {
       </div>
 
       {/* Core Values */}
-      <div className="py-32 bg-[var(--bg-primary)] border-b border-[var(--border-primary)]">
-        <div className="mx-auto max-w-7xl px-6">
+      <div className="py-16 sm:py-24 lg:py-32 bg-[var(--bg-primary)] border-b border-[var(--border-primary)]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="mb-16">
             <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">
               What Drives Us

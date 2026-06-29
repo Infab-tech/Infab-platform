@@ -6,7 +6,7 @@ export default function About() {
   return (
     <section className="relative py-32 bg-[var(--bg-primary)] overflow-hidden" id="about">
       <div className="mx-auto max-w-7xl px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-14 lg:gap-20 items-center">
 
           {/* Left Column */}
           <div>
@@ -61,7 +61,7 @@ export default function About() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
             {/* Card 1 */}
-            <div className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
+            <div className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-6 sm:p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
               <div className="text-3xl text-[var(--text-secondary)] mb-4 flex justify-center"><i className="ph ph-certificate"></i></div>
               <div className="font-sans text-3xl font-bold leading-none text-[var(--text-primary)] mb-3">
                 IISc INCeNSE
@@ -70,7 +70,7 @@ export default function About() {
             </div>
 
             {/* Card 2 */}
-            <div className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5 lg:translate-y-8">
+            <div className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-6 sm:p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5 lg:translate-y-8">
               <div className="text-3xl text-[var(--text-secondary)] mb-4 flex justify-center"><i className="ph ph-microscope"></i></div>
               <div className="font-sans text-5xl font-bold leading-none text-[var(--text-primary)] mb-3">
                 <AnimatedNumber target={3} suffix="" />
@@ -79,7 +79,7 @@ export default function About() {
             </div>
 
             {/* Card 3 */}
-            <div className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
+            <div className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-6 sm:p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-primary)]/40 hover:shadow-2xl hover:shadow-[var(--accent-primary)]/5">
               <div className="text-3xl text-[var(--text-secondary)] mb-4 flex justify-center"><i className="ph ph-shield-star"></i></div>
               <div className="font-sans text-5xl font-bold leading-none text-[var(--text-primary)] mb-3">
                 <AnimatedNumber target={100} suffix="%" />

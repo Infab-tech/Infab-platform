@@ -253,3 +253,10 @@ model PasswordResetToken {
 
   @@index([email])
 }
+
+// 17. SYSTEM SETTINGS (Global toggles)
+model SystemSetting {
+  key       String   @id
+  value     String   @db.Text
+  updatedAt DateTime @default(now()) @updatedAt
+}

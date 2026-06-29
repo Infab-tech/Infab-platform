@@ -4,6 +4,7 @@ import { prisma } from '@/lib/supabase/prisma';
 import { createClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
 import { sendEmail } from '@/lib/email';
+import { getAdminEmailNotificationSetting } from '@/app/actions/settings';
 
 export async function submitQuoteRequest(formData: FormData) {
     try {
@@ -51,12 +52,15 @@ export async function submitQuoteRequest(formData: FormData) {
         revalidatePath('/dashboard');
         revalidatePath('/orders');
 
-        // 5. Send notification
-        await sendEmail({
-            to: process.env.ADMIN_EMAIL || 'info@infab-tech.com',
-            subject: 'New Quote Request Submitted',
-            html: `<p>A new quote request has been submitted by ${user.email}.</p><p>Notes: ${notes || 'None'}</p>`
-        });
+        // 5. Send notification if enabled
+        const emailNotificationsEnabled = await getAdminEmailNotificationSetting();
+        if (emailNotificationsEnabled) {
+            await sendEmail({
+                to: process.env.ADMIN_EMAIL || 'info@infab-tech.com',
+                subject: 'New Quote Request Submitted',
+                html: `<p>A new quote request has been submitted by ${user.email}.</p><p>Notes: ${notes || 'None'}</p>`
+            }).catch(console.error);
+        }
 
         return { success: true, message: "Quote requested successfully." };
     } catch (error) {
@@ -115,11 +119,14 @@ export async function submitMultiItemQuote(items: RFQCartItem[], notes: string) 
         revalidatePath('/admin/orders');
         revalidatePath('/admin');
 
-        await sendEmail({
-            to: process.env.ADMIN_EMAIL || 'info@infab-tech.com',
-            subject: 'New Multi-Item Quote Request',
-            html: `<p>A new multi-item quote request has been submitted by ${user.email}.</p><p>Items: ${finalItems.length}</p><p>Notes: ${notes || 'None'}</p>`
-        });
+        const emailNotificationsEnabled = await getAdminEmailNotificationSetting();
+        if (emailNotificationsEnabled) {
+            await sendEmail({
+                to: process.env.ADMIN_EMAIL || 'info@infab-tech.com',
+                subject: 'New Multi-Item Quote Request',
+                html: `<p>A new multi-item quote request has been submitted by ${user.email}.</p><p>Items: ${finalItems.length}</p><p>Notes: ${notes || 'None'}</p>`
+            }).catch(console.error);
+        }
 
         return { success: true, message: 'Quote request submitted successfully.' };
     } catch (error) {

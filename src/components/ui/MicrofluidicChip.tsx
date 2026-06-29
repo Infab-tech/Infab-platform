@@ -195,7 +195,7 @@ export default function MicrofluidicChip() {
       <div className="relative w-full p-5 select-none transition-colors duration-300">
         {/* 3D scene */}
         <div className="relative z-10 flex justify-center items-center overflow-x-auto">
-          <div style={{ perspective: '900px', perspectiveOrigin: '50% 38%', flexShrink: 0, padding: '30px 20px 34px' }}>
+          <div style={{ perspective: '900px', perspectiveOrigin: '50% 38%', flexShrink: 0, padding: '20px 10px 24px' }}>
             <div className="infab-chip-group">
 
               {/* ── GLASS TOP ── */}

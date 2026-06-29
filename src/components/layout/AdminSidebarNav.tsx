@@ -45,7 +45,7 @@ const NAV_SECTIONS: NavSection[] = [
     {
         title: 'Access',
         items: [
-            { href: '/admin/staff', icon: 'ph-shield-check', label: 'Staff Access' },
+            { href: '/admin/staff', icon: 'ph-shield-check', label: 'Staff Access & Settings' },
             { href: '/admin/users', icon: 'ph-users', label: 'Users' },
         ],
     },

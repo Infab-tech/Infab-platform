@@ -50,10 +50,10 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-8">
 
           {/* Form Area */}
-          <div className="lg:col-span-3 bg-[var(--bg-secondary)] border border-[var(--border-primary)] p-8 md:p-10 rounded-2xl shadow-xl">
+          <div className="lg:col-span-3 bg-[var(--bg-secondary)] border border-[var(--border-primary)] p-5 sm:p-8 md:p-10 rounded-2xl shadow-xl">
             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

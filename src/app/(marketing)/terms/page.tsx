@@ -11,8 +11,8 @@ export default function TermsPage() {
     <div className="bg-[var(--bg-primary)] min-h-screen">
 
       {/* Hero */}
-      <div className="bg-[var(--bg-secondary)] border-b border-[var(--border-primary)] pt-40 pb-16">
-        <div className="mx-auto max-w-4xl px-6">
+      <div className="bg-[var(--bg-secondary)] border-b border-[var(--border-primary)] pt-32 sm:pt-36 md:pt-40 pb-12 sm:pb-16">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
           <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">
             Legal
           </span>
@@ -27,7 +27,7 @@ export default function TermsPage() {
       </div>
 
       {/* Body */}
-      <div className="mx-auto max-w-4xl px-6 py-20">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 py-12 sm:py-20">
 
         {/* Intro */}
         <div className="rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-8 mb-12">

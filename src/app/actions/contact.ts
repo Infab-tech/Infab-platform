@@ -1,6 +1,8 @@
 'use server';
 
 import { prisma } from '@/lib/supabase/prisma';
+import { getAdminEmailNotificationSetting } from '@/app/actions/settings';
+import { sendEmail } from '@/lib/email';
 
 export async function submitInquiry(formData: FormData) {
   try {
@@ -28,6 +30,26 @@ export async function submitInquiry(formData: FormData) {
         message,
       },
     });
+
+    // 3. Send email to admin if notifications are enabled
+    const emailNotificationsEnabled = await getAdminEmailNotificationSetting();
+    if (emailNotificationsEnabled) {
+      const emailBody = `
+        <h3>New Inquiry Received</h3>
+        <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Organization:</strong> ${organization || 'N/A'}</p>
+        <p><strong>Interest:</strong> ${interest}</p>
+        <p><strong>Message:</strong></p>
+        <blockquote style="border-left: 4px solid #ccc; padding-left: 10px; margin-left: 0;">${message.replace(/\n/g, '<br>')}</blockquote>
+      `;
+
+      await sendEmail({
+        to: process.env.ADMIN_EMAIL || 'info@infab-tech.com',
+        subject: `New Inquiry from ${firstName} ${lastName} - ${interest}`,
+        html: emailBody
+      }).catch(console.error); // Catch email errors so it doesn't fail the submission
+    }
 
     return { success: true, message: "Inquiry saved successfully." };
   } catch (error) {

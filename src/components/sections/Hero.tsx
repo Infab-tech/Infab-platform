@@ -58,13 +58,13 @@ export default function Hero() {
       <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center w-full">
 
         {/* LEFT COLUMN: Clean, readable typography */}
-        <div className="flex flex-col items-start text-left h-[420px] sm:h-[380px] lg:h-[400px]">
+        <div className="flex flex-col items-start text-left min-h-[320px] sm:h-[380px] lg:h-[400px]">
 
-          <h1 key={`title-${currentSlide}`} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[var(--text-primary)] mb-6 leading-[1.15] animate-fade-in-up" style={{ animationDelay: '100ms' }}>
+          <h1 key={`title-${currentSlide}`} className="text-3xl sm:text-4xl lg:text-6xl font-extrabold tracking-tight text-[var(--text-primary)] mb-4 sm:mb-6 leading-tight animate-fade-in-up" style={{ animationDelay: '100ms' }}>
             {slides[currentSlide].titleBase} <span className="text-[var(--accent-primary)]">{slides[currentSlide].titleHighlight}</span>
           </h1>
 
-          <p key={`desc-${currentSlide}`} className="text-lg text-[var(--text-secondary)] mb-10 leading-relaxed max-w-lg animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+          <p key={`desc-${currentSlide}`} className="text-base sm:text-lg text-[var(--text-secondary)] mb-8 sm:mb-10 leading-relaxed max-w-lg animate-fade-in-up" style={{ animationDelay: '200ms' }}>
             {slides[currentSlide].description}
           </p>
 

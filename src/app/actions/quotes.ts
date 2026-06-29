@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server';
 import { prisma } from '@/lib/supabase/prisma';
 import { revalidatePath } from 'next/cache';
 import { sendEmail } from '@/lib/email';
+import { getAdminEmailNotificationSetting } from '@/app/actions/settings';
 
 export async function sendQuoteMessage(quoteId: string, text: string) {
     if (!text || text.trim() === '') return { success: false, message: 'Message is empty' };
@@ -56,11 +57,14 @@ export async function sendQuoteMessage(quoteId: string, text: string) {
             html: `<p>An admin has replied to your quote request:</p><p><em>"${text.trim()}"</em></p><p><a href="${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/orders/${quoteId}">View Quote</a></p>`
         }).catch(console.error);
     } else {
-        sendEmail({
-            to: process.env.ADMIN_EMAIL || 'info@infab-tech.com',
-            subject: `New message on Quote #${quoteId.slice(-6).toUpperCase()}`,
-            html: `<p>Customer ${user.email} has replied to quote request #${quoteId.slice(-6).toUpperCase()}:</p><p><em>"${text.trim()}"</em></p>`
-        }).catch(console.error);
+        const emailNotificationsEnabled = await getAdminEmailNotificationSetting();
+        if (emailNotificationsEnabled) {
+            sendEmail({
+                to: process.env.ADMIN_EMAIL || 'info@infab-tech.com',
+                subject: `New customer message on Quote #${quoteId.slice(-6).toUpperCase()}`,
+                html: `<p>Customer (${user.email}) replied:</p><p><em>"${text.trim()}"</em></p><p><a href="${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/admin/orders/${quoteId}">View Quote in Admin</a></p>`
+            }).catch(console.error);
+        }
     }
 
     return { success: true };

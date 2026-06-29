@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { prisma } from '@/lib/supabase/prisma';
 import { FALLBACK_FACILITIES, FALLBACK_SERVICE_ITEMS } from '@/lib/content-defaults';
 import SiliconWafer3D from '@/components/ui/SiliconWafer3D';
+import SemImageSlider from '@/components/ui/SemImageSlider';
 
 export const metadata: Metadata = {
   title: 'Services | INFAB Semiconductor',
@@ -126,13 +127,13 @@ export default async function ServicesPage() {
 
       {/* Page Hero */}
       <div className="bg-[var(--bg-secondary)] border-b border-[var(--border-primary)] pt-40 pb-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-center">
             <div>
               <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">What We Do</span>
-              <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-[var(--text-primary)] mb-6 leading-tight max-w-3xl">Services</h1>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--text-primary)] mb-5 sm:mb-6 leading-tight max-w-3xl">Services</h1>
               <div className="w-12 h-1 bg-[var(--accent-primary)] mb-8"></div>
-              <p className="text-xl text-[var(--text-secondary)] leading-relaxed max-w-2xl">
+              <p className="text-base sm:text-xl text-[var(--text-secondary)] leading-relaxed max-w-2xl">
                 End-to-end MEMS and microfluidics services from concept to qualified device. Custom design, fabrication, characterisation, and packaging under one roof in Bengaluru.
               </p>
             </div>
@@ -146,7 +147,7 @@ export default async function ServicesPage() {
       {/* Sticky Tab Navigation */}
       <div className="sticky top-20 z-40 w-full border-b border-[var(--border-primary)] bg-[var(--bg-secondary)]/80 backdrop-blur-md">
         <div className="mx-auto max-w-7xl px-6">
-          <nav className="-mb-px flex space-x-8 overflow-x-auto" aria-label="Tabs">
+          <nav className="-mb-px flex space-x-4 sm:space-x-8 overflow-x-auto" aria-label="Tabs">
             <a href="#mems" className="whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-bold text-[var(--text-secondary)] hover:border-[var(--accent-primary)] hover:text-[var(--text-primary)] transition-colors">
               MEMS
             </a>
@@ -161,10 +162,10 @@ export default async function ServicesPage() {
       </div>
 
       {/* ── MEMS Fabrication Services ──────────────────────────────────────── */}
-      <div id="mems" className="border-b border-[var(--border-primary)] py-32 bg-[var(--bg-secondary)]">
-        <div className="mx-auto max-w-7xl px-6">
+      <div id="mems" className="border-b border-[var(--border-primary)] py-16 sm:py-24 lg:py-32 bg-[var(--bg-secondary)]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
           {/* Section header */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-end mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-end mb-10 sm:mb-16">
             <div>
               <span className="inline-block font-mono text-sm font-semibold tracking-widest uppercase text-[var(--accent-primary)] mb-4">Service 01</span>
               <h2 className="text-4xl font-bold tracking-tight text-[var(--text-primary)] mb-6">MEMS Fabrication Services</h2>
@@ -221,6 +222,8 @@ export default async function ServicesPage() {
           </div>
         </div>
       </div>
+
+      <SemImageSlider />
 
       {/* ── Microfluidics Solution ─────────────────────────────────────────── */}
       <div id="microfluidics" className="border-b border-[var(--border-primary)] py-32">
