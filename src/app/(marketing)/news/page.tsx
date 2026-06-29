@@ -229,7 +229,7 @@ export default async function NewsPage() {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a
-              href="https://wa.me/919980909371"
+              href="https://wa.me/919008589371"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-12 items-center justify-center gap-3 rounded-md bg-[#25D366] px-8 text-sm font-semibold uppercase tracking-wider text-white transition-all hover:brightness-110"

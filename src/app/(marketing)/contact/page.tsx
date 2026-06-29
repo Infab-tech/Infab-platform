@@ -5,10 +5,11 @@ export const metadata = {
   description: 'Get in touch with the INFAB team for quotes, collaborations, or inquiries about MEMS sensors, microfluidic devices, and semiconductor fabrication services.',
 };
 
-export default function ContactPage() {
+export default async function ContactPage({ searchParams }: { searchParams: Promise<{ product?: string }> }) {
+  const { product } = await searchParams;
   return (
-    <div className="pt-20"> {/* Padding to account for the sticky navbar */}
-      <Contact />
+    <div className="pt-20">
+      <Contact productName={product} />
     </div>
   );
 }

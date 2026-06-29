@@ -108,9 +108,11 @@ export default function EditNewsArticlePage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label htmlFor="publishedAt" className="font-mono text-xs font-semibold uppercase text-[var(--text-secondary)]">Publication Date *</label>
+              <label htmlFor="publishedAt" className="font-mono text-xs font-semibold uppercase text-[var(--text-secondary)]">
+                Publication Date <span className="normal-case font-normal">(optional)</span>
+              </label>
               <input
-                type="date" id="publishedAt" name="publishedAt" required defaultValue={dateValue}
+                type="date" id="publishedAt" name="publishedAt" defaultValue={dateValue}
                 className="bg-[var(--text-primary)]/[0.03] border border-[var(--text-primary)]/10 rounded-lg px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] transition-colors"
               />
             </div>

@@ -3,9 +3,21 @@
 import { useState } from 'react';
 import { submitInquiry } from '@/app/actions/contact';
 
-export default function Contact() {
+function guessInterest(name: string): string {
+  const n = name.toLowerCase();
+  if (n.includes('microfluidic') || n.includes('droplet') || n.includes('organ') ||
+      n.includes('nanoparticle') || n.includes('chip') || n.includes('htpt')) return 'healthcare';
+  if (n.includes('pressure') || n.includes('flow') || n.includes('hall') ||
+      n.includes('aerospace') || n.includes('sensor module')) return 'aerospace';
+  if (n.includes('mems') || n.includes('fabricat')) return 'mems';
+  return 'other';
+}
+
+export default function Contact({ productName }: { productName?: string }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const initialInterest = productName ? guessInterest(productName) : '';
+  const initialMessage = productName ? `I am interested in: ${productName}\n\n` : '';
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -80,7 +92,7 @@ export default function Contact() {
 
               <div className="flex flex-col gap-2">
                 <label htmlFor="interest" className="font-mono text-xs font-semibold uppercase text-[var(--text-secondary)]">Area of Interest *</label>
-                <select id="interest" name="interest" required defaultValue="" className="bg-[var(--bg-primary)] border border-[var(--border-primary)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] focus:bg-[var(--bg-tertiary)] transition-colors appearance-none">
+                <select id="interest" name="interest" required defaultValue={initialInterest} className="bg-[var(--bg-primary)] border border-[var(--border-primary)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] focus:bg-[var(--bg-tertiary)] transition-colors appearance-none">
                   <option value="" disabled>Select a product or service category</option>
                   <option value="aerospace">Aerospace — Pressure Sensors</option>
                   <option value="healthcare">Healthcare — Microfluidic Chips</option>
@@ -91,7 +103,7 @@ export default function Contact() {
 
               <div className="flex flex-col gap-2">
                 <label htmlFor="message" className="font-mono text-xs font-semibold uppercase text-[var(--text-secondary)]">Message *</label>
-                <textarea id="message" name="message" rows={5} required className="bg-[var(--bg-primary)] border border-[var(--border-primary)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] focus:bg-[var(--bg-tertiary)] transition-colors resize-none"></textarea>
+                <textarea id="message" name="message" rows={5} required defaultValue={initialMessage} className="bg-[var(--bg-primary)] border border-[var(--border-primary)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent-primary)] focus:bg-[var(--bg-tertiary)] transition-colors resize-none"></textarea>
               </div>
 
               <div className="pt-2">

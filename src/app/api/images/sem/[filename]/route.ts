@@ -7,9 +7,19 @@ export async function GET(
   { params }: { params: Promise<{ filename: string }> }
 ) {
   const filename = (await params).filename;
-  // Read directly from the folder the user provided
+
+  // Reject filenames with path traversal sequences or non-safe characters
+  if (!filename || !/^[a-zA-Z0-9_\-. ]+$/.test(filename)) {
+    return new NextResponse('Invalid filename', { status: 400 });
+  }
+
   const sourceFolder = "C:/Users/dell/Documents/InFAB/Website/Infab_website/website/SEM Images_To Show/SEM Images_To Show";
   const filePath = path.join(sourceFolder, filename);
+
+  // Confirm the resolved path is still inside the intended directory
+  if (!filePath.startsWith(path.resolve(sourceFolder))) {
+    return new NextResponse('Forbidden', { status: 403 });
+  }
 
   try {
     if (!fs.existsSync(filePath)) {

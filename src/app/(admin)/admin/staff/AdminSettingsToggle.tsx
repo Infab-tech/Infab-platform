@@ -26,7 +26,7 @@ export default function AdminSettingsToggle({ initialValue }: { initialValue: bo
       <div>
         <h3 className="text-lg font-bold text-[var(--text-primary)] mb-1">Email Notifications</h3>
         <p className="text-sm text-[var(--text-secondary)]">
-          Receive emails at <span className="font-mono bg-[var(--bg-secondary)] px-1 py-0.5 rounded text-[var(--accent-primary)]">info@infab-tech.com</span> for new quotes, inquiries, and customer replies.
+          Receive emails at the configured administrator addresses for new quotes, inquiries, and customer replies.
         </p>
       </div>
       

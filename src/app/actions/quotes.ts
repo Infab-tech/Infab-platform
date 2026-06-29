@@ -60,7 +60,7 @@ export async function sendQuoteMessage(quoteId: string, text: string) {
         const emailNotificationsEnabled = await getAdminEmailNotificationSetting();
         if (emailNotificationsEnabled) {
             sendEmail({
-                to: process.env.ADMIN_EMAIL || 'info@infab-tech.com',
+                to: process.env.ADMIN_EMAILS ? process.env.ADMIN_EMAILS.split(',') : [],
                 subject: `New customer message on Quote #${quoteId.slice(-6).toUpperCase()}`,
                 html: `<p>Customer (${user.email}) replied:</p><p><em>"${text.trim()}"</em></p><p><a href="${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/admin/orders/${quoteId}">View Quote in Admin</a></p>`
             }).catch(console.error);

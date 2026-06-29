@@ -6,11 +6,32 @@ import { prisma } from '@/lib/supabase/prisma';
 import { headers } from 'next/headers';
 import crypto from 'crypto';
 
+// In-memory rate limiter (resets on serverless cold start — acceptable for low-traffic auth)
+const _rl = new Map<string, { count: number; resetAt: number }>();
+function rateLimited(ip: string, max: number, windowMs: number): boolean {
+  const key = `${ip}:${windowMs}`;
+  const now = Date.now();
+  const e = _rl.get(key);
+  if (!e || now > e.resetAt) { _rl.set(key, { count: 1, resetAt: now + windowMs }); return false; }
+  if (e.count >= max) return true;
+  e.count++;
+  return false;
+}
+async function getIp(): Promise<string> {
+  const hdrs = await headers();
+  return hdrs.get('x-forwarded-for')?.split(',')[0].trim() ?? hdrs.get('x-real-ip') ?? 'unknown';
+}
+
 function generateCustomerId() {
     return 'INFAB-' + crypto.randomBytes(3).toString('hex').toUpperCase();
 }
 
 export async function loginUser(formData: FormData) {
+    const ip = await getIp();
+    if (rateLimited(ip, 10, 15 * 60 * 1000)) {
+        return { success: false, message: 'Too many login attempts. Please try again in 15 minutes.' };
+    }
+
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
 
@@ -54,6 +75,11 @@ export async function logoutUser() {
 }
 
 export async function registerUser(formData: FormData) {
+    const ip = await getIp();
+    if (rateLimited(ip, 5, 60 * 60 * 1000)) {
+        return { success: false, message: 'Too many registration attempts. Please try again later.' };
+    }
+
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
     const confirmPassword = formData.get('confirmPassword') as string;
@@ -114,8 +140,13 @@ export async function updatePassword(formData: FormData) {
 }
 
 export async function sendPasswordResetOtp(formData: FormData) {
+    const ip = await getIp();
+    if (rateLimited(ip, 3, 15 * 60 * 1000)) {
+        return { success: false, message: 'Too many reset attempts. Please try again in 15 minutes.' };
+    }
+
     const email = formData.get('email') as string;
-    
+
     // Generate a secure 6-digit OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     

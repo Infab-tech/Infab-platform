@@ -17,11 +17,11 @@ type SupabaseUser = {
 export default async function AdminUsersPage() {
     // We use a raw query because Prisma defaults to the 'public' schema, 
     // but Supabase stores auth users in the 'auth' schema. This bypasses the need for the Service Role key.
-    const users = await prisma.$queryRawUnsafe<SupabaseUser[]>(`
-        SELECT id, email, raw_user_meta_data, created_at, last_sign_in_at 
-        FROM auth.users 
+    const users = await prisma.$queryRaw<SupabaseUser[]>`
+        SELECT id, email, raw_user_meta_data, created_at, last_sign_in_at
+        FROM auth.users
         ORDER BY created_at DESC
-    `);
+    `;
 
     // Fetch who is an admin
     const admins = await prisma.userRole.findMany({

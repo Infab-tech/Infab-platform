@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 
 interface ProductData {
   id: string;
+  slug: string;
   name: string;
   category: string;
   description: string;
@@ -23,9 +24,14 @@ interface ProductData {
   cadFileUrls: string[];
 }
 
+function slugify(name: string) {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
 const fallbackProducts: ProductData[] = FALLBACK_PRODUCTS.map((p, i) => ({
   ...p,
   id: `default-${i}`,
+  slug: slugify(p.name),
   imageUrls: p.imageUrl ? [p.imageUrl] : [],
   datasheetUrl: p.datasheetUrl || null,
   drawingUrl: p.drawingUrl || null,
@@ -100,10 +106,10 @@ function ProductCard({ product }: { product: ProductData }) {
         )}
 
         <Link
-          href={`/contact?product=${encodeURIComponent(product.name)}`}
+          href={`/products/${product.slug}`}
           className="inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors mt-2"
         >
-          Request Quote <i className="ph ph-arrow-right transition-transform group-hover:translate-x-1"></i>
+          View Details <i className="ph ph-arrow-right transition-transform group-hover:translate-x-1"></i>
         </Link>
       </div>
     </div>
@@ -116,10 +122,11 @@ export default async function ProductsPage() {
     const rows = await prisma.product.findMany({
       where: { isActive: true },
       orderBy: { category: 'asc' },
-      select: { id: true, name: true, category: true, description: true, specs: true, imageUrl: true, imageUrls: true, datasheetUrl: true, drawingUrl: true, cadFileUrls: true },
+      select: { id: true, slug: true, name: true, category: true, description: true, specs: true, imageUrl: true, imageUrls: true, datasheetUrl: true, drawingUrl: true, cadFileUrls: true },
     });
     dbProducts = rows.map((r) => ({
       id: r.id,
+      slug: r.slug,
       name: r.name,
       category: r.category.toUpperCase(),
       description: r.description,

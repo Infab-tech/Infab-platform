@@ -236,7 +236,7 @@ export async function addNewsArticle(formData: FormData) {
                 description,
                 category: category || 'General',
                 link: link || null,
-                publishedAt: publishedAt ? new Date(publishedAt) : new Date(),
+                publishedAt: publishedAt ? new Date(publishedAt) : undefined,
                 isPublished,
             },
         });
