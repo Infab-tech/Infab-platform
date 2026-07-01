@@ -79,12 +79,6 @@ export default function CrystalLattice3D() {
 
   const c = isDark ? getDarkColors() : getLightColors();
 
-  const legendItems = [
-    { bg: c.activeBond, border: 'transparent', label: 'Active Bond' },
-    { bg: c.atomFill, border: c.atomGlow, label: 'Si Atom (Node)' },
-    { bg: 'transparent', border: c.bondStroke, label: 'Lattice Structure' },
-  ];
-
   return (
     <div className="relative flex flex-col items-center w-full">
       <style>{`
@@ -172,25 +166,6 @@ export default function CrystalLattice3D() {
 
             </div>
           </div>
-        </div>
-
-        {/* Hint */}
-        <div className="relative z-10 flex items-center justify-center gap-2 mt-8 mb-2">
-          <span style={{ fontFamily: 'monospace', fontSize: 8.5, letterSpacing: '2px', textTransform: 'uppercase', color: c.hintText }}>
-            Crystal Lattice  ·  Network Topology
-          </span>
-        </div>
-
-        {/* Layer legend */}
-        <div className="relative z-10 flex justify-center gap-5 flex-wrap mt-2">
-          {legendItems.map(item => (
-            <div key={item.label} className="flex items-center gap-1.5">
-              <div style={{ width: 9, height: 9, borderRadius: 2, background: item.bg, border: `1px solid ${item.border}`, flexShrink: 0 }} />
-              <span style={{ fontFamily: 'monospace', fontSize: 8.5, letterSpacing: '1.5px', textTransform: 'uppercase', color: c.legendText }}>
-                {item.label}
-              </span>
-            </div>
-          ))}
         </div>
       </div>
     </div>

@@ -70,12 +70,6 @@ export default function OpticalWaveguide3D() {
 
   const c = isDark ? getDarkColors() : getLightColors();
 
-  const legendItems = [
-    { bg: c.laserPulse, border: 'transparent', label: 'Data Pulse (Optical)' },
-    { bg: 'transparent', border: c.waveguideStroke, label: 'Photonic Waveguide' },
-    { bg: isDark ? '#1a1e2e' : '#cbd5e1', border: c.chipBorder, label: 'Si Photonics Chip' },
-  ];
-
   return (
     <div className="relative flex flex-col items-center w-full">
       <style>{`
@@ -174,25 +168,6 @@ export default function OpticalWaveguide3D() {
 
             </div>
           </div>
-        </div>
-
-        {/* Hint */}
-        <div className="relative z-10 flex items-center justify-center gap-2 mt-4 mb-2">
-          <span style={{ fontFamily: 'monospace', fontSize: 8.5, letterSpacing: '2px', textTransform: 'uppercase', color: c.hintText }}>
-            Optical Waveguide  ·  High-Speed Broadcast
-          </span>
-        </div>
-
-        {/* Layer legend */}
-        <div className="relative z-10 flex justify-center gap-5 flex-wrap mt-2">
-          {legendItems.map(item => (
-            <div key={item.label} className="flex items-center gap-1.5">
-              <div style={{ width: 9, height: 9, borderRadius: 2, background: item.bg, border: `1px solid ${item.border}`, flexShrink: 0 }} />
-              <span style={{ fontFamily: 'monospace', fontSize: 8.5, letterSpacing: '1.5px', textTransform: 'uppercase', color: c.legendText }}>
-                {item.label}
-              </span>
-            </div>
-          ))}
         </div>
       </div>
     </div>
