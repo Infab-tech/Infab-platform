@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { prisma } from '@/lib/supabase/prisma';
 import { FALLBACK_PRODUCTS } from '@/lib/content-defaults';
 import ProductImageCarousel from '@/components/ui/ProductImageCarousel';
-import MemsSensor3D from '@/components/ui/MemsSensor3D';
+import DomainTransit from '@/components/ui/DomainTransit';
 
 export const metadata: Metadata = {
   title: 'Products | INFAB Semiconductor',
@@ -159,7 +159,7 @@ export default async function ProductsPage() {
               </p>
             </div>
             <div>
-              <MemsSensor3D />
+              <DomainTransit />
             </div>
           </div>
         </div>

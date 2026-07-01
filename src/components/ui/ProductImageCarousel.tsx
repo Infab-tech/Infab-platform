@@ -14,7 +14,7 @@ export default function ProductImageCarousel({ urls, name, height = 'h-48' }: Pr
 
   if (urls.length === 0) {
     return (
-      <div className={`w-full ${height} bg-[var(--bg-primary)] border-b border-[var(--border-primary)] flex items-center justify-center relative overflow-hidden`}>
+      <div className={`w-full ${height} bg-white border-b border-[var(--border-primary)] flex items-center justify-center relative overflow-hidden`}>
         <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent-primary)]/5 to-transparent" />
         <i className="ph ph-microchip text-5xl text-[var(--text-secondary)]/10" />
       </div>
@@ -25,7 +25,7 @@ export default function ProductImageCarousel({ urls, name, height = 'h-48' }: Pr
   const next = () => setIdx((i) => (i + 1) % urls.length);
 
   return (
-    <div className={`relative w-full ${height} bg-white dark:bg-[var(--bg-tertiary)] border-b border-[var(--border-primary)] overflow-hidden`}>
+    <div className={`relative w-full ${height} bg-white border-b border-[var(--border-primary)] overflow-hidden`}>
       <Image
         src={urls[idx]}
         alt={`${name} — image ${idx + 1} of ${urls.length}`}

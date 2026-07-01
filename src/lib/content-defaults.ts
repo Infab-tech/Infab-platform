@@ -291,12 +291,14 @@ export const FALLBACK_RECOGNITIONS: DefaultRecognition[] = [
     title: 'INCeNSE Incubated',
     body: 'Incubated at INCeNSE — the deep-tech incubator at the Centre for Nano Science and Engineering, Bengaluru. One of India\'s premier MEMS and semiconductor incubation programmes.',
     issuer: 'INCeNSE, Bengaluru',
+    logoUrl: '/assests/incense-logo-300x70-1-removebg-preview-300x70.png',
     order: 3,
   },
   {
     title: 'BIRAC Collaboration',
     body: 'Supported by the Biotechnology Industry Research Assistance Council (BIRAC) for the development of organ-on-chip microfluidic platforms.',
     issuer: 'Dept. of Biotechnology, Govt. of India',
+    logoUrl: '/assests/birac-logo-1.png',
     order: 4,
   },
 ];

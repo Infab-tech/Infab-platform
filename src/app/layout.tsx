@@ -1,7 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
-import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: {
@@ -64,7 +63,8 @@ export default async function RootLayout({
   return (
     <html lang="en" className={`scroll-smooth ${isDark ? 'dark' : ''}`} data-scroll-behavior="smooth">
       <head>
-        <Script src="https://unpkg.com/@phosphor-icons/web" strategy="lazyOnload" />
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body className="antialiased min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)]">

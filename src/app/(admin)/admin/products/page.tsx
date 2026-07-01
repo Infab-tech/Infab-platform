@@ -153,7 +153,7 @@ export default async function AdminProductsPage({ searchParams }: { searchParams
                                     <td className="p-5">
                                         {product.imageUrl ? (
                                             // eslint-disable-next-line @next/next/no-img-element
-                                            <img src={product.imageUrl} alt="" className="w-12 h-12 rounded-lg object-contain bg-[var(--bg-primary)] border border-[var(--text-primary)]/10 p-1" />
+                                            <img src={product.imageUrl} alt="" className="w-12 h-12 rounded-lg object-contain bg-white border border-[var(--text-primary)]/10 p-1" />
                                         ) : (
                                             <div className="w-12 h-12 rounded-lg bg-[var(--text-primary)]/5 border border-[var(--text-primary)]/10 flex items-center justify-center">
                                                 <i className="ph ph-image text-lg text-[var(--text-secondary)]/40"></i>

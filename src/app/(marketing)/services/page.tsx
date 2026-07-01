@@ -86,13 +86,6 @@ const microfluidicsFabrication = [
   { icon: 'ph-link', title: 'Hybrid Integration', description: 'Combining PDMS, glass, and silicon in a single device  bonding dissimilar materials to achieve complex multi layer microfluidic architectures.' },
 ];
 
-// Microfluidic Device Showcase — real INFAB projects
-const microfluidicsDevices = [
-  { title: 'Silicon & SU-8 Mold', description: 'High resolution SU-8 master molds on silicon for repeatable PDMS soft lithography, enabling sub-10 µm feature sizes across multilayer designs.' },
-  { title: 'Cancer-on-Chip', description: 'Multi layer organ-on-chip platform developed in collaboration with BIRAC and Manipal Hospital for cancer cell co-culture under physiological shear stress.' },
-  { title: 'mRNA Chip in Glass', description: 'Herringbone micromixer fabricated in borosilicate glass for mRNA LNP synthesis  enabling precise nanoparticle size control for RNA delivery applications.' },
-];
-
 export default async function ServicesPage() {
   // Fetch from DB, fall back to hardcoded content
   let dbFacilities: { icon: string; title: string; description: string; photoUrl: string | null }[] = [];
@@ -100,7 +93,6 @@ export default async function ServicesPage() {
   let dbMEMSProcesses: { icon: string; title: string; description: string; detail: string | null }[] = [];
   let dbMicroDesign: { icon: string; title: string; description: string }[] = [];
   let dbMicroFab: { icon: string; title: string; description: string }[] = [];
-  let dbMicroDevices: { title: string; description: string }[] = [];
   let semImages: string[] = [];
 
   try {
@@ -125,7 +117,6 @@ export default async function ServicesPage() {
     if (byCat('mems-process').length > 0) dbMEMSProcesses = byCat('mems-process');
     if (byCat('micro-design').length > 0) dbMicroDesign = byCat('micro-design');
     if (byCat('micro-fab').length > 0) dbMicroFab = byCat('micro-fab');
-    if (byCat('micro-device').length > 0) dbMicroDevices = byCat('micro-device');
   } catch (error) {
     console.error("Error fetching services data from Prisma:", error);
   }
@@ -135,7 +126,6 @@ export default async function ServicesPage() {
   const activeProcesses = dbMEMSProcesses.length > 0 ? dbMEMSProcesses : memsProcesses;
   const activeDesign = dbMicroDesign.length > 0 ? dbMicroDesign : microfluidicsDesign;
   const activeFab = dbMicroFab.length > 0 ? dbMicroFab : microfluidicsFabrication;
-  const activeDevices = dbMicroDevices.length > 0 ? dbMicroDevices : microfluidicsDevices;
   return (
     <div className="bg-[var(--bg-primary)]">
 
@@ -286,24 +276,6 @@ export default async function ServicesPage() {
             </div>
           </div>
 
-          {/* Microfluidic Devices Showcase */}
-          <div>
-            <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2">Microfluidic Devices</h3>
-            <div className="w-8 h-0.5 bg-[var(--accent-primary)] mb-8"></div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {activeDevices.map((dev) => (
-                <div key={dev.title} className="rounded-2xl border border-[var(--accent-primary)]/20 bg-[var(--bg-secondary)] p-8 hover:border-[var(--accent-primary)]/40 transition-colors">
-                  <h4 className="text-base font-bold text-[var(--text-primary)] mb-3">{dev.title}</h4>
-                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{dev.description}</p>
-                </div>
-              ))}
-            </div>
-            <div className="mt-8">
-              <Link href="/contact" className="inline-flex items-center gap-2 font-mono text-sm font-semibold uppercase tracking-wider text-[var(--accent-primary)] hover:text-[var(--text-primary)] transition-colors">
-                Request a Quote <i className="ph ph-arrow-right"></i>
-              </Link>
-            </div>
-          </div>
         </div>
       </div>
 
