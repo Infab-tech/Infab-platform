@@ -66,6 +66,26 @@ export default async function RootLayout({
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                window.sessionStorage.getItem('test');
+              } catch (e) {
+                const mockStorage = {
+                  getItem: function() { return null; },
+                  setItem: function() {},
+                  removeItem: function() {},
+                  clear: function() {},
+                  length: 0,
+                  key: function() { return null; }
+                };
+                Object.defineProperty(window, 'sessionStorage', { value: mockStorage, writable: true, configurable: true });
+                Object.defineProperty(window, 'localStorage', { value: mockStorage, writable: true, configurable: true });
+              }
+            `,
+          }}
+        />
       </head>
       <body className="antialiased min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)]">
         <a
