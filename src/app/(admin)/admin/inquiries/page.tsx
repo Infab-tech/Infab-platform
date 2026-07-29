@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/supabase/prisma';
 import { updateInquiryStatus } from '@/app/actions/admin';
 import DeleteInquiryButton from './DeleteInquiryButton';
+import ReplyInquiryDialog from './ReplyInquiryDialog';
 import Pagination from '@/components/ui/Pagination';
 
 export const metadata = {
@@ -92,11 +93,11 @@ export default async function AdminInquiriesPage({ searchParams }: { searchParam
                                         <div className="text-xs text-[var(--accent-primary)]">{inquiry.email}</div>
                                         <div className="text-xs text-[var(--text-secondary)]">{inquiry.organization}</div>
                                     </td>
-                                    <td className="p-5 max-w-xs">
+                                    <td className="p-5 max-w-md">
                                         <span className="inline-block px-2 py-1 bg-[var(--text-primary)]/5 rounded text-xs font-mono uppercase text-[var(--text-secondary)] mb-2">
                                             {inquiry.interest}
                                         </span>
-                                        <p className="text-[var(--text-secondary)] line-clamp-2" title={inquiry.message}>
+                                        <p className="text-[var(--text-secondary)] whitespace-pre-wrap">
                                             {inquiry.message}
                                         </p>
                                     </td>
@@ -105,29 +106,36 @@ export default async function AdminInquiriesPage({ searchParams }: { searchParam
                                         {inquiry.status === 'RESOLVED' && <span className="text-green-500 font-bold text-xs uppercase">Resolved</span>}
                                     </td>
                                     <td className="p-5 text-right">
-                                        {inquiry.status === 'PENDING' && (
-                                            <form action={async () => {
-                                                'use server';
-                                                await updateInquiryStatus(inquiry.id, 'RESOLVED');
-                                            }}>
-                                                <button type="submit" className="px-4 py-2 bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] hover:bg-[var(--accent-primary)] hover:text-black transition-colors rounded text-xs font-bold uppercase">
-                                                    Mark Resolved
-                                                </button>
-                                            </form>
-                                        )}
-                                        {inquiry.status === 'RESOLVED' && (
-                                            <div className="flex gap-2 justify-end">
+                                        <div className="flex flex-wrap gap-2 justify-end">
+                                            <ReplyInquiryDialog 
+                                                inquiryId={inquiry.id} 
+                                                email={inquiry.email} 
+                                                firstName={inquiry.firstName} 
+                                            />
+                                            {inquiry.status === 'PENDING' && (
                                                 <form action={async () => {
                                                     'use server';
-                                                    await updateInquiryStatus(inquiry.id, 'PENDING');
+                                                    await updateInquiryStatus(inquiry.id, 'RESOLVED');
                                                 }}>
-                                                    <button type="submit" className="px-4 py-2 bg-[var(--text-primary)]/10 text-[var(--text-secondary)] hover:bg-[var(--text-primary)] hover:text-[var(--bg-primary)] transition-colors rounded text-xs font-bold uppercase">
-                                                        Unresolve
+                                                    <button type="submit" className="px-4 py-2 bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] hover:bg-[var(--accent-primary)] hover:text-black transition-colors rounded text-xs font-bold uppercase">
+                                                        Mark Resolved
                                                     </button>
                                                 </form>
-                                                <DeleteInquiryButton inquiryId={inquiry.id} />
-                                            </div>
-                                        )}
+                                            )}
+                                            {inquiry.status === 'RESOLVED' && (
+                                                <>
+                                                    <form action={async () => {
+                                                        'use server';
+                                                        await updateInquiryStatus(inquiry.id, 'PENDING');
+                                                    }}>
+                                                        <button type="submit" className="px-4 py-2 bg-[var(--text-primary)]/10 text-[var(--text-secondary)] hover:bg-[var(--text-primary)] hover:text-[var(--bg-primary)] transition-colors rounded text-xs font-bold uppercase">
+                                                            Unresolve
+                                                        </button>
+                                                    </form>
+                                                    <DeleteInquiryButton inquiryId={inquiry.id} />
+                                                </>
+                                            )}
+                                        </div>
                                     </td>
                                 </tr>
                             ))}

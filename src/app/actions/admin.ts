@@ -5,6 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import { FALLBACK_PRODUCTS, FALLBACK_NEWS, FALLBACK_TEAM, FALLBACK_RECOGNITIONS } from '@/lib/content-defaults';
+import { sendEmail } from '@/lib/email';
 
 // Helper function to double-check admin authorization on the server
 export async function verifyAdmin() {
@@ -713,5 +714,42 @@ export async function deleteApplication(id: string) {
     await verifyAdmin();
     await prisma.jobApplication.delete({ where: { id } });
     revalidatePath('/admin/careers');
+}
+
+export async function replyToInquiry(inquiryId: string, subject: string, message: string) {
+    await verifyAdmin();
+    const inquiry = await prisma.inquiry.findUnique({ where: { id: inquiryId } });
+    if (!inquiry) {
+        return { success: false, message: 'Inquiry not found' };
+    }
+    
+    const html = `
+        <div style="font-family: sans-serif; max-w: 600px; margin: 0 auto; color: #333;">
+            <p>${message.replace(/\n/g, '<br>')}</p>
+            <br/>
+            <hr style="border: 1px solid #eee; margin: 20px 0;" />
+            <p style="font-size: 12px; color: #888;">
+                <strong>Original Inquiry:</strong><br/>
+                ${inquiry.message.replace(/\n/g, '<br>')}
+            </p>
+        </div>
+    `;
+
+    const result = await sendEmail({
+        to: inquiry.email,
+        from: 'INFAB <inquiry@infabsemi.com>',
+        subject: subject,
+        html: html
+    });
+
+    if (result.success) {
+        await prisma.inquiry.update({
+            where: { id: inquiryId },
+            data: { status: 'RESOLVED' }
+        });
+        revalidatePath('/admin/inquiries');
+    }
+
+    return result;
 }
 
