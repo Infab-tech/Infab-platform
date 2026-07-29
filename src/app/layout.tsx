@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: {
@@ -97,6 +98,7 @@ export default async function RootLayout({
         <div id="main-content">
           {children}
         </div>
+        <Analytics />
       </body>
     </html>
   );
